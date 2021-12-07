@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024807291922",
+    "project_id": "ges-app-30c54",
+    "storage_bucket": "ges-app-30c54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024807291922:android:24c1342ae5b966ed251ccb",
+        "android_client_info": {
+          "package_name": "com.UniversityOfTheWestOfScotland.GESApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024807291922-4j1jkjnf8pgkaro4ktngqhoc0km7vpnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYm3yENOwL9h1C5SGblbOz8x3qZHmXz3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024807291922-4j1jkjnf8pgkaro4ktngqhoc0km7vpnq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

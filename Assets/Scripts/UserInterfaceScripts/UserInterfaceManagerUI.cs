@@ -21,6 +21,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject Add_SubMenu;
 
     public GameObject BannerTop;
+    public GameObject BannerBottom; //added for login screen so we can make visible after details are logged in or registered
     public Button BannerTop_Back_Button;
     public Button BannerTop_Secondary_Button;
     public TMP_Text BannerTop_Text;
@@ -58,7 +59,9 @@ public class UserInterfaceManagerUI : MonoBehaviour
     private void Start()
     {
         accountManager = FindObjectOfType<AccountManager>();
-        Open_Home();
+        //Determine which scene opens first
+        //Open_Home();
+        Open_Login();
     }
 
     void LoadAllReferenceScreens()
@@ -97,6 +100,11 @@ public class UserInterfaceManagerUI : MonoBehaviour
         BannerTop.gameObject.SetActive(!_disable);
     }
 
+    public void Configure_Bottom_Banner(/*bool _disable = false, bool _throwWarning = false, string title = "", UnityAction _backButtonAction = null, Sprite _UI_Image = null, UnityAction _secondaryButtonAction = null*/) 
+    {
+        BannerBottom.SetActive(true);
+    }
+
     public void ChangeWindow(int value)
     {
         for(int i=0; i<ListofAvailableScreens.Count; i++)
@@ -117,7 +125,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
         predefinedScreen.SetActive(true);
     }
 
-
+    public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }
     public void Open_Home() { ChangeWindow(HomeScreen); Configure_Top_Banner(true); TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills Added"; HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString(); HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString(); HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString(); }
     public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); }
     public void Open_Calander() { ChangeWindow(CalanderScreen); Configure_Top_Banner(false, false, "Calendar", delegate { ChangeWindow(HomeScreen); }); }
