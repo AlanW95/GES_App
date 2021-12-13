@@ -101,12 +101,12 @@ public class FirebaseManager : MonoBehaviour
 
     public void LoginButton()
     {
-
+        StartCoroutine(LoginLogic(loginEmail.text, loginPassword.text));
     }
 
     public void RegisterButton()
     {
-
+        StartCoroutine(RegisterLogic(registerUsername.text, registerEmail.text, registerPassword.text, registerConfirmPassword.text));
     }
 
     private IEnumerator LoginLogic(string _email, string _password)
