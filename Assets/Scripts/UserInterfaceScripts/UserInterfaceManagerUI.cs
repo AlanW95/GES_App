@@ -62,6 +62,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
         //Determine which scene opens first
         //Open_Home();
         Open_Login();
+        BannerBottom.SetActive(false);
     }
 
     void LoadAllReferenceScreens()
