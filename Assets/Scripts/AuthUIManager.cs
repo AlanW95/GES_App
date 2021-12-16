@@ -49,7 +49,7 @@ public class AuthUIManager : MonoBehaviour
     public void LoginScreen()
     {
         //conditional testing to see which hierarchy is active to then change to represented - used for signing out
-        if (loginUI.activeInHierarchy == true)
+        if (loginUI.activeInHierarchy == true || verifyEmailUI.activeInHierarchy == true)
         {
             ClearUI();
             loginUI.SetActive(false);

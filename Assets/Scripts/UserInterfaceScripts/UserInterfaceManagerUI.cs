@@ -9,6 +9,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
 {
     public Transform _holderScreen;
 
+    public GameObject ProfileScreen;
     public GameObject LoginScreen;
     public GameObject HomeScreen;
     public GameObject AddEditInformationScreen;
@@ -126,6 +127,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
         predefinedScreen.SetActive(true);
     }
 
+    public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile"/*+ TODO: ADD USERNAME*/, delegate { ChangeWindow(ProfileScreen); }); }
     public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }
     public void Open_Home() { ChangeWindow(HomeScreen); Configure_Top_Banner(true); TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills Added"; HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString(); HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString(); HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString(); }
     public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); }
