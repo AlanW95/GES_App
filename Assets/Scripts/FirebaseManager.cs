@@ -36,6 +36,10 @@ public class FirebaseManager : MonoBehaviour
     [SerializeField]
     private TMP_Text registerOutputText;
 
+    [Header("Forget Password References")]
+    [SerializeField]
+    private TMP_InputField forgetPasswordEmail;
+
     private void Awake() {
 
         DontDestroyOnLoad(gameObject);
@@ -366,6 +370,30 @@ public class FirebaseManager : MonoBehaviour
                 AuthUIManager.instance.AwaitVerification(true, user.Email, null);
                 Debug.Log("Email sent successfully");
             }
+        }
+    }
+
+    private IEnumerator ResetPassword()
+    {
+        if (user != null)
+        {
+            //TODO: SORT UI OUT TO HAVE RESET PASSWORD SCREEN
+
+            //temp fix until properly set up with UI in Editor
+            var passwordTask = auth.SendPasswordResetEmailAsync(user.Email); //change this to email entered in the field
+
+            yield return new WaitUntil(predicate: () => passwordTask.IsCompleted);
+
+            if (passwordTask.IsCanceled)
+            {
+                Debug.LogError("SendPasswordResetEmailAsync was cancelled.");
+            }
+            if (passwordTask.IsFaulted)
+            {
+                Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + passwordTask.Exception);
+            }
+
+            Debug.Log("Password reset email sent successfully.");
         }
     }
 }

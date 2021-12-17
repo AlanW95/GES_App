@@ -7,7 +7,7 @@ public class AuthUIManager : MonoBehaviour
 {
     public static AuthUIManager instance;
 
-    [Header("References")]
+    [Header("Account UI References")]
     [SerializeField]
     private GameObject checkingForAccountUI;
     [SerializeField]
@@ -18,6 +18,10 @@ public class AuthUIManager : MonoBehaviour
     private GameObject verifyEmailUI;
     [SerializeField]
     private TMP_Text verifyEmailText;
+    [SerializeField]
+    private GameObject forgetPasswordUI;
+    [SerializeField]
+    private TMP_Text forgetPasswordText;
 
     [Header("Home References")]
     [SerializeField]
@@ -49,7 +53,7 @@ public class AuthUIManager : MonoBehaviour
     public void LoginScreen()
     {
         //conditional testing to see which hierarchy is active to then change to represented - used for signing out
-        if (loginUI.activeInHierarchy == true || verifyEmailUI.activeInHierarchy == true)
+        if (loginUI.activeInHierarchy == true)
         {
             ClearUI();
             loginUI.SetActive(false);
@@ -63,12 +67,34 @@ public class AuthUIManager : MonoBehaviour
             homeUI.SetActive(false);
             bottomBanner.SetActive(false);
         }
+        //TESTING PURPOSES ONLY - Can be removed at a later date
+        if (verifyEmailUI.activeInHierarchy == true) //remove VerifyEmail for authentication verification email
+        {
+            ClearUI();
+            loginUI.SetActive(false);
+            homeUI.SetActive(true);
+            bottomBanner.SetActive(true);
+        }
+        if (forgetPasswordUI.activeInHierarchy == true)
+        {
+            ClearUI();
+            loginUI.SetActive(true);
+            forgetPasswordUI.SetActive(false);
+        }
     }
 
     public void RegisterScreen()
     {
         ClearUI();
         registerUI.SetActive(true);
+    }
+
+    public void ForgetPasswordScreen()
+    {
+        ClearUI();
+        forgetPasswordUI.SetActive(true);
+        loginUI.SetActive(false);
+        forgetPasswordText.text = $"Enter associated email below:";
     }
 
     public void HomeScreen()
