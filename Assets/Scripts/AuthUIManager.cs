@@ -7,6 +7,10 @@ public class AuthUIManager : MonoBehaviour
 {
     public static AuthUIManager instance;
 
+    [Header("Splash Screen References")]
+    [SerializeField]
+    private GameObject splashUI;
+
     [Header("Account UI References")]
     [SerializeField]
     private GameObject checkingForAccountUI;
@@ -81,6 +85,12 @@ public class AuthUIManager : MonoBehaviour
             loginUI.SetActive(true);
             forgetPasswordUI.SetActive(false);
         }
+    }
+
+    public void SignInWithEmail()
+    {
+        loginUI.SetActive(true);
+        splashUI.SetActive(false);
     }
 
     public void RegisterScreen()

@@ -9,6 +9,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
 {
     public Transform _holderScreen;
 
+    public GameObject SplashScreen;
     public GameObject ProfileScreen;
     public GameObject LoginScreen;
     public GameObject HomeScreen;
@@ -62,7 +63,9 @@ public class UserInterfaceManagerUI : MonoBehaviour
         accountManager = FindObjectOfType<AccountManager>();
         //Determine which scene opens first
         //Open_Home();
-        Open_Login();
+        //Open_Login();
+        Open_SplashScreen();
+        BannerTop.SetActive(false);
         BannerBottom.SetActive(false);
     }
 
@@ -127,6 +130,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
         predefinedScreen.SetActive(true);
     }
 
+    public void Open_SplashScreen() { ChangeWindow(SplashScreen); Configure_Top_Banner(true); }
     public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile"/*+ TODO: ADD USERNAME*/, delegate { ChangeWindow(ProfileScreen); }); }
     public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }
     public void Open_Home() { ChangeWindow(HomeScreen); Configure_Top_Banner(true); TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills Added"; HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString(); HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString(); HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString(); }

@@ -39,6 +39,10 @@ public class FirebaseManager : MonoBehaviour
     [Header("Forget Password References")]
     [SerializeField]
     private TMP_InputField forgetPasswordEmail;
+    [SerializeField]
+    private GameObject forgotPasswordOutput;
+    [SerializeField]
+    private TMP_Text forgotPasswordOutputText;
 
     private void Awake() {
 
@@ -177,6 +181,11 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(RegisterLogic(registerUsername.text, registerEmail.text, registerPassword.text, registerConfirmPassword.text));
     }
 
+    public void ForgetPassword()
+    {
+        StartCoroutine(ResetPassword(forgetPasswordEmail.text));
+    }
+
     public void SignOutButton()
     {
         if (user != null)
@@ -239,11 +248,11 @@ public class FirebaseManager : MonoBehaviour
             }
             else
             {
-                // Send verification email to user
+                //TODO: Send verification email to user
                 //StartCoroutine(SendVerificationEmail());
+                //Temporary State for Testing
                 AuthUIManager.instance.HomeScreen();
 
-                //TODO: Send to welcome/ home screen as temporary state
             }
         }
     }
@@ -373,27 +382,53 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ResetPassword()
+    private IEnumerator ResetPassword(string _email)
     {
-        if (user != null)
+        AuthUIManager.instance.ForgetPasswordScreen();
+
+        var passwordTask = auth.SendPasswordResetEmailAsync(_email); //changed to input field text that has been entered
+
+        yield return new WaitUntil(predicate: () => passwordTask.IsCompleted);
+
+        if (passwordTask.IsCanceled)
         {
-            //TODO: SORT UI OUT TO HAVE RESET PASSWORD SCREEN
+            Debug.LogError("SendPasswordResetEmailAsync was cancelled.");
+        }
+        if (passwordTask.IsFaulted)
+        {
+            Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + passwordTask.Exception);
+        }
 
-            //temp fix until properly set up with UI in Editor
-            var passwordTask = auth.SendPasswordResetEmailAsync(user.Email); //change this to email entered in the field
+        if (passwordTask.Exception != null)
+        {
+            FirebaseException firebaseException = (FirebaseException)passwordTask.Exception.GetBaseException();
+            AuthError error = (AuthError)firebaseException.ErrorCode;
+            string output = "No account is associated with this email. Please register an account.";
 
-            yield return new WaitUntil(predicate: () => passwordTask.IsCompleted);
-
-            if (passwordTask.IsCanceled)
+            forgotPasswordOutputText.text = output;
+            forgotPasswordOutput.SetActive(true);
+            yield return new WaitForSeconds(5);
+            forgotPasswordOutput.SetActive(false);
+        }
+        else
+        {
+            if (user.IsEmailVerified)
             {
-                Debug.LogError("SendPasswordResetEmailAsync was cancelled.");
+                Debug.Log("Password reset email sent successfully.");
+                string output = "Password reset email sent. You should receive an email shortly.";
+                forgotPasswordOutputText.text = output;
+                forgotPasswordOutput.SetActive(true);
+                yield return new WaitForSeconds(5);
+                forgotPasswordOutput.SetActive(false);
             }
-            if (passwordTask.IsFaulted)
+            else
             {
-                Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + passwordTask.Exception);
-            }
+                Debug.Log("No account is associated with this email. Please register an account.");
+                forgotPasswordOutput.SetActive(true);
+                yield return new WaitForSeconds(5);
+                forgotPasswordOutput.SetActive(false);
 
-            Debug.Log("Password reset email sent successfully.");
+            }
         }
     }
 }
