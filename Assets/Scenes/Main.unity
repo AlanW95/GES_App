@@ -7644,7 +7644,7 @@ GameObject:
   - component: {fileID: 312535241}
   - component: {fileID: 312535240}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SignedInText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20742,8 +20742,8 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 1
-  m_HideSoftKeyboard: 1
+  m_HideMobileInput: 0
+  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -27342,8 +27342,8 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 1
-  m_HideSoftKeyboard: 1
+  m_HideMobileInput: 0
+  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -43843,8 +43843,8 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 1
-  m_HideSoftKeyboard: 1
+  m_HideMobileInput: 0
+  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -46251,15 +46251,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginEmail: {fileID: 2101786050}
   loginPassword: {fileID: 1713582370}
+  loginOutput: {fileID: 1911301968}
   loginOutputText: {fileID: 1911301970}
   registerUsername: {fileID: 1489774329}
   registerEmail: {fileID: 627678051}
   registerPassword: {fileID: 1060853627}
   registerConfirmPassword: {fileID: 798639283}
+  registerOutput: {fileID: 1943065091}
   registerOutputText: {fileID: 1943065093}
   forgetPasswordEmail: {fileID: 1923126142}
   forgotPasswordOutput: {fileID: 995963848}
   forgotPasswordOutputText: {fileID: 995963850}
+  welcomeOutputText: {fileID: 2043143740}
+  profileNameOutputText: {fileID: 465223337}
+  bottomBannerOutputText: {fileID: 312535240}
 --- !u!4 &1807724316
 Transform:
   m_ObjectHideFlags: 0
@@ -48526,7 +48531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1911301969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48914,7 +48919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1943065092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50527,7 +50532,7 @@ GameObject:
   - component: {fileID: 2043143741}
   - component: {fileID: 2043143740}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: WelcomeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

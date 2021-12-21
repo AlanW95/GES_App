@@ -64,7 +64,7 @@ public class AuthUIManager : MonoBehaviour
             homeUI.SetActive(true);
             bottomBanner.SetActive(true);
         }
-        if (homeUI.activeInHierarchy == true)
+        if (homeUI.activeInHierarchy == true || registerUI.activeInHierarchy == true)
         {
             ClearUI();
             loginUI.SetActive(true);

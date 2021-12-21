@@ -21,6 +21,8 @@ public class FirebaseManager : MonoBehaviour
     [SerializeField]
     private TMP_InputField loginPassword;
     [SerializeField]
+    private GameObject loginOutput;
+    [SerializeField]
     private TMP_Text loginOutputText;
     [Space(5f)]
 
@@ -34,6 +36,8 @@ public class FirebaseManager : MonoBehaviour
     [SerializeField]
     private TMP_InputField registerConfirmPassword;
     [SerializeField]
+    private GameObject registerOutput;
+    [SerializeField]
     private TMP_Text registerOutputText;
 
     [Header("Forget Password References")]
@@ -43,6 +47,18 @@ public class FirebaseManager : MonoBehaviour
     private GameObject forgotPasswordOutput;
     [SerializeField]
     private TMP_Text forgotPasswordOutputText;
+
+    [Header("Home References")]
+    [SerializeField]
+    private TMP_Text welcomeOutputText;
+
+    [Header("Profile References")]
+    [SerializeField]
+    private TMP_Text profileNameOutputText;
+
+    [Header("Bottom Banner")]
+    [SerializeField]
+    private TMP_Text bottomBannerOutputText;
 
     private void Awake() {
 
@@ -161,6 +177,9 @@ public class FirebaseManager : MonoBehaviour
             if (signedIn)
             {
                 Debug.Log($"Signed In: {user.DisplayName}");
+                welcomeOutputText.text = $"Welcome {user.DisplayName}!";
+                profileNameOutputText.text = $"{ user.DisplayName}";
+                bottomBannerOutputText.text = $"Signed in as: {user.DisplayName}";
             }
         }
     }
@@ -236,6 +255,9 @@ public class FirebaseManager : MonoBehaviour
             }
 
             loginOutputText.text = output;
+            loginOutput.SetActive(true);
+            yield return new WaitForSeconds(5);
+            loginOutput.SetActive(false);
         }
         else
         {
@@ -249,9 +271,9 @@ public class FirebaseManager : MonoBehaviour
             else
             {
                 //TODO: Send verification email to user
-                //StartCoroutine(SendVerificationEmail());
+                StartCoroutine(SendVerificationEmail());
                 //Temporary State for Testing
-                AuthUIManager.instance.HomeScreen();
+                /*AuthUIManager.instance.HomeScreen();*/
 
             }
         }
@@ -262,10 +284,16 @@ public class FirebaseManager : MonoBehaviour
         if (_username == "")
         {
             registerOutputText.text = "Please enter a username";
+            registerOutput.SetActive(true);
+            yield return new WaitForSeconds(5);
+            registerOutput.SetActive(false);
         } 
         else if (_password != _confirmPassword)
         {
             registerOutputText.text = "Passwords do not match!";
+            registerOutput.SetActive(true);
+            yield return new WaitForSeconds(5);
+            registerOutput.SetActive(false);
         }
         else
         {
@@ -299,6 +327,9 @@ public class FirebaseManager : MonoBehaviour
                 }
 
                 registerOutputText.text = output;
+                registerOutput.SetActive(true);
+                yield return new WaitForSeconds(5);
+                registerOutput.SetActive(false);
             }
             else
             {
@@ -332,6 +363,9 @@ public class FirebaseManager : MonoBehaviour
                     }
 
                     registerOutputText.text = output;
+                    registerOutput.SetActive(true);
+                    yield return new WaitForSeconds(5);
+                    registerOutput.SetActive(false);
                 }
                 else
                 {
