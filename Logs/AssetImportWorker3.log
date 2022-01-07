@@ -1,0 +1,761 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.2f1 (5e2b1e92c7f8) revision 6171422'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 22000.376; Version 2009; 64bit' Language: 'en' Physical Memory: 32718 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+C:/Users/alanw/Documents/GitHub/GES_App
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+57312
+Successfully changed project path to: C:/Users/alanw/Documents/GitHub/GES_App
+C:/Users/alanw/Documents/GitHub/GES_App
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 97.19 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.2f1 (5e2b1e92c7f8)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/alanw/Documents/GitHub/GES_App/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   NVIDIA
+    VRAM:     8088 MB
+    Driver:   30.0.14.9729
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56828
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004609 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 90.35 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.566 seconds
+Domain Reload Profiling:
+	ReloadAssembly (566ms)
+		BeginReloadAssembly (67ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (427ms)
+			LoadAssemblies (65ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (86ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (22ms)
+			SetupLoadedEditorAssemblies (273ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (13ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (90ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (125ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.013153 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\alanw\Documents\GitHub\GES_App\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\alanw\Documents\GitHub\GES_App\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 103.29 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+System.IO.IOException: Sharing violation on path C:\Users\alanw\Documents\GitHub\GES_App\ProjectSettings\GvhProjectSettings.xml
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks, System.Int32 bufferSize) [0x00055] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at System.IO.StreamReader..ctor (System.String path, System.Boolean detectEncodingFromByteOrderMarks) [0x00007] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at System.IO.StreamReader..ctor (System.String path) [0x00000] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamReader..ctor(string)
+  at Google.XmlUtilities.ParseXmlTextFileElements (System.String filename, Google.Logger logger, Google.XmlUtilities+ParseElement parseElement) [0x0000f] in Z:\tmp\tmp.kPg0d2FQui\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\XmlUtilities.cs:104 
+  at Google.ProjectSettings.Load () [0x00012] in Z:\tmp\tmp.kPg0d2FQui\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\ProjectSettings.cs:776 
+  at Google.ProjectSettings.LoadIfEmpty () [0x0001b] in Z:\tmp\tmp.kPg0d2FQui\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\ProjectSettings.cs:557 
+  at Google.ProjectSettings.GetBool (System.String name, System.Boolean defaultValue, Google.SettingsLocation location) [0x0002b] in Z:\tmp\tmp.kPg0d2FQui\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\ProjectSettings.cs:605 
+  at Google.ProjectSettings.GetBool (System.String name, System.Boolean defaultValue) [0x00000] in Z:\tmp\tmp.kPg0d2FQui\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\ProjectSettings.cs:618 
+  at Google.IOSResolver.get_VerboseLoggingEnabled () [0x00000] in Z:\tmp\tmp.lPqUMYqZ9q\third_party\unity\unity_jar_resolver\source\IOSResolver\src\IOSResolver.cs:984 
+  at Google.IOSResolver..cctor () [0x001ec] in Z:\tmp\tmp.lPqUMYqZ9q\third_party\unity\unity_jar_resolver\source\IOSResolver\src\IOSResolver.cs:689 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.647 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1648ms)
+		BeginReloadAssembly (149ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (16ms)
+		EndReloadAssembly (1405ms)
+			LoadAssemblies (69ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (214ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (54ms)
+			SetupLoadedEditorAssemblies (962ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (103ms)
+				BeforeProcessingInitializeOnLoad (94ms)
+				ProcessInitializeOnLoadAttributes (717ms)
+				ProcessInitializeOnLoadMethodAttributes (32ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.73 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3998 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 122 unused Assets / (59.0 KB). Loaded Objects now: 4381.
+Memory consumption went from 154.7 MB to 154.7 MB.
+Total: 3.602200 ms (FindLiveObjects: 0.367500 ms CreateObjectMapping: 0.096600 ms MarkObjects: 3.007200 ms  DeleteObjects: 0.128900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 54951.721345 seconds.
+  path: Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.1.0.aar
+  artifactKey: Guid(e7e9e52fc07defb44a7c2168e8c55f9d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.1.0.aar using Guid(e7e9e52fc07defb44a7c2168e8c55f9d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '065abcb31720a6f60f5d11b95f88d176') in 0.076344 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Firebase/Plugins/Firebase.TaskExtension.dll
+  artifactKey: Guid(f5d4069c578548ba9f199b46d61bf06d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/Firebase.TaskExtension.dll using Guid(f5d4069c578548ba9f199b46d61bf06d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '610be7045fb084a21b5e93eeb1a14d9b') in 0.012836 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Plugins/Android/com.google.firebase.firebase-auth-21.0.1.aar
+  artifactKey: Guid(841ea1498d7b856418f906a31e94d28d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/com.google.firebase.firebase-auth-21.0.1.aar using Guid(841ea1498d7b856418f906a31e94d28d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '24ae5934bf48c2658016687f71580dc1') in 0.009057 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Plugins/Android/androidx.legacy.legacy-support-core-ui-1.0.0.aar
+  artifactKey: Guid(fb696797ee77c67498d467bf4eff8dfc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.legacy.legacy-support-core-ui-1.0.0.aar using Guid(fb696797ee77c67498d467bf4eff8dfc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '93a6562194e8c38983e55c05f152fbbe') in 0.009388 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Editor Default Resources/Firebase/fb_cloud_messaging.png
+  artifactKey: Guid(837e8e1f35e334e81931d0857680cebf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Editor Default Resources/Firebase/fb_cloud_messaging.png using Guid(837e8e1f35e334e81931d0857680cebf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5c5173fc1f1717443edf143b3b5910d0') in 0.017850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Plugins/Android/com.google.android.gms.play-services-measurement-impl-19.0.0.aar
+  artifactKey: Guid(deecbe2b5d13eca47b6fcd013eaf5356) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/com.google.android.gms.play-services-measurement-impl-19.0.0.aar using Guid(deecbe2b5d13eca47b6fcd013eaf5356) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ab581f7d838d9759dea63382094e043b') in 0.010148 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/Android/androidx.core.core-1.2.0.aar
+  artifactKey: Guid(8019b27296afe1346a983b2bf6744202) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.core.core-1.2.0.aar using Guid(8019b27296afe1346a983b2bf6744202) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5a38a2e6c14516ed1c11ca87ea22cd8d') in 0.009634 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Firebase/Editor/network_request.exe
+  artifactKey: Guid(d3cd5d0a941c4cdc8ab4b1b684b05191) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Editor/network_request.exe using Guid(d3cd5d0a941c4cdc8ab4b1b684b05191) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6644905265932f8fa2f445b75eec80d8') in 0.009314 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Editor Default Resources/Firebase/fb_dynamic_links_dark.png
+  artifactKey: Guid(9355a4671cfe4eef90879863318d1a4b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Editor Default Resources/Firebase/fb_dynamic_links_dark.png using Guid(9355a4671cfe4eef90879863318d1a4b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8a67b572664b9fea89ccc220b166ba63') in 0.009015 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.0.aar
+  artifactKey: Guid(bf896665906915345a7c811cbf303576) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.0.aar using Guid(bf896665906915345a7c811cbf303576) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '623e526b9d25f234e322ad1e74b945f8') in 0.010579 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Scenes/Main.unity
+  artifactKey: Guid(91be183c8fcb827409a217479c12ae27) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scenes/Main.unity using Guid(91be183c8fcb827409a217479c12ae27) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'bcae7bfd62203d2e64ec960b43788807') in 0.008943 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Editor Default Resources/Firebase/fb_auth_dark.png
+  artifactKey: Guid(3a9e1ef6287664c389bb09e2ac1b23b7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Editor Default Resources/Firebase/fb_auth_dark.png using Guid(3a9e1ef6287664c389bb09e2ac1b23b7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e4165339a8f4d37f40cc4917463c0019') in 0.013564 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Scripts/AccountManager.cs
+  artifactKey: Guid(69c027ce15669e740b843f991314b57c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/AccountManager.cs using Guid(69c027ce15669e740b843f991314b57c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ade799246c6f809edbfac009956e7d7e') in 0.011983 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Parse/Plugins/Unity.Compat.dll
+  artifactKey: Guid(015ef18e20f24535830f59eda9e70830) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Parse/Plugins/Unity.Compat.dll using Guid(015ef18e20f24535830f59eda9e70830) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '424fa9e31b737329a6832dd58ce7ef97') in 0.009691 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Plugins/Android/com.google.firebase.firebase-common-20.0.0.aar
+  artifactKey: Guid(ec175c078b1fd994c8cab70feafab374) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/com.google.firebase.firebase-common-20.0.0.aar using Guid(ec175c078b1fd994c8cab70feafab374) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8b0d523876558a41653c84d3eab47833') in 0.009078 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Firebase/Editor/Firebase.Editor.dll.mdb
+  artifactKey: Guid(7f7b9cecf58b463599316e650bec7cb6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Editor/Firebase.Editor.dll.mdb using Guid(7f7b9cecf58b463599316e650bec7cb6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '327eaef3ed0eecb5fd283de66ed5d20e') in 0.012463 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Firebase/Editor/FirebaseAuth_version-8.6.2_manifest.txt
+  artifactKey: Guid(0d22022089f641b59173999a73b770b1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Editor/FirebaseAuth_version-8.6.2_manifest.txt using Guid(0d22022089f641b59173999a73b770b1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '1c38df0581091e8806e9d7914b4cdec3') in 0.013246 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Firebase/Plugins/Google.MiniJson.dll
+  artifactKey: Guid(3ebb289656f1477fa263e62d36c6e329) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/Google.MiniJson.dll using Guid(3ebb289656f1477fa263e62d36c6e329) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '163be699361810b9dc1b601db82b008c') in 0.009839 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Firebase/Plugins/Firebase.Analytics.dll
+  artifactKey: Guid(816270c2a2a348e59cb9b7b096a24f50) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/Firebase.Analytics.dll using Guid(816270c2a2a348e59cb9b7b096a24f50) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c0b9a44bd248e5a7d171e3f9d3c96b8d') in 0.010149 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/Android/androidx.slidingpanelayout.slidingpanelayout-1.0.0.aar
+  artifactKey: Guid(7c98cd1cb44140d42b9a2a675c11c2bb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.slidingpanelayout.slidingpanelayout-1.0.0.aar using Guid(7c98cd1cb44140d42b9a2a675c11c2bb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'bbba27fb3a01ec0be5d74fd6f6883582') in 0.009411 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Firebase/Editor/generate_xml_from_google_services_json.py
+  artifactKey: Guid(8f18ed76c0f04ce0a65736104f913ef8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Editor/generate_xml_from_google_services_json.py using Guid(8f18ed76c0f04ce0a65736104f913ef8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3e41fc8150c76d4b868ae082c9424e15') in 0.008901 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Scripts/AuthUIManager.cs
+  artifactKey: Guid(43356b24bc900664fb89ba437e393c42) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/AuthUIManager.cs using Guid(43356b24bc900664fb89ba437e393c42) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f14f589e79061c1616ef4cbe1fc0a69e') in 0.010124 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.6.0.aar
+  artifactKey: Guid(2627f29197a63b141b09ff4fc8194be9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.6.0.aar using Guid(2627f29197a63b141b09ff4fc8194be9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '843c74115d7e8e4b7e9051dd3870b271') in 0.011033 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Plugins/Android/androidx.lifecycle.lifecycle-common-2.0.0.jar
+  artifactKey: Guid(5064d113b4724854ea3b85085766b032) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.lifecycle.lifecycle-common-2.0.0.jar using Guid(5064d113b4724854ea3b85085766b032) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5be495023c2f581e06809570a982b4c9') in 0.011297 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/google-services.json
+  artifactKey: Guid(381d71b2598dcbb4f8e961ac5321efe7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/google-services.json using Guid(381d71b2598dcbb4f8e961ac5321efe7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0afad7f6597510a5a0ef9e56e94d2079') in 0.012102 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Editor Default Resources/Firebase/firebase_lockup.png
+  artifactKey: Guid(9f058f25e8e2d47cfb894951d4d7e48a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Editor Default Resources/Firebase/firebase_lockup.png using Guid(9f058f25e8e2d47cfb894951d4d7e48a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '68ff8d0c5e41bd8cb3f32adcac547002') in 0.009221 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Firebase/Plugins/Firebase.Analytics.dll.mdb
+  artifactKey: Guid(f22bb7d5145e41b1ace885c60f743673) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/Firebase.Analytics.dll.mdb using Guid(f22bb7d5145e41b1ace885c60f743673) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e7584dfe5062079d83548e9eb7dd6245') in 0.009941 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/Android/androidx.lifecycle.lifecycle-runtime-2.0.0.aar
+  artifactKey: Guid(d4a07569f9d38594082473cfbbcfef88) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/androidx.lifecycle.lifecycle-runtime-2.0.0.aar using Guid(d4a07569f9d38594082473cfbbcfef88) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e2ebf3593b153fa5722d6425c2f1fdeb') in 0.009991 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.059511 seconds.
+  path: Assets/Resources/Prefabs/EditAccountInformationScreen Variant.prefab
+  artifactKey: Guid(2873a8afd3763c545a248e739d704a1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Prefabs/EditAccountInformationScreen Variant.prefab using Guid(2873a8afd3763c545a248e739d704a1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6fd81af2c509d53b31309c2ba6579dd2') in 0.096534 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+  artifactKey: Guid(d930090c0cd643c7b55f19a38538c162) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc using Guid(d930090c0cd643c7b55f19a38538c162) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3b6306ded29223022f6c837ce34e1611') in 0.010707 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+  artifactKey: Guid(128e987d567d4e2c824d754223b3f3b0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader using Guid(128e987d567d4e2c824d754223b3f3b0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '44ffedffa405965df905e96c6d7368c8') in 0.012551 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_125.png
+  artifactKey: Guid(22ebd5ab1b5b04655b7c925208e6588f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_125.png using Guid(22ebd5ab1b5b04655b7c925208e6588f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3d82e2b3110e5a5270872fa0a4c99eaf') in 0.011217 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_126.png
+  artifactKey: Guid(bfbe366ddd94c49bd94baceafa4f5fbe) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_126.png using Guid(bfbe366ddd94c49bd94baceafa4f5fbe) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b89072e3132dc6cb08f5fd67b9e8a0d6') in 0.010432 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_111.png
+  artifactKey: Guid(335d2d291e4a048998314fb60ddb2570) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_111.png using Guid(335d2d291e4a048998314fb60ddb2570) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8ac0433f9451d087cbba4ab0b484e9d1') in 0.012136 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+  artifactKey: Guid(48bb5f55d8670e349b6e614913f9d910) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader using Guid(48bb5f55d8670e349b6e614913f9d910) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5985152dbce29ab6c801dbbcaaf5273b') in 0.010426 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader
+  artifactKey: Guid(a02a7d8c237544f1962732b55a9aebf1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader using Guid(a02a7d8c237544f1962732b55a9aebf1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5b5c2906d4457281bab3cd7521644fe8') in 0.010128 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+  artifactKey: Guid(c334973cef89a9840b0b0c507e0377ab) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc using Guid(c334973cef89a9840b0b0c507e0377ab) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '67bc23e9718705419f9c280b923497fa') in 0.009733 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_116.png
+  artifactKey: Guid(3f0cbe5bd3dd3430eade779c789e5af8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_116.png using Guid(3f0cbe5bd3dd3430eade779c789e5af8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '033eb2f33f198ee5ec6b58eb4d7c25d6') in 0.011089 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_121.png
+  artifactKey: Guid(2f69549efda3046259c117c3b3a4f4c6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_121.png using Guid(2f69549efda3046259c117c3b3a4f4c6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f938833f6ed2bfa1ac91e490724bb513') in 0.012177 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Scripts/UserInterfaceScripts/DynamicInterfaceAreaUI.cs
+  artifactKey: Guid(701394f8b87c0cb41b8d536a98e7cb1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/UserInterfaceScripts/DynamicInterfaceAreaUI.cs using Guid(701394f8b87c0cb41b8d536a98e7cb1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9fc76b0c575f28b4d8dcb6f10f63494e') in 0.010556 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Scripts/UserInterfaceScripts/EditAccountInformationUI.cs
+  artifactKey: Guid(d639f25ce692f644cb8f7b3f0f3b0480) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/UserInterfaceScripts/EditAccountInformationUI.cs using Guid(d639f25ce692f644cb8f7b3f0f3b0480) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '39c72eb0429b378ab15f8c32ef3c1a8f') in 0.009812 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_1.png
+  artifactKey: Guid(ad9cf6ef9d5bd47cea51a8001a964b95) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_1.png using Guid(ad9cf6ef9d5bd47cea51a8001a964b95) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3f99d6dda5b9143aaa9087299569132e') in 0.009562 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/TextMesh Pro/Resources/TMP Settings.asset
+  artifactKey: Guid(3f5b5dff67a942289a9defa416b206f3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Resources/TMP Settings.asset using Guid(3f5b5dff67a942289a9defa416b206f3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5f738c32f79b1c358bfdd47d72fd4475') in 0.010301 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+  artifactKey: Guid(c8d12adcee749c344b8117cf7c7eb912) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader using Guid(c8d12adcee749c344b8117cf7c7eb912) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '460fc2c2113c9deb6ef2e62fd7a78b3e') in 0.010036 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_105.png
+  artifactKey: Guid(a9aca0487442f45c2be9a5e4a62fcd18) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_105.png using Guid(a9aca0487442f45c2be9a5e4a62fcd18) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '47197831126a9dc17507efc6f322f19c') in 0.010427 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/circle.png
+  artifactKey: Guid(030e4d39425631a43a52a779f08c736f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/circle.png using Guid(030e4d39425631a43a52a779f08c736f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '1a2e7d6cc2bfcfec40b86b3325689713') in 0.026725 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_115.png
+  artifactKey: Guid(542124a8a834744d8bb6b3659551b693) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_115.png using Guid(542124a8a834744d8bb6b3659551b693) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '27d5190405ed6ab4f5d885a6184dac6c') in 0.011919 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+  artifactKey: Guid(14eb328de4b8eb245bb7cea29e4ac00b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader using Guid(14eb328de4b8eb245bb7cea29e4ac00b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '15369b38f3b9289537aefc1a40795433') in 0.009660 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_110.png
+  artifactKey: Guid(b5722d0c9c3e54b859e6cffe663a754e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_110.png using Guid(b5722d0c9c3e54b859e6cffe663a754e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'fbda087e736d0e876749fac5052e659d') in 0.010946 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_148.png
+  artifactKey: Guid(86f9b6e08f3f04d04af10106ddbae5fc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_148.png using Guid(86f9b6e08f3f04d04af10106ddbae5fc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b325c3c96e3b5446ecaac6de7418c099') in 0.009030 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.046801 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_19.png
+  artifactKey: Guid(c9c7b7ed009384c3e8c3dadcbcaf1f55) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_19.png using Guid(c9c7b7ed009384c3e8c3dadcbcaf1f55) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cb4352612c588f774b18175764f0ae42') in 0.011060 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Firebase/Plugins/x86_64/FirebaseCppAuth.dll
+  artifactKey: Guid(05faff41310d42b1b623c09a22aa53ff) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/x86_64/FirebaseCppAuth.dll using Guid(05faff41310d42b1b623c09a22aa53ff) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '743954b52bda566fd99626a0e2471433') in 0.010034 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_55.png
+  artifactKey: Guid(c26f05787040943969214d438c0f7103) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_55.png using Guid(c26f05787040943969214d438c0f7103) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '514fbb9015ce5465675b7a7aeeec129e') in 0.011551 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_67.png
+  artifactKey: Guid(2f054384e65804a4a840a3d45d2e0ec3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_67.png using Guid(2f054384e65804a4a840a3d45d2e0ec3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8a6112ba4f4d51e58e0e61c9663ad422') in 0.010482 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Plugins/Android/FirebaseApp.androidlib/project.properties
+  artifactKey: Guid(0214ab743ef1d42459feba75da0d06b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/Android/FirebaseApp.androidlib/project.properties using Guid(0214ab743ef1d42459feba75da0d06b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '802339d08318638232708ad6c3d4ede8') in 0.013322 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat
+  artifactKey: Guid(79459efec17a4d00a321bdcc27bbc385) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat using Guid(79459efec17a4d00a321bdcc27bbc385) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b539903efb4a2631a1f5be4bcf879581') in 0.013547 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Firebase/Plugins/x86_64/FirebaseCppAnalytics.bundle
+  artifactKey: Guid(35bfcced25264151bd76b628a1dfa989) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/x86_64/FirebaseCppAnalytics.bundle using Guid(35bfcced25264151bd76b628a1dfa989) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3a17eb235b23395642622b71934f1ada') in 0.008867 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Firebase/Plugins/x86_64/FirebaseCppAnalytics.dll
+  artifactKey: Guid(c48626ae27ed478483ba85fd7c81c04b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/x86_64/FirebaseCppAnalytics.dll using Guid(c48626ae27ed478483ba85fd7c81c04b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '09f5540af6c0fb3f242360ecb2b1df7f') in 0.009535 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_51.png
+  artifactKey: Guid(a3b06b72842e245be8875173eb906caa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_51.png using Guid(a3b06b72842e245be8875173eb906caa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '200f1977779840f612b94fe15ab5308b') in 0.011033 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_21.png
+  artifactKey: Guid(e9f0e114e90f142c9bb3e7aff877ca99) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_21.png using Guid(e9f0e114e90f142c9bb3e7aff877ca99) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cad1c13f7f55f39b7416dd45fb25f1cc') in 0.011843 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_44.png
+  artifactKey: Guid(6fd22b1c183734dccac0a298ebc0eece) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_44.png using Guid(6fd22b1c183734dccac0a298ebc0eece) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9f42cd123569a4733d6f8d758d9a1b88') in 0.009487 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/maven-metadata.xml
+  artifactKey: Guid(96337775a7c941d88ea15f8026ad6f8e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/maven-metadata.xml using Guid(96337775a7c941d88ea15f8026ad6f8e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '63e3aeaa2230720fa64cc15af7399de2') in 0.021800 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_7.png
+  artifactKey: Guid(bc56d5d21c468438e8264e4eb6197ada) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_7.png using Guid(bc56d5d21c468438e8264e4eb6197ada) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c56806c93ccdaf8a010fee8e3a703007') in 0.010911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_59.png
+  artifactKey: Guid(9679845dfdece41c4aa50c2d04826cd2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_59.png using Guid(9679845dfdece41c4aa50c2d04826cd2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '63e71c177acbf77dcd24c77519d80008') in 0.010777 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_68.png
+  artifactKey: Guid(d6b71cf9ab0b549c5a01c00a2846fddd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_68.png using Guid(d6b71cf9ab0b549c5a01c00a2846fddd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '1f299d4b4ee08cc821fb1864e6f8e753') in 0.010454 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_92.png
+  artifactKey: Guid(aa06c12d8c0b3473fa06334cb0ce16e8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_92.png using Guid(aa06c12d8c0b3473fa06334cb0ce16e8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '4c5e7ac1c2c6d5465e6fefbdc9e4b900') in 0.010613 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_24.png
+  artifactKey: Guid(a85f9aadd9b5a4b6486b8b1918967624) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_24.png using Guid(a85f9aadd9b5a4b6486b8b1918967624) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '48a80ad93a50ccb5584b83a533983bfc') in 0.012402 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_49.png
+  artifactKey: Guid(8d3ad891a1e384868847c9f171952059) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_49.png using Guid(8d3ad891a1e384868847c9f171952059) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '975b28af287b53231323f938f218f0d5') in 0.010145 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll
+  artifactKey: Guid(bd18eee30834e4f71bded96fd14033a9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll using Guid(bd18eee30834e4f71bded96fd14033a9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3ec994ceca700979fb64e4897155c7fb') in 0.009865 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_41.png
+  artifactKey: Guid(2e3eaf6f735564e85a1628b42aacec49) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_41.png using Guid(2e3eaf6f735564e85a1628b42aacec49) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2ac378c20bd5baf45830333f389daa46') in 0.009785 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_22.png
+  artifactKey: Guid(23be7368d408b4c878461dbfe8d65964) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_22.png using Guid(23be7368d408b4c878461dbfe8d65964) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f75ace438ef2150258b3a704387959ed') in 0.011302 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Firebase/Plugins/iOS/Firebase.Analytics.dll
+  artifactKey: Guid(52718a3a80d44aacb368bcc9d62dd804) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/iOS/Firebase.Analytics.dll using Guid(52718a3a80d44aacb368bcc9d62dd804) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '106749de6029693cb05f2ead998b5cfe') in 0.009248 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_97.png
+  artifactKey: Guid(2951b5c709fc54a7d843dfe18039e61f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_97.png using Guid(2951b5c709fc54a7d843dfe18039e61f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e72173a1863a6431f88934e30a1bccde') in 0.010064 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_71.png
+  artifactKey: Guid(c25d5194de66840a0a574070fc851e1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_71.png using Guid(c25d5194de66840a0a574070fc851e1b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'abb08d03d6ec90f96191867f6d4687e5') in 0.012352 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_99.png
+  artifactKey: Guid(ea712bb20889c4d7c847eb2de09f63d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_99.png using Guid(ea712bb20889c4d7c847eb2de09f63d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '06d8484680dd9e3c2609a3a34c8dd334') in 0.010615 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_43.png
+  artifactKey: Guid(be2facb1befc645e994bd9d288694ea3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_43.png using Guid(be2facb1befc645e994bd9d288694ea3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '644444431df2760e0e35e37156904421') in 0.010448 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_81.png
+  artifactKey: Guid(9f7fda3fd10ed42fbbcd9f01e85a2a84) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_81.png using Guid(9f7fda3fd10ed42fbbcd9f01e85a2a84) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'be76e4ad534c4e8926d212f91707a896') in 0.011840 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_74.png
+  artifactKey: Guid(d060095b0777f4ef197b11be37a3427c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_74.png using Guid(d060095b0777f4ef197b11be37a3427c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2f44f5c4de52c84e6fbe4c6707a1552e') in 0.010598 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_76.png
+  artifactKey: Guid(2a15ebbd58a964cedbbf3c71a3aff8d9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_76.png using Guid(2a15ebbd58a964cedbbf3c71a3aff8d9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ee8e14f9ed9603c56f21efae609318eb') in 0.012870 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_30.png
+  artifactKey: Guid(7c5b9298a63f0447a91ec796e3e94d08) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/User Interface/Icons/icon_theme14_30.png using Guid(7c5b9298a63f0447a91ec796e3e94d08) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6adc5d5d45179e4a743415d4f100b44c') in 0.010027 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Firebase/Plugins/x86_64/FirebaseCppAuth.so
+  artifactKey: Guid(a4d0f2c2a6ca44528c55eb26d36f25d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/Plugins/x86_64/FirebaseCppAuth.so using Guid(a4d0f2c2a6ca44528c55eb26d36f25d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '30822e1fe4f9df0b4650f815cd8f75ef') in 0.011241 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/8.6.2/firebase-auth-unity-8.6.2.pom
+  artifactKey: Guid(8df96b6531e44622bfb34588a7643ecb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/8.6.2/firebase-auth-unity-8.6.2.pom using Guid(8df96b6531e44622bfb34588a7643ecb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '59251b64e11507a1e8b075f8969092a4') in 0.009653 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

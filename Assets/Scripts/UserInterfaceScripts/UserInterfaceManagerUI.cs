@@ -45,8 +45,6 @@ public class UserInterfaceManagerUI : MonoBehaviour
 
     public List<GameObject> ListofAvailableScreens = new List<GameObject>();
 
-
-
     private AccountManager accountManager;
 
     //public Sprite LoadResources_Icon() { return new Sprite(); }
