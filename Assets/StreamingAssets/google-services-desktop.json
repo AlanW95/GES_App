@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "firebase_url": "null",
     "project_number": "1024807291922",
+    "firebase_url": "https://ges-app-30c54-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "ges-app-30c54",
     "storage_bucket": "ges-app-30c54.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024807291922:android:24c1342ae5b966ed251ccb",
+        "mobilesdk_app_id": "1:1024807291922:android:72016862383a4336251ccb",
         "android_client_info": {
           "package_name": "com.UniversityOfTheWestOfScotland.GESApp"
         }

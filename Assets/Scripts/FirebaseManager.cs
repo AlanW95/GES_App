@@ -198,8 +198,23 @@ public class FirebaseManager : MonoBehaviour
         registerOutputText.text = "";
     }
 
+    public void ClearRegisterFields()
+    {
+        registerUsername.text = "";
+        registerEmail.text = "";
+        registerPassword.text = "";
+        registerConfirmPassword.text = "";
+    }
+
+    public void ClearLoginFields()
+    {
+        loginEmail.text = "";
+        loginPassword.text = "";
+    }
+
     public void LoginButton()
     {
+        SaveDataButton();
         StartCoroutine(LoginLogic(loginEmail.text, loginPassword.text));
     }
 
@@ -210,10 +225,26 @@ public class FirebaseManager : MonoBehaviour
 
     //For the time being all database references are saved to the database when a button is pressed
     //TODO: Change so data is automatically being saved through the coroutine - we don't want to be pressing a button to save data to the database
+
+    //TODO: We would want to say that when the user is created, so in the RegisterLogic then it adds these to the database. We will be adding;
+        //Username
+        //Name
+        //Email
+        //Password
+        //University
+        //Skill
+        //Experience
+        //Reference
+        //Artifact
     public void SaveDataButton()
     {
-        StartCoroutine(UpdateUsernameAuth(user.DisplayName));
-        StartCoroutine(UpdateUsernameDatabase(user.DisplayName));
+        //StartCoroutine(UpdateUsernameAuth(loginEmail.text));
+        StartCoroutine(UpdateUsernameDatabase(loginEmail.text));
+
+        //TODO: Add UniversityField, SkillsField and ExperienceField
+        /*StartCoroutine(UpdateUniversity(int.Parse(universityField.text)));
+        StartCoroutine(UpdateSkills(int.Parse(skillsField.text)));
+        StartCoroutine(UpdateExperience(int.Parse(experienceField.text)));*/
     }
 
     public void ForgetPassword()
@@ -387,6 +418,8 @@ public class FirebaseManager : MonoBehaviour
                 {
                     Debug.Log($"Firebase user has been created successfully: {user.DisplayName} ({user.UserId})");
 
+
+
                     //Send a verficiation email to the user
                     StartCoroutine(SendVerificationEmail());
                 }
@@ -482,7 +515,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateUsernameAuth(string _username)
+    /*private IEnumerator UpdateUsernameAuth(string _username)
     {
         //Create a user profile and set the username
         UserProfile profile = new UserProfile { DisplayName = _username };
@@ -500,7 +533,7 @@ public class FirebaseManager : MonoBehaviour
         {
             //Auth username is now updated
         }
-    }
+    }*/
 
     private IEnumerator UpdateUsernameDatabase(string _username)
     {
@@ -517,4 +550,52 @@ public class FirebaseManager : MonoBehaviour
             //Database username is now updated
         }
     }
+
+    /*private IEnumerator UpdateUniversity(int _university)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("university").SetValueAsync(_university);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //University is now updated
+        }
+    }
+
+    private IEnumerator UpdateSkills(int _skills)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(_skills);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Skills is now updated
+        }
+    }
+
+    private IEnumerator UpdateExperience(int _experience)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experience").SetValueAsync(_experience);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Experience is now updated
+        }
+    }*/
 }
