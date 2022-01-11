@@ -14,6 +14,7 @@ public class FirebaseManager : MonoBehaviour
     [Header("Firebase")]
     public FirebaseAuth auth;
     public FirebaseUser user;
+    public DatabaseReference DBreference;
     [Space(5f)]
 
     [Header("Login References")]
@@ -40,6 +41,17 @@ public class FirebaseManager : MonoBehaviour
     private GameObject registerOutput;
     [SerializeField]
     private TMP_Text registerOutputText;
+    [Space(5f)]
+
+    //TODO: Add SkillsField and ExperienceField
+    [Header("Register 2 References")]
+    [SerializeField]
+    private TMP_InputField universityField;
+    /*[SerializeField]
+    private TMP_InputField skillsField;
+    [SerializeField]
+    private TMP_InputField experienceField;*/
+    [Space(5f)]
 
     [Header("Forget Password References")]
     [SerializeField]
@@ -48,22 +60,23 @@ public class FirebaseManager : MonoBehaviour
     private GameObject forgotPasswordOutput;
     [SerializeField]
     private TMP_Text forgotPasswordOutputText;
+    [Space(5f)]
 
     [Header("Home References")]
     [SerializeField]
     private TMP_Text welcomeOutputText;
+    [Space(5f)]
 
     [Header("Profile References")]
     [SerializeField]
     private TMP_Text profileNameOutputText;
+    [SerializeField]
+    private TMP_Text profileUniversityText;
+    [Space(5f)]
 
     [Header("Bottom Banner")]
     [SerializeField]
     private TMP_Text bottomBannerOutputText;
-
-    [Header("Database References")]
-    [SerializeField]
-    private DatabaseReference DBreference;
 
     private void Awake() {
 
@@ -98,6 +111,14 @@ public class FirebaseManager : MonoBehaviour
     {
         StartCoroutine(CheckAndFixDependencies());
     }
+
+    /*private void FixedUpdate()
+    {
+        //TODO: Add UniversityField, SkillsField and ExperienceField
+        SaveProfileButton();
+        *//*StartCoroutine(UpdateSkills(int.Parse(skillsField.text)));
+        StartCoroutine(UpdateExperience(int.Parse(experienceField.text)));*//*
+    }*/
 
     private IEnumerator CheckAndFixDependencies()
     {
@@ -187,6 +208,7 @@ public class FirebaseManager : MonoBehaviour
                 Debug.Log($"Signed In: {user.DisplayName}");
                 welcomeOutputText.text = $"Welcome {user.DisplayName}!";
                 profileNameOutputText.text = $"{ user.DisplayName}";
+                universityField.text = $"{profileUniversityText.text}";
                 bottomBannerOutputText.text = $"Signed in as: {user.DisplayName}";
             }
         }
@@ -214,7 +236,7 @@ public class FirebaseManager : MonoBehaviour
 
     public void LoginButton()
     {
-        SaveDataButton();
+        //SaveDataButton();
         StartCoroutine(LoginLogic(loginEmail.text, loginPassword.text));
     }
 
@@ -239,12 +261,26 @@ public class FirebaseManager : MonoBehaviour
     public void SaveDataButton()
     {
         //StartCoroutine(UpdateUsernameAuth(loginEmail.text));
-        StartCoroutine(UpdateUsernameDatabase(loginEmail.text));
 
-        //TODO: Add UniversityField, SkillsField and ExperienceField
-        /*StartCoroutine(UpdateUniversity(int.Parse(universityField.text)));
-        StartCoroutine(UpdateSkills(int.Parse(skillsField.text)));
-        StartCoroutine(UpdateExperience(int.Parse(experienceField.text)));*/
+        //StartCoroutine(UpdateUsernameDatabase("hello world"));
+        StartCoroutine(UpdateUsernameDatabase(loginEmail.text));
+        //Debug.Log(loginEmail.text);
+        //Debug.Log("User data to be sent to database");
+    }
+
+    public void SaveProfileButton()
+    {
+        AuthUIManager.instance.ProfileScreen();
+
+        if (universityField.text == "")
+        {
+            //do nothing
+        } else
+        {
+            StartCoroutine(UpdateUniversity(universityField.text));
+
+            profileUniversityText.text = universityField.text;
+        }
     }
 
     public void ForgetPassword()
@@ -259,6 +295,8 @@ public class FirebaseManager : MonoBehaviour
             //signs current user out
             auth.SignOut();
             Debug.Log("User has been successfully signed out");
+            ClearLoginFields();
+            ClearRegisterFields();
             //return to login screen
             AuthUIManager.instance.LoginScreen();
         }
@@ -267,6 +305,8 @@ public class FirebaseManager : MonoBehaviour
             //do nothing
         }
     }
+
+    //-----------------------------------------------------------------------------------------
 
     private IEnumerator LoginLogic(string _email, string _password)
     {
@@ -303,6 +343,7 @@ public class FirebaseManager : MonoBehaviour
 
             loginOutputText.text = output;
             loginOutput.SetActive(true);
+            StartCoroutine(LoadUserData());
             yield return new WaitForSeconds(5);
             loginOutput.SetActive(false);
         }
@@ -314,6 +355,9 @@ public class FirebaseManager : MonoBehaviour
 
                 // Change scene to the home screen for the app
                 AuthUIManager.instance.HomeScreen();
+
+                ClearLoginFields();
+                ClearRegisterFields();
             }
             else
             {
@@ -418,10 +462,11 @@ public class FirebaseManager : MonoBehaviour
                 {
                     Debug.Log($"Firebase user has been created successfully: {user.DisplayName} ({user.UserId})");
 
-
-
                     //Send a verficiation email to the user
                     StartCoroutine(SendVerificationEmail());
+
+                    ClearLoginFields();
+                    ClearRegisterFields();
                 }
             }
         }
@@ -537,21 +582,25 @@ public class FirebaseManager : MonoBehaviour
 
     private IEnumerator UpdateUsernameDatabase(string _username)
     {
+        yield return new WaitForSeconds(5);
+
         var DBTask = DBreference.Child("users").Child(user.UserId).Child("username").SetValueAsync(_username);
+
+        Debug.Log("UpdateUsernameDatabase has been ran");
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database username is now updated
-        }
+         if (DBTask.Exception != null)
+         {
+             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+         }
+         else
+         {
+             //Database username is now updated
+         }
     }
 
-    /*private IEnumerator UpdateUniversity(int _university)
+    private IEnumerator UpdateUniversity(string _university)
     {
         var DBTask = DBreference.Child("users").Child(user.UserId).Child("university").SetValueAsync(_university);
 
@@ -567,7 +616,8 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateSkills(int _skills)
+    //TODO: Uncomment/ add StartCoroutine
+    /*private IEnumerator UpdateSkills(int _skills)
     {
         var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(_skills);
 
@@ -583,6 +633,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    //TODO: Uncomment/ add StartCoroutine
     private IEnumerator UpdateExperience(int _experience)
     {
         var DBTask = DBreference.Child("users").Child(user.UserId).Child("experience").SetValueAsync(_experience);
@@ -598,4 +649,29 @@ public class FirebaseManager : MonoBehaviour
             //Experience is now updated
         }
     }*/
+
+    //Loading in User Data with the Firebase Realtime Database
+    private IEnumerator LoadUserData()
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No data exists yet
+            profileUniversityText.text = "";
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            profileUniversityText.text = snapshot.Child("university").Value.ToString();
+        }
+    }
 }

@@ -31,6 +31,10 @@ public class AuthUIManager : MonoBehaviour
     [SerializeField]
     private GameObject homeUI;
     [SerializeField]
+    private GameObject profileUI;
+    [SerializeField]
+    private GameObject editProfileUI;
+    [SerializeField]
     private GameObject bottomBanner;
 
     private void Awake()
@@ -112,6 +116,14 @@ public class AuthUIManager : MonoBehaviour
         ClearUI();
         homeUI.SetActive(true);
         bottomBanner.SetActive(true);
+    }
+
+    public void ProfileScreen()
+    {
+        ClearUI();
+        profileUI.SetActive(true);
+        bottomBanner.SetActive(true);
+        editProfileUI.SetActive(false);
     }
 
     public void AwaitVerification(bool _emailSent, string _email, string _output)

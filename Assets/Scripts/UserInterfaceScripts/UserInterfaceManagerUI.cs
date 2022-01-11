@@ -11,6 +11,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
 
     public GameObject SplashScreen;
     public GameObject ProfileScreen;
+    public GameObject EditProfileScreen;
     public GameObject LoginScreen;
     public GameObject HomeScreen;
     public GameObject AddEditInformationScreen;
@@ -97,7 +98,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
 
         if(_UI_Image == null)
         {
-            BannerTop_Secondary_Button.gameObject.SetActive(false);
+            BannerTop_Secondary_Button.gameObject.SetActive(true);
         }
 
         BannerTop.gameObject.SetActive(!_disable);
@@ -129,7 +130,8 @@ public class UserInterfaceManagerUI : MonoBehaviour
     }
 
     public void Open_SplashScreen() { ChangeWindow(SplashScreen); Configure_Top_Banner(true); }
-    public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile"/*+ TODO: ADD USERNAME*/, delegate { ChangeWindow(ProfileScreen); }); }
+    public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile", delegate { ChangeWindow(ProfileScreen); }, null, delegate { ChangeWindow(EditProfileScreen); }); }
+    public void Open_EditProfile() { ChangeWindow(EditProfileScreen); Configure_Top_Banner(false, false, "Edit Profile", delegate { ChangeWindow(ProfileScreen); }); }
     public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }
     public void Open_Home() { ChangeWindow(HomeScreen); Configure_Top_Banner(true); TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills Added"; HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString(); HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString(); HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString(); }
     public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); }
