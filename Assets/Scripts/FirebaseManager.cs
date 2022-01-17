@@ -176,6 +176,7 @@ public class FirebaseManager : MonoBehaviour
             {
                 //Change scene to home screen
                 //GameManager.instance.ChangeScene(1); //from the video tutorial
+                StartCoroutine(LoadUserData());
 
                 AuthUIManager.instance.HomeScreen();
             }
@@ -343,7 +344,6 @@ public class FirebaseManager : MonoBehaviour
 
             loginOutputText.text = output;
             loginOutput.SetActive(true);
-            StartCoroutine(LoadUserData());
             yield return new WaitForSeconds(5);
             loginOutput.SetActive(false);
         }
@@ -351,6 +351,7 @@ public class FirebaseManager : MonoBehaviour
         {
             if (user.IsEmailVerified)
             {
+                StartCoroutine(LoadUserData());
                 yield return new WaitForSeconds(1f);
 
                 // Change scene to the home screen for the app
@@ -664,7 +665,7 @@ public class FirebaseManager : MonoBehaviour
         else if (DBTask.Result.Value == null)
         {
             //No data exists yet
-            profileUniversityText.text = "";
+            profileUniversityText.text = "No University Selected";
         }
         else
         {
