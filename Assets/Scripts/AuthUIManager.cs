@@ -37,6 +37,22 @@ public class AuthUIManager : MonoBehaviour
     [SerializeField]
     private GameObject bottomBanner;
 
+
+
+    [Header("Show/Hide Password References")]
+    [SerializeField]
+    public TMP_InputField LoginPasswordField;
+    [SerializeField]
+    public TMP_Text LoginPasswordText;
+    [SerializeField]
+    public TMP_InputField RegisterPasswordField;
+    [SerializeField]
+    public TMP_Text RegisterPasswordText;
+    [SerializeField]
+    public TMP_InputField RegisterConfirmPasswordField;
+    [SerializeField]
+    public TMP_Text RegisterConfirmPasswordText;
+
     private void Awake()
     {
         if (instance == null)
@@ -137,6 +153,55 @@ public class AuthUIManager : MonoBehaviour
         else
         {
             verifyEmailText.text = $"Email not sent: {_output}\nPlease verify {_email}";
+        }
+    }
+
+    public void ShowLoginPassword(bool show)
+    {
+        LoginPasswordField.placeholder.GetComponent<TMP_Text>().enabled = true;
+        LoginPasswordText.enabled = true;
+
+
+        if (show)
+        {
+            LoginPasswordField.placeholder.GetComponent<TMP_Text>().text = LoginPasswordField.text;
+            LoginPasswordText.enabled = false;
+        }
+        else
+        {
+            LoginPasswordField.placeholder.GetComponent<TMP_Text>().enabled = false;
+        }
+    }
+
+    public void ShowRegisterPassword (bool show)
+    {
+        RegisterPasswordField.placeholder.GetComponent<TMP_Text>().enabled = true;
+        RegisterPasswordText.enabled = true;
+
+        if (show)
+        {
+            RegisterPasswordField.placeholder.GetComponent<TMP_Text>().text = RegisterPasswordField.text;
+            RegisterPasswordText.enabled = false;
+        }
+        else
+        {
+            RegisterPasswordField.placeholder.GetComponent<TMP_Text>().enabled = false;
+        }
+    }
+
+    public void ShowRegisterConfirmPassword(bool show)
+    {
+        RegisterConfirmPasswordField.placeholder.GetComponent<TMP_Text>().enabled = true;
+        RegisterConfirmPasswordText.enabled = true;
+
+        if (show)
+        {
+            RegisterConfirmPasswordField.placeholder.GetComponent<TMP_Text>().text = RegisterConfirmPasswordField.text;
+            RegisterConfirmPasswordText.enabled = false;
+        }
+        else
+        {
+            RegisterConfirmPasswordField.placeholder.GetComponent<TMP_Text>().enabled = false;
         }
     }
 }
