@@ -81,14 +81,14 @@ public class AuthUIManager : MonoBehaviour
         {
             ClearUI();
             loginUI.SetActive(false);
-            homeUI.SetActive(true);
+            profileUI.SetActive(true);
             bottomBanner.SetActive(true);
         }
-        if (homeUI.activeInHierarchy == true || registerUI.activeInHierarchy == true)
+        if (profileUI.activeInHierarchy == true || registerUI.activeInHierarchy == true)
         {
             ClearUI();
             loginUI.SetActive(true);
-            homeUI.SetActive(false);
+            profileUI.SetActive(false);
             bottomBanner.SetActive(false);
         }
         //TESTING PURPOSES ONLY - Can be removed at a later date
@@ -96,7 +96,7 @@ public class AuthUIManager : MonoBehaviour
         {
             ClearUI();
             loginUI.SetActive(false);
-            homeUI.SetActive(true);
+            profileUI.SetActive(true);
             bottomBanner.SetActive(true);
         }
         if (forgetPasswordUI.activeInHierarchy == true)
@@ -124,7 +124,7 @@ public class AuthUIManager : MonoBehaviour
         ClearUI();
         forgetPasswordUI.SetActive(true);
         loginUI.SetActive(false);
-        forgetPasswordText.text = $"Enter associated email below:";
+        forgetPasswordText.text = $"Confirm your email address and we will send further instructions.";
     }
 
     public void HomeScreen()

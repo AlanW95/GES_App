@@ -300,6 +300,8 @@ public class FirebaseManager : MonoBehaviour
             ClearRegisterFields();
             //return to login screen
             AuthUIManager.instance.LoginScreen();
+            loginOutputText.text = "User successfully signed out.";
+            StartCoroutine(SignOutLogic());
         }
         else
         {
@@ -308,6 +310,13 @@ public class FirebaseManager : MonoBehaviour
     }
 
     //-----------------------------------------------------------------------------------------
+
+    private IEnumerator SignOutLogic()
+    {
+        loginOutput.SetActive(true);
+        yield return new WaitForSeconds(4);
+        loginOutput.SetActive(false);
+    }
 
     private IEnumerator LoginLogic(string _email, string _password)
     {
