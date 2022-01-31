@@ -161,8 +161,8 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_AddSkill() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Skill"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewSkill(1); }
     public void Open_AddArtifact() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Artefact"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewArtifact(1); }
 
-    public void Open_AllExperiences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Viewing All Experiences", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllExperiences(); }
-    public void Open_AllArtefacts() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Viewing All Projects", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllArtefacts(); }
-    public void Open_AllReferences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Viewing All References", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllReferences(); }
+    public void Open_AllExperiences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Experiences", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllExperiences(); }
+    public void Open_AllArtefacts() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Projects", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllArtefacts(); }
+    public void Open_AllReferences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "References", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllReferences(); }
 
 }
