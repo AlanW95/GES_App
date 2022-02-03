@@ -833,7 +833,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         if (accountManager.localUserAccount._skills.Count == 0)
         {
             //Do empty
-            CreateDisplayGroup("<b><align=center>No Skills Added!</align></b>");
+            CreateDisplayGroup("<b><align=center>No Skills!</align></b>");
             return;
         }
 
