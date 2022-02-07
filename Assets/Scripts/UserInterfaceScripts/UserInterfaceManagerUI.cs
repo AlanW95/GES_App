@@ -10,6 +10,8 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public Transform _holderScreen;
 
     public GameObject SplashScreen;
+    public GameObject CoachSelectionScreen;
+    public GameObject CoachQuestionScreen;
     public GameObject ProfileScreen;
     public GameObject EditProfileScreen;
     public GameObject LoginScreen;
@@ -130,6 +132,8 @@ public class UserInterfaceManagerUI : MonoBehaviour
     }
 
     public void Open_SplashScreen() { ChangeWindow(SplashScreen); Configure_Top_Banner(true); }
+    public void Open_CoachSelectionScreen() { ChangeWindow(CoachSelectionScreen); Configure_Top_Banner(true); }
+    public void Open_CoachQuestionScreen() { ChangeWindow(CoachQuestionScreen); Configure_Top_Banner(true); }
     public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile", delegate { ChangeWindow(ProfileScreen); }, null, delegate { ChangeWindow(EditProfileScreen); }); }
     public void Open_EditProfile() { ChangeWindow(EditProfileScreen); Configure_Top_Banner(false, false, "Edit Profile", delegate { ChangeWindow(ProfileScreen); }); }
     public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }

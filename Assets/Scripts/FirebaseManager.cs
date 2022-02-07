@@ -62,6 +62,16 @@ public class FirebaseManager : MonoBehaviour
     private TMP_Text forgotPasswordOutputText;
     [Space(5f)]
 
+    [Header("Coach Selection References")]
+    private string selectedCoach;
+    [SerializeField]
+    private GameObject coachText;
+    [SerializeField]
+    private TMP_Text coachSelectionText;
+    [SerializeField]
+    private int coach = 0;
+    [Space(5f)]
+
     [Header("Home References")]
     [SerializeField]
     private TMP_Text welcomeOutputText;
@@ -178,7 +188,8 @@ public class FirebaseManager : MonoBehaviour
                 //GameManager.instance.ChangeScene(1); //from the video tutorial
                 StartCoroutine(LoadUserData());
 
-                AuthUIManager.instance.HomeScreen();
+                /*AuthUIManager.instance.HomeScreen();*/
+                AuthUIManager.instance.CoachSelectionScreen();
             }
             else
             {
@@ -364,7 +375,8 @@ public class FirebaseManager : MonoBehaviour
                 yield return new WaitForSeconds(1f);
 
                 // Change scene to the home screen for the app
-                AuthUIManager.instance.HomeScreen();
+                //AuthUIManager.instance.HomeScreen();
+                AuthUIManager.instance.CoachSelectionScreen();
 
                 ClearLoginFields();
                 ClearRegisterFields();
@@ -625,6 +637,122 @@ public class FirebaseManager : MonoBehaviour
             //University is now updated
         }
     }
+
+    /*
+     * SELECTION OF WORK COACH
+     */
+    private IEnumerator UpdateCoach(string _coach)
+    {
+        //TODO:Add date and time reference so we can accomodate each selection of each at certain time intervals.
+
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("coach").SetValueAsync(_coach);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Coach is now updated
+        }
+    }
+
+    public void Coach1() { coach = 1;  CoachSelection(); }
+    public void Coach2() { coach = 2;  CoachSelection(); }
+    public void Coach3() { coach = 3;  CoachSelection(); }
+    public void Coach4() { coach = 4;  CoachSelection(); }
+    public void Coach5() { coach = 5;  CoachSelection(); }
+    public void Coach6() { coach = 6;  CoachSelection(); }
+
+    public void CoachSelection()
+    {
+        switch (coach)
+        {
+            case 1:
+                //Calm Clarice has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Calm Clarice!";
+                selectedCoach = "Calm Clarice";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Clarice picture to the CoachQuestionsScreen
+
+                break;
+            case 2:
+                //Funny Fabio has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Funny Fabio!";
+                selectedCoach = "Funny Fabio";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Fabio picture to the CoachQuestionsScreen
+
+                break;
+            case 3:
+                //Optimistic Alen has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Optimistic Alen!";
+                selectedCoach = "Optimistic Alen";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Alen picture to the CoachQuestionsScreen
+
+                break;
+            case 4:
+                //Enthusiastic Emily has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Enthusiastic Emily!";
+                selectedCoach = "Enthusiastic Emily";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Emily picture to the CoachQuestionsScreen
+
+                break;
+            case 5:
+                //Ambitious Fred has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Ambitious Fred!";
+                selectedCoach = "Ambitious Fred";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Fred picture to the CoachQuestionsScreen
+
+                break;
+            case 6:
+                //Logical Sam has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You have selected Logical Sam!";
+                selectedCoach = "Logical Sam";
+                Debug.Log(selectedCoach);
+
+                //TODO: Add Sam picture to the CoachQuestionsScreen
+
+                break;
+            default:
+                //No coach has been selected
+                coachText.SetActive(true);
+                coachSelectionText.text = "You still have to select a coach!";
+                selectedCoach = "";
+                Debug.Log(selectedCoach);
+                break;
+        }
+    }
+
+    public void ConfirmCoachSelection()
+    {
+        StartCoroutine(UpdateCoach(selectedCoach));
+
+        //TODO: Change to the CoachQuestionScreen
+        AuthUIManager.instance.CoachQuestionScreen();
+    }
+
+
+
+    /*
+     * COACH FINISHED
+     */
 
     //TODO: Uncomment/ add StartCoroutine
     /*private IEnumerator UpdateSkills(int _skills)

@@ -29,6 +29,10 @@ public class AuthUIManager : MonoBehaviour
 
     [Header("Home References")]
     [SerializeField]
+    private GameObject coachUI;
+    [SerializeField]
+    private GameObject coachQuestionUI;
+    [SerializeField]
     private GameObject homeUI;
     [SerializeField]
     private GameObject profileUI;
@@ -132,6 +136,20 @@ public class AuthUIManager : MonoBehaviour
         ClearUI();
         homeUI.SetActive(true);
         bottomBanner.SetActive(true);
+    }
+
+    public void CoachSelectionScreen()
+    {
+        ClearUI();
+        coachUI.SetActive(true);
+        bottomBanner.SetActive(false);
+    }
+
+    public void CoachQuestionScreen()
+    {
+        ClearUI();
+        coachQuestionUI.SetActive(true);
+        bottomBanner.SetActive(false);
     }
 
     public void ProfileScreen()
