@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
@@ -63,6 +64,10 @@ public class FirebaseManager : MonoBehaviour
     [Space(5f)]
 
     [Header("Coach Selection References")]
+    [SerializeField]
+    private TMP_Text coachSelectionWelcomeText;
+    [SerializeField]
+    private TMP_Text coachEmotionText;
     private string selectedCoach;
     [SerializeField]
     private GameObject coachText;
@@ -70,6 +75,15 @@ public class FirebaseManager : MonoBehaviour
     private TMP_Text coachSelectionText;
     [SerializeField]
     private int coach = 0;
+    private string selectedEmotion;
+    [SerializeField]
+    private GameObject emotionText;
+    [SerializeField]
+    private TMP_Text emotionSelectionText;
+    [SerializeField]
+    private int emotion = 0;
+    [SerializeField]
+    private Button[] coachButtons;
     [Space(5f)]
 
     [Header("Home References")]
@@ -218,6 +232,8 @@ public class FirebaseManager : MonoBehaviour
             if (signedIn)
             {
                 Debug.Log($"Signed In: {user.DisplayName}");
+                coachSelectionWelcomeText.text = $"Hi {user.DisplayName}!";
+                coachEmotionText.text = $"How are you feeling today, {user.DisplayName}?";
                 welcomeOutputText.text = $"Welcome {user.DisplayName}!";
                 profileNameOutputText.text = $"{ user.DisplayName}";
                 universityField.text = $"{profileUniversityText.text}";
@@ -376,6 +392,7 @@ public class FirebaseManager : MonoBehaviour
 
                 // Change scene to the home screen for the app
                 //AuthUIManager.instance.HomeScreen();
+                //TODO: ENTER THE USERNAME
                 AuthUIManager.instance.CoachSelectionScreen();
 
                 ClearLoginFields();
@@ -602,6 +619,8 @@ public class FirebaseManager : MonoBehaviour
         }
     }*/
 
+    #region Write to Database
+
     private IEnumerator UpdateUsernameDatabase(string _username)
     {
         yield return new WaitForSeconds(5);
@@ -638,14 +657,13 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    /*
-     * SELECTION OF WORK COACH
-     */
     private IEnumerator UpdateCoach(string _coach)
     {
-        //TODO:Add date and time reference so we can accomodate each selection of each at certain time intervals.
+        //Addition of time was added to accomodate the database storing the users different selections
+        string dateTimeString = System.DateTime.Now.ToString();
+        System.DateTime dateTime = System.DateTime.Parse(dateTimeString);
 
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("coach").SetValueAsync(_coach);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("coach").Child(dateTime.ToString("yyyy-MM-dd HH:mm")).SetValueAsync(_coach);
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -659,12 +677,16 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void Coach1() { coach = 1;  CoachSelection(); }
-    public void Coach2() { coach = 2;  CoachSelection(); }
-    public void Coach3() { coach = 3;  CoachSelection(); }
-    public void Coach4() { coach = 4;  CoachSelection(); }
-    public void Coach5() { coach = 5;  CoachSelection(); }
-    public void Coach6() { coach = 6;  CoachSelection(); }
+    #endregion Write to Database
+
+    #region Coach and Emotion Selection
+
+    public void Coach1() { coach = 1;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[0].interactable = false; }
+    public void Coach2() { coach = 2;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[1].interactable = false; }
+    public void Coach3() { coach = 3;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[2].interactable = false; }
+    public void Coach4() { coach = 4;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[3].interactable = false; }
+    public void Coach5() { coach = 5;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[4].interactable = false; }
+    public void Coach6() { coach = 6;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[5].interactable = false; }
 
     public void CoachSelection()
     {
@@ -748,11 +770,105 @@ public class FirebaseManager : MonoBehaviour
         AuthUIManager.instance.CoachQuestionScreen();
     }
 
-
-
     /*
      * COACH FINISHED
      */
+
+    /*
+     * SELECTION OF EMOTION
+     */
+    private IEnumerator UpdateEmotion(string _emotion)
+    {
+        //Addition of time was added to accomodate the database storing the users different selections
+        string dateTimeString = System.DateTime.Now.ToString();
+        System.DateTime dateTime = System.DateTime.Parse(dateTimeString);
+
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("coach").Child("emotions").Child(dateTime.ToString("yyyy-MM-dd HH:mm")).SetValueAsync(_emotion);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Emotion is now updated
+        }
+    }
+
+    public void Emotion1() { emotion = 1; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[7].interactable = false; }
+    public void Emotion2() { emotion = 2; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[8].interactable = false; }
+    public void Emotion3() { emotion = 3; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[9].interactable = false; }
+    public void Emotion4() { emotion = 4; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[10].interactable = false; }
+    public void Emotion5() { emotion = 5; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[11].interactable = false; }
+    public void Emotion6() { emotion = 6; EmotionSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[12].interactable = false; }
+
+    public void EmotionSelection()
+    {
+        switch (emotion)
+        {
+            case 1:
+                //Anxious has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling anxious today.";
+                selectedEmotion = "Anxious";
+                Debug.Log(selectedEmotion);
+                break;
+            case 2:
+                //Curious has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling curious today.";
+                selectedEmotion = "Curious";
+                Debug.Log(selectedEmotion);
+                break;
+            case 3:
+                //Excited has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling excited today!";
+                selectedEmotion = "Excited";
+                Debug.Log(selectedEmotion);
+                break;
+            case 4:
+                //Lost has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling lost today.";
+                selectedEmotion = "Lost";
+                Debug.Log(selectedEmotion);
+                break;
+            case 5:
+                //Proud has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling proud today!";
+                selectedEmotion = "Proud";
+                Debug.Log(selectedEmotion);
+                break;
+            case 6:
+                //Tired has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "I am feeling tired today.";
+                selectedEmotion = "Tired";
+                Debug.Log(selectedEmotion);
+                break;
+            default:
+                //No emotion has been selected
+                emotionText.SetActive(true);
+                emotionSelectionText.text = "You still have to select an emotion!";
+                selectedEmotion = "";
+                Debug.Log(selectedEmotion);
+                break;
+        }
+    }
+
+    public void ConfirmEmotionSelection()
+    {
+        StartCoroutine(UpdateEmotion(selectedEmotion));
+
+        //TODO: Change to the HomeScreen
+        AuthUIManager.instance.HomeScreen();
+    }
+
+    #endregion Coach and Emotion Selection
 
     //TODO: Uncomment/ add StartCoroutine
     /*private IEnumerator UpdateSkills(int _skills)
