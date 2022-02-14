@@ -15,6 +15,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject ProfileScreen;
     public GameObject EditProfileScreen;
     public GameObject LoginScreen;
+    public GameObject RegisterScreen;
     public GameObject HomeScreen;
     public GameObject AddEditInformationScreen;
     public GameObject SettingsScreen;
@@ -134,13 +135,14 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_SplashScreen() { ChangeWindow(SplashScreen); Configure_Top_Banner(true); }
     public void Open_CoachSelectionScreen() { ChangeWindow(CoachSelectionScreen); Configure_Top_Banner(true); }
     public void Open_CoachQuestionScreen() { ChangeWindow(CoachQuestionScreen); Configure_Top_Banner(true); }
-    public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile", delegate { ChangeWindow(ProfileScreen); }, null, delegate { ChangeWindow(EditProfileScreen); }); }
-    public void Open_EditProfile() { ChangeWindow(EditProfileScreen); Configure_Top_Banner(false, false, "Edit Profile", delegate { ChangeWindow(ProfileScreen); }); }
-    public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }); }
+    public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile", delegate { ChangeWindow(HomeScreen); }, null, delegate { ChangeWindow(EditProfileScreen); }); }
+    public void Open_EditProfile() { ChangeWindow(EditProfileScreen); Configure_Top_Banner(false, false, "Edit Profile", delegate { ChangeWindow(ProfileScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_Login() { ChangeWindow(LoginScreen); Configure_Top_Banner(false, false, "Login", delegate { ChangeWindow(LoginScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_Register() { ChangeWindow(RegisterScreen); Configure_Top_Banner(false, false, "Register", delegate { ChangeWindow(RegisterScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_Home() { ChangeWindow(HomeScreen); Configure_Top_Banner(true); TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills"; HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString(); HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString(); HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString(); }
-    public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); }
-    public void Open_Calander() { ChangeWindow(CalanderScreen); Configure_Top_Banner(false, false, "Calendar", delegate { ChangeWindow(HomeScreen); }); }
-    public void Open_Files() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Files", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().CreateSkillsDisplayContent(); }
+    public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_Calander() { ChangeWindow(CalanderScreen); Configure_Top_Banner(false, false, "Calendar", delegate { ChangeWindow(HomeScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_Files() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Files", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().CreateSkillsDisplayContent(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
     public void Open_Add_SubMenu(bool forceClose = false) 
@@ -160,13 +162,13 @@ public class UserInterfaceManagerUI : MonoBehaviour
             Add_SubMenu.SetActive(false);
     }
 
-    public void Open_AddReference() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Reference"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewReference(1); }
-    public void Open_AddExperience() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Experience"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewExperiencePage(1); }
-    public void Open_AddSkill() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Skill"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewSkill(1); }
-    public void Open_AddArtifact() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Artefact"); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewArtifact(1); }
+    public void Open_AddReference() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Reference", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewReference(1); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AddExperience() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Experience", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewExperiencePage(1); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AddSkill() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Skill", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewSkill(1); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AddArtifact() { Open_Add_SubMenu(true);  ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Add Artefact", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddNewArtifact(1); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
-    public void Open_AllExperiences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Experiences", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllExperiences(); }
-    public void Open_AllArtefacts() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Projects", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllArtefacts(); }
-    public void Open_AllReferences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "References", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllReferences(); }
+    public void Open_AllExperiences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Experiences", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllExperiences(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AllArtefacts() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Projects", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllArtefacts(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AllReferences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "References", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllReferences(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 }

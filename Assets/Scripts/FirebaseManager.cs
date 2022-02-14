@@ -232,6 +232,8 @@ public class FirebaseManager : MonoBehaviour
             if (signedIn)
             {
                 Debug.Log($"Signed In: {user.DisplayName}");
+                loginOutputText.text = "Signing in...";
+                StartCoroutine(SignOutLogic());
                 coachSelectionWelcomeText.text = $"Hi {user.DisplayName}!";
                 coachEmotionText.text = $"How are you feeling today, {user.DisplayName}?";
                 welcomeOutputText.text = $"Welcome {user.DisplayName}!";
@@ -697,7 +699,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Calm Clarice!";
                 selectedCoach = "Calm Clarice";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Clarice picture to the CoachQuestionsScreen
 
@@ -707,7 +708,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Funny Fabio!";
                 selectedCoach = "Funny Fabio";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Fabio picture to the CoachQuestionsScreen
 
@@ -717,7 +717,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Optimistic Alen!";
                 selectedCoach = "Optimistic Alen";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Alen picture to the CoachQuestionsScreen
 
@@ -727,7 +726,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Enthusiastic Emily!";
                 selectedCoach = "Enthusiastic Emily";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Emily picture to the CoachQuestionsScreen
 
@@ -737,7 +735,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Ambitious Fred!";
                 selectedCoach = "Ambitious Fred";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Fred picture to the CoachQuestionsScreen
 
@@ -747,7 +744,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You have selected Logical Sam!";
                 selectedCoach = "Logical Sam";
-                Debug.Log(selectedCoach);
 
                 //TODO: Add Sam picture to the CoachQuestionsScreen
 
@@ -757,7 +753,6 @@ public class FirebaseManager : MonoBehaviour
                 coachText.SetActive(true);
                 coachSelectionText.text = "You still have to select a coach!";
                 selectedCoach = "";
-                Debug.Log(selectedCoach);
                 break;
         }
     }
@@ -813,49 +808,42 @@ public class FirebaseManager : MonoBehaviour
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling anxious today.";
                 selectedEmotion = "Anxious";
-                Debug.Log(selectedEmotion);
                 break;
             case 2:
                 //Curious has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling curious today.";
                 selectedEmotion = "Curious";
-                Debug.Log(selectedEmotion);
                 break;
             case 3:
                 //Excited has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling excited today!";
                 selectedEmotion = "Excited";
-                Debug.Log(selectedEmotion);
                 break;
             case 4:
                 //Lost has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling lost today.";
                 selectedEmotion = "Lost";
-                Debug.Log(selectedEmotion);
                 break;
             case 5:
                 //Proud has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling proud today!";
                 selectedEmotion = "Proud";
-                Debug.Log(selectedEmotion);
                 break;
             case 6:
                 //Tired has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "I am feeling tired today.";
                 selectedEmotion = "Tired";
-                Debug.Log(selectedEmotion);
                 break;
             default:
                 //No emotion has been selected
                 emotionText.SetActive(true);
                 emotionSelectionText.text = "You still have to select an emotion!";
                 selectedEmotion = "";
-                Debug.Log(selectedEmotion);
                 break;
         }
     }

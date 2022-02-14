@@ -117,6 +117,14 @@ public class AuthUIManager : MonoBehaviour
         splashUI.SetActive(false);
     }
 
+    public void SplashScreen()
+    {
+        ClearUI();
+        splashUI.SetActive(true);
+        registerUI.SetActive(false);
+        loginUI.SetActive(false);
+    }
+
     public void RegisterScreen()
     {
         ClearUI();
