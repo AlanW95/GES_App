@@ -204,6 +204,11 @@ public class FirebaseManager : MonoBehaviour
 
                 /*AuthUIManager.instance.HomeScreen();*/
                 AuthUIManager.instance.CoachSelectionScreen();
+                /*for (int i=0; i<coachButtons.Length; i++)
+                {
+                    coachButtons[i].interactable = true;
+                }*/
+                
             }
             else
             {
@@ -345,6 +350,8 @@ public class FirebaseManager : MonoBehaviour
         loginOutput.SetActive(true);
         yield return new WaitForSeconds(4);
         loginOutput.SetActive(false);
+        coachSelectionText.text = "";
+        emotionSelectionText.text = "";
     }
 
     private IEnumerator LoginLogic(string _email, string _password)
@@ -395,8 +402,9 @@ public class FirebaseManager : MonoBehaviour
                 // Change scene to the home screen for the app
                 //AuthUIManager.instance.HomeScreen();
                 //TODO: ENTER THE USERNAME
+                coachButtons[6].interactable = false;
+                coachButtons[13].interactable = false;
                 AuthUIManager.instance.CoachSelectionScreen();
-
                 ClearLoginFields();
                 ClearRegisterFields();
             }
@@ -683,12 +691,12 @@ public class FirebaseManager : MonoBehaviour
 
     #region Coach and Emotion Selection
 
-    public void Coach1() { coach = 1;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[0].interactable = false; }
-    public void Coach2() { coach = 2;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[1].interactable = false; }
-    public void Coach3() { coach = 3;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[2].interactable = false; }
-    public void Coach4() { coach = 4;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[3].interactable = false; }
-    public void Coach5() { coach = 5;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[4].interactable = false; }
-    public void Coach6() { coach = 6;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[5].interactable = false; }
+    public void Coach1() { coach = 1;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[0].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach2() { coach = 2;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[1].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach3() { coach = 3;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[2].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach4() { coach = 4;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[3].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach5() { coach = 5;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[4].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach6() { coach = 6;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[5].interactable = false; coachButtons[13].interactable = false; }
 
     public void CoachSelection()
     {

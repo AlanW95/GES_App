@@ -291,7 +291,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
             CreateHeaderText("Add new reference", pageNumber + "/" + totalPages, "Contact Information");
             ContentDataIdentiferUI _name = CreateEditInformationContent("Name", _addNewReferenceData.Name, TMP_InputField.ContentType.Name);
-            ContentDataIdentiferUI _position = CreateEditInformationContent("Position", _addNewReferenceData.Position, TMP_InputField.ContentType.EmailAddress);
+            ContentDataIdentiferUI _position = CreateEditInformationContent("Position", _addNewReferenceData.Position, TMP_InputField.ContentType.Standard);
             ContentDataIdentiferUI _email = CreateEditInformationContent("Email", _addNewReferenceData.Email, TMP_InputField.ContentType.EmailAddress);
             //CreateEditInformationContent("Phone Number", TMP_InputField.ContentType.IntegerNumber, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -412,7 +412,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 4)
         {
             CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "Give a brief description of the experience.");
-            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Description, TMP_InputField.ContentType.Alphanumeric);
+            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Description, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue", delegate { _addNewExperienceData.Description = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
             //ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseExperiences(accountManager.localUserAccount._experiences), _addNewExperienceData.CourseOccured, true);
@@ -434,14 +434,14 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 5)
         {
             CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "What was your primary role in this experience?");
-            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.RoleInExperience, TMP_InputField.ContentType.Alphanumeric);
+            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.RoleInExperience, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue", delegate { _addNewExperienceData.RoleInExperience = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
         }
         else if (pageNumber == 6)
         {
             CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "Additional comments.");
-            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Comments, TMP_InputField.ContentType.Alphanumeric);
+            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Comments, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue", delegate { _addNewExperienceData.Comments = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
         }

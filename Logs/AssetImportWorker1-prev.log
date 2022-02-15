@@ -1,0 +1,471 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.2f1 (5e2b1e92c7f8) revision 6171422'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 22000.493; Version 2009; 64bit' Language: 'en' Physical Memory: 32689 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+C:/Users/alanw/Documents/GitHub/GES_App
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+54057
+Successfully changed project path to: C:/Users/alanw/Documents/GitHub/GES_App
+C:/Users/alanw/Documents/GitHub/GES_App
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 100.49 ms, found 10 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.2f1 (5e2b1e92c7f8)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/alanw/Documents/GitHub/GES_App/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   NVIDIA
+    VRAM:     8088 MB
+    Driver:   30.0.15.1123
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56580
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005873 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 105.83 ms, found 10 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.650 seconds
+Domain Reload Profiling:
+	ReloadAssembly (651ms)
+		BeginReloadAssembly (75ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (499ms)
+			LoadAssemblies (73ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (111ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (302ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (106ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (135ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.015364 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\alanw\Documents\GitHub\GES_App\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\alanw\Documents\GitHub\GES_App\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 89.96 ms, found 10 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unable to write to 'ProjectSettings\GvhProjectSettings.xml' (System.IO.IOException: Sharing violation on path C:\Users\alanw\Documents\GitHub\GES_App\ProjectSettings\GvhProjectSettings.xml
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean useAsync) [0x00000] in <c183552e59b24622ab6b4273bc2ea328>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,bool)
+  at System.Xml.XmlWriterSettings.CreateWriter (System.String outputFileName) [0x00051] in <1ff8de9752c54556a8f45c3ec566f8af>:0 
+  at System.Xml.XmlWriter.Create (System.String outputFileName, System.Xml.XmlWriterSettings settings) [0x0000a] in <1ff8de9752c54556a8f45c3ec566f8af>:0 
+  at Google.ProjectSettings.Save () [0x00095] in Z:\tmp\tmp.wzz20lkBKd\third_party\unity\unity_jar_resolver\source\VersionHandlerImpl\src\ProjectSettings.cs:826 , Project settings were not saved!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+Google.Logger:Log (string,Google.LogLevel) (at Z:/tmp/tmp.wzz20lkBKd/third_party/unity/unity_jar_resolver/source/VersionHandlerImpl/src/Logger.cs:136)
+Google.ProjectSettings:Save () (at Z:/tmp/tmp.wzz20lkBKd/third_party/unity/unity_jar_resolver/source/VersionHandlerImpl/src/ProjectSettings.cs:842)
+Google.ProjectSettings:SetBool (string,bool,Google.SettingsLocation) (at Z:/tmp/tmp.wzz20lkBKd/third_party/unity/unity_jar_resolver/source/VersionHandlerImpl/src/ProjectSettings.cs:484)
+Google.ProjectSettings:SetBool (string,bool) (at Z:/tmp/tmp.wzz20lkBKd/third_party/unity/unity_jar_resolver/source/VersionHandlerImpl/src/ProjectSettings.cs:496)
+Google.IOSResolver:set_VerboseLoggingEnabled (bool) (at Z:/tmp/tmp.kH4A9CRZhT/third_party/unity/unity_jar_resolver/source/IOSResolver/src/IOSResolver.cs:986)
+Google.IOSResolver:.cctor () (at Z:/tmp/tmp.kH4A9CRZhT/third_party/unity/unity_jar_resolver/source/IOSResolver/src/IOSResolver.cs:689)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Z:/tmp/tmp.wzz20lkBKd/third_party/unity/unity_jar_resolver/source/VersionHandlerImpl/src/ProjectSettings.cs Line: 842)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.838 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1838ms)
+		BeginReloadAssembly (170ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (25ms)
+		EndReloadAssembly (1573ms)
+			LoadAssemblies (83ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (270ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (62ms)
+			SetupLoadedEditorAssemblies (1042ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (90ms)
+				BeforeProcessingInitializeOnLoad (95ms)
+				ProcessInitializeOnLoadAttributes (808ms)
+				ProcessInitializeOnLoadMethodAttributes (33ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 1.18 ms, found 10 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4093 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 78 unused Assets / (57.0 KB). Loaded Objects now: 4519.
+Memory consumption went from 158.4 MB to 158.3 MB.
+Total: 4.529100 ms (FindLiveObjects: 0.448500 ms CreateObjectMapping: 0.110900 ms MarkObjects: 3.833800 ms  DeleteObjects: 0.133800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 282119.235163 seconds.
+  path: Assets/User Interface/AuthenticationButtons/return_pressed.png
+  artifactKey: Guid(bfe528988991b554186513f02a2a7786) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/return_pressed.png using Guid(bfe528988991b554186513f02a2a7786) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2122725a2f3e3d70678ccfb334edc84b') in 0.113796 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_76.png
+  artifactKey: Guid(2a15ebbd58a964cedbbf3c71a3aff8d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_76.png using Guid(2a15ebbd58a964cedbbf3c71a3aff8d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea3856b5bfbf0dd3b2e3e2a8c43f333b') in 0.027281 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/AuthenticationButtons/submit_hovered.png
+  artifactKey: Guid(083d358ec5fec9d4ea4a2d7b3e7906b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/submit_hovered.png using Guid(083d358ec5fec9d4ea4a2d7b3e7906b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cce47485acd6abec84a031314b6232d6') in 0.024214 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_52.png
+  artifactKey: Guid(b00603ec34c8449cd8b2668307c66847) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_52.png using Guid(b00603ec34c8449cd8b2668307c66847) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5aa69e8d83ca05624d541209d360c20') in 0.020183 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/User Interface/AuthenticationButtons/google_hover.png
+  artifactKey: Guid(80682ac993861ff4eab6ab58fae4e6c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/google_hover.png using Guid(80682ac993861ff4eab6ab58fae4e6c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54dbe3291a31dcf84eb9c9f7cba7a7db') in 0.028465 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_124.png
+  artifactKey: Guid(27bf1d57c32c64ef490ae169d1ae2790) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_124.png using Guid(27bf1d57c32c64ef490ae169d1ae2790) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c64a4aa25951b2e4130f5903a4baf148') in 0.025333 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/AuthenticationButtons/cancel_pressed.png
+  artifactKey: Guid(361d1495662ef784c821367f764f0e64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/cancel_pressed.png using Guid(361d1495662ef784c821367f764f0e64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b4f3cab921cd8e16240c883c29eeb7d') in 0.023691 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_39.png
+  artifactKey: Guid(6c1a02d539c6a46d5834e45b64d81860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_39.png using Guid(6c1a02d539c6a46d5834e45b64d81860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3decbe47de76ec2f4d2d0a62558cd682') in 0.024685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_123.png
+  artifactKey: Guid(59cb6ed1608fc4b8d96a371bcc54625c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_123.png using Guid(59cb6ed1608fc4b8d96a371bcc54625c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bced8f601471be735e47d88f2e40c55') in 0.026263 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_112.png
+  artifactKey: Guid(63b76d738f10042cf9283fe52bfdc80d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_112.png using Guid(63b76d738f10042cf9283fe52bfdc80d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a6f875d18ca2c817d32f5b404d5bb8d') in 0.021507 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_61.png
+  artifactKey: Guid(6743c2ae3f8ef4748afee081ab939a3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_61.png using Guid(6743c2ae3f8ef4748afee081ab939a3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f864082db278805108202d23cc82e2c6') in 0.020334 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_65.png
+  artifactKey: Guid(357dbf3b795414bc18b9a1f168d7a6b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_65.png using Guid(357dbf3b795414bc18b9a1f168d7a6b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c77f5534732242a8ce5bd966b86f778f') in 0.020623 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/User Interface/AuthenticationButtons/loginemail_normal.png
+  artifactKey: Guid(e8807a9d3b1ae324688b1121893b2a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/loginemail_normal.png using Guid(e8807a9d3b1ae324688b1121893b2a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87360adddd999c14574c9a89aebda2b8') in 0.020538 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_17.png
+  artifactKey: Guid(c582dcc713f2f4b1390e42e169fe87fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_17.png using Guid(c582dcc713f2f4b1390e42e169fe87fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96836c2c212b02800aa7349a58fc9c2f') in 0.018318 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/User Interface/button_hovered.png
+  artifactKey: Guid(8352e41c16aeaa14891c8f5d7fed4982) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/button_hovered.png using Guid(8352e41c16aeaa14891c8f5d7fed4982) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88a4925c576b46eaa6b3e8cb06834423') in 0.019485 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_59.png
+  artifactKey: Guid(9679845dfdece41c4aa50c2d04826cd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_59.png using Guid(9679845dfdece41c4aa50c2d04826cd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7a10600e66382af17c2774a57205d38') in 0.021264 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_35.png
+  artifactKey: Guid(3bd5b3826840a49a3bde64f9c976c267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_35.png using Guid(3bd5b3826840a49a3bde64f9c976c267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9761bc6be593332de57b8e62dec749d0') in 0.021896 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_107.png
+  artifactKey: Guid(94a01d4381cdd424aa317395eb445f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_107.png using Guid(94a01d4381cdd424aa317395eb445f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afe59e59908e7e32cc363e4947e3872e') in 0.020642 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_93.png
+  artifactKey: Guid(5220bb2735fff4c94a04342184c4696a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_93.png using Guid(5220bb2735fff4c94a04342184c4696a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c17faeb95234358fcead3a842a1bed87') in 0.024243 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_148.png
+  artifactKey: Guid(86f9b6e08f3f04d04af10106ddbae5fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_148.png using Guid(86f9b6e08f3f04d04af10106ddbae5fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ebd1adbfaadeae28bbc31f9a7c95fda') in 0.019975 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_85.png
+  artifactKey: Guid(5df9da9c504704cde9be9dccd84684d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_85.png using Guid(5df9da9c504704cde9be9dccd84684d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8db5c4e602b927d3d6bc7717e2823ed2') in 0.018917 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/User Interface/AuthenticationButtons/email_disabled.png
+  artifactKey: Guid(1c41151549d49d44ea6acfbaea417096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/email_disabled.png using Guid(1c41151549d49d44ea6acfbaea417096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d93aa1f3060f1e847460dcc4b08c387') in 0.020595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_67.png
+  artifactKey: Guid(2f054384e65804a4a840a3d45d2e0ec3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_67.png using Guid(2f054384e65804a4a840a3d45d2e0ec3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d12437838837d9370d6c9f70428f075') in 0.020010 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/User Interface/AuthenticationButtons/createaccount_hovered.png
+  artifactKey: Guid(1d74bb54148d32e40aec9a3023fa30bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/createaccount_hovered.png using Guid(1d74bb54148d32e40aec9a3023fa30bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6d84ed6dc7f3628440449a25d99c5a5') in 0.020563 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/AuthenticationButtons/createaccount_pressed.png
+  artifactKey: Guid(3aab99c70c1ecc34dbd1fce4abf02083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/createaccount_pressed.png using Guid(3aab99c70c1ecc34dbd1fce4abf02083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b43578742be475647ca12c429f30433') in 0.020831 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/AuthenticationButtons/cancel_disabled.png
+  artifactKey: Guid(71d66631ba6db804b9d568a412268d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/cancel_disabled.png using Guid(71d66631ba6db804b9d568a412268d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16861462397c0bd7970540ddbd9d818c') in 0.022441 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_23.png
+  artifactKey: Guid(f00fc364145f54132a650ba99737b097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_23.png using Guid(f00fc364145f54132a650ba99737b097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6e24429a5083c6de32ca1d050f631c8') in 0.018167 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_90.png
+  artifactKey: Guid(0cbb20fd2fe1246d7bf800a4274630a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_90.png using Guid(0cbb20fd2fe1246d7bf800a4274630a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33351a4305801bed6a101393206508a6') in 0.018731 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_135.png
+  artifactKey: Guid(9bc27078c6d3f4bc2b78e2e6dbb1701f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_135.png using Guid(9bc27078c6d3f4bc2b78e2e6dbb1701f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e2e7547c60d9eb472406520915f90ce') in 0.017971 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/Icons/hide_password.png
+  artifactKey: Guid(1124f77964f1e104b9ea4db42d666539) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/hide_password.png using Guid(1124f77964f1e104b9ea4db42d666539) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ff5a486e7fd75fc3e2265c301085b4b') in 0.286361 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_11.png
+  artifactKey: Guid(671d9b58051c14d809b447763c68f1e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_11.png using Guid(671d9b58051c14d809b447763c68f1e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bbf69a5f8b3702a9a6df5fdea7735eb') in 0.017823 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_132.png
+  artifactKey: Guid(dd2bbebd40d9a4ff481cbe5786ce8ca0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_132.png using Guid(dd2bbebd40d9a4ff481cbe5786ce8ca0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9b35ff1e8e2fc9936746fd8fdcf6cb5') in 0.017729 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/User Interface/AuthenticationButtons/submit_normal.png
+  artifactKey: Guid(3035e789b0289b7459f1ee2068f4544f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/submit_normal.png using Guid(3035e789b0289b7459f1ee2068f4544f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8d0acd1e4f76b23eff27318244d07e1') in 0.016819 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/AuthenticationButtons/save_hovered.png
+  artifactKey: Guid(0289dafaa5653474eafc0e6b677c8e61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/save_hovered.png using Guid(0289dafaa5653474eafc0e6b677c8e61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c336b592d3e47681f444c5596e6fc849') in 0.017077 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/ges-app-200x200.png
+  artifactKey: Guid(80163d31bcf56044f838a2cdda7d7644) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/ges-app-200x200.png using Guid(80163d31bcf56044f838a2cdda7d7644) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '172510c61b6060caa67c09a7de8e5007') in 0.027302 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_128.png
+  artifactKey: Guid(07ad2728cf1a747428f78d271a293844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_128.png using Guid(07ad2728cf1a747428f78d271a293844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbee3f1069f66519a8e3431a5bf315ec') in 0.020492 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_83.png
+  artifactKey: Guid(8eebea729539d439f83c44ed0a8af222) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_83.png using Guid(8eebea729539d439f83c44ed0a8af222) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf2c3163a1fde262a334d408c59f4da1') in 0.018446 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/User Interface/AuthenticationButtons/google_disabled.png
+  artifactKey: Guid(2c721271aec111a4f9daea84e1714210) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/google_disabled.png using Guid(2c721271aec111a4f9daea84e1714210) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68a021ec3729636af4f034212b2cc603') in 0.023792 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/User Interface/profile-field.png
+  artifactKey: Guid(779364618d8cdb149b2e0b178d706ccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/profile-field.png using Guid(779364618d8cdb149b2e0b178d706ccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2f99aae8c4791e6282fae94b0c66855') in 0.035633 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/User Interface/AuthenticationButtons/cancel_normal.png
+  artifactKey: Guid(befca4df92def9d40a6332787809fa8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/cancel_normal.png using Guid(befca4df92def9d40a6332787809fa8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '207f44fe0fd445a585cb31f17282b30a') in 0.022957 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_12.png
+  artifactKey: Guid(4881e007ff54b4cea8564feff42bac72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_12.png using Guid(4881e007ff54b4cea8564feff42bac72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77be1fe205e6565f6acab6d9a7281a19') in 0.020312 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_77.png
+  artifactKey: Guid(cf7022000fb1e46e197f3d2249ef1fa3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_77.png using Guid(cf7022000fb1e46e197f3d2249ef1fa3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32a23e5460a03ddcb3466b16471f7fb2') in 0.021827 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_74.png
+  artifactKey: Guid(d060095b0777f4ef197b11be37a3427c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_74.png using Guid(d060095b0777f4ef197b11be37a3427c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6a30b0ef6516aa94e621bfae4bc4ed9') in 0.027815 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_36.png
+  artifactKey: Guid(f0f2d1a8aaa024e41bed319234001270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_36.png using Guid(f0f2d1a8aaa024e41bed319234001270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f0afe671cacdb7e3470fb27a036abc5') in 0.021825 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/User Interface/button_normal.png
+  artifactKey: Guid(872e588c965f42d49858ad6769517015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/button_normal.png using Guid(872e588c965f42d49858ad6769517015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d34a6ab5c6bd95aa4d8ff0159317481') in 0.028917 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/User Interface/Icons/icon_theme14_146.png
+  artifactKey: Guid(9a87de0ad3e724a9f808f5ab4930f208) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/Icons/icon_theme14_146.png using Guid(9a87de0ad3e724a9f808f5ab4930f208) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d32b42fe7538b73dbc0d60db9b46d3d') in 0.020803 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/User Interface/AuthenticationButtons/apple_disabled.png
+  artifactKey: Guid(88800f0ca441b30448bdf04726ec7868) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/User Interface/AuthenticationButtons/apple_disabled.png using Guid(88800f0ca441b30448bdf04726ec7868) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '714c257871477e590e6a91327dc91ee2') in 0.018455 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
