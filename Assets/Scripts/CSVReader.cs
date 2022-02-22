@@ -68,16 +68,22 @@ public class CSVReader : MonoBehaviour
         }*/
 
 
-        //Old Solution for rows and colums
+        //Old Solution for rows and columns
         string[] data = textAssetData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
 
-        int tableSize = data.Length / 6 - 1;
+        int tableSize = data.Length / 6;
         mySkillsList.skills = new Skills[tableSize];
+        /*int columnOne = data.Length / 6 - 1;
+        int columnTwo = data.Length / 6 - 2;
+        int columnThree = data.Length / 6 - 3;
+        int columnFour = data.Length / 6 - 4;
+        int columnFive = data.Length / 6 - 5;
+        int columnSix = data.Length / 6 - 6;*/
 
         for (int i = 0; i < tableSize; i++)
         {
             mySkillsList.skills[i] = new Skills();
-            mySkillsList.skills[i].HardSkills = data[i];
+            mySkillsList.skills[i].HardSkills = data[6 * (i + 1)];
             mySkillsList.skills[i].OrganisationSkills = data[6 * (i + 1) + 1];
             mySkillsList.skills[i].CommunicationAndInterpersonalSkills = data[6 * (i + 1) + 2];
             mySkillsList.skills[i].PersonalSkillsValuesAndAttitudes = data[6 * (i + 1) + 3];
