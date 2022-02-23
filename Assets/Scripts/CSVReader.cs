@@ -10,6 +10,9 @@ public class CSVReader : MonoBehaviour
      *  CSVReader script has been adapted and expanded from a YouTube tutorial
      *      https://youtu.be/tI9NEm02EuE
      * 
+     *  Instead of the class make arrays of the size you want. Then when you initial the player the class, 
+     *  instead initialise all the arrays and finally instead of reading 
+     *  in to each of the player class variables, just read directly into the arrays.
      */
 
     public TextAsset textAssetData;
@@ -17,20 +20,20 @@ public class CSVReader : MonoBehaviour
     [System.Serializable]
     public class Skills
     {
-        public string HardSkills;
-        public string OrganisationSkills;
-        public string CommunicationAndInterpersonalSkills;
-        public string PersonalSkillsValuesAndAttitudes;
-        public string GeneralWorkplaceSkills;
-        public string ForeignLanguagesSkills;
+        public string[] HardSkills;
+        public string[] OrganisationSkills;
+        public string[] CommunicationAndInterpersonalSkills;
+        public string[] PersonalSkillsValuesAndAttitudes;
+        public string[] GeneralWorkplaceSkills;
+        public string[] ForeignLanguagesSkills;
     }
-    [System.Serializable]
+    /*[System.Serializable]
     public class SkillsList
     {
         public Skills[] skills;
-    }
+    }*/
 
-    public SkillsList mySkillsList = new SkillsList();
+    public Skills mySkillsList = new Skills();
 
     // Start is called before the first frame update
     void Start()
@@ -40,48 +43,14 @@ public class CSVReader : MonoBehaviour
 
     void ReadCSV()
     {
-        /*var lines = textAssetData.text.Split('\n');
-
-        var lists = new List<List<string>>();
-        var columns = 0;
-        for (int i = 0; i < lines.Length; i++)
-        {
-            var data = lines[i].Split(',');
-            var list = new List<string>(data); //turn this into a list
-            lists.Add(list); // add this list into a big list
-            columns = Mathf.Max(columns, data.Length); //can tell max number 
-        }
-
-        for (int row = 0; row < lists.Count; row++)
-        {
-            for (int col = 0; col < columns; col++)
-            {
-                try
-                {
-                    print(lists[row][col]);
-                }
-                catch
-                {
-                    print("*");
-                }
-            }
-        }*/
-
-
-        //Old Solution for rows and columns
         string[] data = textAssetData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
 
         int tableSize = data.Length / 6;
-        mySkillsList.skills = new Skills[tableSize];
-        /*int columnOne = data.Length / 6 - 1;
-        int columnTwo = data.Length / 6 - 2;
-        int columnThree = data.Length / 6 - 3;
-        int columnFour = data.Length / 6 - 4;
-        int columnFive = data.Length / 6 - 5;
-        int columnSix = data.Length / 6 - 6;*/
+        //mySkillsList.skills = new Skills[tableSize];
 
-        for (int i = 0; i < tableSize; i++)
+        /*for (int i = 0; i < tableSize; i++)
         {
+            mySkillsList.HardSkills[i] = data[6 * (i + 1)];
             mySkillsList.skills[i] = new Skills();
             mySkillsList.skills[i].HardSkills = data[6 * (i + 1)];
             mySkillsList.skills[i].OrganisationSkills = data[6 * (i + 1) + 1];
@@ -89,6 +58,11 @@ public class CSVReader : MonoBehaviour
             mySkillsList.skills[i].PersonalSkillsValuesAndAttitudes = data[6 * (i + 1) + 3];
             mySkillsList.skills[i].GeneralWorkplaceSkills = data[6 * (i + 1) + 4];
             mySkillsList.skills[i].ForeignLanguagesSkills = data[6 * (i + 1) + 5];
+        }*/
+
+        for (int i = 0; i < tableSize; i++)
+        {
+            mySkillsList.HardSkills[i] = data[i + 1];
         }
     }
 }
