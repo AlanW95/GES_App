@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
@@ -9,6 +10,12 @@ using TMPro;
 
 public class FirebaseManager : MonoBehaviour
 {
+    //In order to build for WebGL using Firebase, some parameters and differnt measure had to be considered to allow this to build effetively
+    [DllImport("__Internal")]
+    public static extern void GetJSON(string path, string objectName, string callback, string fallback);
+
+    //--------------------------------------------
+
     public static FirebaseManager instance;
 
     //References
@@ -133,7 +140,24 @@ public class FirebaseManager : MonoBehaviour
 
     private void Start()
     {
+        //WebGL
+        GetJSON("example", gameObject.name, "OnRequestSuccess", "OnRequestFailed");
+
+        //------------------------------------------------------
+
         StartCoroutine(CheckAndFixDependencies());
+    }
+
+    private void OnRequestSuccess(string data)
+    {
+        InitializeFirebase();
+        Debug.Log("OnRequestSuccess was successful");
+    }
+
+    private void OnRequestFailed(string error)
+    {
+        InitializeFirebase();
+        Debug.Log("OnRequestFailed was successful");
     }
 
     /*private void FixedUpdate()

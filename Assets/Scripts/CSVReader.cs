@@ -60,9 +60,9 @@ public class CSVReader : MonoBehaviour
             mySkillsList.skills[i].ForeignLanguagesSkills = data[6 * (i + 1) + 5];
         }*/
 
-        for (int i = 0; i < tableSize; i++)
+        /*for (int i = 0; i < tableSize; i++)
         {
             mySkillsList.HardSkills[i] = data[i + 1];
-        }
+        }*/
     }
 }
