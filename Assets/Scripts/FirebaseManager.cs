@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
@@ -10,12 +9,6 @@ using TMPro;
 
 public class FirebaseManager : MonoBehaviour
 {
-    //In order to build for WebGL using Firebase, some parameters and differnt measure had to be considered to allow this to build effetively
-    [DllImport("__Internal")]
-    public static extern void GetJSON(string path, string objectName, string callback, string fallback);
-
-    //--------------------------------------------
-
     public static FirebaseManager instance;
 
     //References
@@ -55,6 +48,8 @@ public class FirebaseManager : MonoBehaviour
     [Header("Register 2 References")]
     [SerializeField]
     private TMP_InputField universityField;
+    [SerializeField]
+    private TMP_InputField profileUsernameField;
     /*[SerializeField]
     private TMP_InputField skillsField;
     [SerializeField]
@@ -103,6 +98,8 @@ public class FirebaseManager : MonoBehaviour
     private TMP_Text profileNameOutputText;
     [SerializeField]
     private TMP_Text profileUniversityText;
+    [SerializeField]
+    private TMP_Text profileUsernameText;
     [Space(5f)]
 
     [Header("Bottom Banner")]
@@ -140,24 +137,7 @@ public class FirebaseManager : MonoBehaviour
 
     private void Start()
     {
-        //WebGL
-        GetJSON("example", gameObject.name, "OnRequestSuccess", "OnRequestFailed");
-
-        //------------------------------------------------------
-
         StartCoroutine(CheckAndFixDependencies());
-    }
-
-    private void OnRequestSuccess(string data)
-    {
-        InitializeFirebase();
-        Debug.Log("OnRequestSuccess was successful");
-    }
-
-    private void OnRequestFailed(string error)
-    {
-        InitializeFirebase();
-        Debug.Log("OnRequestFailed was successful");
     }
 
     /*private void FixedUpdate()
@@ -339,6 +319,9 @@ public class FirebaseManager : MonoBehaviour
             StartCoroutine(UpdateUniversity(universityField.text));
 
             profileUniversityText.text = universityField.text;
+            profileUsernameText.text = profileUsernameField.text;
+            universityField.text = "";
+            profileUsernameField.text = "";
         }
     }
 
@@ -376,6 +359,7 @@ public class FirebaseManager : MonoBehaviour
         loginOutput.SetActive(false);
         coachSelectionText.text = "";
         emotionSelectionText.text = "";
+        welcomeOutputText.text = "Welcome to an early \nprototype of the GES App!";
     }
 
     private IEnumerator LoginLogic(string _email, string _password)
