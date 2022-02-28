@@ -1,130 +1,122 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class SkillsRepository : FirebaseManager
+public class SkillsRepository : MonoBehaviour
 {
-    private string[] skills;
+    /*
+     * 
+     *  SkillsRepositry script has been adapted and expanded from a YouTube tutorial about CSVReader
+     *      https://youtu.be/tI9NEm02EuE
+     *      
+     */
 
-    #region IEnumerator's writing different categorised skills to database
-    private IEnumerator WriteHardSkillsToDatabase(string _skill)
+    public TextAsset HardSkillsTextData;
+    public TextAsset OrganisationalSkillsTextData;
+    public TextAsset CommunicationAndInterpersonalSkillsTextData;
+    public TextAsset PersonalSkillsValuesAndAttitudesTextData;
+    public TextAsset GeneralWorkplaceSkillsTextData;
+    public TextAsset ForeignLanguagesSkillsTextData;
+
+    [System.Serializable]
+    public class Skills
     {
-        yield return new WaitForSeconds(1); //may have to change this value to 5
-
-        var DBTask = DBreference.Child("skills").Child("hard").SetValueAsync(_skill);
-
-        Debug.Log("Hard Skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database hard skills is now updated
-        }
+        public string Skill;
+        public string Definition;
+    }
+    [System.Serializable]
+    public class SkillsList
+    {
+        public Skills[] skills;
     }
 
-    private IEnumerator WriteOrganisationalSkillsToDatabase(string _skill)
+    public SkillsList hardSkillList = new SkillsList();
+    public SkillsList organisationalSkillList = new SkillsList();
+    public SkillsList commIntSkillList = new SkillsList();
+    public SkillsList psvaSkillList = new SkillsList();
+    public SkillsList generalWorkplaceSkillList = new SkillsList();
+    public SkillsList foreignLanguageSkillList = new SkillsList();
+
+    // Start is called before the first frame update
+    void Start()
     {
-        yield return new WaitForSeconds(1); //may have to change this value to 5 or possibly less? 0.5 or 0.25?
-
-        var DBTask = DBreference.Child("skills").Child("organisational").SetValueAsync(_skill);
-
-        Debug.Log("Organisation Skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database organisational skills is now updated
-        }
+        ReadSkills();
     }
 
-    private IEnumerator WriteCommunInterSkillsToDatabase(string _skill)
+    void ReadSkills()
     {
-        yield return new WaitForSeconds(1); //may have to change this value to 5 or poossibly less? 0.5 or 0.25?
+        string[] hardSkillsData = HardSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+        string[] organisationalSkillsData = OrganisationalSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+        string[] communicationAndInterpersonalSkillsData = CommunicationAndInterpersonalSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+        string[] personalSkillsvalueAndAttitudesSkillsData = PersonalSkillsValuesAndAttitudesTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+        string[] generalWorkplaceSkillsData = GeneralWorkplaceSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+        string[] foreignLanguagesSkillsData = ForeignLanguagesSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
 
-        var DBTask = DBreference.Child("skills").Child("communication-interpersonal").SetValueAsync(_skill);
+        int hsTableSize = hardSkillsData.Length / 2 - 1;
+        hardSkillList.skills = new Skills[hsTableSize];
 
-        Debug.Log("Communication and Interpersonal Skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
+        for (int i = 0; i < hsTableSize; i++)
         {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            hardSkillList.skills[i] = new Skills();
+
+            hardSkillList.skills[i].Skill = hardSkillsData[2 * (i + 1)];
+            hardSkillList.skills[i].Definition = hardSkillsData[2 * (i + 1) + 1];
         }
-        else
+
+        int oTableSize = organisationalSkillsData.Length / 2 - 1;
+        organisationalSkillList.skills = new Skills[oTableSize];
+
+        for (int i = 0; i < oTableSize; i++)
         {
-            //Database communication and interpersonal skills is now updated
+            organisationalSkillList.skills[i] = new Skills();
+
+            organisationalSkillList.skills[i].Skill = organisationalSkillsData[2 * (i + 1)];
+            organisationalSkillList.skills[i].Definition = organisationalSkillsData[2 * (i + 1) + 1];
+        }
+
+        int caiTableSize = communicationAndInterpersonalSkillsData.Length / 2 - 1;
+        commIntSkillList.skills = new Skills[caiTableSize];
+
+        for (int i = 0; i < caiTableSize; i++)
+        {
+            commIntSkillList.skills[i] = new Skills();
+
+            commIntSkillList.skills[i].Skill = communicationAndInterpersonalSkillsData[2 * (i + 1)];
+            commIntSkillList.skills[i].Definition = communicationAndInterpersonalSkillsData[2 * (i + 1) + 1];
+        }
+
+        int psvaTableSize = personalSkillsvalueAndAttitudesSkillsData.Length / 2 - 1;
+        psvaSkillList.skills = new Skills[psvaTableSize];
+
+        for (int i = 0; i < psvaTableSize; i++)
+        {
+            psvaSkillList.skills[i] = new Skills();
+
+            psvaSkillList.skills[i].Skill = personalSkillsvalueAndAttitudesSkillsData[2 * (i + 1)];
+            psvaSkillList.skills[i].Definition = personalSkillsvalueAndAttitudesSkillsData[2 * (i + 1) + 1];
+        }
+
+        int gwTableSize = generalWorkplaceSkillsData.Length / 2 - 1;
+        generalWorkplaceSkillList.skills = new Skills[gwTableSize];
+
+        for (int i = 0; i < gwTableSize; i++)
+        {
+            generalWorkplaceSkillList.skills[i] = new Skills();
+
+            generalWorkplaceSkillList.skills[i].Skill = generalWorkplaceSkillsData[2 * (i + 1)];
+            generalWorkplaceSkillList.skills[i].Definition = generalWorkplaceSkillsData[2 * (i + 1) + 1];
+        }
+
+        int flTableSize = foreignLanguagesSkillsData.Length / 2 - 1;
+        foreignLanguageSkillList.skills = new Skills[flTableSize];
+
+        for (int i = 0; i < flTableSize; i++)
+        {
+            foreignLanguageSkillList.skills[i] = new Skills();
+
+            foreignLanguageSkillList.skills[i].Skill = foreignLanguagesSkillsData[2 * (i + 1)];
+            foreignLanguageSkillList.skills[i].Definition = foreignLanguagesSkillsData[2 * (i + 1) + 1];
         }
     }
-
-    private IEnumerator WritePersonalValueAttitudesSkillsToDataBase(string _skill)
-    {
-        yield return new WaitForSeconds(1); //may have to change this value to 5 or possible less? 0.5 or 0.25?
-
-        var DBTask = DBreference.Child("skills").Child("personal-values-attitudes").SetValueAsync(_skill);
-
-        Debug.Log("Personal skills, values and attitude skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database personal skills, values and attitudes is now updated
-        }
-    }
-
-    private IEnumerator WriteGeneralWorkplaceSkillsToDatabase(string _skill)
-    {
-        yield return new WaitForSeconds(1); //may have to change this value to 5 or possibly less? 0.5 or 0.25?
-
-        var DBTask = DBreference.Child("skills").Child("general-workplace").SetValueAsync(_skill);
-
-        Debug.Log("General Workplace skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database general workplace skills is now updated
-        }
-    }
-
-    private IEnumerator WriteForeignLanguagesSkillsToDatabase(string _skill)
-    {
-        yield return new WaitForSeconds(1); //may have to change this value to 5 or possibly less? 0.5 or 0.25?
-
-        var DBTask = DBreference.Child("skills").Child("foreign-languages").SetValueAsync(_skill);
-
-        Debug.Log("Foreign languages skills have been added to the database");
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database foreign languages skills is now updated
-        }
-    }
-    #endregion
 }

@@ -16493,7 +16493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 287.02808, y: -43.139954}
+  m_AnchoredPosition: {x: 287.02808, y: -43.139893}
   m_SizeDelta: {x: 334.05615, y: 86.27991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489359351
@@ -59335,7 +59335,7 @@ GameObject:
   - component: {fileID: 1762330707}
   - component: {fileID: 1762330706}
   m_Layer: 0
-  m_Name: CSVReader
+  m_Name: SkillsRepository
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59348,19 +59348,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762330705}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f4d95c8c7745141b15f65423a3c6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAssetData: {fileID: 4900000, guid: d6e20224596b65f4cb0fa59bc1c3261d, type: 3}
-  mySkillsList:
-    HardSkills: []
-    OrganisationSkills: []
-    CommunicationAndInterpersonalSkills: []
-    PersonalSkillsValuesAndAttitudes: []
-    GeneralWorkplaceSkills: []
-    ForeignLanguagesSkills: []
+  HardSkillsTextData: {fileID: 4900000, guid: a50b69366daa3c548bfb93417470a682, type: 3}
+  OrganisationalSkillsTextData: {fileID: 4900000, guid: 869e3fb08c5d45d4e8d8ec399024c6d8, type: 3}
+  CommunicationAndInterpersonalSkillsTextData: {fileID: 4900000, guid: bf20d2de314fc504081658ee49cada2f, type: 3}
+  PersonalSkillsValuesAndAttitudesTextData: {fileID: 4900000, guid: 25ef4d07155e43840843ed25c1b16462, type: 3}
+  GeneralWorkplaceSkillsTextData: {fileID: 4900000, guid: 9438b1423abb13542a57a8d09bc3e470, type: 3}
+  ForeignLanguagesSkillsTextData: {fileID: 4900000, guid: 2c0e1cedeba1d6147838dfc02ce202e2, type: 3}
+  hardSkillList:
+    skills: []
+  organisationalSkillList:
+    skills: []
+  commIntSkillList:
+    skills: []
+  psvaSkillList:
+    skills: []
+  generalWorkplaceSkillList:
+    skills: []
+  foreignLanguageSkillList:
+    skills: []
 --- !u!4 &1762330707
 Transform:
   m_ObjectHideFlags: 0
