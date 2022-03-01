@@ -17688,7 +17688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.909912, y: -0.5}
+  m_AnchoredPosition: {x: -50.909897, y: -0.5}
   m_SizeDelta: {x: -121.82, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525558565
@@ -31706,7 +31706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -124.28851, y: 24.886353}
+  m_AnchoredPosition: {x: -124.2885, y: 24.886353}
   m_SizeDelta: {x: -387.55618, y: -64.43994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930085222
@@ -37503,7 +37503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.909912, y: -0.5}
+  m_AnchoredPosition: {x: -50.909897, y: -0.5}
   m_SizeDelta: {x: -121.82, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103834797
@@ -44729,7 +44729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -237.02246}
+  m_AnchoredPosition: {x: 0, y: -237.02245}
   m_SizeDelta: {x: 0, y: -344.04498}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304438956
@@ -48239,7 +48239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.404907, y: -0.5}
+  m_AnchoredPosition: {x: -35.404892, y: -0.5}
   m_SizeDelta: {x: -90.80993, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409678594
@@ -48877,7 +48877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.404907, y: -0.5}
+  m_AnchoredPosition: {x: -35.404892, y: -0.5}
   m_SizeDelta: {x: -90.80993, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1427116516
@@ -56281,7 +56281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 287.02808, y: -255.69977}
+  m_AnchoredPosition: {x: 287.02808, y: -255.69975}
   m_SizeDelta: {x: 334.05615, y: 86.27991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669216500
@@ -59334,6 +59334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762330707}
   - component: {fileID: 1762330706}
+  - component: {fileID: 1762330708}
   m_Layer: 0
   m_Name: SkillsRepository
   m_TagString: Untagged
@@ -59386,6 +59387,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1762330708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762330705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25335354b69741d4dbe447e6ed924b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HardSkillsTextData: {fileID: 0}
+  OrganisationalSkillsTextData: {fileID: 0}
+  CommunicationAndInterpersonalSkillsTextData: {fileID: 0}
+  PersonalSkillsValuesAndAttitudesTextData: {fileID: 0}
+  GeneralWorkplaceSkillsTextData: {fileID: 0}
+  ForeignLanguagesSkillsTextData: {fileID: 0}
+  hardSkillList:
+    skills: []
+  organisationalSkillList:
+    skills: []
+  commIntSkillList:
+    skills: []
+  psvaSkillList:
+    skills: []
+  generalWorkplaceSkillList:
+    skills: []
+  foreignLanguageSkillList:
+    skills: []
+  LawTextData: {fileID: 0}
+  EducationTextData: {fileID: 0}
+  LiteratureTextData: {fileID: 0}
+  LinguisticsTextData: {fileID: 0}
+  HumanitiesTextData: {fileID: 0}
+  MediaSciencesTextData: {fileID: 0}
+  PsychologyTextData: {fileID: 0}
+  BusinessStudiesTextData: {fileID: 0}
+  ScienceAndEngineeringTextData: {fileID: 0}
+  GeographyAndEarthSciencesTextData: {fileID: 0}
+  MedicineVeterinaryAndLifeSciencesTextData: {fileID: 0}
+  ArchitectureTextData: {fileID: 0}
+  ArtsTextData: {fileID: 0}
+  TheologyAndReligiousStudiesTextData: {fileID: 0}
+  SocialAndPoliticalSciencesTextData: {fileID: 0}
+  lawList:
+    dreamjobs: []
+  educationList:
+    dreamjobs: []
+  literatureList:
+    dreamjobs: []
+  linguisticsList:
+    dreamjobs: []
+  humanitiesList:
+    dreamjobs: []
+  mediaSciencesList:
+    dreamjobs: []
+  psychologyList:
+    dreamjobs: []
+  businessStudiesList:
+    dreamjobs: []
+  scienceAndEngineeringList:
+    dreamjobs: []
+  geographyAndEarthScienceList:
+    dreamjobs: []
+  medicineVeterinaryAndLifeSciencesList:
+    dreamjobs: []
+  architectureList:
+    dreamjobs: []
+  artsList:
+    dreamjobs: []
+  theologyAndReligiousStudiesList:
+    dreamjobs: []
+  socialAndPoliticalSciencesList:
+    dreamjobs: []
 --- !u!1 &1763357573
 GameObject:
   m_ObjectHideFlags: 0
