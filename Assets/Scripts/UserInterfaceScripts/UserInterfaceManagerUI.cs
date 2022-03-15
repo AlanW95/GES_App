@@ -17,6 +17,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject LoginScreen;
     public GameObject RegisterScreen;
     public GameObject HomeScreen;
+    public GameObject AddSkillsScreen;
     public GameObject AddEditInformationScreen;
     public GameObject SettingsScreen;
     public GameObject CalanderScreen;
@@ -143,6 +144,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_Setting() { ChangeWindow(SettingsScreen); Configure_Top_Banner(false, false, "Settings", delegate { ChangeWindow(HomeScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_Calander() { ChangeWindow(CalanderScreen); Configure_Top_Banner(false, false, "Calendar", delegate { ChangeWindow(HomeScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_Files() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Files", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().CreateSkillsDisplayContent(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AddSkills() { ChangeWindow(AddSkillsScreen); Configure_Top_Banner(false, false, "Add a Skill", delegate { ChangeWindow(HomeScreen); }, null, null ); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
     public void Open_Add_SubMenu(bool forceClose = false) 
