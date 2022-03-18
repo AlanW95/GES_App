@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 public class SkillsInfo : MonoBehaviour
@@ -15,8 +16,16 @@ public class SkillsInfo : MonoBehaviour
     private GameObject[] skillsList;
     [SerializeField]
     private Button[] bottomBannerButtons;
+    [SerializeField]
+    private GameObject noResultsFound;
+    [SerializeField]
+    private GameObject continueButton;
+    [SerializeField]
+    private GameObject addSkillField;
+    [SerializeField]
+    private TMP_InputField addSkillInputField;
     /*[SerializeField]
-    private TMP_Text skillCategoryText;*/
+    private GameObject SkillLevelSelectPrefab;*/
     [Space(5f)]
 
     [Header("Skill Definition Window")]
@@ -27,6 +36,8 @@ public class SkillsInfo : MonoBehaviour
     [SerializeField]
     private TMP_Text skillDefinition;
 
+    public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +47,47 @@ public class SkillsInfo : MonoBehaviour
         }
         definitionWindow.SetActive(false);
         skillInputField.SetActive(true);
+
+        //alphabet
+        char[] alphabetArray = alphabet.ToCharArray();
     }
 
     void Update()
-    {
+    {   
+        // if the skill input text equals the skill name text on each skill
+        if (skillInput.text == "")
+        {
+            for (int i = 0; i < skillsList.Length; i++)
+            {
+                skillsList[i].SetActive(true);
+            }
+            continueButton.SetActive(false);
+            noResultsFound.SetActive(false);
+            addSkillField.SetActive(false);
+        }
+
+        foreach (char character in alphabet)
+        {
+            if (skillInput.text.Contains(character))
+            {
+                noResultsFound.SetActive(true);
+                for (int i = 0; i < skillsList.Length; i++)
+                {
+                    skillsList[i].SetActive(false);
+                }
+                break;
+            }
+        }
+
+        foreach (char character in alphabet)
+        {
+            if (addSkillInputField.text.Contains(character))
+            {
+                continueButton.SetActive(true);
+                break;
+            }
+        }
+
         //Search function, if the input field contain the name or letters preferably of a word already then it will stay
         for (int i = 0; i < skillsList.Length; i++)
         {
@@ -47,38 +95,43 @@ public class SkillsInfo : MonoBehaviour
 
             if (skillInput.text.Contains(skillsList[i].name))
             {
-                Debug.Log("skill input contain skill list name");
                 skillsList[i].SetActive(true);
-
-                /*if (!skillInput.text.Contains(skillsList[i].name))
-                {
-                    skillsList[i].SetActive(false);
-                }*/
-            } else
-            {
-                //skillsList[i].SetActive(false); //UNCOMMENT THIS FOR THE SEARCH FUNCTION TO WORK
+                noResultsFound.SetActive(false);
             }
+        }
+    }
 
-            /*if (!skillInput.text.Contains(skillsList[i].name))
+    public void AddNewCustomSkill()
+    {
+        addSkillField.SetActive(true);
+    }
+
+    /*public Transform CreateSkillButton(string content, string description, int level, UnityAction _event, bool overrideCheck = true)
+    {
+        Transform ButtonHolder = CreatePrefab(EditButtonPrefab);
+        ButtonHolder.GetComponent<HorizontalLayoutGroup>().padding.bottom = 0;
+        SkillLevelSelectPrefab.GetComponentInChildren<TMP_Text>().text = content;
+        SkillLevelSelectPrefab.GetComponentsInChildren<TMP_Text>()[1].text = description;
+        for (int i = 0; i < 4; i++)
+        {
+            //Debug.Log(SkillLevelSelectPrefab.GetComponentInChildren<GridLayoutGroup>().name);
+            if (i + 1 < level)
             {
-                skillsList[i].SetActive(true);
-            }*/
+                SkillLevelSelectPrefab.GetComponentInChildren<GridLayoutGroup>().transform.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                SkillLevelSelectPrefab.GetComponentInChildren<GridLayoutGroup>().transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
 
-        /*if (index != -1)
-        {
-            for (int i = 0; i < skillsList.Length; i++)
-            {
-                skillsList[i].SetActive(false);
-            }
-        } else
-        {
-            for (int i = 0; i < skillsList.Length; i++)
-            {
-                skillsList[i].SetActive(true);
-            }
-        }*/
-    }
+
+        Transform _buttonCreated = CreatePrefab(SkillLevelSelectPrefab, ButtonHolder);
+        _buttonCreated.GetComponent<Button>().onClick.AddListener(_event);
+        if (overrideCheck)
+            ContinueButton = _buttonCreated.GetComponent<Button>();
+        return _buttonCreated;
+    }*/
 
     /*
      *  TODO FOR TODAY: ADDING REST OF SKILL LIST DETAILS, ADD NEW SKILL (HAVE IT ALWAYS DISPLAYING SEPARATELY FROM THE SKILL LIST), MAKE COPY OF DEFINITION WINDOW WITH INPUTFIELD
@@ -92,6 +145,7 @@ public class SkillsInfo : MonoBehaviour
             case 1:
                 skillName.text = "Ability to accept Criticism";
                 skillDefinition.text = "Ability to accept Criticism definition will go here.";
+
                 break;
             case 2:
                 skillName.text = "Active Listening to Others";
@@ -368,75 +422,64 @@ public class SkillsInfo : MonoBehaviour
             //62 in total
             case 0:
                 skillName.text = "Ability to accept Criticism";
-                skillDefinition.text = "Definition will go here.";
+                skillInput.text = skillName.text;
+                for (int i = 0; i < skillsList.Length; i++)
+                {
+                    skillsList[i].SetActive(false);
+                }
+                skillsList[0].SetActive(true);
+                continueButton.SetActive(true);
                 break;
             case 1:
                 skillName.text = "Active Listening to Others";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 2:
                 skillName.text = "Adaptability";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 3:
                 skillName.text = "Analytical Thinking";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 4:
                 skillName.text = "Applied Knowledge";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 5:
                 skillName.text = "Approachableness";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 6:
                 skillName.text = "Argumentation/ Discussion Skills";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 7:
                 skillName.text = "Attention to Detail";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 8:
                 skillName.text = "Authenticity";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 9:
                 skillName.text = "Business and Commercial Awareness";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 10:
                 skillName.text = "Career Management";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 11:
                 skillName.text = "Communicativeness";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 12:
                 skillName.text = "Confidence";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 13:
                 skillName.text = "Confidentiality";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 14:
                 skillName.text = "Conflict Resolution";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 15:
                 skillName.text = "Creative/ Innovative Thinking";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 16:
                 skillName.text = "Critical Thinking";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 17:
                 skillName.text = "Customer Service";
-                skillDefinition.text = "Definition will go here.";
                 break;
             case 18:
                 skillName.text = "Decision Making";
