@@ -93,8 +93,19 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public void AddNewSkill(int pageNumber)
     {
         DestroyCurrentScreens();
-        int totalPages = 3;
+        /* 5 PAGES IN TOTAL
+         * 
+         * 1. Add Skill page
+         * 2. Share skill with Skill Repository (send to database)
+         * 3. Level of the Skill
+         * 4. Share skill level with the Skill Repository (send to database)
+         * 5. Skill Summary (could be removed)
+         *
+         */
+        int totalPages = 5; //originally int totalPages = 3;
 
+
+        //if Page 1 - NEW Skill Page - so we have to refer to the new skill page created where the user can delete a skill.
         if (pageNumber == 1)
         {
             Configure_Top_Banner(false, true, "Add Skill", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
@@ -106,7 +117,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
         if (pageNumber == 1)
         {
-            if (_addNewSkillData == null)
+            //new skills page
+            //userInterfaceManager.Open_AddSkills();
+
+            /* if (_addNewSkillData == null)
                 _addNewSkillData = new SkillData();
 
             CreateHeaderText("Add new Skill", pageNumber + "/" + totalPages, "Enter skill information:");
@@ -116,9 +130,23 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             {
                 CaptureStringData(ref _addNewSkillData.Name, _skillName);
                 AddNewSkill(pageNumber + 1);
-            });
+            }); */
         }
+        //Page 2 - 
+        //TODO: CHANGE TO PAGE 3: Level of Skill because we need to add a new screen in for the confirmation of sharing with the crowd repository.
         else if (pageNumber == 2)
+        {
+            CreateHeaderText("Share Skill", pageNumber + "/" + totalPages, SkillDisplayContent.name);
+
+            /* CreateHeaderText("Add new skill", pageNumber + "/" + totalPages, "Select skill level:");    
+            CreateSkillButton("Novice", "Little or no knowledge or experience.", 1, delegate { _addNewSkillData.Level = 1; _addNewSkillData.LevelName = "Novice"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Advanced Beginner", "Basic knowledge or experience.", 2, delegate { _addNewSkillData.Level = 2; _addNewSkillData.LevelName = "Advanced Beginner"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Competent", "Intermediate knowledge or experience.", 3, delegate { _addNewSkillData.Level = 3; _addNewSkillData.LevelName = "Competent"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Proficient", "Broad knowledge or experience.", 4, delegate { _addNewSkillData.Level = 4; _addNewSkillData.LevelName = "Proficient"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Expert", "Extensive knowledge or experience.", 5, delegate { _addNewSkillData.Level = 5; _addNewSkillData.LevelName = "Expert"; AddNewSkill(pageNumber + 1); }); */
+
+        }
+        else if (pageNumber == 3)
         {
             CreateHeaderText("Add new skill", pageNumber + "/" + totalPages, "Select skill level:");
             CreateSkillButton("Novice", "Little or no knowledge or experience.", 1, delegate { _addNewSkillData.Level = 1; _addNewSkillData.LevelName = "Novice"; AddNewSkill(pageNumber + 1); });
@@ -127,10 +155,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateSkillButton("Proficient", "Broad knowledge or experience.", 4, delegate { _addNewSkillData.Level = 4; _addNewSkillData.LevelName = "Proficient"; AddNewSkill(pageNumber + 1); });
             CreateSkillButton("Expert", "Extensive knowledge or experience.", 5, delegate { _addNewSkillData.Level = 5; _addNewSkillData.LevelName = "Expert"; AddNewSkill(pageNumber + 1); });
 
-        }
-        else if (pageNumber == 3)
-        {
-            CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
+            /* CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
             CreateDisplayGroup("<b>Skill</b>");
             Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;
             CreateDisplayGroup(_addNewSkillData.LevelName, _holder);
@@ -142,7 +167,19 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveSkill();
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
-              });
+              }); */
+        }
+        else if (pageNumber == 4)
+        {
+            CreateHeaderText("Share Acquisition", pageNumber + "/" + totalPages, SkillDisplayContent.name);
+            CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.");
+            CreateButton("Yes, I would love to contribute!",
+            delegate
+            {
+                _addNewSkillData = null;
+                userInterfaceManager.Open_Files(); // maybe have this return to main home, we will see.
+                //TODO: Send skill to Firebase Realtime Database
+            });
         }
     }
 

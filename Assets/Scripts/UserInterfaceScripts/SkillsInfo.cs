@@ -46,6 +46,7 @@ public class SkillsInfo : MonoBehaviour
             skillsList[i].SetActive(true);
         }
         definitionWindow.SetActive(false);
+        noResultsFound.SetActive(false);
         skillInputField.SetActive(true);
 
         //alphabet
@@ -54,6 +55,9 @@ public class SkillsInfo : MonoBehaviour
 
     void Update()
     {   
+        //TODO: THERE IS AN ERROR WITH THE SEARCH FUNCTION, IF YOU SEARCH SKILLS WITH MORE THAN ONE WORD, IT DOESN'T APPEAR
+        //TODO: MUST FIX THIS!!
+
         // if the skill input text equals the skill name text on each skill
         if (skillInput.text == "")
         {
@@ -70,12 +74,14 @@ public class SkillsInfo : MonoBehaviour
         {
             if (skillInput.text.Contains(character))
             {
-                noResultsFound.SetActive(true);
                 for (int i = 0; i < skillsList.Length; i++)
                 {
                     skillsList[i].SetActive(false);
                 }
                 break;
+            } else if (!skillInput.text.Contains(character))
+            {
+                noResultsFound.SetActive(true);
             }
         }
 
@@ -413,6 +419,18 @@ public class SkillsInfo : MonoBehaviour
         }
     }
 
+    public void PassSkillNameExt()
+    {
+        skillInput.text = skillName.text;
+        for (int i = 0; i < skillsList.Length; i++)
+        {
+            skillsList[i].SetActive(false);
+        }
+        skillsList[0].SetActive(true);
+        noResultsFound.SetActive(false);
+        continueButton.SetActive(true);
+    }
+
     // This function will pass as when the user click the actual button meaning it will select that certain skill for their choosing
     //TODO: Add in the functionality to progress to the next screen for selecting the skill level.
     public void PassSkillName(int index)
@@ -422,244 +440,255 @@ public class SkillsInfo : MonoBehaviour
             //62 in total
             case 0:
                 skillName.text = "Ability to accept Criticism";
-                skillInput.text = skillName.text;
-                for (int i = 0; i < skillsList.Length; i++)
-                {
-                    skillsList[i].SetActive(false);
-                }
-                skillsList[0].SetActive(true);
-                continueButton.SetActive(true);
+                PassSkillNameExt();
                 break;
             case 1:
                 skillName.text = "Active Listening to Others";
+                PassSkillNameExt();
                 break;
             case 2:
                 skillName.text = "Adaptability";
+                PassSkillNameExt();
                 break;
             case 3:
                 skillName.text = "Analytical Thinking";
+                PassSkillNameExt();
                 break;
             case 4:
                 skillName.text = "Applied Knowledge";
+                PassSkillNameExt();
                 break;
             case 5:
                 skillName.text = "Approachableness";
+                PassSkillNameExt();
                 break;
             case 6:
                 skillName.text = "Argumentation/ Discussion Skills";
+                PassSkillNameExt();
                 break;
             case 7:
                 skillName.text = "Attention to Detail";
+                PassSkillNameExt();
                 break;
             case 8:
                 skillName.text = "Authenticity";
+                PassSkillNameExt();
                 break;
             case 9:
                 skillName.text = "Business and Commercial Awareness";
+                PassSkillNameExt();
                 break;
             case 10:
                 skillName.text = "Career Management";
+                PassSkillNameExt();
                 break;
             case 11:
                 skillName.text = "Communicativeness";
+                PassSkillNameExt();
                 break;
             case 12:
                 skillName.text = "Confidence";
+                PassSkillNameExt();
                 break;
             case 13:
                 skillName.text = "Confidentiality";
+                PassSkillNameExt();
                 break;
             case 14:
                 skillName.text = "Conflict Resolution";
+                PassSkillNameExt();
                 break;
             case 15:
                 skillName.text = "Creative/ Innovative Thinking";
+                PassSkillNameExt();
                 break;
             case 16:
                 skillName.text = "Critical Thinking";
+                PassSkillNameExt();
                 break;
             case 17:
                 skillName.text = "Customer Service";
+                PassSkillNameExt();
                 break;
             case 18:
                 skillName.text = "Decision Making";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 19:
                 skillName.text = "Digital Literacy";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 20:
                 skillName.text = "Diplomacy";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 21:
                 skillName.text = "Discipline";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 22:
                 skillName.text = "Flexibility";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 23:
                 skillName.text = "Good Judgement";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 24:
                 skillName.text = "Growth Orientation";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 25:
                 skillName.text = "Independence at Work";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 26:
                 skillName.text = "Initiative";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 27:
                 skillName.text = "Leadership";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 28:
                 skillName.text = "Listening";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 29:
                 skillName.text = "Logical Reasoning";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 30:
                 skillName.text = "Multitasking";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 31:
                 skillName.text = "Patience";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 32:
                 skillName.text = "Persistance";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 33:
                 skillName.text = "Planning";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 34:
                 skillName.text = "Presentation Skills";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 35:
                 skillName.text = "Prioritising";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 36:
                 skillName.text = "Problem Solving";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 37:
                 skillName.text = "Project Management";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 38:
                 skillName.text = "Propriety/ Personal Culture";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 39:
                 skillName.text = "Providing Feedback";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 40:
                 skillName.text = "Punctuality";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 41:
                 skillName.text = "Reading";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 42:
                 skillName.text = "Research Skills";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 43:
                 skillName.text = "Responsibility/ Commitment";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 44:
                 skillName.text = "Self-Awareness";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 45:
                 skillName.text = "Self-Motivation";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 46:
                 skillName.text = "Self-Presentation";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 47:
                 skillName.text = "Self-Reflection";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 48:
                 skillName.text = "Sense of Humor";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 49:
                 skillName.text = "Social Media Management";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 50:
                 skillName.text = "Speaking";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 51:
                 skillName.text = "Speaking Fluency";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 52:
                 skillName.text = "Specialistic Industry Skills";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 53:
                 skillName.text = "Stamina";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 54:
                 skillName.text = "Statistical Skills";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 55:
                 skillName.text = "Stress Management";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 56:
                 skillName.text = "Teamwork";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 57:
                 skillName.text = "Time Management";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 58:
                 skillName.text = "Work Ethic";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 59:
                 skillName.text = "Work Under Pressure";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 60:
                 skillName.text = "Writing";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             case 61:
                 skillName.text = "Writing Skills";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
             default:
                 skillName.text = "Ability to accept Criticism";
-                skillDefinition.text = "Definition will go here.";
+                PassSkillNameExt();
                 break;
         }
     }
