@@ -35,6 +35,10 @@ public class SkillsInfo : MonoBehaviour
     private TMP_Text skillName;
     [SerializeField]
     private TMP_Text skillDefinition;
+    [Space(5f)]
+
+    [Header("Skill Data")]
+    public SkillData _addNewSkillData;
 
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
