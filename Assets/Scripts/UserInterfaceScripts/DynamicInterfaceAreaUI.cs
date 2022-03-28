@@ -169,13 +169,13 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 
                 AddNewSkill(pageNumber + 1);
                 //TODO: Send skill to Firebase Realtime Database
-            }); 
+            }, 255, 255, 255, 255, 255, 255); 
             CreateButton("No thank you!",
              delegate
              {
-                 CaptureStringData(ref _addNewSkillData.Name, _skillName);
+                 /*CaptureStringData(ref _addNewSkillData.Name, _skillName);*/
                  AddNewSkill(pageNumber + 1);
-             });
+             }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 3)
         {
@@ -196,7 +196,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 _addNewSkillData = null;
                 AddNewSkill(pageNumber + 1);
                 //TODO: DO NOT send skill to Firebase Realtime Database
-            });
+            }, 255, 255, 255, 255, 255, 255);
 
             /* CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
             CreateDisplayGroup("<b>Skill</b>");
@@ -225,7 +225,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 /*AddNewSkill(pageNumber + 1);*/
                 userInterfaceManager.Open_Files();
                 //TODO: Send skill to Firebase Realtime Database
-            });
+            }, 255, 255, 255, 255, 255, 255);
             CreateButton("No thank you!",
              delegate
              {
@@ -234,7 +234,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                  Debug.Log(_addNewSkillData);
                  userInterfaceManager.Open_Files();
                  /*AddNewSkill(pageNumber + 1);*/
-             });
+             }, 255, 255, 255, 255, 255, 255);
         }
         /*else if (pageNumber == 5)
         {
@@ -250,10 +250,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveSkill();
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
-              });
+              }, 255, 255, 255);
         }*/
     }
- 
+
     public void AddNewArtifact(int pageNumber)
     {
         DestroyCurrentScreens();
@@ -276,12 +276,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 _addNewArtifactData = new ArtifactData();
 
             CreateHeaderText("Add new artifact", pageNumber + "/" + totalPages, "content text here");
-            CreateButton("Document", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Document; AddNewArtifact(pageNumber + 1); });
-            CreateButton("Image", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Image; AddNewArtifact(pageNumber + 1); });
-            CreateButton("Link", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Link; AddNewArtifact(pageNumber + 1); });
-            CreateButton("Repository", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Repository; AddNewArtifact(pageNumber + 1); });
-            CreateButton("Video", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Video; AddNewArtifact(pageNumber + 1); });
-            CreateButton("Note", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Note; AddNewArtifact(pageNumber + 1); });
+            CreateButton("Document", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Document; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Image", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Image; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Link", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Link; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Repository", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Repository; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Video", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Video; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Note", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Note; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 2)
         {
@@ -297,7 +297,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 CaptureStringData(ref _addNewArtifactData.Description, _description);
                 CaptureStringData(ref _addNewArtifactData.URL, _url);
                 AddNewArtifact(pageNumber + 1);
-            });
+            }, 255, 255, 255, 255, 255, 255);
 
         }
         else if (pageNumber == 3)
@@ -317,7 +317,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 }
 
                 AddNewArtifact(pageNumber + 1);
-            });
+            }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 4)
         {
@@ -337,7 +337,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 SaveArtifact();
                 AddNewArtifact(pageNumber + 1);
                 _addNewArtifactData = null;
-            });
+            }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 5)
         {
@@ -374,7 +374,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveArtifact();
                   _addNewArtifactData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
-              });
+              }, 255, 255, 255, 255, 255, 255);
         }
     }
 
@@ -410,7 +410,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 CaptureStringData(ref _addNewReferenceData.Position, _position);
                 CaptureStringData(ref _addNewReferenceData.Email, _email);
                 AddNewReference(pageNumber + 1);
-            });
+            }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 2)
         {
@@ -430,7 +430,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 //SaveReference();
                 AddNewReference(pageNumber + 1);
                 //_addNewReferenceData = null;
-            });
+            }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 3)
         {
@@ -460,14 +460,17 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveReference();
                   _addNewReferenceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
-              });
+              }, 255, 255, 255, 255, 255, 255);
         }
     }
 
     public void AddNewExperiencePage(int pageNumber)
     {
         DestroyCurrentScreens();
-        int totalPages = 7;
+        float r;
+        float g;
+        float b;
+        int totalPages = 14;
 
         if (pageNumber == 1)
         {
@@ -483,24 +486,30 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             if (_addNewExperienceData == null)
                 _addNewExperienceData = new ExperienceData();
 
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "Please enter a new experience.");
-            ContentDataIdentiferUI _name = CreateEditInformationContent("Experience", _addNewExperienceData.ExperienceLocale, TMP_InputField.ContentType.Name);
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "What was your primary role/ job title in this experience?");
+            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.RoleInExperience, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate { CaptureStringData(ref _addNewExperienceData.ExperienceLocale, _name); AddNewExperiencePage(pageNumber + 1); });
+            CreateButton("Continue", delegate { _addNewExperienceData.RoleInExperience = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+
+            /*ContentDataIdentiferUI _name = CreateEditInformationContent("Experience", _addNewExperienceData.ExperienceLocale, TMP_InputField.ContentType.Name);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Continue", delegate { CaptureStringData(ref _addNewExperienceData.ExperienceLocale, _name); AddNewExperiencePage(pageNumber + 1); });*/
+
+            //CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "What was your primary role in this experience?");
         }
         else if (pageNumber == 2)
         {
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "On what dates did this experience occur?");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "When did this experience take place?");
             ContentDataIdentiferUI _startDate = CreateDatePrefab("Start Date", _addNewExperienceData.StartDate).GetComponent<ContentDataIdentiferUI>();
             ContentDataIdentiferUI _endDate = CreateDatePrefab("End Date", _addNewExperienceData.EndDate).GetComponent<ContentDataIdentiferUI>();
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate { CaptureDate(ref _addNewExperienceData.StartDate, _startDate); CaptureDate(ref _addNewExperienceData.EndDate, _endDate); AddNewExperiencePage(pageNumber + 1); });
+            CreateButton("Continue", delegate { CaptureDate(ref _addNewExperienceData.StartDate, _startDate); CaptureDate(ref _addNewExperienceData.EndDate, _endDate); AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
 
-        } else if(pageNumber == 3)
+        } else if (pageNumber == 3)
         {
 
-        
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "What skills does this experience support?");
+
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "What skills did this experience help you improve at? You may choose more than one.");
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewExperienceData.Skills, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",
@@ -514,44 +523,107 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 }
 
                 AddNewExperiencePage(pageNumber + 1);
-            });
+            }, 255, 255, 255, 255, 255, 255);
 
         }
         else if (pageNumber == 4)
         {
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "Give a brief description of the experience.");
-            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Description, TMP_InputField.ContentType.Standard);
-            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate { _addNewExperienceData.Description = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
-            //ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseExperiences(accountManager.localUserAccount._experiences), _addNewExperienceData.CourseOccured, true);
-            //CreateButton("Continue",
-            //delegate
-            //{
-            //    ContentDataIdentiferUI[] _listItems = _toggleHolder.GetComponentsInChildren<ContentDataIdentiferUI>();
-            //    for (int i = 0; i < _listItems.Length; i++)
-            //    {
-            //        if (_listItems[i]._toggleItem != null && _listItems[i]._toggleItem.isOn)
-            //            _addNewExperienceData.CourseOccured.Add(_listItems[i]._ToggleItemName.text);
-            //    }
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Where did this experience take place?");
+            CreateButton("Academic", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Practical", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
 
-            //    AddNewExperiencePage(pageNumber + 1);
-            //});
-
-            //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); });
         }
         else if (pageNumber == 5)
         {
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "What was your primary role in this experience?");
-            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.RoleInExperience, TMP_InputField.ContentType.Standard);
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Give a brief description of the experience.");
+            ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Description, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate { _addNewExperienceData.RoleInExperience = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
+            CreateButton("Continue", delegate { _addNewExperienceData.Description = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            /*ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseExperiences(accountManager.localUserAccount._experiences), _addNewExperienceData.CourseOccured, true);
+            CreateButton("Continue",
+            delegate
+            {
+                ContentDataIdentiferUI[] _listItems = _toggleHolder.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItems.Length; i++)
+                {
+                    if (_listItems[i]._toggleItem != null && _listItems[i]._toggleItem.isOn)
+                        _addNewExperienceData.CourseOccured.Add(_listItems[i]._ToggleItemName.text);
+                }
+
+                AddNewExperiencePage(pageNumber + 1);
+            });
+
+            CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); });*/
         }
         else if (pageNumber == 6)
         {
-            CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "Additional comments.");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to your assigned role?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 7)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team success?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 8)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team leadership?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 9)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team process?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 10)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How accountable were you towards your work?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 11)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How well did you communicate with the rest of the team?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 12)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "How well did you cooperate with the rest of the team?");
+            CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
+            CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
+            CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
+            CreateButton("Good", delegate { AddNewExperiencePage(pageNumber + 1); }, 155, 255, 112, 0, 0, 0);
+            CreateButton("Very good", delegate { AddNewExperiencePage(pageNumber + 1); }, 112, 255, 126, 0, 0, 0);
+        }
+        else if (pageNumber == 13)
+        {
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Additional comments.");
             ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Comments, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate { _addNewExperienceData.Comments = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); });
+            CreateButton("Continue", delegate { _addNewExperienceData.Comments = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
         }
         //else if (pageNumber == 6)
         //{
@@ -561,7 +633,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //    //CreateEditInformationContent("email", TMP_InputField.ContentType.EmailAddress);
         //    //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); });
         //}
-        else if (pageNumber == 7) //summary of information
+        else if (pageNumber == 14) //summary of information
         {
             CreateHeaderText("Experience Summary", pageNumber + "/" + totalPages, "Please check all information.");
             CreateDisplayGroup("<b>Experience</b>");
@@ -584,20 +656,20 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveExperience();
                   _addNewExperienceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
-              });
+              }, 255, 255, 255, 255, 255, 255);
 
             //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); SaveExperience(); });
 
 
         }
-        else if (pageNumber == 8)
+        /*else if (pageNumber == 8)
         {
             CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "content text here");
         }
         else if (pageNumber == 9)
         {
             CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "content text here");
-        }
+        }*/
 
         //CreateHeaderText("Add new experience", pageNumber + "/" + totalPages, "content text here");
         //List<string> SkillsFromDataBase = new List<string>();
@@ -615,7 +687,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //rightText.Add("right b");
         //CreateDisplayLine(lefttext, rightText);
 
-        //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); });
+        //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255);
     }
 
 
@@ -808,7 +880,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
         for (int i = 0; i < contents.Count; i++)
         {
-            Transform _button = CreateButton(contents[i], _events[i], false);
+            Transform _button = CreateButton(contents[i], _events[i], 255, 255, 255, 255, 255, 255, false);
             //Debug.Log(_button.name + i);
             if (i == 0)
                 ContinueButton = _button.GetComponent<Button>();
@@ -845,11 +917,13 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         return _buttonCreated;
     }
 
-    public Transform CreateButton(string content, UnityAction _event, bool overrideCheck = true)
+    public Transform CreateButton(string content, UnityAction _event, float r, float g, float b, float tr, float tg, float tb, bool overrideCheck = true)
     {
         Transform ButtonHolder = CreatePrefab(EditButtonPrefab);
         ButtonHolder.GetComponent<HorizontalLayoutGroup>().padding.bottom = 0;
         ButtonPrefab.GetComponentInChildren<TMP_Text>().text = content;
+        ButtonPrefab.GetComponentInChildren<TMP_Text>().color = new Color(tr, tg, tb); //text colours
+        ButtonPrefab.GetComponentInChildren<Image>().color = new Color(r, g, b); //button colours
         Transform _buttonCreated = CreatePrefab(ButtonPrefab, ButtonHolder);
         _buttonCreated.GetComponent<Button>().onClick.AddListener(_event);
         if (overrideCheck)
