@@ -93,9 +93,17 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         userInterfaceManager.Configure_Top_Banner(_disable, _throwWarning, title, _backButtonAction, _UI_Image, _secondaryButtonAction);
     }
 
-    public void GetSkillInfo()
+    public void GenerateSkillData()
     {
+        if (_addNewSkillData == null)
+        {
+            _addNewSkillData = new SkillData();
+        }
 
+        _addNewSkillData.Name = selectedSkill.text;
+        //ContentDataIdentiferUI _skillName = CreateEditInformationContent("Name", _addNewSkillData.Name, TMP_InputField.ContentType.Name);
+        /*_skillName.enabled = false;*/
+        //CaptureStringData(ref _addNewSkillData.Name, _skillName);
     }
 
     public void AddNewSkill(int pageNumber)
@@ -183,11 +191,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateDisplayGroup("<b>" + selectedSkill.text + "</b>");
             /*Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;*/
             /*CreateDisplayGroup(_addNewSkillData.LevelName, _holder);*/
-            CreateSkillButton("Novice", "Little or no knowledge or experience.", 1, delegate { AddNewSkill(pageNumber + 1); });
-            CreateSkillButton("Advanced Beginner", "Basic knowledge or experience.", 2, delegate { AddNewSkill(pageNumber + 1); });
-            CreateSkillButton("Competent", "Intermediate knowledge or experience.", 3, delegate { AddNewSkill(pageNumber + 1); });
-            CreateSkillButton("Proficient", "Broad knowledge or experience.", 4, delegate { AddNewSkill(pageNumber + 1); });
-            CreateSkillButton("Expert", "Extensive knowledge or experience.", 5, delegate { AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Novice", "Little or no knowledge or experience.", 1, delegate { _addNewSkillData.Level = 1; _addNewSkillData.LevelName = "Novice"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Advanced Beginner", "Basic knowledge or experience.", 2, delegate { _addNewSkillData.Level = 2; _addNewSkillData.LevelName = "Advanced Beginner"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Competent", "Intermediate knowledge or experience.", 3, delegate { _addNewSkillData.Level = 3; _addNewSkillData.LevelName = "Competent"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Proficient", "Broad knowledge or experience.", 4, delegate { _addNewSkillData.Level = 4; _addNewSkillData.LevelName = "Proficient"; AddNewSkill(pageNumber + 1); });
+            CreateSkillButton("Expert", "Extensive knowledge or experience.", 5, delegate { _addNewSkillData.Level = 5; _addNewSkillData.LevelName = "Expert"; AddNewSkill(pageNumber + 1); });
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Not sure?",
             delegate
@@ -275,7 +283,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             if (_addNewArtifactData == null)
                 _addNewArtifactData = new ArtifactData();
 
-            CreateHeaderText("Add new artifact", pageNumber + "/" + totalPages, "content text here");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "content text here");
             CreateButton("Document", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Document; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Image", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Image; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Link", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Link; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
@@ -285,7 +293,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 2)
         {
-            CreateHeaderText("Add new " + _addNewArtifactData.type.ToString() + " artifact", pageNumber + "/" + totalPages, "[Text]");
+            CreateHeaderText(null + _addNewArtifactData.type.ToString() + " artifact", pageNumber + "/" + totalPages, "[Text]");
             ContentDataIdentiferUI _title = CreateEditInformationContent("Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
             ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter description...");
             ContentDataIdentiferUI _url = CreateEditInformationContent("URL", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
@@ -302,7 +310,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 3)
         {
-            CreateHeaderText("Add new artifact", pageNumber + "/" + totalPages, "Add relevant skills:");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Add relevant skills:");
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
 
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -321,7 +329,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 4)
         {
-            CreateHeaderText("Add new artifact", pageNumber + "/" + totalPages, "Add relevant experiences:");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Add relevant experiences:");
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseExperiences(accountManager.localUserAccount._experiences), _addNewArtifactData.Experiences, true);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",
@@ -341,8 +349,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 5)
         {
-            CreateHeaderText("Artefact Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
-            CreateDisplayGroup("<b>Artefact</b>");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "<b>Artifact Summary</b><br><br>Please check all information before proceeding.");
+            CreateDisplayGroup("<b>Artifact</b>");
             Transform _holder = CreateDisplayGroup(_addNewArtifactData.type.ToString()).parent;
             CreateDisplayGroup(_addNewArtifactData.Title, _holder);
             CreateDisplayGroup(_addNewArtifactData.Description, _holder);
@@ -397,7 +405,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             if (_addNewReferenceData == null)
                 _addNewReferenceData = new ReferenceData();
 
-            CreateHeaderText("Add new reference", pageNumber + "/" + totalPages, "Contact Information");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Contact Information");
             ContentDataIdentiferUI _name = CreateEditInformationContent("Name", _addNewReferenceData.Name, TMP_InputField.ContentType.Name);
             ContentDataIdentiferUI _position = CreateEditInformationContent("Position", _addNewReferenceData.Position, TMP_InputField.ContentType.Standard);
             ContentDataIdentiferUI _email = CreateEditInformationContent("Email", _addNewReferenceData.Email, TMP_InputField.ContentType.EmailAddress);
@@ -414,7 +422,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 2)
         {
-            CreateHeaderText("Add new reference", pageNumber + "/" + totalPages, "Skills that referee can vouch for:");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "Skills that referee can vouch for:");
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewReferenceData.Skills, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",

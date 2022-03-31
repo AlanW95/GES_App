@@ -45494,6 +45494,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 651570461}
+        m_TargetAssemblyTypeName: DynamicInterfaceAreaUI, Assembly-CSharp
+        m_MethodName: GenerateSkillData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &818458015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83528,6 +83540,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d899c283373564cb3f5f658e465da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ScrollRectHolder: {fileID: 0}
+  HeaderTextHolder: {fileID: 0}
+  EditSingleDetailPrefab: {fileID: 0}
+  EditLongContentTextBoxPrefab: {fileID: 0}
+  EditToggleListGroupPrefab: {fileID: 0}
+  EditToggleItemPrefab: {fileID: 0}
+  EditDatePrefab: {fileID: 0}
+  EditButtonPrefab: {fileID: 0}
+  ButtonPrefab: {fileID: 0}
+  SkillLevelSelectPrefab: {fileID: 0}
+  SpaceFiller: {fileID: 0}
+  DisplayContentTextPrefabGroup: {fileID: 0}
+  DisplayContentTextPrefabItem: {fileID: 0}
+  SkillDisplayContent: {fileID: 0}
+  DisplayLineTextPrefabGroup: {fileID: 0}
+  DisplayLineTextPrefabItem: {fileID: 0}
+  CreatedScreenGameObjects: []
+  SubElementGameObjects: []
+  ContinueButton: {fileID: 0}
+  SkillReferenceProjectTitle: {fileID: 0}
+  SkillReferenceProjectContent: {fileID: 0}
+  SkillExperienceTitle: {fileID: 0}
+  SkillExperienceContent: {fileID: 0}
+  SkillItemExtension: {fileID: 0}
+  accountManager: {fileID: 0}
+  selectedSkill: {fileID: 0}
   skillInput: {fileID: 1041671839}
   skillInputField: {fileID: 1041671837}
   skillsList:
