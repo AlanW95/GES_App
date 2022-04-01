@@ -19,9 +19,11 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject HomeScreen;
     public GameObject AddSkillsScreen;
     public GameObject AddEditInformationScreen;
+    public GameObject SkillLevelDrawerScreen;
     public GameObject SettingsScreen;
     public GameObject CalanderScreen;
     public GameObject FilesScreen;
+    public GameObject DreamJobScreen;
 
 
 
@@ -145,9 +147,12 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_Calander() { ChangeWindow(CalanderScreen); Configure_Top_Banner(false, false, "Calendar", delegate { ChangeWindow(HomeScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_Files() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Files", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().CreateSkillsDisplayContent(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_AddSkills() { ChangeWindow(AddSkillsScreen); Configure_Top_Banner(false, false, "Add a Skill", delegate { ChangeWindow(HomeScreen); }, null, null ); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(true); BannerBottom.SetActive(false); }
+    public void Close_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(false); BannerBottom.SetActive(true); }
+    public void Open_DreamJob() { ChangeWindow(DreamJobScreen); Configure_Top_Banner(false, false, "Dream Jobs", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
-    public void Open_Add_SubMenu(bool forceClose = false) 
+        public void Open_Add_SubMenu(bool forceClose = false) 
     {
         //Debug.Log(Add_SubMenu.activeInHierarchy);
         if(Add_SubMenu.activeInHierarchy || forceClose == true)

@@ -187,6 +187,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 3)
         {
+            //TODO: CHANGE THISSSS
+            //Configure_Top_Banner(false, false, "Skill Level", delegate { AddNewSkill(pageNumber - 1); }, true, delegate { /*show skill level information*/ });
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Select skill level:");
             CreateDisplayGroup("<b>" + selectedSkill.text + "</b>");
             /*Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;*/
@@ -197,12 +199,14 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateSkillButton("Proficient", "Broad knowledge or experience.", 4, delegate { _addNewSkillData.Level = 4; _addNewSkillData.LevelName = "Proficient"; AddNewSkill(pageNumber + 1); });
             CreateSkillButton("Expert", "Extensive knowledge or experience.", 5, delegate { _addNewSkillData.Level = 5; _addNewSkillData.LevelName = "Expert"; AddNewSkill(pageNumber + 1); });
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            //TODO: HAVE DISPLAY THE SKILL LEVEL INFO DRAWER
             CreateButton("Not sure?",
             delegate
             {
-                SaveSkill();
+                userInterfaceManager.Open_SkillLevelDrawer();
+                /*SaveSkill();
                 _addNewSkillData = null;
-                AddNewSkill(pageNumber + 1);
+                AddNewSkill(pageNumber + 1);*/
                 //TODO: DO NOT send skill to Firebase Realtime Database
             }, 255, 255, 255, 255, 255, 255);
 
@@ -283,7 +287,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             if (_addNewArtifactData == null)
                 _addNewArtifactData = new ArtifactData();
 
-            CreateHeaderText(null, pageNumber + "/" + totalPages, "content text here");
+            CreateHeaderText(null, pageNumber + "/" + totalPages, "What kind of artifact would you like to add?");
             CreateButton("Document", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Document; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Image", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Image; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Link", delegate { _addNewArtifactData.type = ArtifactData.ArtifactType.Link; AddNewArtifact(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
@@ -293,20 +297,113 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 2)
         {
-            CreateHeaderText(null + _addNewArtifactData.type.ToString() + " artifact", pageNumber + "/" + totalPages, "[Text]");
-            ContentDataIdentiferUI _title = CreateEditInformationContent("Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
-            ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter description...");
-            ContentDataIdentiferUI _url = CreateEditInformationContent("URL", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
-
-            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Continue", delegate
+            //Document
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Document)
             {
-                CaptureStringData(ref _addNewArtifactData.Title, _title);
-                CaptureStringData(ref _addNewArtifactData.Description, _description);
-                CaptureStringData(ref _addNewArtifactData.URL, _url);
-                AddNewArtifact(pageNumber + 1);
-            }, 255, 255, 255, 255, 255, 255);
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
 
+                //TODO: Using the Firebase Storage, we should be able to have an upload and download system for users to store uploads of images, documents etc.
+                ContentDataIdentiferUI _url = CreateEditInformationContent("File Upload Coming Soon!", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter brief description of the document here");
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    CaptureStringData(ref _addNewArtifactData.URL, _url);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
+
+            //Image
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Image)
+            {
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
+
+                //TODO: Using the Firebase Storage, we should be able to have an upload and download system for users to store uploads of images, documents etc.
+                ContentDataIdentiferUI _url = CreateEditInformationContent("File Upload Coming Soon! Enter URL of image as temporary measure.", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Image Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter brief description of the image here");
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    CaptureStringData(ref _addNewArtifactData.URL, _url);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
+
+            //Link
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Link)
+            {
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
+
+                ContentDataIdentiferUI _url = CreateEditInformationContent("Link", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter brief description of link provided here");
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    CaptureStringData(ref _addNewArtifactData.URL, _url);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
+
+            //Repository
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Repository)
+            {
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
+
+                ContentDataIdentiferUI _url = CreateEditInformationContent("Repository Link", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Name of Repository", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter brief description of your repository here");
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    CaptureStringData(ref _addNewArtifactData.URL, _url);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
+
+            //YouTube Video
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Video)
+            {
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
+
+                ContentDataIdentiferUI _url = CreateEditInformationContent("Video URL", _addNewArtifactData.URL, TMP_InputField.ContentType.Standard, false);
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Video Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter brief description of video here"); 
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    CaptureStringData(ref _addNewArtifactData.URL, _url);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
+
+            //Note
+            if (_addNewArtifactData.type == ArtifactData.ArtifactType.Note)
+            {
+                CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewArtifactData.type.ToString() + " Artifact");
+
+                ContentDataIdentiferUI _title = CreateEditInformationContent("Title", _addNewArtifactData.Title, TMP_InputField.ContentType.Name);
+                ContentDataIdentiferUI _description = CreateLongContextPrefab(_addNewArtifactData.Description, TMP_InputField.ContentType.Standard, "Enter your description here");
+                StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+                CreateButton("Continue", delegate
+                {
+                    CaptureStringData(ref _addNewArtifactData.Title, _title);
+                    CaptureStringData(ref _addNewArtifactData.Description, _description);
+                    AddNewArtifact(pageNumber + 1);
+                }, 255, 255, 255, 255, 255, 255);
+            }
         }
         else if (pageNumber == 3)
         {

@@ -99,6 +99,13 @@ public class ReferenceData
     public ReferenceData() { }
 }
 
+public class DreamJobData
+{
+    public string Name;
+    public string Category;
+    //public string 
+}
+
 public class AccountManager : MonoBehaviour
 {
     public UserAccount localUserAccount = new UserAccount();
