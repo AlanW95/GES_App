@@ -48,14 +48,14 @@ public class DreamJobInfo : MonoBehaviour
     //We want to grab the skill information so we can link it with Dream Job that will be selected by the user
     [Header("Dream Job Skill Information")]
     public SkillsRepository skillData;
-    [SerializeField]
-    private List<DreamJobSkillData> dreamJobSkillsList;
 
-    [System.Serializable]
+    public static List<string> dreamJobSkillsList = new List<string>();
+
+    /*[System.Serializable]
     public struct DreamJobSkillData
     {
         public string[] skill;
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -145,6 +145,16 @@ public class DreamJobInfo : MonoBehaviour
                 dreamJobName = "Administration/ Corporate Support";
                 Debug.Log(dreamJobName);
 
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list whenever we have to
 
                 //dreamJobSkillsList.Add = skillData.hardSkillList.skills[0].Skill;
                 /*for (int i = 0; i < skillData.Length; i++)
