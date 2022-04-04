@@ -795,7 +795,28 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255);
     }
 
+    /*public void AddDreamJob()
+    {
+        Transform _prefab = CreateToggleItem()
 
+        *//*public Transform CreateDatePrefab(string content, System.DateTime defaultData)
+        {
+            EditDatePrefab.GetComponentInChildren<TMP_Text>().text = content;
+            Transform _prefab = CreatePrefab(EditDatePrefab);
+
+            //Debug.Log(defaultData.Year.ToString());
+
+            if (defaultData.Year.ToString() != "1")
+            {
+                _prefab.GetComponent<ContentDataIdentiferUI>()._DOB_DD.text = defaultData.Date.Day.ToString("00");
+                _prefab.GetComponent<ContentDataIdentiferUI>()._DOB_MM.text = defaultData.Date.Month.ToString("00");
+                _prefab.GetComponent<ContentDataIdentiferUI>()._DOB_YY.text = defaultData.Date.Year.ToString("0000");
+            }
+
+            CreatedScreenGameObjects.Add(_prefab.gameObject);
+            return _prefab;
+        }*//*
+    }*/
 
     public void CaptureDate(ref System.DateTime dataItem, ContentDataIdentiferUI _dataSource)
     {

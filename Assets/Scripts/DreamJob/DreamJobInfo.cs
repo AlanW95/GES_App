@@ -29,6 +29,12 @@ public class DreamJobInfo : MonoBehaviour
     private GameObject addDreamJobField;
     [SerializeField]
     private TMP_InputField addDreamJobInputField;
+    [SerializeField]
+    private TMP_Text dreamJobTitle;
+    [SerializeField]
+    private TMP_Text displayDreamJobContentText;
+    [SerializeField]
+    private GameObject[] displayDreamJobContent; //prefab
     [Space(5f)]
 
     //THIS MAY NOT BE NEEDED, PRECAUTION FOR THE TIME BEING
@@ -51,11 +57,25 @@ public class DreamJobInfo : MonoBehaviour
 
     public static List<string> dreamJobSkillsList = new List<string>();
 
+    private UserInterfaceManagerUI userInterfaceManager;
+    private DynamicInterfaceAreaUI dynamicInterfaceManager;
+
+    [SerializeField] GameObject Toggles;
+    [SerializeField] Transform maskPanel;
+
     /*[System.Serializable]
     public struct DreamJobSkillData
     {
         public string[] skill;
     }*/
+
+    private void Awake()
+    {
+        
+        userInterfaceManager = FindObjectOfType<UserInterfaceManagerUI>();
+        dynamicInterfaceManager = FindObjectOfType<DynamicInterfaceAreaUI>();
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -136,31 +156,103 @@ public class DreamJobInfo : MonoBehaviour
         for (int i = 0; i < educationList.Length; i++) { educationList[i].SetActive(false); }
     }
 
-    #region Pass Dream Job Names
-    public void PassLawName(int index)
+    private string ListToText(List<string> list)
+    {
+        string result = "";
+        foreach (var listMember in list)
+        {
+            //Transform _prefab = CreatePrefab
+            result += listMember.ToString() + "\n";
+            
+        }
+        return result;
+    }
+
+#region Pass Dream Job Names
+public void PassLawName(int index)
     {
         switch (index)
         {
             case 0:
                 dreamJobName = "Administration/ Corporate Support";
+                dreamJobTitle.text = dreamJobName;
                 Debug.Log(dreamJobName);
 
-                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills
                 dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Law, Legal documentation and terminologies");
+                dreamJobSkillsList.Add("Transcribing and proof-reading Legal documents");
+                dreamJobSkillsList.Add("Knowledge of basic administrative skills");
+                dreamJobSkillsList.Add("Basic knowledge of Billing and Accounting");
+                dreamJobSkillsList.Add("Legal Drafting Skills");
+
+                //Organisational Skills
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[12].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[22].Skill.ToString());
+
+                //General Workplace Skills
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
 
                 foreach (var x in dreamJobSkillsList)
                 {
                     Debug.Log(x.ToString());
                 }
 
-                //TODO: WHEN WE WANT TO CLEAR THE LIST
-                //dreamJobSkillsList.Clear(); //this should clear the list whenever we have to
-
-                //dreamJobSkillsList.Add = skillData.hardSkillList.skills[0].Skill;
-                /*for (int i = 0; i < skillData.Length; i++)
+                /*ContentDataIdentiferUI _toggleHolder = dynamicInterfaceManager.CreateToggleItem(dynamicInterfaceManager.getDatabaseSkills(dynamicInterfaceManager.accountManager.localUserAccount._skills), dynamicInterfaceManager._addNewExperienceData.Skills, false);
+                displayDreamJobContent = _toggleHolder;
+                ContentDataIdentiferUI[] _listItems = _toggleHolder.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItems.Length; i++)
                 {
-                    skillData[i].hardSkillList.skills[0].Skill = dreamJobName;
+                    if (_listItems[i]._toggleItem != null && _listItems[i]._toggleItem.isOn)
+                        dynamicInterfaceManager._addNewExperienceData.Skills.Add(_listItems[i]._ToggleItemName.text);
                 }*/
+
+                for (int i=0; i < dreamJobSkillsList.Count; i++)
+                {
+                    GameObject toggle = (GameObject)Instantiate(Toggles);
+                    toggle.GetComponentInChildren<TextMeshProUGUI>().text = dreamJobSkillsList[i];
+
+                    toggle.transform.SetParent(maskPanel.transform, false);
+                    toggle.SetActive(true);
+                    toggle.transform.localScale = new Vector3(1, 1, 1);
+                }
+
+                /*displayDreamJobContentText.text = "";
+                displayDreamJobContentText.text = ListToText(dreamJobSkillsList);*/
+                /*ListToText();*/
+                userInterfaceManager.Open_Profile();
+
+                //dynamicInterfaceManager.CreateToggleItem(dreamJobSkillsList, null); 
+                //CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 1:
                 dreamJobName = "Data & Analytics (Legal Analyst)";
@@ -180,7 +272,6 @@ public class DreamJobInfo : MonoBehaviour
             case 6:
                 dreamJobName = "Research & Development";
                 break;
-            case 7:
                 dreamJobName = "Press Relations";
                 break;
             case 8:
