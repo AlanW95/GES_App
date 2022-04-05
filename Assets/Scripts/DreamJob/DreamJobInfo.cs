@@ -147,6 +147,13 @@ public class DreamJobInfo : MonoBehaviour
             if (dreamJobInput.text.Contains(educationList[i].name)) { educationList[i].SetActive(true); noResultsFound.SetActive(false); }
             //TODO: ADD MORE DREAM JOBS HERE AS THEY ARE ADDED
         }
+
+        //Constantly checking if all the toggles are on, if so... it has met the required to complete the Dream Job
+        if (Toggles.GetComponentInChildren<Toggle>().isOn == true)
+        {
+            //make text 100% complete
+            Debug.Log("All Dream Jobs skills have been met");
+        }
     }
 
     public void AddNewCustomDreamJob()
@@ -272,6 +279,7 @@ public void PassLawName(int index)
             case 6:
                 dreamJobName = "Research & Development";
                 break;
+            case 7:
                 dreamJobName = "Press Relations";
                 break;
             case 8:
