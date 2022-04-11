@@ -39,6 +39,7 @@ public class SkillsInfo : MonoBehaviour
 
     [Header("Skill Data")]
     public SkillData _addNewSkillData;
+    public DynamicInterfaceAreaUI dynamicInterfaceManager;
 
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -114,6 +115,15 @@ public class SkillsInfo : MonoBehaviour
     public void AddNewCustomSkill()
     {
         addSkillField.SetActive(true);
+    }
+
+    public void TransferSkillData()
+    {
+        //Remmeber to add the _addNewSkillData.Name, we must specify the name of the newly Skill due to separate scripts
+        dynamicInterfaceManager._addNewSkillData.Name = addSkillInputField.text;
+        skillInput.text = addSkillInputField.text;
+        addSkillInputField.text = "";
+        skillInput.text = "";
     }
 
     /*public Transform CreateSkillButton(string content, string description, int level, UnityAction _event, bool overrideCheck = true)

@@ -49,6 +49,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
     public AccountManager accountManager;
     private UserInterfaceManagerUI userInterfaceManager;
+    public SkillsInfo skillInfoManager;
 
     [SerializeField]
     private TMP_InputField selectedSkill;
@@ -57,6 +58,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     {
         accountManager = FindObjectOfType<AccountManager>();
         userInterfaceManager = FindObjectOfType<UserInterfaceManagerUI>();
+        skillInfoManager = FindObjectOfType<SkillsInfo>();
         currentInactiveChildObjects = _ScrollRectHolder.transform.childCount;
 
     }
@@ -100,7 +102,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             _addNewSkillData = new SkillData();
         }
 
-        _addNewSkillData.Name = selectedSkill.text;
+        selectedSkill.text = _addNewSkillData.Name;
+        //_addNewSkillData.Name = selectedSkill.text;
+        skillInfoManager.TransferSkillData();
+
         //ContentDataIdentiferUI _skillName = CreateEditInformationContent("Name", _addNewSkillData.Name, TMP_InputField.ContentType.Name);
         /*_skillName.enabled = false;*/
         //CaptureStringData(ref _addNewSkillData.Name, _skillName);
@@ -109,7 +114,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public void AddNewSkill(int pageNumber)
     {
         DestroyCurrentScreens();
-        int totalPages = 4; //originally int totalPages = 3;
+        int totalPages = 5; //originally int totalPages = 3;
         /* 5 PAGES IN TOTAL
          * 
          * 1. Add Skill page
@@ -166,7 +171,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 2)
         {
             Configure_Top_Banner(false, false, "Share Skill", delegate { AddNewSkill(pageNumber - 1); }, null, null);
-            CreateHeaderText(null, pageNumber + "/" + totalPages, selectedSkill.text);
+            CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
             CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.");
 
             
@@ -190,7 +195,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             //TODO: CHANGE THISSSS
             //Configure_Top_Banner(false, false, "Skill Level", delegate { AddNewSkill(pageNumber - 1); }, true, delegate { /*show skill level information*/ });
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Select skill level:");
-            CreateDisplayGroup("<b>" + selectedSkill.text + "</b>");
+            CreateDisplayGroup("<b><u>" + _addNewSkillData.Name + "</b></u>");
             /*Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;*/
             /*CreateDisplayGroup(_addNewSkillData.LevelName, _holder);*/
             CreateSkillButton("Novice", "Little or no knowledge or experience.", 1, delegate { _addNewSkillData.Level = 1; _addNewSkillData.LevelName = "Novice"; AddNewSkill(pageNumber + 1); });
@@ -227,33 +232,40 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 4)
         {
             Configure_Top_Banner(false, false, "Share Acquisition", delegate { AddNewSkill(pageNumber - 1); }, null, null);
-            CreateHeaderText(null, pageNumber + "/" + totalPages, selectedSkill.text);
+            CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
             CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.");
             CreateButton("Yes, I would love to contribute!",
             delegate
             {
-                SaveSkill();
-                _addNewSkillData = null;
-                /*AddNewSkill(pageNumber + 1);*/
-                userInterfaceManager.Open_Files();
+                //SaveSkill();
+                //_addNewSkillData = null;
+                Debug.Log(_addNewSkillData.Name);
+                Debug.Log(_addNewSkillData.LevelName);
+                AddNewSkill(pageNumber + 1);
+                /*userInterfaceManager.Open_Files();*/
                 //TODO: Send skill to Firebase Realtime Database
             }, 255, 255, 255, 255, 255, 255);
             CreateButton("No thank you!",
              delegate
              {
-                 SaveSkill();
-                 _addNewSkillData = null;
-                 Debug.Log(_addNewSkillData);
-                 userInterfaceManager.Open_Files();
-                 /*AddNewSkill(pageNumber + 1);*/
+                 //SaveSkill();
+                 //_addNewSkillData = null;
+                 Debug.Log(_addNewSkillData.Name);
+                 Debug.Log(_addNewSkillData.LevelName);
+                 /*userInterfaceManager.Open_Files();*/
+                 AddNewSkill(pageNumber + 1);
              }, 255, 255, 255, 255, 255, 255);
         }
-        /*else if (pageNumber == 5)
+        else if (pageNumber == 5)
         {
             CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
-            CreateDisplayGroup("<b>Skill</b>");
-            Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;
-            CreateDisplayGroup(_addNewSkillData.LevelName, _holder);
+            CreateDisplayGroup("<b><u>Skill</b></u>");
+            /*StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));*/
+            Transform _holder = CreateDisplayGroup("<br>" + _addNewSkillData.Name).parent;
+
+            CreateSkillButton(_addNewSkillData.LevelName, _addNewSkillData.Name, _addNewSkillData.Level, null);
+            CreateDisplayGroup("<br><br>" + _addNewSkillData.LevelName, _holder);
+            CreateDisplayGroup("<br>" + _addNewSkillData.Level.ToString(), _holder);
 
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Confirm",
@@ -262,8 +274,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveSkill();
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
-              }, 255, 255, 255);
-        }*/
+              }, 255, 255, 255, 255, 255, 255);
+        }
     }
 
     public void AddNewArtifact(int pageNumber)
