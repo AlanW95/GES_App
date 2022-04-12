@@ -48,7 +48,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     private float boundrySize = 25f;
 
     public AccountManager accountManager;
-    private UserInterfaceManagerUI userInterfaceManager;
+    public UserInterfaceManagerUI userInterfaceManager;
     public SkillsInfo skillInfoManager;
 
     [SerializeField]
@@ -56,9 +56,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
     private void Awake()
     {
-        accountManager = FindObjectOfType<AccountManager>();
+        /*accountManager = FindObjectOfType<AccountManager>();
         userInterfaceManager = FindObjectOfType<UserInterfaceManagerUI>();
-        skillInfoManager = FindObjectOfType<SkillsInfo>();
+        skillInfoManager = FindObjectOfType<SkillsInfo>();*/
         currentInactiveChildObjects = _ScrollRectHolder.transform.childCount;
 
     }
@@ -100,11 +100,22 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         if (_addNewSkillData == null)
         {
             _addNewSkillData = new SkillData();
+        } else
+        {
+            Debug.LogError("Could not create new skill data");
         }
 
-        selectedSkill.text = _addNewSkillData.Name;
-        //_addNewSkillData.Name = selectedSkill.text;
-        skillInfoManager.TransferSkillData();
+        skillInfoManager.PassingSkillValidation();
+
+        /*if (_addNewSkillData == null)
+        {
+            _addNewSkillData = new SkillData();
+        }*/
+
+        //selectedSkill.text = _addNewSkillData.Name;
+        /*_addNewSkillData.Name = selectedSkill.text;*/
+        /*Debug.Log(_addNewSkillData.Name);*/
+        /*skillInfoManager.TransferSkillData();*/
 
         //ContentDataIdentiferUI _skillName = CreateEditInformationContent("Name", _addNewSkillData.Name, TMP_InputField.ContentType.Name);
         /*_skillName.enabled = false;*/
@@ -170,7 +181,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //TODO: CHANGE TO PAGE 3: Level of Skill because we need to add a new screen in for the confirmation of sharing with the crowd repository.
         else if (pageNumber == 2)
         {
-            Configure_Top_Banner(false, false, "Share Skill", delegate { AddNewSkill(pageNumber - 1); }, null, null);
+            Configure_Top_Banner(false, false, "Share Skill", delegate { userInterfaceManager.Open_AddSkills(); }, null, null);
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
             CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.");
 
@@ -259,13 +270,14 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 5)
         {
             CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
+            CreateDisplayGroup("");
             CreateDisplayGroup("<b><u>Skill</b></u>");
             /*StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));*/
-            Transform _holder = CreateDisplayGroup("<br>" + _addNewSkillData.Name).parent;
-
-            CreateSkillButton(_addNewSkillData.LevelName, _addNewSkillData.Name, _addNewSkillData.Level, null);
+            /*Transform _holder = CreateDisplayGroup("<br>" + _addNewSkillData.Name).parent;
             CreateDisplayGroup("<br><br>" + _addNewSkillData.LevelName, _holder);
-            CreateDisplayGroup("<br>" + _addNewSkillData.Level.ToString(), _holder);
+            CreateDisplayGroup("<br>" + _addNewSkillData.Level.ToString(), _holder);*/
+
+            CreateSkillButton(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level, null);
 
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Confirm",

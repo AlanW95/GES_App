@@ -115,15 +115,31 @@ public class SkillsInfo : MonoBehaviour
     public void AddNewCustomSkill()
     {
         addSkillField.SetActive(true);
+        addSkillInputField.text = "";
+    }
+
+    public void ResetSkillFields()
+    {
+        addSkillInputField.text = "";
+        skillInput.text = "";
     }
 
     public void TransferSkillData()
     {
-        //Remmeber to add the _addNewSkillData.Name, we must specify the name of the newly Skill due to separate scripts
-        dynamicInterfaceManager._addNewSkillData.Name = addSkillInputField.text;
+        //Remember to add the _addNewSkillData.Name, we must specify the name of the newly Skill due to separate scripts
+        /*Debug.Log("Custom input field: " + addSkillInputField.text);*/
+
+        //skillInput.text = addSkillInputField.text;
+        Debug.Log(addSkillInputField.text);
         skillInput.text = addSkillInputField.text;
-        addSkillInputField.text = "";
-        skillInput.text = "";
+
+        //dynamicInterfaceManager._addNewSkillData.Name = skillInput.text;
+
+        /*Debug.Log(skillInput.text);*/
+        /*addSkillInputField.text = "";
+        skillInput.text = "";*/
+        /*Debug.Log(skillInput.text);
+        Debug.Log("Test: " + _addNewSkillData.Name);*/
     }
 
     /*public Transform CreateSkillButton(string content, string description, int level, UnityAction _event, bool overrideCheck = true)
@@ -436,6 +452,7 @@ public class SkillsInfo : MonoBehaviour
     public void PassSkillNameExt()
     {
         skillInput.text = skillName.text;
+        //dynamicInterfaceManager._addNewSkillData.Name = skillInput.text;
         for (int i = 0; i < skillsList.Length; i++)
         {
             skillsList[i].SetActive(false);
@@ -443,6 +460,18 @@ public class SkillsInfo : MonoBehaviour
         skillsList[0].SetActive(true);
         noResultsFound.SetActive(false);
         continueButton.SetActive(true);
+    }
+
+    public void PassingSkillValidation()
+    {
+        if (addSkillField.activeInHierarchy == true)
+        {
+            dynamicInterfaceManager._addNewSkillData.Name = addSkillInputField.text;
+        }
+        else
+        {
+            dynamicInterfaceManager._addNewSkillData.Name = skillInput.text;
+        }
     }
 
     // This function will pass as when the user click the actual button meaning it will select that certain skill for their choosing
