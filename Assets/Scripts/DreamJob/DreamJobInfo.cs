@@ -253,7 +253,7 @@ public void PassLawName(int index)
                 /*displayDreamJobContentText.text = "";
                 displayDreamJobContentText.text = ListToText(dreamJobSkillsList);*/
                 /*ListToText();*/
-                userInterfaceManager.Open_Profile();
+                userInterfaceManager.Open_MyDreamJob();
 
                 //dynamicInterfaceManager.CreateToggleItem(dreamJobSkillsList, null); 
                 //CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);

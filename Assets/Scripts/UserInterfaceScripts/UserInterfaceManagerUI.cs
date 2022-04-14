@@ -18,6 +18,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject RegisterScreen;
     public GameObject HomeScreen;
     public GameObject AddSkillsScreen;
+    public GameObject AddDreamJobScreen;
     public GameObject AddEditInformationScreen;
     public GameObject SkillLevelDrawerScreen;
     public GameObject SettingsScreen;
@@ -150,7 +151,8 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_AddSkills() { ChangeWindow(AddSkillsScreen); Configure_Top_Banner(false, false, "Add a Skill", delegate { ChangeWindow(HomeScreen); }, null, null ); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(true); BannerBottom.SetActive(false); }
     public void Close_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(false); BannerBottom.SetActive(true); }
-    public void Open_DreamJob() { ChangeWindow(DreamJobScreen); Configure_Top_Banner(false, false, "Dream Jobs", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_AddDreamJob() { ChangeWindow(AddDreamJobScreen); Configure_Top_Banner(false, false, "Dream Jobs", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_MyDreamJob() { ChangeWindow(DreamJobScreen); Configure_Top_Banner(false, false, "My Dream Job", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
         public void Open_Add_SubMenu(bool forceClose = false) 
