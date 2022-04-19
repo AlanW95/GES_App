@@ -34,7 +34,13 @@ public class DreamJobInfo : MonoBehaviour
     [SerializeField]
     private TMP_Text displayDreamJobContentText;
     [SerializeField]
-    private GameObject[] displayDreamJobContent; //prefab
+    private List<Toggle> displayDreamJobContent; //prefab
+    [SerializeField]
+    private Slider dreamJobProgressSlider;
+    [SerializeField]
+    private GameObject DreamJobScreen;
+    [SerializeField]
+    private float maxSliderValue;
     [Space(5f)]
 
     //THIS MAY NOT BE NEEDED, PRECAUTION FOR THE TIME BEING
@@ -59,6 +65,8 @@ public class DreamJobInfo : MonoBehaviour
 
     private UserInterfaceManagerUI userInterfaceManager;
     private DynamicInterfaceAreaUI dynamicInterfaceManager;
+    [SerializeField]
+    private SkillData skillDataManager;
 
     [SerializeField] GameObject Toggles;
     [SerializeField] Transform maskPanel;
@@ -149,11 +157,45 @@ public class DreamJobInfo : MonoBehaviour
         }
 
         //Constantly checking if all the toggles are on, if so... it has met the required to complete the Dream Job
-        if (Toggles.GetComponentInChildren<Toggle>().isOn == true)
+        /*if (DreamJobScreen.activeInHierarchy == true)
+        {
+            Debug.Log("running if statement");
+            
+        }*/
+
+        
+
+
+        /*for (int i = 0; i < dreamJobSkillsList.Count; i++)
+        {
+            GameObject toggle = (GameObject)Instantiate(Toggles);
+            toggle.GetComponentInChildren<TextMeshProUGUI>().text = dreamJobSkillsList[i];
+
+            toggle.transform.SetParent(maskPanel.transform, false);
+            toggle.SetActive(true);
+            toggle.transform.localScale = new Vector3(1, 1, 1);
+            dreamJobProgressSlider.maxValue = dreamJobSkillsList.Count;
+            displayDreamJobContent.Add(toggle);
+        }*/
+
+        /*for (int i = 0; i < dreamJobSkillsList.Count; i++)
+        {
+            Debug.Log(Toggles.GetComponentInChildren<Toggle>().isOn);
+        }*/
+
+        /*if (Toggles.GetComponentInChildren<Toggle>().isOn == true)
         {
             //make text 100% complete
             Debug.Log("All Dream Jobs skills have been met");
         }
+
+        if (Toggles.GetComponentInChildren<Toggle>().isOn == true)
+        {
+            dreamJobProgressSlider.value += 1;
+        } else if (Toggles.GetComponentInChildren<Toggle>().isOn == false)
+        {
+            dreamJobProgressSlider.value -= 1;
+        }*/
     }
 
     public void AddNewCustomDreamJob()
@@ -161,6 +203,102 @@ public class DreamJobInfo : MonoBehaviour
         addDreamJobField.SetActive(true);
         for (int i = 0; i < lawList.Length; i++) { lawList[i].SetActive(false); }
         for (int i = 0; i < educationList.Length; i++) { educationList[i].SetActive(false); }
+    }
+
+    public void CheckSlider()
+    {
+        if (dreamJobProgressSlider.value == maxSliderValue)
+        {
+            Debug.Log("Congrats you have met the required skill set list for your Dream Job!");
+        }
+    }
+
+    public void Toggle_Changed(bool newValue)
+    {
+        if (newValue) 
+        {
+            dreamJobProgressSlider.value += 1;
+        }
+
+        if (!newValue)
+        {
+            dreamJobProgressSlider.value -= 1;
+        }
+        
+        /*for (int i = 0; i < displayDreamJobContent.Count; i++)
+        {
+            //displayDreamJobContent
+            dreamJobProgressSlider.value++;
+        }*/
+        /*if (displayDreamJobContent[0].isOn == true)
+        {
+            Debug.Log("HELLO THERE!");
+            dreamJobProgressSlider.value = dreamJobProgressSlider.value + 1;
+        }*/
+
+        /*for (int i = 0; i < displayDreamJobContent.Count; i++)
+        {
+            *//*if (displayDreamJobContent[i].onValueChanged.AddListener(delegate { AddValueToDreamJobSlider(); } ))*//*
+            //displayDreamJobContent[i].isOn == true;
+            if (displayDreamJobContent[i].isOn == true)
+            {
+                Debug.Log("Toggle activated");
+                dreamJobProgressSlider.value++;
+            }
+
+            if (displayDreamJobContent[i].isOn == false)
+            {
+                Debug.Log("Toggle deactivated");
+                dreamJobProgressSlider.value--;
+            }
+        }*/
+
+        /*foreach (Toggle t in displayDreamJobContent)
+        {
+            for (int i = 0; i < displayDreamJobContent.Count; i++)
+            {
+                if (t.isOn == true)
+                {
+                    Debug.Log("Toggle activated");
+                    break;
+                }
+
+                if (t.isOn == false)
+                {
+                    Debug.Log("Toggle deactivated");
+                    break;
+                }
+            }
+        }*/
+
+        /*for (int i = 0; i < displayDreamJobContent.Count; i++)
+        {
+            if (displayDreamJobContent[i].GetComponentInChildren<Toggle>().isOn == true)
+            {
+                Debug.Log("Toggle is on");
+                dreamJobProgressSlider.value += 1;
+            }
+
+            if (displayDreamJobContent[i].GetComponentInChildren<Toggle>().isOn == false)
+            {
+                Debug.Log("Toggle is off");
+                dreamJobProgressSlider.value -= 1;
+            }
+
+            *//*Toggle dreamJob = displayDreamJobContent[i].GetComponentInChildren<Toggle>();
+
+            if (dreamJob.isOn == true)
+            {
+                Debug.Log("Toggle on");
+                dreamJobProgressSlider.value += 1;
+            }
+
+            if (dreamJob.isOn == false)
+            {
+                Debug.Log("Toggle off");
+                dreamJobProgressSlider.value -= 1;
+            }*//*
+        }*/
     }
 
     private string ListToText(List<string> list)
@@ -223,6 +361,7 @@ public void PassLawName(int index)
                 dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
                 dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
 
+
                 //Foreign Language Skills
                 //no foreign language skills
 
@@ -248,7 +387,21 @@ public void PassLawName(int index)
                     toggle.transform.SetParent(maskPanel.transform, false);
                     toggle.SetActive(true);
                     toggle.transform.localScale = new Vector3(1, 1, 1);
+                    dreamJobProgressSlider.maxValue = dreamJobSkillsList.Count;
+                    maxSliderValue = dreamJobProgressSlider.maxValue;
+                    dreamJobProgressSlider.value = 0;
+                    displayDreamJobContent.Add(toggle.GetComponentInChildren<Toggle>());
+
+                    //if (any skill names == any of the displayDreamJobContent names)
+                    // { then those specific toggles will turn on }
+
+                    if (dreamJobSkillsList[i].Contains(skillDataManager.Name))
+                    {
+                        Toggle_Changed(true);
+                    }
                 }
+
+                
 
                 /*displayDreamJobContentText.text = "";
                 displayDreamJobContentText.text = ListToText(dreamJobSkillsList);*/
