@@ -41,6 +41,8 @@ public class DreamJobInfo : MonoBehaviour
     private GameObject DreamJobScreen;
     [SerializeField]
     private float maxSliderValue;
+    [SerializeField]
+    private GameObject selectADreamJob;
     [Space(5f)]
 
     //THIS MAY NOT BE NEEDED, PRECAUTION FOR THE TIME BEING
@@ -59,17 +61,17 @@ public class DreamJobInfo : MonoBehaviour
 
     //We want to grab the skill information so we can link it with Dream Job that will be selected by the user
     [Header("Dream Job Skill Information")]
-    public SkillsRepository skillData;
+    public SkillsRepository skillData; 
+    public AccountManager accountManager;
 
     public static List<string> dreamJobSkillsList = new List<string>();
 
     private UserInterfaceManagerUI userInterfaceManager;
     private DynamicInterfaceAreaUI dynamicInterfaceManager;
-    [SerializeField]
-    private SkillData skillDataManager;
 
     [SerializeField] GameObject Toggles;
     [SerializeField] Transform maskPanel;
+
 
     /*[System.Serializable]
     public struct DreamJobSkillData
@@ -79,10 +81,8 @@ public class DreamJobInfo : MonoBehaviour
 
     private void Awake()
     {
-        
         userInterfaceManager = FindObjectOfType<UserInterfaceManagerUI>();
         dynamicInterfaceManager = FindObjectOfType<DynamicInterfaceAreaUI>();
-
     }
 
     // Start is called before the first frame update
@@ -379,7 +379,7 @@ public void PassLawName(int index)
                         dynamicInterfaceManager._addNewExperienceData.Skills.Add(_listItems[i]._ToggleItemName.text);
                 }*/
 
-                for (int i=0; i < dreamJobSkillsList.Count; i++)
+                for (int i = 0; i < dreamJobSkillsList.Count; i++)
                 {
                     GameObject toggle = (GameObject)Instantiate(Toggles);
                     toggle.GetComponentInChildren<TextMeshProUGUI>().text = dreamJobSkillsList[i];
@@ -391,14 +391,21 @@ public void PassLawName(int index)
                     maxSliderValue = dreamJobProgressSlider.maxValue;
                     dreamJobProgressSlider.value = 0;
                     displayDreamJobContent.Add(toggle.GetComponentInChildren<Toggle>());
+                    selectADreamJob.SetActive(false);
 
                     //if (any skill names == any of the displayDreamJobContent names)
                     // { then those specific toggles will turn on }
 
-                    if (dreamJobSkillsList[i].Contains(skillDataManager.Name))
+                    /*Debug.Log(accountManager.localUserAccount._skills[0]);*/
+                    /*for (int j = 0; j < accountManager.localUserAccount._skills.Count; j++)
+                    {
+                        Debug.Log(accountManager.localUserAccount._skills);
+                    }*/
+                    
+                    /*if (dreamJobSkillsList.Contains(getSkillData._skills.ToString()))
                     {
                         Toggle_Changed(true);
-                    }
+                    }*/
                 }
 
                 
