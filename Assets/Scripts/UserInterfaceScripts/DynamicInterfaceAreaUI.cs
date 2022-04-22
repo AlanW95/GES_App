@@ -188,7 +188,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             Configure_Top_Banner(false, false, "Share Skill", delegate { userInterfaceManager.Open_AddSkills(); }, null, null);
             EditButton.SetActive(false);
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
-            CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.");
+            CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.<br><br><br>Please note: no data is stored in this current build of the app. Both buttons will progress, collecting no data.");
 
             
 
@@ -251,7 +251,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             Configure_Top_Banner(false, false, "Share Acquisition", delegate { AddNewSkill(pageNumber - 1); }, null, null);
             EditButton.SetActive(false);
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
-            CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.");
+            CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.<br><br><br>Please note: no data is stored in this current build of the app. Both buttons will progress, collecting no data.");
             CreateButton("Yes, I would love to contribute!",
             delegate
             {
@@ -546,7 +546,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             ContentDataIdentiferUI _email = CreateEditInformationContent("Email", _addNewReferenceData.Email, TMP_InputField.ContentType.EmailAddress);
             //CreateEditInformationContent("Phone Number", TMP_InputField.ContentType.IntegerNumber, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateDisplayGroup("<b>By pressing continue you confirm that you have consent from the named reference to have their data processed and stored within this app and associated database(s).</b>");
+            CreateDisplayGroup("<b>By pressing continue you confirm that you have consent from the named reference to have their data processed and stored within this app and associated database(s).</b><br><br><b><i>Please note in this build of the app, no data is being stored.</i></b>");
             CreateButton("Continue", delegate
             {
                 CaptureStringData(ref _addNewReferenceData.Name, _name);

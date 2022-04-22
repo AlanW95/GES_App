@@ -43,6 +43,8 @@ public class DreamJobInfo : MonoBehaviour
     private float maxSliderValue;
     [SerializeField]
     private GameObject selectADreamJob;
+    [SerializeField]
+    private GameObject dreamJobCompletionWindow;
     [Space(5f)]
 
     //THIS MAY NOT BE NEEDED, PRECAUTION FOR THE TIME BEING
@@ -209,20 +211,28 @@ public class DreamJobInfo : MonoBehaviour
     {
         if (dreamJobProgressSlider.value == maxSliderValue)
         {
-            Debug.Log("Congrats you have met the required skill set list for your Dream Job!");
+            //Debug.Log("Congrats you have met the required skill set list for your Dream Job!");
+
+            //You have met all your skills required for your dream job! No data has been recorded in this build of the app. You are free to close the app.
+            dreamJobCompletionWindow.SetActive(true);
         }
+    }
+
+    public void Close_DreamJobCompletionWindow()
+    {
+        dreamJobCompletionWindow.SetActive(false);
     }
 
     public void Toggle_Changed(bool newValue)
     {
         if (newValue) 
         {
-            dreamJobProgressSlider.value += 1;
+            dreamJobProgressSlider.value += 2;
         }
 
         if (!newValue)
         {
-            dreamJobProgressSlider.value -= 1;
+            dreamJobProgressSlider.value -= 2;
         }
         
         /*for (int i = 0; i < displayDreamJobContent.Count; i++)
@@ -323,11 +333,12 @@ public class DreamJobInfo : MonoBehaviour
             toggle.transform.SetParent(maskPanel.transform, false);
             toggle.SetActive(true);
             toggle.transform.localScale = new Vector3(1, 1, 1);
-            dreamJobProgressSlider.maxValue = dreamJobSkillsList.Count;
-            maxSliderValue = dreamJobProgressSlider.maxValue;
-            dreamJobProgressSlider.value = 0;
             displayDreamJobContent.Add(toggle.GetComponentInChildren<Toggle>());
             selectADreamJob.SetActive(false);
+            //dreamJobProgressSlider.value = 0;
+
+            dreamJobProgressSlider.maxValue = dreamJobSkillsList.Count * 2;
+            maxSliderValue = dreamJobProgressSlider.maxValue;
 
             //if any of the skills from the Dream Job fit then it will recognise this
             for (int x = 0; x < accountManager.localUserAccount._skills.Count; x++)
@@ -335,6 +346,10 @@ public class DreamJobInfo : MonoBehaviour
                 if (accountManager.localUserAccount._skills[x].Name.Contains(dreamJobSkillsList[i]))
                 {
                     displayDreamJobContent[i].isOn = true;
+                    //dreamJobProgressSlider.value += 1;
+
+                    /*dreamJobProgressSlider.maxValue = dreamJobSkillsList.Count + dreamJobProgressSlider.value;
+                    maxSliderValue = dreamJobProgressSlider.maxValue;*/
                 }
             }
         }
@@ -704,15 +719,247 @@ public class DreamJobInfo : MonoBehaviour
                 break;
             case 6:
                 dreamJobName = "Research & Development";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Research Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of relevant Laws and Legal Issues");
+                dreamJobSkillsList.Add("Knowledge of Policy and Governance Legislations");
+                dreamJobSkillsList.Add("Upto-date Knowledge of Relevant Legal Technologies");
+
+                //Organisational Skills B
+                //Attention to Detail/ Due Diligence, Discipline, Prioritizing, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Communication, Leadership, Teamwork and Collaboration
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Creativity, Critical Thinking, Growth-Orientation, Proactive/ Initiative, Self-Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Business and Commercial Awareness, Creative Problem Solving, Negotiations Skills, Networking, Persuasion Skills
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[11].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 7:
                 dreamJobName = "Press Relations";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Research Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Marketing and Branding Skills");
+                dreamJobSkillsList.Add("Knowledge and Awareness of Different Media Agendas");
+                dreamJobSkillsList.Add("Knowledge of Law and PR Basics");
+
+                //Organisational Skills B
+                //Attention to Detail, Multitasking, Prioritizing, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communication, Leadership, Presentation Skills, Providing Feedback, Teamwork
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[8].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Creativity and Imagination, Proactive/ Initiative, Stress Management, Work Under Pressure
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[15].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Collaboration and Relationship Management, Commercial Awareness, Creative Problem Solving, Cultural Awareness, Decision Making, Persuasion Skills, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[11].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 8:
                 dreamJobName = "Teaching & Education";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Applied Knowledge, Research Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+                dreamJobSkillsList.Add("Upto Date Knowledge of Pedagogical Tools and Packages");
+                dreamJobSkillsList.Add("Knowledge of the Relevant Subjects");
+
+                //Organisational Skills B
+                //Discipline, Planning, Prioritizing, Attention to Detail, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening Skills, Approachableness/ Socialable, Communicativeness, Confidence, Leadership, Speaking Fluency
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[10].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Sense of Humour, Creativity, Critical Thinking, Flexibility, Patience, Responsibility/ Commitment
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[10].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude to Work, Problem Solving, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 9:
                 dreamJobName = "Environment & Sustainability";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Research Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Relevant Laws and Legal Issues");
+                dreamJobSkillsList.Add("In-depth Knowledge of Relevant Policy, Regulations, and Legislations");
+                dreamJobSkillsList.Add("Legal Drafting Skills");
+
+                //Organisational Skills B
+                //Attention to Detail, Multitasking
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Communication Skills, Writing Skills, Speaking Fluency, Team Player
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Critical Thinking, Flexibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Proven Persuation Skills, Commercial Awareness, Effective Collaboration, Proven Negotiation Skills
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[11].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
         }
     }
@@ -723,69 +970,1316 @@ public class DreamJobInfo : MonoBehaviour
         {
             case 0:
                 dreamJobName = "Audio-Visual Technician";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy Skills, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                /*dreamJobSkillsList.Add("Knowledge of Relevant Laws and Legal Issues");
+                dreamJobSkillsList.Add("In-depth Knowledge of Relevant Policy, Regulations, and Legislations");
+                dreamJobSkillsList.Add("Legal Drafting Skills");*/
+
+                //Organisational Skills B
+                //Planning, Discipline, Multitasking, Punctuality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Customer Service
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Flexibility, Responsibility, Self-Motivation, Patience, Initiative
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Postive Attitude to Work, Problem Solving, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 1:
                 dreamJobName = "Careers Advisor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy Skills, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Counselling Skills");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+                dreamJobSkillsList.Add("Teaching Knowledge");
+
+                //Organisational Skills B
+                //Discipline, Planning, Prioritising
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Discussion Skills, Providing Feedback, Speaking Fluency
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Responsibility, Self-Motivation, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Career Management, Cultural Awareness, Independence at Work, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 2:
                 dreamJobName = "Child Protection Officer";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinking, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Counselling Skills");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+
+                //Organisational Skills B
+                //Discipline, Planning, Prioritising, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexibility, Work Under Pressure, Responsibility, Self-Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[15].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Decision Making, Negotiating Skills, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 3:
                 dreamJobName = "Communication Support Worker";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinking, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching Practices");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+                dreamJobSkillsList.Add("Sign Language & Deaf Studies");
+
+                //Organisational Skills B
+                //Discipline, Planning, Prioritizing, Punctuality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Providing Feedback, Socialable
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexible, Self-Motivation, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 4:
                 dreamJobName = "Community Education Co-ordinator";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinking, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                /*dreamJobSkillsList.Add("Knowledge of Teaching Practices");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+                dreamJobSkillsList.Add("Sign Language & Deaf Studies");*/
+
+                //Organisational Skills B
+                //Discipline, Multitasking, Planning, Prioritizing, Project Management, Punctionality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Communicativeness, Customer Service, Socialable (approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Initiative, Critical Thinking, Patience, Flexibility, Responsibility, Self-Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Networking, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 5:
                 dreamJobName = "Nursery Worker";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                /*dreamJobSkillsList.Add("Knowledge of Teaching Practices");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+                dreamJobSkillsList.Add("Sign Language & Deaf Studies");*/
+
+                //Organisational Skills B
+                //Discipline, Multitasking, Punctionality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening skills, Communicativeness, Customer Service, Socialable (approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexible, Responsibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 6:
                 dreamJobName = "Ofsted Inspector";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Observation/ Interviewing Skills");
+
+                //Organisational Skills B
+                //Discipline, Planning, Punctuality, Time Management, Meticulousness (B10)
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening Skills, Argumentation/ Discussion Skills, Communicativeness, Leadership, Providing Feedback
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Critical Thinking, Responsiblity, Initiative, Growth Orientation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Business and Commercial Awareness, Decision Making, Independence at Work, Networking, Positive Attitude at Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 7:
                 dreamJobName = "Online Tutor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching & Curriculum Design");
+                dreamJobSkillsList.Add("Creating Best Conditions for Learning & Teaching");
+                dreamJobSkillsList.Add("Knowledge of Digital Media");
+
+                //Organisational Skills B
+                //Discipline, Planning, Priotising, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Communicativeness, Customer Service, Presentation Skills, Speaking Fluency
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Flexibility, Initiative, Creative/ Innovative Thinking, Responsiblity, Self Presentation, Growth Orientation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Problem Solving
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 8:
                 dreamJobName = "Outdoors Activities Instructor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching & Instruction");
+
+                //Organisational Skills B
+                //Discipline, Attention to Detail, Multitasking, Planning, Punctionality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Leadership Skills, Speaking Fluency, Teamwork, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Initiative, Responsiblity, Self-Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Independence at Work, Positive Attitude At Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 9:
                 dreamJobName = "Play Worker";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("First Aid");
+                dreamJobSkillsList.Add("Counselling Skills");
+
+                //Organisational Skills B
+                //Discipline, Multitasking, Planning
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active listening skills, Communicativeness, Customer Service
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexiblity, Creative Thinking, Critical Thinking, Responsibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude at Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 10:
                 dreamJobName = "Portage Home Visitor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+                dreamJobSkillsList.Add("Knowledge of Early Childhood Studies");
+
+                //Organisational Skills B
+                //Discipline, Punctionality, Time MAnagement, Prioritizing
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening to Others, Communicativeness, Customer Service, Providing Feedback
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexibility, Creative Thinking, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 11:
                 dreamJobName = "Primary School Worker";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+                //Organisational Skills B
+                //Discipline, Multitasking, Planning, Prioritizing, Punctionality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Discussion Skills, Providing Feedback, Speaking Fluency, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexiblity, Creative Thinking, Responsibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Decision Making, Independence at Work, Positive Attitude to Work, Problem Solving, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 12:
                 dreamJobName = "Prison Instructor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+                //Organisational Skills B
+                //Discipline, Meticulous (Attention to Detail), Multitasking, Planning, Prioritizing, Punctuality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Discussion Skills, Providing Feedback, Speaking Fluency, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexiblity, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Independence at Work, Adaptability, Cultural Awareness, Positive Attitude at Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 13:
                 dreamJobName = "QCF Assessor";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy Skills, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+                dreamJobSkillsList.Add("Monitoring and Evaluation");
+
+                //Organisational Skills B
+                //Discipline, Meticulous (Attention to Detail), Prioritizing, Project Management, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Discussion Skills, Leadership, Providing Feedback, Writing Skils, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Flexiblity, Critical Thinking, Initiative, Responsiblity
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Business & Commercial Awareness, Decision Making, Independence at Work, Negotiating Skills, Networking, Positive Attitude, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 14:
                 dreamJobName = "R&D Manager";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy, Applied Knowledge, Research Skills, Statistical Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[5].Skill.ToString());
+
+                //custom skills not in the repository
+                /*dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+                dreamJobSkillsList.Add("Monitoring and Evaluation");*/
+
+                //Organisational Skills B
+                //Discipline, Meticulous (Attention to Detail), Multitasking, Planning, Prioritizing, Project Management, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Discussion Skills, Leadership, Providing Feedback, Speaking Fluency, Teamwork
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Critical Thinking, Creative/ Innovative Thinking, Initiative
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Business and Commercial Awareness, Cultural Awareness, Decision Making, Independence at Work, Negotiating Skills, Netowkring, Positive Attitude to Work, Problem Solving, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 15:
                 dreamJobName = "School Business Manager";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Skills, Digital Literacy, Applied Knowledge, Statistical Skills
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[5].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of HR and Employment Laws");
+                
+
+                //Organisational Skills B
+                //Project Management, Planning, Time Management, Multitasking, Prioritizing, Discipline
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Leadership, Customer Service, Communicativeness, Discussion Skills, Teamwork, Active Listening, Speaking Fluency
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Flexibility, Critical Thinking, Creative Thinking, Growth Orientation, Responsibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Business & Cultural Awareness, Adaptability, Networking, Negotiating Skills, Cultural Awareness, Positive Attitude at Work, Work Ethic, Independence at Work, Decision Making
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[10].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 16:
                 dreamJobName = "School for Life Teacher";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+
+                //Organisational Skills B
+                //Meticulous (Attention to Detail), Discipline, Punctionality, Planning, Multitasking, Time Management, Prioritizing
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[7].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Leadership, Customer Service, Communicativeness, Presentation Skills, Active Listening, Providing Feedback
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Creative Thinking, Initiative, Patience, Responsibility, Self-Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Independence at Work, Decision Making, Work Ethic, Positive Attitude at Work, Adaptability, Cultural Awareness
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 17:
                 dreamJobName = "SEN Teacher";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinkinkg, Digital Literacy, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+
+                //Organisational Skills B
+                //Discipline, Prioritizing, Planning, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Speaking Fluency, Active Listening Skills, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexibility, Responsibility, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Positive Attitude to Work, Cultural Awareness, Work Ethic, Decision Making, Problem Solving
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 18:
                 dreamJobName = "SEN Teaching Assistant";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinkinkg, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+
+                //Organisational Skills B
+                //Discipline, Prioritizing, Punctuality, Time Management
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Presentation Skills, Speaking Fluency, Socialable (Approachableness)
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[11].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Patience, Flexibility, Responsibility, Critical Thinking
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[11].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Cultural Awareness, Positive Attitude at Work, Problem Solving, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 19:
                 dreamJobName = "Training Manager";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Analytical Thinkinkg, Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Teaching");
+                dreamJobSkillsList.Add("Ability to Create and Implement Best Pedagogical Strategies");
+
+
+                //Organisational Skills B
+                //Discipline, Planning, Prioritizing
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Communicativeness, Customer Service, Discussion Skills, Leadership, Speaking Fluency
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Initiative, Self-Motivation, Flexibility, Critical Thinking, Growth Orientation, Responsibility
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Business and Cultural Awareness, Career Management, Positive Attitude to Work, Work Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[6].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 20:
                 dreamJobName = "Training Officer";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy, Applied Knowledge
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[3].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Teaching Knowledge");
+                dreamJobSkillsList.Add("Curriculum Design");
+
+
+                //Organisational Skills B
+                //Planning, Prioritizing, Discipline, Punctionality
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[6].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Discussion Skills, Communicativeness, Teamwork, Presentation Skills
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[2].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[5].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[8].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Critical Thinking, Creative Thinking, Responsibility, Self Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[8].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Positive Attitude to Work, Cultural Awareness
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
             case 21:
                 dreamJobName = "Youth Worker";
+                dreamJobTitle.text = dreamJobName;
+                //Debug.Log(dreamJobName);
+
+                //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
+                //Industry/ Hard Skills A
+                //Digital Literacy
+                dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
+
+                //custom skills not in the repository
+                dreamJobSkillsList.Add("Knowledge of Psychology");
+
+
+                //Organisational Skills B
+                //Time Mangagement, Punctuality, Discipline
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[4].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.organisationalSkillList.skills[5].Skill.ToString());
+
+                //Communication and Interpersonal Skills C
+                //Active Listening, Customer Service, Communicativeness
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[1].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[7].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.commIntSkillList.skills[9].Skill.ToString());
+
+                //Personal Skills, Values and Attitudes D 
+                //Responsibility, Self Motivation
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.psvaSkillList.skills[4].Skill.ToString());
+
+                //General Workplace Skills E
+                //Adaptability, Positive Attitude at Work, Cultural Awareness, WOrk Ethic
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[0].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[3].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[8].Skill.ToString());
+                dreamJobSkillsList.Add(skillData.generalWorkplaceSkillList.skills[9].Skill.ToString());
+
+                //Foreign Language Skills
+                //no foreign language skills
+
+                foreach (var x in dreamJobSkillsList)
+                {
+                    Debug.Log(x.ToString());
+                }
+
+                DisplayDreamJob();
+
+                //TODO: WHEN WE WANT TO CLEAR THE LIST
+                //dreamJobSkillsList.Clear(); //this should clear the list
                 break;
         }
     }
