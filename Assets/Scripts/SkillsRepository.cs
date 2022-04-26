@@ -19,6 +19,13 @@ public class SkillsRepository : MonoBehaviour
     public TextAsset GeneralWorkplaceSkillsTextData;
     public TextAsset ForeignLanguagesSkillsTextData;
 
+    //Personality
+    public TextAsset EmotionalStabilityTextData;
+    public TextAsset AgreeablenessTextData;
+    public TextAsset ConscientiousnessTextData;
+    public TextAsset ExtraversionTextData;
+    public TextAsset IntellectOpennessTextData;
+
     [System.Serializable]
     public class Skills
     {
@@ -38,6 +45,13 @@ public class SkillsRepository : MonoBehaviour
     public SkillsList generalWorkplaceSkillList = new SkillsList();
     public SkillsList foreignLanguageSkillList = new SkillsList();
 
+    //Personality
+    public SkillsList emotionalStabilitySkillList = new SkillsList();
+    public SkillsList agreeablenessSkillList = new SkillsList();
+    public SkillsList conscientiousnessSkillList = new SkillsList();
+    public SkillsList extraversionSkillList = new SkillsList();
+    public SkillsList intellectOpennessSkillList = new SkillsList();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +66,13 @@ public class SkillsRepository : MonoBehaviour
         string[] personalSkillsvalueAndAttitudesSkillsData = PersonalSkillsValuesAndAttitudesTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
         string[] generalWorkplaceSkillsData = GeneralWorkplaceSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
         string[] foreignLanguagesSkillsData = ForeignLanguagesSkillsTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries); //originally StringSplitOptions.None
+
+        //Personality
+        string[] emotionalStabilitySkillsData = EmotionalStabilityTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] agreeablenessSkillsData = AgreeablenessTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] conscientiousnessSkillsData = ConscientiousnessTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] extraversionSkillsData = ExtraversionTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] intellectOpennessSkillsData = IntellectOpennessTextData.text.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
         int hsTableSize = hardSkillsData.Length / 2 - 1;
         hardSkillList.skills = new Skills[hsTableSize];
@@ -117,6 +138,62 @@ public class SkillsRepository : MonoBehaviour
 
             foreignLanguageSkillList.skills[i].Skill = foreignLanguagesSkillsData[2 * (i + 1)];
             foreignLanguageSkillList.skills[i].Definition = foreignLanguagesSkillsData[2 * (i + 1) + 1];
+        }
+
+        //Personality
+        int esTableSize = emotionalStabilitySkillsData.Length / 2 - 1;
+        emotionalStabilitySkillList.skills = new Skills[esTableSize];
+
+        for (int i = 0; i < esTableSize; i++)
+        {
+            emotionalStabilitySkillList.skills[i] = new Skills();
+
+            emotionalStabilitySkillList.skills[i].Skill = emotionalStabilitySkillsData[2 * (i + 1)];
+            emotionalStabilitySkillList.skills[i].Definition = emotionalStabilitySkillsData[2 * (i + 1) + 1];
+        }
+
+        int agreeTableSize = agreeablenessSkillsData.Length / 2 - 1;
+        agreeablenessSkillList.skills = new Skills[agreeTableSize];
+
+        for (int i = 0; i < agreeTableSize; i++)
+        {
+            agreeablenessSkillList.skills[i] = new Skills();
+
+            agreeablenessSkillList.skills[i].Skill = agreeablenessSkillsData[2 * (i + 1)];
+            agreeablenessSkillList.skills[i].Definition = agreeablenessSkillsData[2 * (i + 1) + 1];
+        }
+
+        int conTableSize = conscientiousnessSkillsData.Length / 2 - 1;
+        conscientiousnessSkillList.skills = new Skills[conTableSize];
+
+        for (int i = 0; i < conTableSize; i++)
+        {
+            conscientiousnessSkillList.skills[i] = new Skills();
+
+            conscientiousnessSkillList.skills[i].Skill = conscientiousnessSkillsData[2 * (i + 1)];
+            conscientiousnessSkillList.skills[i].Definition = conscientiousnessSkillsData[2 * (i + 1) + 1];
+        }
+
+        int extraTableSize = extraversionSkillsData.Length / 2 - 1;
+        extraversionSkillList.skills = new Skills[extraTableSize];
+
+        for (int i = 0; i < extraTableSize; i++)
+        {
+            extraversionSkillList.skills[i] = new Skills();
+
+            extraversionSkillList.skills[i].Skill = extraversionSkillsData[2 * (i + 1)];
+            extraversionSkillList.skills[i].Definition = extraversionSkillsData[2 * (i + 1) + 1];
+        }
+
+        int ioTableSize = intellectOpennessSkillsData.Length / 2 - 1;
+        intellectOpennessSkillList.skills = new Skills[ioTableSize];
+
+        for (int i = 0; i < ioTableSize; i++)
+        {
+            intellectOpennessSkillList.skills[i] = new Skills();
+
+            intellectOpennessSkillList.skills[i].Skill = intellectOpennessSkillsData[2 * (i + 1)];
+            intellectOpennessSkillList.skills[i].Definition = intellectOpennessSkillsData[2 * (i + 1) + 1];
         }
     }
 }
