@@ -25,7 +25,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject CalanderScreen;
     public GameObject FilesScreen;
     public GameObject DreamJobScreen;
-
+    public GameObject LearningResourcesScreen;
 
 
     public GameObject Add_SubMenu;
@@ -153,6 +153,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Close_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(false); BannerBottom.SetActive(true); }
     public void Open_AddDreamJob() { ChangeWindow(AddDreamJobScreen); Configure_Top_Banner(false, false, "Dream Jobs", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_MyDreamJob() { ChangeWindow(DreamJobScreen); Configure_Top_Banner(false, false, "My Dream Job", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_LearningResources() { ChangeWindow(LearningResourcesScreen); Configure_Top_Banner(false, false, "Learning Resources", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
         public void Open_Add_SubMenu(bool forceClose = false) 
@@ -180,5 +181,4 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Open_AllExperiences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Experiences", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllExperiences(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_AllArtefacts() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Projects", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllArtefacts(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_AllReferences() { ChangeWindow(FilesScreen); ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "References", delegate { ChangeWindow(HomeScreen); }); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().DisplayAllReferences(); BannerTop_Secondary_Button.gameObject.SetActive(false); }
-
 }

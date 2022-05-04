@@ -872,6 +872,146 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }*//*
     }*/
 
+    //---------PRACTICE SKILLS---------------------
+    public void AddPracticeSkills(int pageNumber)
+    {
+        DestroyCurrentScreens();
+        int totalPages = 11;
+
+        /*
+         * Pages
+         * 1 - Practice Skills Home
+         * Work Coach, Text "How do you want to practice your desired skills?", Two buttons (Learning Resources, Browse Physical Practice Options)
+         * 2 - Learning Resources - choose skill
+         * 3 - Learning Resources - choose type of learning resource
+         * 4 - List of Video/ Audio learning resources
+         * 5 - List of Paper/ Article/ Blog learning resources
+         * 6 - List of Free Courses/ Self-Assessment learning resources
+         * 7 - List of Mini Games learning resources
+         * 8 - Skill definition screen
+         * 9 - BROWSE PHYSICAL PRACTICE OPTIONS - THIS WON'T BE AVAILABLE RIGHT AWAY (LOCATION-BASED SERVICES)
+         * 10 - Add Own Learning Resource - Type of Learning Resource
+         * 11 - Add Own Learning Resource - Details of Learning Resource
+         * 12 - Add Own Learning Resource - Confirmation of custom Learning Resource
+         */
+        //1 - Practice Skills Home
+        //Work Coach, Text "How do you want to practice your desired skills?", Two buttons(Learning Resources, Browse Physical Practice Options)
+        if (pageNumber == 1)
+        {
+            Configure_Top_Banner(false, true, "Learning Resources", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
+            EditButton.SetActive(false);
+
+            CreateHeaderText(null, null, "How do you want to practice your desired skills?");
+            CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255); //add 7 because page 8
+        }
+        else
+        {
+            Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 1); }, null, null);
+        }
+        //2 - Learning Resources - choose skill
+        if (pageNumber == 2)
+        {
+            EditButton.SetActive(false);
+            //TODO: ADD WORK COACH IMAGE TO REPLACE THE HEADERTEXT
+            CreateHeaderText(null, null, "Which skills would you like to learn?");
+
+            //TODO: ADD DROPDOWN OF SKILLS FROM REPOSITORY
+
+            CreateButton("Continue", delegate
+            {
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);
+            
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Yes, I want to contribute a resource", delegate
+            {
+                AddPracticeSkills(pageNumber + 7);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //3 - Learning Resources - choose type of learning resource
+        else if (pageNumber == 3)
+        {
+            CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            EditButton.SetActive(false);
+            CreateButton("Videos/ Audio", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Papers/ Articles/ Blogs", delegate { AddPracticeSkills(pageNumber + 2); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Free Courses/ Self Assessment", delegate { AddPracticeSkills(pageNumber + 3); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Mini Games", delegate { AddPracticeSkills(pageNumber + 4); }, 255, 255, 255, 255, 255, 255);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Skill Details", delegate { AddPracticeSkills(pageNumber + 5); }, 255, 255, 255, 255, 255, 255);
+        }
+        //4 - List of Video/ Audio learning resources
+        else if (pageNumber == 4)
+        {
+            CreateHeaderText(null, null, "Video and Audio Resources");
+            EditButton.SetActive(false);
+            CreateButton("Continue",
+            delegate
+            {
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //5 - List of Paper/ Article/ Blog learning resources
+        else if (pageNumber == 5)
+        {
+            CreateHeaderText(null, null, "Paper, Article & Blog Resources");
+            EditButton.SetActive(false);
+            CreateButton("Continue",
+            delegate
+            {
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //6 - List of Free Courses/ Self-Assessment learning resources
+        else if (pageNumber == 6)
+        {
+            CreateHeaderText(null, null, "Free Courses and Self-Assessment Learning Resources");
+            EditButton.SetActive(false);
+            CreateButton("Continue",
+            delegate
+            {
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //7 - List of Mini Games learning resources
+        else if (pageNumber == 7)
+        {
+            CreateHeaderText(null, null, "Mini-Game Resources");
+            EditButton.SetActive(false);
+            CreateButton("Continue",
+            delegate
+            {
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //8 - Skill definition screen
+        else if (pageNumber == 8)
+        {
+            //TODO: Add in the skill definition etc; this will be dependant on the skill that is selected.
+        }
+        //9 - BROWSE PHYSICAL PRACTICE OPTIONS - THIS WON'T BE AVAILABLE RIGHT AWAY (LOCATION-BASED SERVICES)
+        else if (pageNumber == 9)
+        {
+            //will add in due course
+        }
+        //10 - Add Own Learning Resource - Type of Learning Resource
+        else if (pageNumber == 10)
+        {
+            //will add in due course
+        }
+        //11 - Add Own Learning Resource - Details of Learning Resource
+        else if (pageNumber == 11)
+        {
+            //will add in due course
+        }
+        //12 - Add Own Learning Resource - Confirmation of custom Learning Resource
+        else if (pageNumber == 12)
+        {
+            //will add in due course
+        }
+    }
+
     public void CaptureDate(ref System.DateTime dataItem, ContentDataIdentiferUI _dataSource)
     {
         dataItem = _dataSource.GetDate();
