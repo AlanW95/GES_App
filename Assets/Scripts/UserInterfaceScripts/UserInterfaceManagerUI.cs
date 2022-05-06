@@ -25,7 +25,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public GameObject CalanderScreen;
     public GameObject FilesScreen;
     public GameObject DreamJobScreen;
-    public GameObject LearningResourcesScreen;
+    //public GameObject LearningResourcesScreen;
 
 
     public GameObject Add_SubMenu;
@@ -153,7 +153,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     public void Close_SkillLevelDrawer() { SkillLevelDrawerScreen.SetActive(false); BannerBottom.SetActive(true); }
     public void Open_AddDreamJob() { ChangeWindow(AddDreamJobScreen); Configure_Top_Banner(false, false, "Dream Jobs", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
     public void Open_MyDreamJob() { ChangeWindow(DreamJobScreen); Configure_Top_Banner(false, false, "My Dream Job", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
-    public void Open_LearningResources() { ChangeWindow(LearningResourcesScreen); Configure_Top_Banner(false, false, "Learning Resources", delegate { ChangeWindow(HomeScreen); }, null, null); BannerTop_Secondary_Button.gameObject.SetActive(false); }
+    public void Open_LearningResources() { ChangeWindow(AddEditInformationScreen); Configure_Top_Banner(false, false, "Learning Resources", delegate { ChangeWindow(HomeScreen); }, null, null); AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddPracticeSkills(1); BannerTop_Secondary_Button.gameObject.SetActive(false); }
 
 
         public void Open_Add_SubMenu(bool forceClose = false) 

@@ -18,6 +18,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public GameObject ButtonPrefab;
     public GameObject SkillLevelSelectPrefab;
     public GameObject SpaceFiller;
+    public GameObject WorkCoachPrefab;
+    public GameObject DropDownSkillsPrefab;
 
     public GameObject DisplayContentTextPrefabGroup;
     public GameObject DisplayContentTextPrefabItem;
@@ -276,8 +278,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else if (pageNumber == 5)
         {
-            CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
+            CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, null);
             EditButton.SetActive(false);
+            CreateWorkCoach(null, "Please check all the information for your skill before proceeding!");
+            //CreateSkillsDropDown(); //JUST FOR TESTING PURPOSES
             CreateDisplayGroup("");
             CreateDisplayGroup("<b><u>Skill</b></u>");
             /*StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));*/
@@ -876,7 +880,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public void AddPracticeSkills(int pageNumber)
     {
         DestroyCurrentScreens();
-        int totalPages = 11;
+        int totalPages = 12;
 
         /*
          * Pages
@@ -902,8 +906,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             EditButton.SetActive(false);
 
             CreateHeaderText(null, null, "How do you want to practice your desired skills?");
+            CreateWorkCoach(null, "Practice makes perfect! For the time being, you can view internal learning resources with more physical practice options coming soon!");
+
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255); //add 7 because page 8
+            CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
         }
         else
         {
@@ -914,25 +920,34 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             EditButton.SetActive(false);
             //TODO: ADD WORK COACH IMAGE TO REPLACE THE HEADERTEXT
-            CreateHeaderText(null, null, "Which skills would you like to learn?");
+            CreateWorkCoach(null, "Which skills would you like to learn?");
+            //CreateHeaderText(null, null, "Which skills would you like to learn?");
 
-            //TODO: ADD DROPDOWN OF SKILLS FROM REPOSITORY
+            CreateSkillsDropDown();
 
             CreateButton("Continue", delegate
             {
+                //TODO: GET DROPDOWN SELECTED VALUE
+                /*GameObject findLabel1 = DropDownSkillsPrefab.Find("Label");
+                Transform findLabel = DropDownSkillsPrefab.transform.Find("Label");*/
+                //string selectedSkill = DropDownSkillsPrefab.transform.Find("Label").GetComponent<TMP_Text>().text;
+                //string selectedSkill = findLabel.GetComponent<TMP_Text>().text;
+                //string selectedSkill = DropDownSkillsPrefab.transform.GetComponentInChildren<TMP_Text>().text;
+                Debug.Log(selectedSkill);
                 AddPracticeSkills(pageNumber + 1);
             }, 255, 255, 255, 255, 255, 255);
             
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Yes, I want to contribute a resource", delegate
+            CreateButton("Yes, I want to contribute my own resource", delegate
             {
                 AddPracticeSkills(pageNumber + 7);
-            }, 255, 255, 255, 255, 255, 255);
+            }, 255, 255, 255, 255, 255, 255, interactableCheck: false);
         }
         //3 - Learning Resources - choose type of learning resource
         else if (pageNumber == 3)
         {
-            CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            CreateWorkCoach(null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            //CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
             EditButton.SetActive(false);
             CreateButton("Videos/ Audio", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Papers/ Articles/ Blogs", delegate { AddPracticeSkills(pageNumber + 2); }, 255, 255, 255, 255, 255, 255);
@@ -944,7 +959,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //4 - List of Video/ Audio learning resources
         else if (pageNumber == 4)
         {
-            CreateHeaderText(null, null, "Video and Audio Resources");
+            CreateWorkCoach(null, "Here is a selection of videos and/ or audio for <SKILL>");
+            //CreateHeaderText(null, null, "Video and Audio Resources");
             EditButton.SetActive(false);
             CreateButton("Continue",
             delegate
@@ -955,7 +971,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //5 - List of Paper/ Article/ Blog learning resources
         else if (pageNumber == 5)
         {
-            CreateHeaderText(null, null, "Paper, Article & Blog Resources");
+            CreateWorkCoach(null, "Here is a selection of papers, articles & blog resources for <SKILL>");
+            //CreateHeaderText(null, null, "Paper, Article & Blog Resources");
             EditButton.SetActive(false);
             CreateButton("Continue",
             delegate
@@ -966,7 +983,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //6 - List of Free Courses/ Self-Assessment learning resources
         else if (pageNumber == 6)
         {
-            CreateHeaderText(null, null, "Free Courses and Self-Assessment Learning Resources");
+            CreateWorkCoach(null, "Here is a selection of free courses and self-assessment learning resources.");
+            //CreateHeaderText(null, null, "Free Courses and Self-Assessment Learning Resources");
             EditButton.SetActive(false);
             CreateButton("Continue",
             delegate
@@ -977,7 +995,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //7 - List of Mini Games learning resources
         else if (pageNumber == 7)
         {
-            CreateHeaderText(null, null, "Mini-Game Resources");
+            CreateWorkCoach(null, "Here is a selection of mini game resources");
+            //CreateHeaderText(null, null, "Mini-Game Resources");
             EditButton.SetActive(false);
             CreateButton("Continue",
             delegate
@@ -1098,6 +1117,22 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     //{
     //    dataSource = _contentSciptID._inputField;
     //}
+
+    public void CreateWorkCoach(Image image, string speech)
+    {
+        Image workCoachImage = WorkCoachPrefab.transform.GetComponentInChildren<Image>();
+        workCoachImage = image;
+
+        TMP_Text speechText = WorkCoachPrefab.transform.GetComponentInChildren<TMP_Text>();
+        speechText.text = speech;
+
+        CreatePrefab(WorkCoachPrefab);
+    }
+
+    public void CreateSkillsDropDown()
+    {
+        CreatePrefab(DropDownSkillsPrefab);
+    }
 
     public void CreateHeaderText(string header, string pageNumberMax, string content)
     {
@@ -1237,7 +1272,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         return _buttonCreated;
     }
 
-    public Transform CreateButton(string content, UnityAction _event, float r, float g, float b, float tr, float tg, float tb, bool overrideCheck = true)
+    public Transform CreateButton(string content, UnityAction _event, float r, float g, float b, float tr, float tg, float tb, bool overrideCheck = true, bool interactableCheck = true)
     {
         Transform ButtonHolder = CreatePrefab(EditButtonPrefab);
         ButtonHolder.GetComponent<HorizontalLayoutGroup>().padding.bottom = 0;
@@ -1248,6 +1283,15 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         _buttonCreated.GetComponent<Button>().onClick.AddListener(_event);
         if (overrideCheck)
             ContinueButton = _buttonCreated.GetComponent<Button>();
+
+        if (interactableCheck)
+        {
+            _buttonCreated.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            _buttonCreated.GetComponent<Button>().interactable = false;
+        }
         return _buttonCreated;
     }
 
