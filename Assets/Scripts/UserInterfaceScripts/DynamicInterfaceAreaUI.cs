@@ -54,10 +54,21 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public AccountManager accountManager;
     public UserInterfaceManagerUI userInterfaceManager;
     public SkillsInfo skillInfoManager;
+    public SkillsRepository skillsRepositoryManager;
     public DreamJobInfo dreamJobInfoManager;
 
     [SerializeField]
-    private TMP_InputField selectedSkill;
+    private GameObject selectedDropDownSkillObject;
+    private TMP_Dropdown selectedSkill;
+    private string selectedSkillName;
+    private int dropdownValue;
+
+    private string learningSkill;
+    private string learningSkillDefinition;
+    private string videoAudio;
+    private string paperArticleBlog;
+    private string freeCourses;
+    private string miniGames;
 
     private void Awake()
     {
@@ -927,13 +938,14 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
             CreateButton("Continue", delegate
             {
-                //TODO: GET DROPDOWN SELECTED VALUE
-                /*GameObject findLabel1 = DropDownSkillsPrefab.Find("Label");
-                Transform findLabel = DropDownSkillsPrefab.transform.Find("Label");*/
-                //string selectedSkill = DropDownSkillsPrefab.transform.Find("Label").GetComponent<TMP_Text>().text;
-                //string selectedSkill = findLabel.GetComponent<TMP_Text>().text;
-                //string selectedSkill = DropDownSkillsPrefab.transform.GetComponentInChildren<TMP_Text>().text;
-                Debug.Log(selectedSkill);
+                GameObject prefab = GameObject.Find("SkillsListPrefab(Clone)");
+                selectedSkill = prefab.GetComponentInChildren<TMP_Dropdown>();
+                //selectedSkill = DropDownSkillsPrefab.GetComponentInChildren<TMP_Dropdown>();
+                dropdownValue = selectedSkill.value;
+                Debug.Log(dropdownValue);
+                selectedSkillName = selectedSkill.options[selectedSkill.value].text;
+                Debug.Log(selectedSkillName);
+
                 AddPracticeSkills(pageNumber + 1);
             }, 255, 255, 255, 255, 255, 255);
             
@@ -946,7 +958,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //3 - Learning Resources - choose type of learning resource
         else if (pageNumber == 3)
         {
-            CreateWorkCoach(null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            CreateWorkCoach(null, "There are various resources available for "+ selectedSkillName + ", choose a type of resource you wish to continue with to learn more about your preferred skill.");
             //CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
             EditButton.SetActive(false);
             CreateButton("Videos/ Audio", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
@@ -959,8 +971,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //4 - List of Video/ Audio learning resources
         else if (pageNumber == 4)
         {
-            CreateWorkCoach(null, "Here is a selection of videos and/ or audio for <SKILL>");
+            CreateWorkCoach(null, "Here is a selection of videos and/ or audio for " + selectedSkillName + ".");
             //CreateHeaderText(null, null, "Video and Audio Resources");
+            GetSkillsLearning(dropdownValue);
+            CreateDisplayGroup("<br><br><br>" + videoAudio);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             EditButton.SetActive(false);
             CreateButton("Continue",
             delegate
@@ -1007,7 +1022,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //8 - Skill definition screen
         else if (pageNumber == 8)
         {
-            //TODO: Add in the skill definition etc; this will be dependant on the skill that is selected.
+            GetSkillsLearning(dropdownValue);
+            CreateWorkCoach(null, "Find below the definition of " + learningSkill + ".");
+            CreateDisplayGroup("<br><br><br>Definition:<br><br>" + learningSkillDefinition);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Return", delegate { AddPracticeSkills(pageNumber - 5); }, 255, 255, 255, 255, 255, 255);
+
         }
         //9 - BROWSE PHYSICAL PRACTICE OPTIONS - THIS WON'T BE AVAILABLE RIGHT AWAY (LOCATION-BASED SERVICES)
         else if (pageNumber == 9)
@@ -1731,5 +1751,272 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     {
         SkillItemExtension.transform.GetComponentInChildren<TMP_Text>().text = content;
         CreatePrefab(SkillItemExtension, _holder);
+    }
+
+    public void GetSkillsLearning(int index)
+    {
+        //TODO: Add in the skill definition etc; this will be dependant on the skill that is selected.
+        //Max is 61
+
+        switch (index)
+        {
+            case 0:
+                learningSkill = "Ability to accept Criticism";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                videoAudio = "No video or audio resources are available at this time. Coming soon.";
+                paperArticleBlog = "No paper, article, or blog resources are available at this time. Coming soon.";
+                freeCourses = "No free courses or self assessment resources are available at this time. Coming soon.";
+                miniGames = "No mini game resources are available at this time. Coming soon.";
+                break;
+            case 1:
+                learningSkill = "Active Listening to Others";
+                learningSkillDefinition = "Active listening involves listening with all senses, focusing on the verbal and non-verbal communication of the person who is speaking, and demonstrating that you are engaged with the conversation. It is the process of listening attentively while someone else speaks without inturrupting, and then paraphrasing and reflecting back what is said, and withholding judgment and advice.";
+                videoAudio = "<link='https://open.spotify.com/episode/3otb0ywmfUEQjok2w1on1q?si=mhqviIuERBCPQ8maJGsyqw&nd=1'>https://open.spotify.com/episode/3otb0ywmfUEQjok2w1on1q?si=mhqviIuERBCPQ8maJGsyqw&nd=1</link>";
+                break;
+            case 2:
+                learningSkill = "Adaptability";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 3:
+                learningSkill = "Analytical Thinking";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 4:
+                learningSkill = "Applied Knowledge";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 5:
+                learningSkill = "Approachableness";
+                learningSkillDefinition = "Ability to engage involving or encouraging friendliness or pleasant companionship with other people.";
+                break;
+            case 6:
+                learningSkill = "Argumentation/ Discussion Skills";
+                learningSkillDefinition = "The ability to to <b>interact and respond to what other people are saying</b>. Talking with confidence and letting others speak without inturrpution or talking over them. Building on what others say, by critical thinking and asking thoughtful questions.";
+                break;
+            case 7:
+                learningSkill = "Attention to Detail";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 8:
+                learningSkill = "Authenticity";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 9:
+                learningSkill = "Business and Commercial Awareness";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 10:
+                learningSkill = "Career Management";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 11:
+                learningSkill = "Communicativeness";
+                learningSkillDefinition = "Ability to conduct effective and efficient communication which includes getting your message across clearly and managing challenging conversations with positive outcomes.";
+                break;
+            case 12:
+                learningSkill = "Confidence";
+                learningSkillDefinition = "Ability to trust in your own judgment, capacities and abilities, not with arrogance but in a realistic and secure way.";
+                break;
+            case 13:
+                learningSkill = "Confidentiality";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 14:
+                learningSkill = "Conflict Resolution";
+                learningSkillDefinition = "Ability to remain calm, non-defensive and respectful during conflict. It involves having the capacity to empathize with other’s viewpoint, and having the ability to seek compromise and collaboration.";
+                break;
+            case 15:
+                learningSkill = "Creative/ Innovative Thinking";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 16:
+                learningSkill = "Critical Thinking";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 17:
+                learningSkill = "Customer Service";
+                learningSkillDefinition = "Ability to provide support to both prospective and existing customers with Professionalism, Patience and ‘People First’ attitude.";
+                break;
+            case 18:
+                learningSkill = "Decision Making";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 19:
+                learningSkill = "Digital Literacy";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 20:
+                learningSkill = "Diplomacy";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 21:
+                learningSkill = "Discipline";
+                learningSkillDefinition = "The way of effective fulfilling tasks, where person is able to control themselves to act in accordance with expectations, sticks to the plan, is resistant to situational and environmental factors and is able to complete the task of action. ";
+                break;
+            case 22:
+                learningSkill = "Flexibility";
+                learningSkillDefinition = "Easy and hassle free adjusting to changes in plans, tasks at work. ";
+                break;
+            case 23:
+                learningSkill = "Good Judgement";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 24:
+                learningSkill = "Growth Orientation";
+                learningSkillDefinition = "Growth-orientation is a disposition of self-improvement by setting new and challenging goals for oneself. It is associated with a growth mindset, which means believing that one’s skills can improve over time thanks to hard work. ";
+                break;
+            case 25:
+                learningSkill = "Independence at Work";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 26:
+                learningSkill = "Initiative";
+                learningSkillDefinition = "Independent setting of tasks and goals at work, doing things without being asked, solving not obvious problems and undertaking own actions and activities.";
+                break;
+            case 27:
+                learningSkill = "Leadership";
+                learningSkillDefinition = "Leadership is the ability to motivate a group of people to act toward achieving a common goal. It involves setting direction, building an inspiring vision, and creating something new. Leadership is about mapping out where you need to go to succeed as a team or an organization; and it is dynamic, exciting, and inspiring.";
+                break;
+            case 28:
+                learningSkill = "Listening";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 29:
+                learningSkill = "Logical Reasoning";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 30:
+                learningSkill = "Multitasking";
+                learningSkillDefinition = "Easily switching attention and focus between task which makes an impression of working on a multiple tasks in the same time and leads to their effective fulfillments simultaneously.";
+                break;
+            case 31:
+                learningSkill = "Patience";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 32:
+                learningSkill = "Persistance";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 33:
+                learningSkill = "Planning";
+                learningSkillDefinition = "The process of preparing the list of tasks and making decisions about the number and order of actions, their timeline, and ways of realization to achieve a proper and correct fulfillment of project or complex tasks.";
+                break;
+            case 34:
+                learningSkill = "Presentation Skills";
+                learningSkillDefinition = "Presenting information about yourself, your work and your viewpoint clearly and effectively.";
+                break;
+            case 35:
+                learningSkill = "Prioritising";
+                learningSkillDefinition = "Determining the order of execution of tasks, the amount of time devoted to them based on their importance, urgency as well as time and personnel resources.";
+                break;
+            case 36:
+                learningSkill = "Problem Solving";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 37:
+                learningSkill = "Project Management";
+                learningSkillDefinition = "Project management is primarily: planning, management and control skills.";
+                break;
+            case 38:
+                learningSkill = "Propriety/ Personal Culture";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 39:
+                learningSkill = "Providing Feedback";
+                learningSkillDefinition = "The ability to give effective feedback that is timely, specific, realistic and balanced while being supportive.";
+                break;
+            case 40:
+                learningSkill = "Punctuality";
+                learningSkillDefinition = "Punctuality means being on time: both to work and on deadlines.";
+                break;
+            case 41:
+                learningSkill = "Reading";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 42:
+                learningSkill = "Research Skills";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 43:
+                learningSkill = "Responsibility/ Commitment";
+                learningSkillDefinition = "Responsibility can be defined as a high level of commitment to one’s duties. Being responsible means taking accountability for one’s actions, words, and performance at work.";
+                break;
+            case 44:
+                learningSkill = "Self-Awareness";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 45:
+                learningSkill = "Self-Motivation";
+                learningSkillDefinition = "Self-motivation is the internal state that helps you initiate and continue a goal-oriented activity, despite obstacles, until it is completed.";
+                break;
+            case 46:
+                learningSkill = "Self-Presentation";
+                learningSkillDefinition = "Self-presentation is behavior with which people try to affect how they are perceived and judged by others; much social behavior is influenced by self-presentational motives and goals (Miller & Rowland, 2019).";
+                break;
+            case 47:
+                learningSkill = "Self-Reflection";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 48:
+                learningSkill = "Sense of Humor";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 49:
+                learningSkill = "Social Media Management";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 50:
+                learningSkill = "Speaking";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 51:
+                learningSkill = "Speaking Fluency";
+                learningSkillDefinition = "Ability to speak easily, reasonably quickly and without having to stop and pause a lot in your language of communication.";
+                break;
+            case 52:
+                learningSkill = "Specialistic Industry Skills";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 53:
+                learningSkill = "Stamina";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 54:
+                learningSkill = "Statistical Skills";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 55:
+                learningSkill = "Stress Management";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 56:
+                learningSkill = "Teamwork";
+                learningSkillDefinition = "Teamwork is the collaborative effort of a group to achieve a common goal or to complete a task in the most effective and efficient way.";
+                break;
+            case 57:
+                learningSkill = "Time Management";
+                learningSkillDefinition = "Time management refers to the planning, prioritizing, and scheduling of tasks to create work efficiency in an environment of competing demands.";
+                break;
+            case 58:
+                learningSkill = "Work Ethic";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 59:
+                learningSkill = "Work Under Pressure";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 60:
+                learningSkill = "Writing";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+            case 61:
+                learningSkill = "Writing Skills";
+                learningSkillDefinition = "Having knowledge of writing structure and ability to effectively communicate your ideas through writing with your target audience in mind (e.g. informal, formal and technical writing).";
+                break;
+            default:
+                learningSkill = "Ability to accept Criticism";
+                learningSkillDefinition = "No skill definition available. Coming soon.";
+                break;
+        }
     }
 }
