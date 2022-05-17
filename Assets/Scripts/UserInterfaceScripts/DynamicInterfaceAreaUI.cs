@@ -20,6 +20,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public GameObject SpaceFiller;
     public GameObject WorkCoachPrefab;
     public GameObject DropDownSkillsPrefab;
+    public GameObject EditURLButtonPrefab;
+    public GameObject URLButtonPrefab;
 
     public GameObject DisplayContentTextPrefabGroup;
     public GameObject DisplayContentTextPrefabItem;
@@ -1167,6 +1169,52 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         CreatePrefab(HeaderTextHolder);
     }
 
+    public void CreateURLButtons(List<string> contents, List<UnityAction> _events)
+    {
+        Transform ButtonHolder = CreatePrefab(EditURLButtonPrefab);
+
+        for (int i = 0; i < contents.Count; i++)
+        {
+            Transform _button = CreateURLButton(contents[i], _events[i]);
+        }
+    }
+
+    public Transform CreateURLButton(string content, UnityAction _event)
+    {
+        Transform ButtonHolder = CreatePrefab(EditURLButtonPrefab);
+        ButtonHolder.GetComponent<HorizontalLayoutGroup>().padding.bottom = 0;
+        URLButtonPrefab.GetComponentInChildren<TMP_Text>().text = content;
+        Transform _buttonCreated = CreatePrefab(URLButtonPrefab, ButtonHolder);
+        _buttonCreated.GetComponent<Button>().onClick.AddListener(_event);
+        return _buttonCreated;
+    }
+
+    /*public void CreateURLText(string text, string url)
+    {
+        URLButtonPrefab.GetComponentInChildren<TMP_Text>().text = text;
+        //URLButtonPrefab.GetComponent<Button>().onClick
+
+        Transform URLButtonHolder = CreatePrefab(EditURLButtonPrefab);
+
+        *//*public void CreateButtons(List<string> contents, List<UnityAction> _events)
+        {
+            
+        }*/
+
+    /*Transform ButtonHolder = CreatePrefab(EditButtonPrefab);
+
+    for (int i = 0; i < contents.Count; i++)
+    {
+        Transform _button = CreateButton(contents[i], _events[i], 255, 255, 255, 255, 255, 255, false);
+        //Debug.Log(_button.name + i);
+        if (i == 0)
+            ContinueButton = _button.GetComponent<Button>();
+        //ButtonPrefab.GetComponentInChildren<TMP_Text>().text = contents[i];
+        //ButtonPrefab.GetComponent<Button>().onClick.AddListener(_events[i]);
+        //CreatePrefab(ButtonPrefab, ButtonHolder);
+    }*//*
+}*/
+
     private ContentDataIdentiferUI CreateEditInformationContent(string information, string defaultData, TMP_InputField.ContentType _contentType, bool requireInput = true, int _characterLimit = 0)
     {
         EditSingleDetailPrefab.GetComponentInChildren<TMP_Text>().text = information;
@@ -1771,7 +1819,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             case 1:
                 learningSkill = "Active Listening to Others";
                 learningSkillDefinition = "Active listening involves listening with all senses, focusing on the verbal and non-verbal communication of the person who is speaking, and demonstrating that you are engaged with the conversation. It is the process of listening attentively while someone else speaks without inturrupting, and then paraphrasing and reflecting back what is said, and withholding judgment and advice.";
-                videoAudio = "<link='https://open.spotify.com/episode/3otb0ywmfUEQjok2w1on1q?si=mhqviIuERBCPQ8maJGsyqw&nd=1'>https://open.spotify.com/episode/3otb0ywmfUEQjok2w1on1q?si=mhqviIuERBCPQ8maJGsyqw&nd=1</link>";
+                //TODO: NEED TO SPLIT THIS DEPENDING ON BUTTON PRESSED FOR RESOURCE
+                CreateURLButton("The Verywell Mind Podcast with Amy Morin on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/3otb0ywmfUEQjok2w1on1q?si=mhqviIuERBCPQ8maJGsyqw&nd=1"); });
                 break;
             case 2:
                 learningSkill = "Adaptability";
