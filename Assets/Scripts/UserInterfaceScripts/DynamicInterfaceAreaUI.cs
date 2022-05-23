@@ -1069,6 +1069,152 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
     }
 
+    //-------------------------------------------------------
+
+    #region Employment Readiness
+
+    public void AddEmploymentReadiness(int pageNumber)
+    {
+        DestroyCurrentScreens();
+        int totalPages = 6;
+
+        /*
+         * Pages
+         * 1 - Employment Readiness
+         * 2 - Create CV
+         * 3 - Exporting CV Data
+         * 4 - Create CV (displayed information)
+         * 5 - Practice Interview
+         * 6 - Practice Interview Resource list, depending on what was selected before
+         */
+        //1 - Employment Readiness
+        if (pageNumber == 1)
+        {
+            Configure_Top_Banner(false, true, "Employment Readiness", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
+            EditButton.SetActive(false);
+
+            CreateWorkCoach(null, "Choose an option to prepare yourself for applying for a job.");
+
+            CreateButton("Create CV", delegate { AddEmploymentReadiness(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Practice Interview", delegate { AddEmploymentReadiness(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
+            //TODO: Check button below about what this does? Also remember to change the pageNumber + ? if needed.
+            //CreateButton("Job Search", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false);
+        }
+        else
+        {
+            Configure_Top_Banner(false, false, "Employment Readiness", delegate { AddPracticeSkills(pageNumber - 1); }, null, null);
+        }
+        //2 - Create CV
+        if (pageNumber == 2)
+        {
+            EditButton.SetActive(false);
+
+            CreateWorkCoach(null, "Choose information you want to add to your CV.");
+            CreateHeaderText(null, null, "This information will be exported in a text file and saved to your device.");
+
+            //ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
+            //ContentDataIdentiferUI _toggleHolderSkills = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
+            //CreateSkillsDisplayContent();
+
+            //List<SkillData> _skillData;
+            //List<string> _data = new List<string>();
+            for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
+            {
+                //CreateSkillDisplayItem(accountManager.localUserAccount._skills[i]);
+
+                ContentDataIdentiferUI _toggleHolderSkills = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), getDatabaseSkills(accountManager.localUserAccount._skills), false);
+            }
+
+            CreateButton("Add", delegate
+            {
+                /*ContentDataIdentiferUI[] _listItemsSkills = _toggleHolderSkills.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItemsSkills.Length; i++)
+                {
+                    if (_listItemsSkills[i]._toggleItem != null && _listItemsSkills[i]._toggleItem.isOn)
+                        _addNewArtifactData.Skills.Add(_listItemsSkills[i]._ToggleItemName.text);
+                }*/
+            }, 255, 255, 255, 255, 255, 255);
+
+            /*CreateSkillsDropDown();
+
+            CreateButton("Continue", delegate
+            {
+                GameObject prefab = GameObject.Find("SkillsListPrefab(Clone)");
+                selectedSkill = prefab.GetComponentInChildren<TMP_Dropdown>();
+                //selectedSkill = DropDownSkillsPrefab.GetComponentInChildren<TMP_Dropdown>();
+                dropdownValue = selectedSkill.value;
+                Debug.Log(dropdownValue);
+                selectedSkillName = selectedSkill.options[selectedSkill.value].text;
+                Debug.Log(selectedSkillName);
+
+                AddPracticeSkills(pageNumber + 1);
+            }, 255, 255, 255, 255, 255, 255);*/
+        }
+        //3 - Learning Resources - choose type of learning resource
+        else if (pageNumber == 3)
+        {
+            CreateWorkCoach(null, "There are various resources available for <b>" + selectedSkillName + "</b>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            //CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            EditButton.SetActive(false);
+            CreateButton("Videos/ Audio", delegate { videoAudio = true; paperArticleBlog = false; freeCourses = false; miniGames = false; AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Papers/ Articles/ Blogs", delegate { videoAudio = false; paperArticleBlog = true; freeCourses = false; miniGames = false; AddPracticeSkills(pageNumber + 2); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Free Courses/ Self Assessment", delegate { videoAudio = false; paperArticleBlog = false; freeCourses = true; miniGames = false; AddPracticeSkills(pageNumber + 3); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Mini Games", delegate { videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = true; AddPracticeSkills(pageNumber + 4); }, 255, 255, 255, 255, 255, 255);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Skill Details", delegate { AddPracticeSkills(pageNumber + 5); }, 255, 255, 255, 255, 255, 255);
+        }
+        //4 - List of Video/ Audio learning resources
+        else if (pageNumber == 4)
+        {
+            Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 1); }, null, null);
+            CreateWorkCoach(null, "Here is a selection of videos and/ or audio for <b>" + selectedSkillName + "</b>.");
+            //CreateHeaderText(null, null, "Video and Audio Resources");
+            GetSkillsLearning(dropdownValue);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            EditButton.SetActive(false);
+            CreateButton("Return",
+            delegate
+            {
+                videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = false;
+                AddPracticeSkills(pageNumber - 1);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //5 - List of Paper/ Article/ Blog learning resources
+        else if (pageNumber == 5)
+        {
+            Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 2); }, null, null);
+            CreateWorkCoach(null, "Here is a selection of papers, articles & blog resources for <b>" + selectedSkillName + "</b>.");
+            //CreateHeaderText(null, null, "Paper, Article & Blog Resources");
+            GetSkillsLearning(dropdownValue);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            EditButton.SetActive(false);
+            CreateButton("Return",
+            delegate
+            {
+                videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = false;
+                AddPracticeSkills(pageNumber - 2);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+        //6 - List of Free Courses/ Self-Assessment learning resources
+        else if (pageNumber == 6)
+        {
+            Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 3); }, null, null);
+            CreateWorkCoach(null, "Here is a selection of free courses and self-assessment learning resources for <b>" + selectedSkillName + "</b>.");
+            //CreateHeaderText(null, null, "Free Courses and Self-Assessment Learning Resources");
+            GetSkillsLearning(dropdownValue);
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            EditButton.SetActive(false);
+            CreateButton("Return",
+            delegate
+            {
+                videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = false;
+                AddPracticeSkills(pageNumber - 3);
+            }, 255, 255, 255, 255, 255, 255);
+        }
+    }
+
+    #endregion Employment Readiness
+
     public void CaptureDate(ref System.DateTime dataItem, ContentDataIdentiferUI _dataSource)
     {
         dataItem = _dataSource.GetDate();
@@ -2800,103 +2946,634 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             case 38:
                 learningSkill = "Propriety/ Personal Culture";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
-                //TODO: CONTINUE FROM HERE
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 39:
                 learningSkill = "Providing Feedback";
                 learningSkillDefinition = "The ability to give effective feedback that is timely, specific, realistic and balanced while being supportive.";
+                if (videoAudio)
+                {
+                    CreateURLButton("The Essentials: Giving Feedback<br><b>Podcast</b><br>Women at Work on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/2fwDfXGTkY2duM53rqCXTM"); });
+                    CreateURLButton("Ep.8: How to Give Feedback to Your Boss<br><b>Podcast</b><br>Radical Candor on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/6xZNH0bFI6GrV3LLDuflo7"); });
+                    CreateURLButton("3 Simple Steps for How to Give Feedback that Improves your Team<br><b>Podcast</b><br>Creating High Performing Teams on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/0usmeFMCNBHKNm02cBWHCY"); });
+                    CreateURLButton("Feedback Made Easy: Mastering the skill of giving feedback to your team<br><b>Podcast</b><br>No Bullsh!t Leadership on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/0FpLxSkkicdpBVhT1n2vvq"); });
+                    CreateURLButton("Providing Effective Feedback<br><b>Podcast</b><br>Healthcare Communication on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/2joA9s7L2GuwC9cyVyC2xd"); });
+                    CreateURLButton("Give Better Feedback<br><b>Podcast</b><br>The Insightful Leader on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/6qZjLsReTMv2rB6u0cg6KZ"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("How to Respond to a Bad Performance Review<br><b>Article</b><br>Dawn Rosenberg McKay, The Balance Careers", delegate { Application.OpenURL("https://www.thebalancecareers.com/bad-performance-review-524880"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 40:
                 learningSkill = "Punctuality";
                 learningSkillDefinition = "Punctuality means being on time: both to work and on deadlines.";
+                if (videoAudio)
+                {
+                    CreateURLButton("What is Punctuality | Explained in 2 min<br><b>Video</b><br>Productivity Guy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=Nvh16ao_D9Q"); });
+                    CreateURLButton("5 Tips To Being Punctual<br><b>Video</b><br>Tero Trainers on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=opOu6N103sQ"); });
+                    CreateURLButton("How to Avoid Being Late for School or Work >> 10 Tips to Be On Time<br><b>Video</b><br>Ways To Grow on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=1KwmSENS0qk"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("Punctuality | Career Advice<br><b>Article</b><br>Robert Half Talent Solutions", delegate { Application.OpenURL("https://www.roberthalf.com.au/career-advice/career-development/punctuality-skills"); });
+                    CreateURLButton("12 Tips for Being Punctual - How to Be On Time<br><b>Article</b><br>Marelisa, Daring to Live Fully", delegate { Application.OpenURL("https://daringtolivefully.com/tips-for-being-punctual"); });
+                    CreateURLButton("How to Be On Time Every Time<br><b>Article</b><br>Dustin Wax, Lifehack", delegate { Application.OpenURL("https://www.lifehack.org/articles/featured/how-to-be-on-time-every-time.html"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 41:
                 learningSkill = "Reading";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Elevate - Brain Training Games<br>Elevate Labs<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.wonder"); });
+                }
                 break;
             case 42:
                 learningSkill = "Research Skills";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 43:
                 learningSkill = "Responsibility/ Commitment";
                 learningSkillDefinition = "Responsibility can be defined as a high level of commitment to one’s duties. Being responsible means taking accountability for one’s actions, words, and performance at work.";
+                if (videoAudio)
+                {
+                    CreateURLButton("What Is Responsibility & Accountability At Work?<br><b>Video</b><br>Everything Sherry on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=42dLWo9v0HM"); });
+                    CreateURLButton("How To Be Responsible and Accountable by Jeff Muir<br><b>Video</b><br>Jeff Muir on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=rXgPNTgC0dQ"); });
+                    CreateURLButton("How To Hold Yourself Accountable (ACCOUNTABILITY FOR YOUR GOALS!)<br><b>Video</b><br>Howell Consultations on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=BSx7to7hT_w"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("Professionalism: Personal Responsibility<br><b>Article</b><br>Stefan Jacobson, Conover", delegate { Application.OpenURL("https://www.conovercompany.com/professionalism-personal-responsibility/"); });
+                    CreateURLButton("The Importance of Work Responsibility and How to Achieve More<br><b>Article</b><br>GlassDoor", delegate { Application.OpenURL("https://www.glassdoor.com/blog/guide/work-responsibility/"); });
+                    CreateURLButton("5 Tips on How to be a More Responsible Person<br><b>Article</b><br>Djordje Todorovic, Lifehack", delegate { Application.OpenURL("https://www.lifehack.org/378031/5-tips-how-more-responsible-person"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("5 Corporate Social Responsibility Courses you can take for free<br>Global Peace Careers", delegate { Application.OpenURL("https://globalpeacecareers.com/magazine/corporate-social-responsibility-courses/"); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("The Don't Do List<br>Feeling Game Company<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.feelinggame.no&hl=en&gl=US"); });
+                }
                 break;
             case 44:
                 learningSkill = "Self-Awareness";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 45:
                 learningSkill = "Self-Motivation";
                 learningSkillDefinition = "Self-motivation is the internal state that helps you initiate and continue a goal-oriented activity, despite obstacles, until it is completed.";
+                if (videoAudio)
+                {
+                    CreateURLButton("Importance of Self-Efficacy<br><b>Video</b><br>Transforming Education on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=VW5v6PQ5PEc"); });
+                    CreateURLButton("How To Stay Motivated - The Locus Rule<br><b>Video</b><br>Improvement Pill on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=8ZhoeSaPF-k"); });
+                    CreateURLButton("The psychology of self-motivation | Scott Geller | TedxVirginiaTech<br><b>Video</b><br>Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=7sxpKhIbr0E"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("Self Motivation: Staying Motivated to Reach Your Goals<br><b>Article</b><br>SoulSalt", delegate { Application.OpenURL("https://soulsalt.com/self-motivation/"); });
+                    CreateURLButton("Self-Motivation Explained + 10 Ways To Motivate Yourself<br><b>Article</b><br>Courtney E. Ackerman, MA., PositivePsychology.com", delegate { Application.OpenURL("https://positivepsychology.com/self-motivation/"); });
+                    CreateURLButton("Self-Motivation: Definition, Examples, and Tips<br><b>Article</b><br>Tchiki Davis, MA, PhD, Berkeley Well-Being Institute", delegate { Application.OpenURL("https://www.berkeleywellbeing.com/self-motivation.html"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("Motivation - Power Guide To Motivating Yourself & Others<br>Alison.com", delegate { Application.OpenURL("https://alison.com/course/motivation-power-guide-to-motivating-yourself-and-others"); });
+                    CreateURLButton("Introduction to Self-Determination Theory: An approach to motivation, development and wellness<br>Richard Ryan, Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/self-determination-theory"); });
+                    CreateURLButton("Motivation Mastery: How to get and stay Motivated<br>Skillshare, ClassCentral", delegate { Application.OpenURL("https://www.classcentral.com/course/skillshare-motivation-mastery-how-to-get-and-stay-motivated-34786"); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("What Are Self-Motivational Games and Their Types?<br>Medium.com", delegate { Application.OpenURL("https://medium.com/gameful-life/what-are-self-motivational-games-and-their-types-e2cb86fdcf5d"); });
+                    CreateURLButton("Pomodoro Technique<br>Wikipedia", delegate { Application.OpenURL("https://en.wikipedia.org/wiki/Pomodoro_Technique"); });
+                    CreateURLButton("Elevate - Brain Training Games<br>Elevate Labs<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.wonder"); });
+                    CreateURLButton("Make Me Better - Motivation App<br>Crafty Studio<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=app.story.craftystudio.shortstory&hl=en&gl=US"); });
+                }
                 break;
             case 46:
                 learningSkill = "Self-Presentation";
                 learningSkillDefinition = "Self-presentation is behavior with which people try to affect how they are perceived and judged by others; much social behavior is influenced by self-presentational motives and goals (Miller & Rowland, 2019).";
+                if (videoAudio)
+                {
+                    CreateURLButton("How to introduce yourself | Kevin Bahler | TedxLehighRiver<br><b>Video</b><br>Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=V1xt7zgnuK0"); });
+                    CreateURLButton("Self-Presentation... What is it?<br><b>Video</b><br>Psych2Go on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=OHlJNWDLWSY"); });
+                    CreateURLButton("PSY 2510 Social Psychology: Self-Presentation<br><b>Video</b><br>Frank M. LoSchiavo on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=sjzsTHmBZXo"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("Poselennova, O. A. ., Kovardakova , M. A. ., Aryabkina, I. V. ., Chernova , Y. A. ., & Ravodin, K. O. . (2021). Creative self-presentation skills among students in the educational process of a higher education institution. Revista Eduweb, 15(2), 208–228. https://doi.org/10.46502/issn.1856-7576/2021.15.02.17", delegate { Application.OpenURL("https://revistaeduweb.org/index.php/eduweb/article/view/377"); });
+                    CreateURLButton("Schlenker, B. R. (2012). Self-presentation. In M. R. Leary & J. P. Tangney (Eds.), Handbook of self and identity (pp. 542–570). The Guilford Press.", delegate { Application.OpenURL("https://psycnet.apa.org/record/2012-10435-025"); });
+                    CreateURLButton("Social Phobia: Diagnosis, Assessment, and Treatment<br><b>Book</b><br>Richard G. Heimberg, Google Books", delegate { Application.OpenURL("https://books.google.pl/books?id=rXrekuSy2bsC&lpg=PA94&ots=gTbL7jC_bk&dq=self%20presentation&lr&hl=pl&pg=PA96#v=onepage&q=self%20presentation&f=false"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("My Dreams: Self Improvement & Life Coach<br>Self Help Apps<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.MyDreams.MyDreams"); });
+                    CreateURLButton("Presentation Skills<br>MSPLDevelopers<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=quick.presentation.skills&hl=en&gl=US"); });
+                }
                 break;
             case 47:
                 learningSkill = "Self-Reflection";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 48:
                 learningSkill = "Sense of Humor";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 49:
                 learningSkill = "Social Media Management";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 50:
                 learningSkill = "Speaking";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 51:
                 learningSkill = "Speaking Fluency";
                 learningSkillDefinition = "Ability to speak easily, reasonably quickly and without having to stop and pause a lot in your language of communication.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("7 Tips And Activities To Promote Speaking Fluency With Your Adult ESL Students<br><b>Article</b><br>Everyday ESL Language Resources", delegate { Application.OpenURL("https://everydayesl.com/blog/speaking-fluency"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 52:
                 learningSkill = "Specialistic Industry Skills";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 53:
                 learningSkill = "Stamina";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 54:
                 learningSkill = "Statistical Skills";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 55:
                 learningSkill = "Stress Management";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("The Verywell Mind Podcast with Amy Morin<br><b>Podcast</b><br>Amy Morin on Spotify", delegate { Application.OpenURL("https://open.spotify.com/show/2WGnJfJon5RKU9bXBUSWHU"); });
+                    CreateURLButton("The Verywell Mind Podcast with Amy Morin (Video Version)<br><b>Podcast</b><br>Verywell Mind on Spotify", delegate { Application.OpenURL("https://open.spotify.com/show/1MP1aFuU65EHyIcCSPNiCB"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("The Art of Coping: Strategies and Skills to Help Your Clients Cope<br>Article<br>Jeremy Sutton, Ph.D., PositivePsychology.com", delegate { Application.OpenURL("https://positivepsychology.com/coping-strategies-skills/"); });
+                    CreateURLButton("What is Emotion Regluation? + 6 Emotional Skills and Strategies<br>Article<br>Madhuleena Roy Chowdhury, BA, PositivePsychology.com", delegate { Application.OpenURL("https://positivepsychology.com/emotion-regulation/"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Wysa: Anxiety, therapy chatbot<br>Touchkin<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=bot.touchkin&hl=en_GB&gl=US"); });
+                }
                 break;
             case 56:
                 learningSkill = "Teamwork";
                 learningSkillDefinition = "Teamwork is the collaborative effort of a group to achieve a common goal or to complete a task in the most effective and efficient way.";
+                if (videoAudio)
+                {
+                    CreateURLButton("Perfecting Teamwork: Building High-Performing Teams By Encouraging Learning<br><b>Podcast</b><br>Think Fast, Talk Smart: Communication Techniques on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/7pHpUwOMGOC2FXcikLvySt"); });
+                    CreateURLButton("Team Management | The No Bullsh*t Guide to Managing a Team<br><b>Podcast</b><br>The No Bullsh*t Guide to a Happier Life on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/2Q4j9UfVYbgYrJxxYvc5xQ"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("7 Important Teamwork Skills You Need in School and Your Career<br>Article<br>Herzing University", delegate { Application.OpenURL("https://www.herzing.edu/blog/7-important-teamwork-skills-you-need-school-and-your-career"); });
+                    CreateURLButton("Employability Skills<br>Article<br>Wigan & Leigh College", delegate { Application.OpenURL("https://libguides.wigan-leigh.ac.uk/c.php?g=667800&p=4736457"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Free Team Building Activities<br>TrainerBubble", delegate { Application.OpenURL("https://www.trainerbubble.com/downloads/category/free-training-resources/free-team-building-activities/"); });
+                }
                 break;
             case 57:
                 learningSkill = "Time Management";
                 learningSkillDefinition = "Time management refers to the planning, prioritizing, and scheduling of tasks to create work efficiency in an environment of competing demands.";
+                if (videoAudio)
+                {
+                    CreateURLButton("How to manage your time more effectively (according to machines) - Brian Christian<br><b>Video</b><br>Ted-Ed on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=iDbdXTMnOmE"); });
+                    CreateURLButton("Jordan Peterson's Ultimate Advice for Students and College Grads - STOP WASTING TIME<br><b>Video</b><br>Motivation2Study on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=wsNzAuYDgy0"); });
+                    CreateURLButton("How I Manage My Time - 10 Time Management Tips<br><b>Video</b><br>Ali Abdaal on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=iONDebHX9qk"); });
+                    CreateURLButton("Time Management<br><b>Video</b><br>Tutorials Point (India) Ltd. on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=KJLHlOIdqA4"); });
+                    CreateURLButton("The Philosophy of Time Management | Brad Aeon | TedxConcordia<br><b>Video</b><br>Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=WXBA4eWskrc"); });
+                    CreateURLButton("Timeboxing: Elon Musk's Time Management Method<br><b>Video</b><br>Thomas Frank on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=fbAYK4KQrso"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("6 time management techniques for time poor professionals<br><b>Article</b><br>Robert Half Talent Solutions", delegate { Application.OpenURL("https://www.roberthalf.com.au/blog/jobseekers/6-time-management-techniques-time-poor-professionals"); });
+                    CreateURLButton("Time Management Is About More Than Life Hacks<br><b>Article</b><br>Erich C. Dierdorff, Harvard Business Review", delegate { Application.OpenURL("https://hbr.org/2020/01/time-management-is-about-more-than-life-hacks"); });
+                    CreateURLButton("Articles on Time Management<br><b>Article(s)</b><br>MSG - Management Study Guide", delegate { Application.OpenURL("https://www.managementstudyguide.com/time-management-articles.htm"); });
+                    CreateURLButton("Time management skills that improve student learning<br><b>Blog</b><br>Australian Christian College", delegate { Application.OpenURL("https://www.acc.edu.au/blog/time-management-skills-student-learning/"); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("How to increase productivity at work<br>Google Digital Workshop", delegate { Application.OpenURL("https://learndigital.withgoogle.com/digitalworkshop-eu/course/increase-productivity"); });
+                    CreateURLButton("A Mini Course on Time Management<br>Udemy", delegate { Application.OpenURL("https://www.udemy.com/course/manageyourtime/"); });
+                    CreateURLButton("Time Management Courses<br>Alison.com", delegate { Application.OpenURL("https://alison.com/courses/personal-development/time-management"); });
+                    CreateURLButton("Work Smarter, Not Harder: Time Management for Personal & Professional Productivity<br>University of California, Irvine via Coursera, Class Central", delegate { Application.OpenURL("https://www.classcentral.com/course/worksmarter-2727"); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Game Dev Story<br>Kairosoft<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=net.kairosoft.android.gamedev3en"); });
+                    CreateURLButton("Cook It! - Cooking Games<br>Flowmotion Entertainment: Top Free Fun Addictive Cool Games Inc.<br>Apple App Store", delegate { Application.OpenURL("https://apps.apple.com/pl/app/cook-it-cooking-games/id1399688008?l=pl"); });
+                    CreateURLButton("MasterChef: Let's Cook!<br>Tilting Point LLC<br>Apple App Store", delegate { Application.OpenURL("https://apps.apple.com/pl/app/masterchef-lets-cook/id1536038028?l=pl"); });
+                    CreateURLButton("Focus City - Pomodoro Timer<br>Aravindham Parasuram<br>Apple Mac App Store", delegate { Application.OpenURL("https://apps.apple.com/pl/app/focus-city-pomodoro-timer/id1468463467?l=pl&mt=12"); });
+                    CreateURLButton("Monday", delegate { Application.OpenURL("https://monday.com/"); });
+                    CreateURLButton("Trello", delegate { Application.OpenURL("https://trello.com/"); });
+                    CreateURLButton("Harvest", delegate { Application.OpenURL("https://www.getharvest.com/"); });
+                    CreateURLButton("Toggl", delegate { Application.OpenURL("https://toggl.com/"); });
+                    CreateURLButton("Session - Pomodoro Focus Timer<br>Philip Young Gunawan<br>Apple Mac App Store", delegate { Application.OpenURL("https://apps.apple.com/pl/app/session-pomodoro-focus-timer/id1521432881?l=pl"); });
+                }
                 break;
             case 58:
                 learningSkill = "Work Ethic";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 59:
                 learningSkill = "Work Under Pressure";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
             case 60:
                 learningSkill = "Writing";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Elevate - Brain Training Games<br>Elevate Labs<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.wonder"); });
+                }
                 break;
             case 61:
                 learningSkill = "Writing Skills";
                 learningSkillDefinition = "Having knowledge of writing structure and ability to effectively communicate your ideas through writing with your target audience in mind (e.g. informal, formal and technical writing).";
+                if (videoAudio)
+                {
+                    CreateURLButton("How To Write A Dissertation Or Thesis - 8 Step Tutorial + Examples<br><b>Video</b><br>Grad Coach on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=1Ir9z_O4P3A"); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("Creative Writing Exercises<br>Language is a Virus", delegate { Application.OpenURL("https://www.languageisavirus.com/creative-writing-exercises/index.php#.YjIjxKinyUk"); });
+                    CreateURLButton("Creative Writing Techniques<br>Language is a Virus", delegate { Application.OpenURL("https://www.languageisavirus.com/creative-writing-techniques/index.php#.YjIlM6inyUk"); });
+                    CreateURLButton("41 Free & Printable Story Map Templates [PDF/ Word]<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/story-map-templates/"); });
+                    CreateURLButton("50 Smart Literature Review Templates (APA)<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/literature-review/"); });
+                    CreateURLButton("45 Perfect Thesis Statement Templates (+ Examples)<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/thesis-statements/"); });
+                    CreateURLButton("50 Statement Of Purpose Examples (Graduate School, MBA, PhD)<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/statement-of-purpose/"); });
+                    CreateURLButton("50 Best Reflective Essay Examples (+ Topic Samples)<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/reflective-essay/"); });
+                    CreateURLButton("50 Free Persuasive Essay Examples (+ BEST Topics)<br>TemplateLAB", delegate { Application.OpenURL("https://templatelab.com/persuasive-essay/"); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("Creative Writing Games<br>Language is a Virus", delegate { Application.OpenURL("https://www.languageisavirus.com/writing-games.php#.YjIjwainyUl"); });
+                }
                 break;
             default:
                 learningSkill = "Ability to accept Criticism";
                 learningSkillDefinition = "No skill definition available. Coming soon.";
+                if (videoAudio)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (paperArticleBlog)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (freeCourses)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
+
+                if (miniGames)
+                {
+                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                }
                 break;
         }
     }
