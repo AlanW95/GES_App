@@ -1112,27 +1112,24 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Choose information you want to add to your CV.");
             CreateHeaderText(null, null, "This information will be exported in a text file and saved to your device.");
 
-            //ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
-            //ContentDataIdentiferUI _toggleHolderSkills = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
-            //CreateSkillsDisplayContent();
+            //ContentDataIdentiferUI _toggleHolderSkills;
 
-            //List<SkillData> _skillData;
-            //List<string> _data = new List<string>();
-            for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
+            ContentDataIdentiferUI _toggleHolderSkills = CreateToggleCVList(getDatabaseSkills(accountManager.localUserAccount._skills), false);
+
+            /*for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
             {
-                //CreateSkillDisplayItem(accountManager.localUserAccount._skills[i]);
 
-                ContentDataIdentiferUI _toggleHolderSkills = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), getDatabaseSkills(accountManager.localUserAccount._skills), false);
-            }
+            }*/
 
             CreateButton("Add", delegate
             {
-                /*ContentDataIdentiferUI[] _listItemsSkills = _toggleHolderSkills.GetComponentsInChildren<ContentDataIdentiferUI>();
+                ContentDataIdentiferUI[] _listItemsSkills = _toggleHolderSkills.GetComponentsInChildren<ContentDataIdentiferUI>();
                 for (int i = 0; i < _listItemsSkills.Length; i++)
                 {
                     if (_listItemsSkills[i]._toggleItem != null && _listItemsSkills[i]._toggleItem.isOn)
-                        _addNewArtifactData.Skills.Add(_listItemsSkills[i]._ToggleItemName.text);
-                }*/
+                        //_addNewArtifactData.Skills.Add(_listItemsSkills[i]._ToggleItemName.text);
+                        Debug.Log("Resources added to CV");
+                }
             }, 255, 255, 255, 255, 255, 255);
 
             /*CreateSkillsDropDown();
@@ -1437,6 +1434,24 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreatePrefab(EditToggleItemPrefab, _toggleGroupHolder);
         }
 
+        return _toggleGroupHolder.GetComponent<ContentDataIdentiferUI>();
+    }
+
+    public ContentDataIdentiferUI CreateToggleCVList(List<string> content, bool forceSingleToggleGroup = false)
+    {
+        Transform _toggleGroupHolder = CreatePrefab(EditToggleListGroupPrefab);
+        _toggleGroupHolder.GetComponent<ToggleGroup>().allowSwitchOff = !forceSingleToggleGroup;
+
+        for (int i = 0; i < content.Count; i++)
+        {
+            EditToggleItemPrefab.GetComponentInChildren<TMP_Text>().text = content[i];
+            EditToggleItemPrefab.GetComponentInChildren<Toggle>().isOn = false;
+            if (forceSingleToggleGroup == true)
+                EditToggleItemPrefab.GetComponentInChildren<Toggle>().group = _toggleGroupHolder.GetComponent<ToggleGroup>();
+            else
+                EditToggleItemPrefab.GetComponentInChildren<Toggle>().group = null;
+        }
+        CreatePrefab(EditToggleItemPrefab, _toggleGroupHolder);
         return _toggleGroupHolder.GetComponent<ContentDataIdentiferUI>();
     }
 
