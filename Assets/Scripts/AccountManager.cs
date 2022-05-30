@@ -16,6 +16,7 @@ public class UserAccount
     public List<ArtifactData> _artifacts = new List<ArtifactData>();
     public List<ReferenceData> _references = new List<ReferenceData>();
     public List<SkillData> _skills = new List<SkillData>();
+    public List<CVData> _cv = new List<CVData>();
 
     public UserAccount() {}
 
@@ -45,6 +46,10 @@ public class UserAccount
         _skills.Add(skillData);
     }
 
+    public void SaveCV(CVData cvData)
+    {
+        _cv.Add(cvData);
+    }
 }
 
 public class SkillData
@@ -97,6 +102,14 @@ public class ReferenceData
     public List<string> Skills = new List<string>();
 
     public ReferenceData() { }
+}
+
+public class CVData
+{
+    public string Name;
+    public List<string> Skills = new List<string>();
+
+    public CVData() { }
 }
 
 public class DreamJobData

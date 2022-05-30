@@ -42,6 +42,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public ReferenceData _addNewReferenceData;
     public SkillData _addNewSkillData;
 
+    public CVData _CVData;
+    public List<string> CVSkills = new List<string>();
+    public List<string> CVExperiences = new List<string>();
+    public List<string> CVReferences = new List<string>();
+    public List<string> CVArtifacts = new List<string>();
 
     public GameObject SkillReferenceProjectTitle;
     public GameObject SkillReferenceProjectContent;
@@ -58,6 +63,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public SkillsInfo skillInfoManager;
     public SkillsRepository skillsRepositoryManager;
     public DreamJobInfo dreamJobInfoManager;
+    public WriteToTextFile textFileManager;
 
     [SerializeField]
     private GameObject selectedDropDownSkillObject;
@@ -1073,6 +1079,16 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
     #region Employment Readiness
 
+    private string ListToText(List<string> list)
+    {
+        string result = "";
+        foreach (var listMember in list)
+        {
+            result += listMember.ToString() + "\n";
+        }
+        return result;
+    }
+
     public void AddEmploymentReadiness(int pageNumber)
     {
         DestroyCurrentScreens();
@@ -1102,7 +1118,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else
         {
-            Configure_Top_Banner(false, false, "Employment Readiness", delegate { AddPracticeSkills(pageNumber - 1); }, null, null);
+            Configure_Top_Banner(false, false, "Employment Readiness", delegate { AddEmploymentReadiness(pageNumber - 1); }, null, null);
         }
         //2 - Create CV
         if (pageNumber == 2)
@@ -1112,53 +1128,87 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Choose information you want to add to your CV.");
             CreateHeaderText(null, null, "This information will be exported in a text file and saved to your device.");
 
-            //ContentDataIdentiferUI _toggleHolderSkills;
-
+            CreateDisplayGroup("Skills:");
             ContentDataIdentiferUI _toggleHolderSkills = CreateToggleCVList(getDatabaseSkills(accountManager.localUserAccount._skills), false);
 
-            /*for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
-            {
+            CreateDisplayGroup("Experience:");
+            ContentDataIdentiferUI _toggleHolderExperience = CreateToggleCVList(getDatabaseExperiences(accountManager.localUserAccount._experiences), false);
 
-            }*/
+            CreateDisplayGroup("Artifacts");
+            ContentDataIdentiferUI _toggleHolderArtifacts = CreateToggleCVList(getDatabaseArtifacts(accountManager.localUserAccount._artifacts), false);
+
+            CreateDisplayGroup("References");
+            ContentDataIdentiferUI _toggleHolderReferences = CreateToggleCVList(getDatabaseReference(accountManager.localUserAccount._references), false);
 
             CreateButton("Add", delegate
             {
+                //Skills
                 ContentDataIdentiferUI[] _listItemsSkills = _toggleHolderSkills.GetComponentsInChildren<ContentDataIdentiferUI>();
                 for (int i = 0; i < _listItemsSkills.Length; i++)
                 {
                     if (_listItemsSkills[i]._toggleItem != null && _listItemsSkills[i]._toggleItem.isOn)
-                        //_addNewArtifactData.Skills.Add(_listItemsSkills[i]._ToggleItemName.text);
-                        Debug.Log("Resources added to CV");
+                    {
+                        CVSkills.Add(_listItemsSkills[i]._ToggleItemName.text);
+                        foreach (var x in CVSkills)
+                        {
+                            Debug.Log(x.ToString());
+                        }
+                    }
                 }
+                //Experience
+                ContentDataIdentiferUI[] _listItemsExperience = _toggleHolderExperience.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItemsExperience.Length; i++)
+                {
+                    if (_listItemsExperience[i]._toggleItem != null && _listItemsExperience[i]._toggleItem.isOn)
+                    {
+                        CVExperiences.Add(_listItemsExperience[i]._ToggleItemName.text);
+                        foreach (var x in CVExperiences)
+                        {
+                            Debug.Log(x.ToString());
+                        }
+                    }
+                }
+                //Artifacts
+                ContentDataIdentiferUI[] _listItemsArtifacts = _toggleHolderArtifacts.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItemsArtifacts.Length; i++)
+                {
+                    if (_listItemsArtifacts[i]._toggleItem != null && _listItemsArtifacts[i]._toggleItem.isOn)
+                    {
+                        CVArtifacts.Add(_listItemsArtifacts[i]._ToggleItemName.text);
+                        foreach (var x in CVArtifacts)
+                        {
+                            Debug.Log(x.ToString());
+                        }
+                    }
+                }
+                //References
+                ContentDataIdentiferUI[] _listItemsReferences = _toggleHolderReferences.GetComponentsInChildren<ContentDataIdentiferUI>();
+                for (int i = 0; i < _listItemsReferences.Length; i++)
+                {
+                    if (_listItemsReferences[i]._toggleItem != null && _listItemsReferences[i]._toggleItem.isOn)
+                    {
+                        CVReferences.Add(_listItemsReferences[i]._ToggleItemName.text);
+                        foreach (var x in CVReferences)
+                        {
+                            Debug.Log(x.ToString());
+                        }
+                    }
+                }
+
+                AddEmploymentReadiness(pageNumber + 1);
             }, 255, 255, 255, 255, 255, 255);
-
-            /*CreateSkillsDropDown();
-
-            CreateButton("Continue", delegate
-            {
-                GameObject prefab = GameObject.Find("SkillsListPrefab(Clone)");
-                selectedSkill = prefab.GetComponentInChildren<TMP_Dropdown>();
-                //selectedSkill = DropDownSkillsPrefab.GetComponentInChildren<TMP_Dropdown>();
-                dropdownValue = selectedSkill.value;
-                Debug.Log(dropdownValue);
-                selectedSkillName = selectedSkill.options[selectedSkill.value].text;
-                Debug.Log(selectedSkillName);
-
-                AddPracticeSkills(pageNumber + 1);
-            }, 255, 255, 255, 255, 255, 255);*/
         }
-        //3 - Learning Resources - choose type of learning resource
+        //3 - Create CV - See list of CV chosen skills, experience, artifacts and references to export
         else if (pageNumber == 3)
         {
-            CreateWorkCoach(null, "There are various resources available for <b>" + selectedSkillName + "</b>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
+            CreateWorkCoach(null, "Now that you have selected your chosen skills, experience, artifacts and references please preview below and export, saving to your device.");
             //CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
             EditButton.SetActive(false);
-            CreateButton("Videos/ Audio", delegate { videoAudio = true; paperArticleBlog = false; freeCourses = false; miniGames = false; AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Papers/ Articles/ Blogs", delegate { videoAudio = false; paperArticleBlog = true; freeCourses = false; miniGames = false; AddPracticeSkills(pageNumber + 2); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Free Courses/ Self Assessment", delegate { videoAudio = false; paperArticleBlog = false; freeCourses = true; miniGames = false; AddPracticeSkills(pageNumber + 3); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Mini Games", delegate { videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = true; AddPracticeSkills(pageNumber + 4); }, 255, 255, 255, 255, 255, 255);
-            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Skill Details", delegate { AddPracticeSkills(pageNumber + 5); }, 255, 255, 255, 255, 255, 255);
+            CreateDisplayGroup("Skills:<br>" + ListToText(CVSkills) + "\nExperience:<br>" + ListToText(CVExperiences) + "\nArtifacts:<br>" + ListToText(CVArtifacts) + "\nReferences:<br>" + ListToText(CVReferences));
+
+
+            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
         //4 - List of Video/ Audio learning resources
         else if (pageNumber == 4)
@@ -1275,7 +1325,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
         for (int i = 0; i < _artifacts.Count; i++)
         {
-            _data.Add(_artifacts[i].ArtificatContent);
+            //_data.Add(_artifacts[i].ArtificatContent);
+            _data.Add(_artifacts[i].Title);
         }
 
         return _data;
@@ -1450,8 +1501,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 EditToggleItemPrefab.GetComponentInChildren<Toggle>().group = _toggleGroupHolder.GetComponent<ToggleGroup>();
             else
                 EditToggleItemPrefab.GetComponentInChildren<Toggle>().group = null;
+
+
+            CreatePrefab(EditToggleItemPrefab, _toggleGroupHolder);
         }
-        CreatePrefab(EditToggleItemPrefab, _toggleGroupHolder);
         return _toggleGroupHolder.GetComponent<ContentDataIdentiferUI>();
     }
 
