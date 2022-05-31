@@ -138,7 +138,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
     }
 
     public void Open_SplashScreen() { ChangeWindow(SplashScreen); Configure_Top_Banner(true); }
-    public void Open_CoachSelectionScreen() { ChangeWindow(CoachSelectionScreen); Configure_Top_Banner(true); }
+    public void Open_CoachSelectionScreen() { ChangeWindow(HomeScreen); BannerBottom.SetActive(true); /*ChangeWindow(CoachSelectionScreen);*/ Configure_Top_Banner(true); }
     public void Open_CoachQuestionScreen() { ChangeWindow(CoachQuestionScreen); Configure_Top_Banner(true); }
     public void Open_Profile() { ChangeWindow(ProfileScreen); Configure_Top_Banner(false, false, "Profile", delegate { ChangeWindow(HomeScreen); }, null, delegate { ChangeWindow(EditProfileScreen); }); }
     public void Open_EditProfile() { ChangeWindow(EditProfileScreen); Configure_Top_Banner(false, false, "Edit Profile", delegate { ChangeWindow(ProfileScreen); }); BannerTop_Secondary_Button.gameObject.SetActive(false); }

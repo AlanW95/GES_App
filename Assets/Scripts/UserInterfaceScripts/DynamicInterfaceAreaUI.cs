@@ -928,6 +928,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Practice makes perfect! For the time being, you can view internal learning resources with more physical practice options coming soon!");
 
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            //TODO: MORE RESEARCH HAS TO BE DONE ON THIS - THIS MAY NOT BE POSSIBLE
             CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
         }
         else
@@ -958,10 +959,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             }, 255, 255, 255, 255, 255, 255);
             
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Yes, I want to contribute my own resource", delegate
+            //TODO: STILL TO ADD THIS FUNCTIONALITY
+            /*CreateButton("Yes, I want to contribute my own resource", delegate
             {
-                AddPracticeSkills(pageNumber + 7);
-            }, 255, 255, 255, 255, 255, 255, interactableCheck: false);
+                //AddPracticeSkills(pageNumber + 7);
+            }, 255, 255, 255, 255, 255, 255, interactableCheck: false);*/
         }
         //3 - Learning Resources - choose type of learning resource
         else if (pageNumber == 3)
@@ -1112,7 +1114,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Choose an option to prepare yourself for applying for a job.");
 
             CreateButton("Create CV", delegate { AddEmploymentReadiness(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Practice Interview", delegate { AddEmploymentReadiness(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
+            CreateDisplayGroup("Job interview practice \ncoming soon.");
+            //CreateButton("Practice Interview", delegate { AddEmploymentReadiness(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
             //TODO: Check button below about what this does? Also remember to change the pageNumber + ? if needed.
             //CreateButton("Job Search", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false);
         }
@@ -1207,8 +1210,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateDisplayGroup("Skills:<br>" + ListToText(CVSkills) + "\nExperience:<br>" + ListToText(CVExperiences) + "\nArtifacts:<br>" + ListToText(CVArtifacts) + "\nReferences:<br>" + ListToText(CVReferences));
 
 
-            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
         //4 - List of Video/ Audio learning resources
         else if (pageNumber == 4)
