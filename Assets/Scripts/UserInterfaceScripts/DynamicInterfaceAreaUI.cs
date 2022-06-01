@@ -23,6 +23,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public GameObject EditURLButtonPrefab;
     public GameObject URLButtonPrefab;
 
+    public GameObject OverlayWindow;
+
     public GameObject DisplayContentTextPrefabGroup;
     public GameObject DisplayContentTextPrefabItem;
 
@@ -929,7 +931,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             //TODO: MORE RESEARCH HAS TO BE DONE ON THIS - THIS MAY NOT BE POSSIBLE
-            CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
+            //CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
         }
         else
         {
@@ -982,7 +984,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 4)
         {
             Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 1); }, null, null);
-            CreateWorkCoach(null, "Here is a selection of videos and/ or audio for <b>" + selectedSkillName + "</b>.");
+            CreateWorkCoach(null, "Here are a selection of videos and/ or audio for <b>" + selectedSkillName + "</b>. Click and they will externally take you to the resource.");
             //CreateHeaderText(null, null, "Video and Audio Resources");
             GetSkillsLearning(dropdownValue);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -998,7 +1000,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 5)
         {
             Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 2); }, null, null);
-            CreateWorkCoach(null, "Here is a selection of papers, articles & blog resources for <b>" + selectedSkillName + "</b>.");
+            CreateWorkCoach(null, "Here are a selection of papers, articles & blog resources for <b>" + selectedSkillName + "</b>. Click and they will externally take you to the resource.");
             //CreateHeaderText(null, null, "Paper, Article & Blog Resources");
             GetSkillsLearning(dropdownValue);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -1014,7 +1016,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 6)
         {
             Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 3); }, null, null);
-            CreateWorkCoach(null, "Here is a selection of free courses and self-assessment learning resources for <b>" + selectedSkillName + "</b>.");
+            CreateWorkCoach(null, "Here are a selection of free courses and self-assessment learning resources for <b>" + selectedSkillName + "</b>. Click and they will externally take you to the resource.");
             //CreateHeaderText(null, null, "Free Courses and Self-Assessment Learning Resources");
             GetSkillsLearning(dropdownValue);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -1030,7 +1032,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 7)
         {
             Configure_Top_Banner(false, false, "Learning Resources", delegate { AddPracticeSkills(pageNumber - 4); }, null, null);
-            CreateWorkCoach(null, "Here is a selection of mini game resources for <b>" + selectedSkillName + "</b>.");
+            CreateWorkCoach(null, "Here are a selection of mini game resources for <b>" + selectedSkillName + "</b>. Click and they will externally take you to the resource.");
             //CreateHeaderText(null, null, "Mini-Game Resources");
             GetSkillsLearning(dropdownValue);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -1138,7 +1140,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             ContentDataIdentiferUI _toggleHolderExperience = CreateToggleCVList(getDatabaseExperiences(accountManager.localUserAccount._experiences), false);
 
             CreateDisplayGroup("Artifacts");
-            ContentDataIdentiferUI _toggleHolderArtifacts = CreateToggleCVList(getDatabaseArtifacts(accountManager.localUserAccount._artifacts), false);
+            ContentDataIdentiferUI _toggleHolderArtifacts = CreateToggleCVList(getDatabaseArtifacts(accountManager.localUserAccount._artifacts), true);
 
             CreateDisplayGroup("References");
             ContentDataIdentiferUI _toggleHolderReferences = CreateToggleCVList(getDatabaseReference(accountManager.localUserAccount._references), false);
@@ -1210,7 +1212,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateDisplayGroup("Skills:<br>" + ListToText(CVSkills) + "\nExperience:<br>" + ListToText(CVExperiences) + "\nArtifacts:<br>" + ListToText(CVArtifacts) + "\nReferences:<br>" + ListToText(CVReferences));
 
 
-            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
         //4 - List of Video/ Audio learning resources
@@ -1264,6 +1266,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     }
 
     #endregion Employment Readiness
+
+    public void OverlayScreenWindow()
+    {
+        userInterfaceManager.AddEditInformationScreen.GetComponent<DynamicInterfaceAreaUI>().AddEmploymentReadiness(3);
+        OverlayWindow.SetActive(false);
+    }
 
     public void CaptureDate(ref System.DateTime dataItem, ContentDataIdentiferUI _dataSource)
     {
@@ -1328,7 +1336,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
         for (int i = 0; i < _artifacts.Count; i++)
         {
-            //_data.Add(_artifacts[i].ArtificatContent);
+            _data.Add(_artifacts[i].ArtificatContent);
             _data.Add(_artifacts[i].Title);
         }
 
