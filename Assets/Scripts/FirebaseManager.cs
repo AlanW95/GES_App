@@ -106,6 +106,10 @@ public class FirebaseManager : MonoBehaviour
     [SerializeField]
     private TMP_Text bottomBannerOutputText;
 
+    [Header("Managers")]
+    [SerializeField]
+    private AccountManager accountManager;
+
     private void Awake() {
 
         DontDestroyOnLoad(gameObject);
@@ -205,6 +209,7 @@ public class FirebaseManager : MonoBehaviour
                 //Change scene to home screen
                 //GameManager.instance.ChangeScene(1); //from the video tutorial
                 StartCoroutine(LoadUserData());
+                StartCoroutine(LoadSkills());
 
                 /*AuthUIManager.instance.HomeScreen();*/
                 AuthUIManager.instance.CoachSelectionScreen();
@@ -405,6 +410,7 @@ public class FirebaseManager : MonoBehaviour
             if (user.IsEmailVerified)
             {
                 StartCoroutine(LoadUserData());
+                StartCoroutine(LoadSkills());
                 yield return new WaitForSeconds(1f);
 
                 // Change scene to the home screen for the app
@@ -695,6 +701,93 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    private IEnumerator UpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(skillData.Name).Child(skillData.LevelName).SetValueAsync(skillData.Level);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Skills are now updated
+        }
+    }
+
+    public void CallUpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
+    {
+        StartCoroutine(UpdateSkills(skillData));
+
+        return;
+    }
+
+    private IEnumerator UpdateExperience(List<string> _experiences)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experiences").SetValueAsync(_experiences);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Experiences are now update
+        }
+    }
+
+    private IEnumerator UpdateArtifacts(List<string> _artifacts)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("artifacts").SetValueAsync(_artifacts);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Artifacts are now updated
+        }
+    }
+
+    private IEnumerator UpdateReferences(List<string> _references)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("references").SetValueAsync(_references);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //References are now updated
+        }
+    }
+
+    private IEnumerator UpdateDreamJob(string _dreamjob, List<string> _dreamjobSkills)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("dreamjob").Child(_dreamjob).SetValueAsync(_dreamjobSkills);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Dream job has been updated
+        }
+    }
+
     #endregion Write to Database
 
     #region Coach and Emotion Selection
@@ -930,6 +1023,43 @@ public class FirebaseManager : MonoBehaviour
             DataSnapshot snapshot = DBTask.Result;
 
             profileUniversityText.text = snapshot.Child("university").Value.ToString();
+        }
+    }
+
+    private IEnumerator LoadSkills()
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //no data exists so nothing will be loaded
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            /*for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
+            {
+                
+            }*/
+
+            //CLOSEST I GOT
+            /*accountManager.localUserAccount._skills.Add((SkillData)snapshot.Child("skills").Value);
+            Debug.Log(accountManager.localUserAccount._skills.ToString());*/
+
+            //accountManager.localUserAccount._skills.Add((SkillData)snapshot.Child("skills").Value);
+
+            //accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value);
+
+            /*accountManager.localUserAccount._skills.
+            accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value;*/
         }
     }
 }

@@ -55,6 +55,7 @@ public class UserInterfaceManagerUI : MonoBehaviour
 
     private AccountManager accountManager;
     public SkillsInfo skillsInfoManager;
+    public FirebaseManager firebaseDatabaseManager;
 
     //public Sprite LoadResources_Icon() { return new Sprite(); }
 

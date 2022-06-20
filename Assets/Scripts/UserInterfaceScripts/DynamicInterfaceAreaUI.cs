@@ -66,6 +66,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public SkillsRepository skillsRepositoryManager;
     public DreamJobInfo dreamJobInfoManager;
     public WriteToTextFile textFileManager;
+    public FirebaseManager firebaseDatabaseManager;
 
     [SerializeField]
     private GameObject selectedDropDownSkillObject;
@@ -317,6 +318,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveSkill();
+                  /*firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);*/
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -1286,6 +1288,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     void SaveSkill()
     {
         accountManager.localUserAccount.SaveSkill(_addNewSkillData);
+        firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData);
+        //firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
     }
 
     void SaveArtifact()
