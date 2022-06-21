@@ -1288,6 +1288,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     void SaveSkill()
     {
         accountManager.localUserAccount.SaveSkill(_addNewSkillData);
+        //firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData);
         firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData);
         //firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
     }
