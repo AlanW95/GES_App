@@ -318,6 +318,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveSkill();
+                  //firebaseDatabaseManager.CallUpdateSkills(skill)
                   /*firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);*/
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.

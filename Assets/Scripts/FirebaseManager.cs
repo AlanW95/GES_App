@@ -703,17 +703,17 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void UpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
+    private IEnumerator UpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
     {
-        Dictionary<string, object> DBTask = new Dictionary<string, object>();
+        /*Dictionary<string, object> DBTask = new Dictionary<string, object>();
         DBTask["name"] = skillData.Name;
         DBTask["description"] = skillData.LevelName;
         DBTask["level"] = skillData.Level;
-        DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(DBTask);
-        
-        //var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(skillData.Name).Child(skillData.LevelName).SetValueAsync(skillData.Level);
+        DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(DBTask);*/
 
-        /*yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(skillData.Name).Child(skillData.LevelName).SetValueAsync(skillData.Level);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
         if (DBTask.Exception != null)
         {
@@ -722,12 +722,12 @@ public class FirebaseManager : MonoBehaviour
         else
         {
             //Skills are now updated
-        }*/
+        }
     }
 
     public void CallUpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
     {
-        //StartCoroutine(UpdateSkills(skillData));
+        StartCoroutine(UpdateSkills(skillData));
 
         return;
     }
@@ -1034,10 +1034,10 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private void LoadSkills()
+    public IEnumerator LoadSkills()
     {
-        //TODO: READD IN AFTER MEETING
-        /*var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
+        /*//TODO: READD IN AFTER MEETING
+        var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
         FirebaseDatabase.DefaultInstance.GetReference("skills").GetValueAsync().ContinueWith(DBTask =>
         {
             if (DBTask.IsFaulted)
@@ -1058,7 +1058,7 @@ public class FirebaseManager : MonoBehaviour
 
         //DBreference.Child("users").Child(user.UserId).Child("skills").
 
-        /*var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
+        var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -1075,23 +1075,23 @@ public class FirebaseManager : MonoBehaviour
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
 
-            
 
-            *//*for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
+
+            for (int i = 0; i < accountManager.localUserAccount._skills.Count; i++)
             {
-                
-            }*//*
+
+            }
 
             //CLOSEST I GOT
-            *//*accountManager.localUserAccount._skills.Add((SkillData)snapshot.Child("skills").Value);
-            Debug.Log(accountManager.localUserAccount._skills.ToString());*//*
+            accountManager.localUserAccount._skills.Add((SkillData)snapshot.Child("skills").Value);
+            Debug.Log(accountManager.localUserAccount._skills.ToString());
 
             //accountManager.localUserAccount._skills.Add((SkillData)snapshot.Child("skills").Value);
 
             //accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value);
 
-            *//*accountManager.localUserAccount._skills.
-            accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value;*//*
-        }*/
+            //accountManager.localUserAccount._skills.
+            //accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value;
+        }
     }
 }
