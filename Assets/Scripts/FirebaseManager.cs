@@ -210,10 +210,17 @@ public class FirebaseManager : MonoBehaviour
                 //GameManager.instance.ChangeScene(1); //from the video tutorial
                 StartCoroutine(LoadUserData());
                 //CallUpdateSkills();
+
+                //TODO: ADD BACK IN LATER - LOADING IN DATA WITH ACCOUNT
                 //StartCoroutine(LoadSkills());
 
                 /*AuthUIManager.instance.HomeScreen();*/
-                AuthUIManager.instance.CoachSelectionScreen();
+
+                //TODO: WE WILL RETURN TO THIS SCREEN AFTER THE LAUNCH BUILD
+                //AuthUIManager.instance.CoachSelectionScreen();
+
+                AuthUIManager.instance.HomeScreen();
+
                 /*for (int i=0; i<coachButtons.Length; i++)
                 {
                     coachButtons[i].interactable = true;
@@ -251,7 +258,7 @@ public class FirebaseManager : MonoBehaviour
                 StartCoroutine(SignOutLogic());
                 coachSelectionWelcomeText.text = $"Hi {user.DisplayName}!";
                 coachEmotionText.text = $"How are you feeling today, {user.DisplayName}?";
-                welcomeOutputText.text = $"Welcome {user.DisplayName}!";
+                welcomeOutputText.text = $"Welcome {user.DisplayName} to the GES App!";
                 profileNameOutputText.text = $"{ user.DisplayName}";
                 universityField.text = $"{profileUniversityText.text}";
                 bottomBannerOutputText.text = $"Signed in as: {user.DisplayName}";
@@ -365,7 +372,7 @@ public class FirebaseManager : MonoBehaviour
         loginOutput.SetActive(false);
         coachSelectionText.text = "";
         emotionSelectionText.text = "";
-        welcomeOutputText.text = "Welcome to an early \nprototype of the GES App!";
+        //welcomeOutputText.text = "Welcome to the \nGES App!";
     }
 
     private IEnumerator LoginLogic(string _email, string _password)
@@ -411,6 +418,7 @@ public class FirebaseManager : MonoBehaviour
             if (user.IsEmailVerified)
             {
                 StartCoroutine(LoadUserData());
+                //TODO: RE-ADD THIS BACK IN LATER
                 //StartCoroutine(LoadSkills());
                 //CallUpdateSkills();
                 yield return new WaitForSeconds(1f);
@@ -420,7 +428,9 @@ public class FirebaseManager : MonoBehaviour
                 //TODO: ENTER THE USERNAME
                 coachButtons[6].interactable = false;
                 coachButtons[13].interactable = false;
-                AuthUIManager.instance.CoachSelectionScreen();
+                //TODO: WE WILL RETURN TO THE COACH SELECTION AFTER THE LAUNCH BUILD OF THE APP
+                //AuthUIManager.instance.CoachSelectionScreen();
+                AuthUIManager.instance.HomeScreen();
                 ClearLoginFields();
                 ClearRegisterFields();
             }
@@ -703,7 +713,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
+    private IEnumerator SendSkills(/*SkillData name, SkillData levelName, SkillData level*/string _skill, string _description, int _level)
     {
         /*Dictionary<string, object> DBTask = new Dictionary<string, object>();
         DBTask["name"] = skillData.Name;
@@ -711,7 +721,9 @@ public class FirebaseManager : MonoBehaviour
         DBTask["level"] = skillData.Level;
         DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(DBTask);*/
 
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(skillData.Name).Child(skillData.LevelName).SetValueAsync(skillData.Level);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(_skill).Child("name").SetValueAsync(_skill);
+        DBreference.Child("users").Child(user.UserId).Child("skills").Child(_skill).Child("description").SetValueAsync(_description);
+        DBreference.Child("users").Child(user.UserId).Child("skills").Child(_skill).Child("level").SetValueAsync(_level);
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -725,11 +737,11 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void CallUpdateSkills(SkillData skillData/*string _skill, string _description, int _level*/)
+    public void CallSendSkills(string _skill, string _description, int _level/*SkillData name, SkillData levelName, SkillData level*//*string _skill, string _description, int _level*/)
     {
-        StartCoroutine(UpdateSkills(skillData));
+        StartCoroutine(SendSkills(_skill, _description, _level));
 
-        return;
+        //return;
     }
 
     private IEnumerator UpdateExperience(List<string> _experiences)
@@ -1023,7 +1035,7 @@ public class FirebaseManager : MonoBehaviour
         else if (DBTask.Result.Value == null)
         {
             //No data exists yet
-            profileUniversityText.text = "No University Selected";
+            profileUniversityText.text = "No University assigned";
         }
         else
         {
@@ -1031,12 +1043,29 @@ public class FirebaseManager : MonoBehaviour
             DataSnapshot snapshot = DBTask.Result;
 
             profileUniversityText.text = snapshot.Child("university").Value.ToString();
+
+            var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").GetValueAsync().ContinueWith(DBSkills =>
+            {
+                if (DBSkills.IsCompleted)
+                {
+                    Debug.Log("Skills successfully pulled");
+                    Debug.Log(DBSkills.ToString());
+                    DataSnapshot snapshotSkills = DBSkills.Result;
+                    Debug.Log(snapshotSkills.Child("name").Value.ToString());
+                    Debug.Log(snapshotSkills.Child("description").Value.ToString());
+                    Debug.Log(snapshotSkills.Child("level").Value.ToString());
+                }
+                else
+                {
+                    Debug.Log("Skill were not successfully pulled, try again");
+                }
+            });
         }
     }
 
     public IEnumerator LoadSkills()
     {
-        /*//TODO: READD IN AFTER MEETING
+        /*//TODO: RE-ADD IN AFTER MEETING
         var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
         FirebaseDatabase.DefaultInstance.GetReference("skills").GetValueAsync().ContinueWith(DBTask =>
         {

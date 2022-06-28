@@ -318,8 +318,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveSkill();
+                  //FIREBASE IS DONE IN THE FUNCTION FOR SAVESKILL();
+                  //firebaseDatabaseManager.CallSendSkills();
+                  //firebaseDatabaseManager.CallSendSkills(_addNewSkillData);
                   //firebaseDatabaseManager.CallUpdateSkills(skill)
-                  /*firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);*/
+                  //firebaseDatabaseManager.CallSendSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -1289,9 +1292,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     void SaveSkill()
     {
         accountManager.localUserAccount.SaveSkill(_addNewSkillData);
-        //firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData);
-        firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData);
-        //firebaseDatabaseManager.CallUpdateSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
+        firebaseDatabaseManager.CallSendSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
+    }
+    
+    void LoadSkill()
+    {
+        //firebaseDatabaseManager.LoadSkills();
     }
 
     void SaveArtifact()
