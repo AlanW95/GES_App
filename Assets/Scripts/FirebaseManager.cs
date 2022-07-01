@@ -109,6 +109,8 @@ public class FirebaseManager : MonoBehaviour
     [Header("Managers")]
     [SerializeField]
     private AccountManager accountManager;
+    [SerializeField]
+    private DynamicInterfaceAreaUI dynamicUIManager;
 
     private void Awake() {
 
@@ -180,7 +182,16 @@ public class FirebaseManager : MonoBehaviour
 
         //database
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+        /*FirebaseDatabase.DefaultInstance
+            .GetReference("users").Child(user.UserId).Child("skills")
+            .ValueChanged += HandleUpdateSkill;*/
     }
+
+    /*public void HandleUpdateSkill(object sender, ValueChangedEventArgs args)
+    {
+        DataSnapshot snapshot = args.Snapshot;
+        Debug.Log("Handle Update Skill: " + snapshot.Value);
+    }*/
 
     private IEnumerator CheckAutoLogin()
     {
@@ -208,7 +219,7 @@ public class FirebaseManager : MonoBehaviour
             {
                 //Change scene to home screen
                 //GameManager.instance.ChangeScene(1); //from the video tutorial
-                StartCoroutine(LoadUserData());
+                StartCoroutine(LoadUserData(/*null*/));
                 //CallUpdateSkills();
 
                 //TODO: ADD BACK IN LATER - LOADING IN DATA WITH ACCOUNT
@@ -417,7 +428,7 @@ public class FirebaseManager : MonoBehaviour
         {
             if (user.IsEmailVerified)
             {
-                StartCoroutine(LoadUserData());
+                StartCoroutine(LoadUserData(/*null*/));
                 //TODO: RE-ADD THIS BACK IN LATER
                 //StartCoroutine(LoadSkills());
                 //CallUpdateSkills();
@@ -1022,7 +1033,7 @@ public class FirebaseManager : MonoBehaviour
     }*/
 
     //Loading in User Data with the Firebase Realtime Database
-    private IEnumerator LoadUserData()
+    private IEnumerator LoadUserData(/*string skill*/)
     {
         var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
 
@@ -1044,12 +1055,26 @@ public class FirebaseManager : MonoBehaviour
 
             profileUniversityText.text = snapshot.Child("university").Value.ToString();
 
-            var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").GetValueAsync().ContinueWith(DBSkills =>
+            //THIS RECOGNISES THERE IS TWO BUT
+            //TODO: HOW CAN WE READ EACH OF THESE????
+            Debug.Log(snapshot.Child("skills").ChildrenCount.ToString());
+
+            //var skill = accountManager.localUserAccount.SaveSkill(dynamicUIManager._addNewSkillData);
+
+            //accountManager.localUserAccount._skills.Add(snapshot.Value.ToString());
+
+            //StartCoroutine(LoadSkillData());
+            //LoadSkillData();
+            
+            //var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").
+
+            /*var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").LimitToLast(50).GetValueAsync().ContinueWith(DBSkills =>
             {
                 if (DBSkills.IsCompleted)
                 {
+                    
                     Debug.Log("Skills successfully pulled");
-                    Debug.Log(DBSkills.ToString());
+                    Debug.Log(DBSkills.Result.Value.ToString());
                     DataSnapshot snapshotSkills = DBSkills.Result;
                     Debug.Log(snapshotSkills.Child("name").Value.ToString());
                     Debug.Log(snapshotSkills.Child("description").Value.ToString());
@@ -1059,9 +1084,50 @@ public class FirebaseManager : MonoBehaviour
                 {
                     Debug.Log("Skill were not successfully pulled, try again");
                 }
-            });
+            });*/
         }
     }
+
+    /*private void LoadSkillData()
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).EqualTo("skills")
+            .ValueChanged += (object sender2, ValueChangedEventArgs e2) =>
+            {
+                if (e2.DatabaseError != null)
+                {
+                    Debug.LogError(e2.DatabaseError.Message);
+                }
+
+                if (e2.Snapshot != null && e2.Snapshot.ChildrenCount > 0)
+                {
+                    foreach (var childSnapshot in e2.Snapshot.Children)
+                    {
+                        var name = childSnapshot.Child("name").Value.ToString();
+
+                        Debug.Log(name.ToString());
+                    }
+                }
+            }
+    }*/
+
+    /*void HandleValueChanged(object sender, ValueChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+        var skillsItems = args.Snapshot.Value as Dictionary<string, object>;
+        foreach (var item in skillsItems)
+        {
+            Debug.Log(item.Key); //kdq6...
+            var values = item.Value as Dictionary<string, object>;
+            foreach (var v in values)
+            {
+                Debug.Log(v.Key + ":" + v.Value); //category: livingroom, code: 126...
+            }
+        }
+    }*/
 
     public IEnumerator LoadSkills()
     {
