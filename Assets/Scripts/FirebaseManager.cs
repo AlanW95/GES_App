@@ -6,6 +6,7 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
 using TMPro;
+using System.Linq;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -366,6 +367,8 @@ public class FirebaseManager : MonoBehaviour
             //return to login screen
             AuthUIManager.instance.LoginScreen();
             loginOutputText.text = "User successfully signed out.";
+            //TODO: REMOVE ALL FROM THE LIST - ADD REST
+            accountManager.localUserAccount._skills.Clear();
             StartCoroutine(SignOutLogic());
         }
         else
@@ -724,13 +727,8 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SendSkills(/*SkillData name, SkillData levelName, SkillData level*/string _skill, string _description, int _level)
+    private IEnumerator SendSkills(string _skill, string _description, int _level)
     {
-        /*Dictionary<string, object> DBTask = new Dictionary<string, object>();
-        DBTask["name"] = skillData.Name;
-        DBTask["description"] = skillData.LevelName;
-        DBTask["level"] = skillData.Level;
-        DBreference.Child("users").Child(user.UserId).Child("skills").SetValueAsync(DBTask);*/
 
         var DBTask = DBreference.Child("users").Child(user.UserId).Child("skills").Child(_skill).Child("name").SetValueAsync(_skill);
         DBreference.Child("users").Child(user.UserId).Child("skills").Child(_skill).Child("description").SetValueAsync(_description);
@@ -748,16 +746,29 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void CallSendSkills(string _skill, string _description, int _level/*SkillData name, SkillData levelName, SkillData level*//*string _skill, string _description, int _level*/)
+    public void CallSendSkills(string _skill, string _description, int _level)
     {
         StartCoroutine(SendSkills(_skill, _description, _level));
-
-        //return;
     }
 
-    private IEnumerator UpdateExperience(List<string> _experiences)
+    private IEnumerator UpdateExperience(string _experience, string _role, System.DateTime _startDate, System.DateTime _endDate, string _description, string _comments, List<string> _skills, List<string> _courseOccurred)
     {
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experiences").SetValueAsync(_experiences);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("experience").SetValueAsync(_experience);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("role").SetValueAsync(_role);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("start").SetValueAsync(_startDate);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("end").SetValueAsync(_endDate);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("description").SetValueAsync(_description);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("comments").SetValueAsync(_comments);
+
+        for (int i = 0; i < _skills.Count; i++)
+        {
+            DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("skills").SetValueAsync(_skills);
+        }
+
+        for (int i = 0; i < _courseOccurred.Count; i++)
+        {
+            DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("occurrence").SetValueAsync(_courseOccurred);
+        }
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -769,6 +780,11 @@ public class FirebaseManager : MonoBehaviour
         {
             //Experiences are now update
         }
+    }
+
+    public void CallSendExperiences(string _experience, string _role, System.DateTime _startDate, System.DateTime _endDate, string _description, string _comments, List<string> _skills, List<string> _courseOccurred)
+    {
+        StartCoroutine(UpdateExperience(_experience, _role, _startDate, _endDate, _description, _comments, _skills, _courseOccurred));
     }
 
     private IEnumerator UpdateArtifacts(List<string> _artifacts)
@@ -1058,6 +1074,26 @@ public class FirebaseManager : MonoBehaviour
             //THIS RECOGNISES THERE IS TWO BUT
             //TODO: HOW CAN WE READ EACH OF THESE????
             Debug.Log(snapshot.Child("skills").ChildrenCount.ToString());
+
+            foreach (DataSnapshot childSnapshot in snapshot.Child("skills").Children.Skip(0))
+            {
+                Debug.Log(childSnapshot.Child("name").Value.ToString());
+                Debug.Log(childSnapshot.Child("description").Value.ToString());
+                Debug.Log(childSnapshot.Child("level").Value.ToString());
+                string skill = childSnapshot.Child("name").Value.ToString();
+                string description = childSnapshot.Child("description").Value.ToString();
+                int level = int.Parse(childSnapshot.Child("level").Value.ToString());
+                /*Debug.Log("The skill is: " + skill);*/
+
+                dynamicUIManager._addNewSkillData = new SkillData();
+                dynamicUIManager._addNewSkillData.Name = skill;
+                dynamicUIManager._addNewSkillData.LevelName = description;
+                dynamicUIManager._addNewSkillData.Level = level;
+                Debug.Log("The skill is: " + dynamicUIManager._addNewSkillData.Name + dynamicUIManager._addNewSkillData.LevelName + dynamicUIManager._addNewSkillData.Level);
+                dynamicUIManager.CreateSkillButton(dynamicUIManager._addNewSkillData.Name, dynamicUIManager._addNewSkillData.LevelName, dynamicUIManager._addNewSkillData.Level, null);
+                dynamicUIManager.SaveSkill();
+                dynamicUIManager._addNewSkillData = null;
+            }
 
             //var skill = accountManager.localUserAccount.SaveSkill(dynamicUIManager._addNewSkillData);
 

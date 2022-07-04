@@ -318,11 +318,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveSkill();
-                  //FIREBASE IS DONE IN THE FUNCTION FOR SAVESKILL();
-                  //firebaseDatabaseManager.CallSendSkills();
-                  //firebaseDatabaseManager.CallSendSkills(_addNewSkillData);
-                  //firebaseDatabaseManager.CallUpdateSkills(skill)
-                  //firebaseDatabaseManager.CallSendSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
+                  SaveSkillWithFirebase();
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -545,6 +541,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveArtifact();
+                  //TODO: ADD FIREBASE FUNCTIONS HERE
+                  //SaveArtifactWithFirebase();
+
                   _addNewArtifactData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -634,6 +633,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveReference();
+                  //TODO:ADD FIREBASE REFERENCE
+                  //SaveReferenceWithFirebase();
+
                   _addNewReferenceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -844,6 +846,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveExperience();
+                  SaveExperienceWithFirebase();
                   _addNewExperienceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
               }, 255, 255, 255, 255, 255, 255);
@@ -1289,30 +1292,35 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         dataItem = _dataSource._inputField.text.ToString();
     }
 
-    void SaveSkill()
+    public void SaveSkill()
     {
         accountManager.localUserAccount.SaveSkill(_addNewSkillData);
-        firebaseDatabaseManager.CallSendSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
-    }
-    
-    void LoadSkill()
-    {
-        //firebaseDatabaseManager.LoadSkills();
+        
     }
 
-    void SaveArtifact()
+    public void SaveSkillWithFirebase()
+    {
+        firebaseDatabaseManager.CallSendSkills(_addNewSkillData.Name, _addNewSkillData.LevelName, _addNewSkillData.Level);
+    }
+
+    public void SaveArtifact()
     {
         accountManager.localUserAccount.SaveArtifact(_addNewArtifactData);
     }
 
-    void SaveReference()
+    public void SaveReference()
     {
         accountManager.localUserAccount.SaveReference(_addNewReferenceData);
     }
 
-    void SaveExperience()
+    public void SaveExperience()
     {
         accountManager.localUserAccount.SaveExperience(_addNewExperienceData);
+    }
+
+    public void SaveExperienceWithFirebase()
+    {
+        firebaseDatabaseManager.CallSendExperiences(_addNewExperienceData.ExperienceLocale, _addNewExperienceData.RoleInExperience, _addNewExperienceData.StartDate, _addNewExperienceData.EndDate, _addNewExperienceData.Description, _addNewExperienceData.Comments, _addNewExperienceData.Skills, _addNewExperienceData.CourseOccured);
     }
 
     public List<string> getDatabaseReference(List<ReferenceData> _references)
