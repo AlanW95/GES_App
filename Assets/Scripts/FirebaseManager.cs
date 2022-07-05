@@ -237,7 +237,7 @@ public class FirebaseManager : MonoBehaviour
                 {
                     coachButtons[i].interactable = true;
                 }*/
-                
+
             }
             else
             {
@@ -313,15 +313,15 @@ public class FirebaseManager : MonoBehaviour
     //TODO: Change so data is automatically being saved through the coroutine - we don't want to be pressing a button to save data to the database
 
     //TODO: We would want to say that when the user is created, so in the RegisterLogic then it adds these to the database. We will be adding;
-        //Username
-        //Name
-        //Email
-        //Password
-        //University
-        //Skill
-        //Experience
-        //Reference
-        //Artifact
+    //Username
+    //Name
+    //Email
+    //Password
+    //University
+    //Skill
+    //Experience
+    //Reference
+    //Artifact
     public void SaveDataButton()
     {
         //StartCoroutine(UpdateUsernameAuth(loginEmail.text));
@@ -467,7 +467,7 @@ public class FirebaseManager : MonoBehaviour
             registerOutput.SetActive(true);
             yield return new WaitForSeconds(5);
             registerOutput.SetActive(false);
-        } 
+        }
         else if (_password != _confirmPassword)
         {
             registerOutputText.text = "Passwords do not match!";
@@ -568,7 +568,7 @@ public class FirebaseManager : MonoBehaviour
             var emailTask = user.SendEmailVerificationAsync();
 
             yield return new WaitUntil(predicate: () => emailTask.IsCompleted);
-            
+
             if (emailTask.Exception != null)
             {
                 FirebaseException firebaseException = (FirebaseException)emailTask.Exception.GetBaseException();
@@ -681,14 +681,14 @@ public class FirebaseManager : MonoBehaviour
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-         if (DBTask.Exception != null)
-         {
-             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-         }
-         else
-         {
-             //Database username is now updated
-         }
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Database username is now updated
+        }
     }
 
     private IEnumerator UpdateUniversity(string _university)
@@ -751,24 +751,33 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(SendSkills(_skill, _description, _level));
     }
 
-    private IEnumerator UpdateExperience(string _experience, string _role, System.DateTime _startDate, System.DateTime _endDate, string _description, string _comments, List<string> _skills, List<string> _courseOccurred)
+    private IEnumerator UpdateExperience(string _place, string _role, string _startDate, string _endDate, string _description, string _comments, List<string> _skills/*, List<string> _courseOccurred*/)
     {
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("experience").SetValueAsync(_experience);
-        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("role").SetValueAsync(_role);
-        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("start").SetValueAsync(_startDate);
-        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("end").SetValueAsync(_endDate);
-        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("description").SetValueAsync(_description);
-        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("comments").SetValueAsync(_comments);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("place").SetValueAsync(_place);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("role").SetValueAsync(_role);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("start").SetValueAsync(_startDate);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("end").SetValueAsync(_endDate);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("description").SetValueAsync(_description);
+        DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("comments").SetValueAsync(_comments);
 
-        for (int i = 0; i < _skills.Count; i++)
+        foreach (var x in _skills)
         {
-            DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("skills").SetValueAsync(_skills);
+            if (x != null)
+            {
+                //Debug.Log(x.ToString());
+                DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("skills").Child(x.ToString()).Child("name").SetValueAsync(x.ToString());
+            } else
+            {
+                DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("skills").SetValueAsync("null");
+            }
         }
 
-        for (int i = 0; i < _courseOccurred.Count; i++)
+        //TODO: ADD WITH REFERENCES AND ARTIFACTS NOT NEEDED IN EXPERIENCES
+        /*foreach (var x in _courseOccurred)
         {
-            DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_experience).Child("occurrence").SetValueAsync(_courseOccurred);
-        }
+            //Debug.Log(x.ToString());
+            DBreference.Child("users").Child(user.UserId).Child("experiences").Child(_role).Child("occurrence").Child(x.ToString()).SetValueAsync(x.ToString());
+        }*/
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -782,14 +791,51 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void CallSendExperiences(string _experience, string _role, System.DateTime _startDate, System.DateTime _endDate, string _description, string _comments, List<string> _skills, List<string> _courseOccurred)
+    public void CallSendExperiences(string _experience, string _role, string _startDate, string _endDate, string _description, string _comments, List<string> _skills/*, List<string> _courseOccurred*/)
     {
-        StartCoroutine(UpdateExperience(_experience, _role, _startDate, _endDate, _description, _comments, _skills, _courseOccurred));
+        StartCoroutine(UpdateExperience(_experience, _role, _startDate, _endDate, _description, _comments, _skills/*, _courseOccurred*/));
     }
 
-    private IEnumerator UpdateArtifacts(List<string> _artifacts)
+    private IEnumerator UpdateArtifacts(string _type, string _title, string _description, string _url, string _content, List<string> _skills, List<string> _experiences)
     {
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("artifacts").SetValueAsync(_artifacts);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("title").SetValueAsync(_title);
+        DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("type").SetValueAsync(_type);
+        DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("description").SetValueAsync(_description);
+        if (_url != null)
+        {
+            DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("url").SetValueAsync(_url);
+        } else
+        {
+            DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("url").SetValueAsync("null");
+        }
+
+        DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("content").SetValueAsync(_content);
+
+        foreach (var x in _skills)
+        {
+            if (x != null)
+            {
+                //Debug.Log(x.ToString());
+                DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("skills").Child(x.ToString()).Child("name").SetValueAsync(x.ToString());
+            } else
+            {
+                DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("skills").Child(x.ToString()).SetValueAsync("null");
+            }
+
+        }
+
+        foreach (var x in _experiences)
+        {
+            if (x != null)
+            {
+                //Debug.Log(x.ToString());
+                DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("experiences").Child(x.ToString()).Child("name").SetValueAsync(x.ToString());
+            } else
+            {
+                DBreference.Child("users").Child(user.UserId).Child("artifacts").Child(_title).Child("experiences").SetValueAsync("null");
+            }
+
+        }
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -803,9 +849,30 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateReferences(List<string> _references)
+    public void CallSendArtifacts(string _type, string _title, string _description, string _url, string _content, List<string> _skills, List<string> _experiences)
     {
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("references").SetValueAsync(_references);
+        StartCoroutine(UpdateArtifacts(_type, _title, _description, _url, _content, _skills, _experiences));
+    }
+
+    private IEnumerator UpdateReferences(string _name, string _email, string _position, string _phonenumber, List<string> _skills)
+    {
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("name").SetValueAsync(_name);
+        DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("email").SetValueAsync(_email);
+        DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("position").SetValueAsync(_position);
+        DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("phonenumber").SetValueAsync(_phonenumber);
+
+        foreach (var x in _skills)
+        {
+            if (x != null)
+            {
+                //Debug.Log(x.ToString());
+                DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("skills").Child(x.ToString()).Child("name").SetValueAsync(x.ToString());
+            }
+            else
+            {
+                DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("skills").SetValueAsync("null");
+            }
+        }
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -817,6 +884,11 @@ public class FirebaseManager : MonoBehaviour
         {
             //References are now updated
         }
+    }
+
+    public void CallSendReferences(string _name, string _email, string _position, string _phonenumber, List<string> _skills)
+    {
+        StartCoroutine(UpdateReferences(_name, _email, _position, _phonenumber, _skills));
     }
 
     private IEnumerator UpdateDreamJob(string _dreamjob, List<string> _dreamjobSkills)
@@ -839,12 +911,12 @@ public class FirebaseManager : MonoBehaviour
 
     #region Coach and Emotion Selection
 
-    public void Coach1() { coach = 1;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[0].interactable = false; coachButtons[13].interactable = false; }
-    public void Coach2() { coach = 2;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[1].interactable = false; coachButtons[13].interactable = false; }
-    public void Coach3() { coach = 3;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[2].interactable = false; coachButtons[13].interactable = false; }
-    public void Coach4() { coach = 4;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[3].interactable = false; coachButtons[13].interactable = false; }
-    public void Coach5() { coach = 5;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[4].interactable = false; coachButtons[13].interactable = false; }
-    public void Coach6() { coach = 6;  CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[5].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach1() { coach = 1; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[0].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach2() { coach = 2; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[1].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach3() { coach = 3; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[2].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach4() { coach = 4; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[3].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach5() { coach = 5; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[4].interactable = false; coachButtons[13].interactable = false; }
+    public void Coach6() { coach = 6; CoachSelection(); for (int i = 0; i < coachButtons.Length; i++) { coachButtons[i].interactable = true; } coachButtons[5].interactable = false; coachButtons[13].interactable = false; }
 
     public void CoachSelection()
     {
@@ -1071,15 +1143,14 @@ public class FirebaseManager : MonoBehaviour
 
             profileUniversityText.text = snapshot.Child("university").Value.ToString();
 
-            //THIS RECOGNISES THERE IS TWO BUT
-            //TODO: HOW CAN WE READ EACH OF THESE????
-            Debug.Log(snapshot.Child("skills").ChildrenCount.ToString());
+            #region Skills Load Data
+            //Debug.Log(snapshot.Child("skills").ChildrenCount.ToString());
 
             foreach (DataSnapshot childSnapshot in snapshot.Child("skills").Children.Skip(0))
             {
-                Debug.Log(childSnapshot.Child("name").Value.ToString());
+                /*Debug.Log(childSnapshot.Child("name").Value.ToString());
                 Debug.Log(childSnapshot.Child("description").Value.ToString());
-                Debug.Log(childSnapshot.Child("level").Value.ToString());
+                Debug.Log(childSnapshot.Child("level").Value.ToString());*/
                 string skill = childSnapshot.Child("name").Value.ToString();
                 string description = childSnapshot.Child("description").Value.ToString();
                 int level = int.Parse(childSnapshot.Child("level").Value.ToString());
@@ -1089,38 +1160,170 @@ public class FirebaseManager : MonoBehaviour
                 dynamicUIManager._addNewSkillData.Name = skill;
                 dynamicUIManager._addNewSkillData.LevelName = description;
                 dynamicUIManager._addNewSkillData.Level = level;
-                Debug.Log("The skill is: " + dynamicUIManager._addNewSkillData.Name + dynamicUIManager._addNewSkillData.LevelName + dynamicUIManager._addNewSkillData.Level);
+                //Debug.Log("The skill is: " + dynamicUIManager._addNewSkillData.Name + dynamicUIManager._addNewSkillData.LevelName + dynamicUIManager._addNewSkillData.Level);
                 dynamicUIManager.CreateSkillButton(dynamicUIManager._addNewSkillData.Name, dynamicUIManager._addNewSkillData.LevelName, dynamicUIManager._addNewSkillData.Level, null);
                 dynamicUIManager.SaveSkill();
                 dynamicUIManager._addNewSkillData = null;
             }
+            #endregion Skills Load Data
 
-            //var skill = accountManager.localUserAccount.SaveSkill(dynamicUIManager._addNewSkillData);
+            #region Experience Load Data
+            //Debug.Log(snapshot.Child("experiences").Value.ToString());
 
-            //accountManager.localUserAccount._skills.Add(snapshot.Value.ToString());
-
-            //StartCoroutine(LoadSkillData());
-            //LoadSkillData();
-            
-            //var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").
-
-            /*var DBSkills = DBreference.Child("users").Child(user.UserId).Child("skills").LimitToLast(50).GetValueAsync().ContinueWith(DBSkills =>
+            foreach (DataSnapshot childSnapshot in snapshot.Child("experiences").Children.Skip(0))
             {
-                if (DBSkills.IsCompleted)
+                /*Debug.Log(childSnapshot.Child("role").Value.ToString());
+                Debug.Log(childSnapshot.Child("place").Value.ToString());
+                Debug.Log(childSnapshot.Child("description").Value.ToString());
+                Debug.Log(childSnapshot.Child("comments").Value.ToString());
+                Debug.Log(childSnapshot.Child("start").Value.ToString());
+                Debug.Log(childSnapshot.Child("end").Value.ToString());
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
                 {
+                    Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                }*/
+
+                dynamicUIManager._addNewExperienceData = new ExperienceData();
+                dynamicUIManager._addNewExperienceData.RoleInExperience = childSnapshot.Child("role").Value.ToString();
+                dynamicUIManager._addNewExperienceData.ExperienceLocale = childSnapshot.Child("place").Value.ToString();
+                dynamicUIManager._addNewExperienceData.Description = childSnapshot.Child("description").Value.ToString();
+                dynamicUIManager._addNewExperienceData.Comments = childSnapshot.Child("comments").Value.ToString();
+                dynamicUIManager._addNewExperienceData.StartDate = System.DateTime.Parse(childSnapshot.Child("start").Value.ToString());
+                dynamicUIManager._addNewExperienceData.EndDate = System.DateTime.Parse(childSnapshot.Child("end").Value.ToString());
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
+                {
+                    dynamicUIManager._addNewExperienceData.Skills.Add(innerChildSnapshot.Child("name").Value.ToString());
+                }
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("course").Children.Skip(0))
+                {
+                    dynamicUIManager._addNewExperienceData.CourseOccured.Add(innerChildSnapshot.Child("name").Value.ToString());
+                }
+                dynamicUIManager.SaveExperience();
+                dynamicUIManager._addNewExperienceData = null;
+            }
+            #endregion Experience Load Data
+
+            #region Artifact Load Data
+            //Debug.Log(snapshot.Child("artifacts").Value.ToString());
+
+            foreach (DataSnapshot childSnapshot in snapshot.Child("artifacts").Children.Skip(0))
+            {
+                /*Debug.Log(childSnapshot.Child("title").Value.ToString());
+                Debug.Log(childSnapshot.Child("type").Value.ToString());
+                Debug.Log(childSnapshot.Child("description").Value.ToString());
+                Debug.Log(childSnapshot.Child("url").Value.ToString());
+
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
+                {
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                    } else
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value == null);
+                    }
                     
-                    Debug.Log("Skills successfully pulled");
-                    Debug.Log(DBSkills.Result.Value.ToString());
-                    DataSnapshot snapshotSkills = DBSkills.Result;
-                    Debug.Log(snapshotSkills.Child("name").Value.ToString());
-                    Debug.Log(snapshotSkills.Child("description").Value.ToString());
-                    Debug.Log(snapshotSkills.Child("level").Value.ToString());
                 }
-                else
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("experiences").Children.Skip(0))
                 {
-                    Debug.Log("Skill were not successfully pulled, try again");
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                    } else
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value == null);
+                    }
+                }*/
+
+                dynamicUIManager._addNewArtifactData = new ArtifactData();
+                dynamicUIManager._addNewArtifactData.Title = childSnapshot.Child("title").Value.ToString();
+                if (childSnapshot.Child("type").Value.ToString() == "Document")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Document;
                 }
-            });*/
+                if (childSnapshot.Child("type").Value.ToString() == "Image")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Image;
+                }
+                if (childSnapshot.Child("type").Value.ToString() == "Link")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Link;
+                }
+                if (childSnapshot.Child("type").Value.ToString() == "Repository")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Repository;
+                }
+                if (childSnapshot.Child("type").Value.ToString() == "Video")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Video;
+                }
+                if (childSnapshot.Child("type").Value.ToString() == "Note")
+                {
+                    dynamicUIManager._addNewArtifactData.type = ArtifactData.ArtifactType.Note;
+                }
+
+                dynamicUIManager._addNewArtifactData.Description = childSnapshot.Child("description").Value.ToString();
+                dynamicUIManager._addNewArtifactData.URL = childSnapshot.Child("url").Value.ToString();
+
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
+                {
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        //Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                        dynamicUIManager._addNewArtifactData.Skills.Add(innerChildSnapshot.Child("name").Value.ToString());
+                    }
+                }
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("experiences").Children.Skip(0))
+                {
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        //Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                        dynamicUIManager._addNewArtifactData.Experiences.Add(innerChildSnapshot.Child("name").Value.ToString());
+                    }
+                }
+                dynamicUIManager.SaveArtifact();
+                dynamicUIManager._addNewArtifactData = null;
+            }
+            #endregion Artifact Load Data
+
+            #region Reference Load Data
+            //Debug.Log(snapshot.Child("references").Value.ToString());
+
+            foreach (DataSnapshot childSnapshot in snapshot.Child("references").Children.Skip(0))
+            {
+                /*Debug.Log(childSnapshot.Child("name").Value.ToString());
+                Debug.Log(childSnapshot.Child("email").Value.ToString());
+                Debug.Log(childSnapshot.Child("position").Value.ToString());
+
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
+                {
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                    }
+                    else
+                    {
+                        Debug.Log(innerChildSnapshot.Child("name").Value == null);
+                    }
+                }*/
+
+                dynamicUIManager._addNewReferenceData = new ReferenceData();
+                dynamicUIManager._addNewReferenceData.Name = childSnapshot.Child("name").Value.ToString();
+                dynamicUIManager._addNewReferenceData.Email = childSnapshot.Child("email").Value.ToString();
+                dynamicUIManager._addNewReferenceData.Position = childSnapshot.Child("position").Value.ToString();
+
+                foreach (DataSnapshot innerChildSnapshot in childSnapshot.Child("skills").Children.Skip(0))
+                {
+                    if (innerChildSnapshot.Child("name").Value != null)
+                    {
+                        //Debug.Log(innerChildSnapshot.Child("name").Value.ToString());
+                        dynamicUIManager._addNewReferenceData.Skills.Add(innerChildSnapshot.Child("name").Value.ToString());
+                    }
+                }
+                dynamicUIManager.SaveReference();
+                dynamicUIManager._addNewReferenceData = null;
+            }
+            #endregion Reference Load Data
         }
     }
 
@@ -1165,9 +1368,9 @@ public class FirebaseManager : MonoBehaviour
         }
     }*/
 
-    public IEnumerator LoadSkills()
+    /*public IEnumerator LoadSkills()
     {
-        /*//TODO: RE-ADD IN AFTER MEETING
+        *//*//TODO: RE-ADD IN AFTER MEETING
         var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
         FirebaseDatabase.DefaultInstance.GetReference("skills").GetValueAsync().ContinueWith(DBTask =>
         {
@@ -1185,7 +1388,7 @@ public class FirebaseManager : MonoBehaviour
                     Debug.Log(DBTask);
                 }
             }
-        });*/
+        });*//*
 
         //DBreference.Child("users").Child(user.UserId).Child("skills").
 
@@ -1224,5 +1427,5 @@ public class FirebaseManager : MonoBehaviour
             //accountManager.localUserAccount._skills.
             //accountManager.localUserAccount._skills.Add(snapshot.Child("skills").Value;
         }
-    }
+    }*/
 }

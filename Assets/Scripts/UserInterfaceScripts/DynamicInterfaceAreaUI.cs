@@ -502,9 +502,10 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                         _addNewArtifactData.Experiences.Add(_listItems[i]._ToggleItemName.text);
                 }
 
-                SaveArtifact();
                 AddNewArtifact(pageNumber + 1);
-                _addNewArtifactData = null;
+                /*SaveArtifact();
+                SaveArtifactWithFirebase();
+                _addNewArtifactData = null;*/
             }, 255, 255, 255, 255, 255, 255);
         }
         else if (pageNumber == 5)
@@ -541,8 +542,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveArtifact();
-                  //TODO: ADD FIREBASE FUNCTIONS HERE
-                  //SaveArtifactWithFirebase();
+                  SaveArtifactWithFirebase();
 
                   _addNewArtifactData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
@@ -633,8 +633,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
               delegate
               {
                   SaveReference();
-                  //TODO:ADD FIREBASE REFERENCE
-                  //SaveReferenceWithFirebase();
+                  SaveReferenceWithFirebase();
 
                   _addNewReferenceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
@@ -711,8 +710,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Where did this experience take place?");
             EditButton.SetActive(false);
-            CreateButton("Academic", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Practical", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Academic", delegate { AddNewExperiencePage(pageNumber + 1); _addNewExperienceData.ExperienceLocale = "Academic"; }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Practical", delegate { AddNewExperiencePage(pageNumber + 1); _addNewExperienceData.ExperienceLocale = "Practical"; }, 255, 255, 255, 255, 255, 255);
 
         }
         else if (pageNumber == 5)
@@ -831,6 +830,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateDisplayGroup("<b>Experience</b>");
             CreateDisplayGroup(_addNewExperienceData.ExperienceLocale);
 
+            CreateDisplayGroup("<b>Start & End Date</b>");
+            CreateDisplayGroup(_addNewExperienceData.StartDate.ToShortDateString() + " -\n" + _addNewExperienceData.EndDate.ToShortDateString());
+
             CreateDisplayGroup("<b>Role</b>");
             CreateDisplayGroup(_addNewExperienceData.RoleInExperience);
 
@@ -845,6 +847,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateButton("Confirm",
               delegate
               {
+
                   SaveExperience();
                   SaveExperienceWithFirebase();
                   _addNewExperienceData = null;
@@ -1295,7 +1298,6 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public void SaveSkill()
     {
         accountManager.localUserAccount.SaveSkill(_addNewSkillData);
-        
     }
 
     public void SaveSkillWithFirebase()
@@ -1308,9 +1310,19 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         accountManager.localUserAccount.SaveArtifact(_addNewArtifactData);
     }
 
+    public void SaveArtifactWithFirebase()
+    {
+        firebaseDatabaseManager.CallSendArtifacts(_addNewArtifactData.type.ToString(), _addNewArtifactData.Title, _addNewArtifactData.Description, _addNewArtifactData.URL, _addNewArtifactData.ArtificatContent, _addNewArtifactData.Skills, _addNewArtifactData.Experiences);
+    }
+
     public void SaveReference()
     {
         accountManager.localUserAccount.SaveReference(_addNewReferenceData);
+    }
+
+    public void SaveReferenceWithFirebase()
+    {
+        firebaseDatabaseManager.CallSendReferences(_addNewReferenceData.Name, _addNewReferenceData.Email, _addNewReferenceData.Position, _addNewReferenceData.PhoneNumber, _addNewReferenceData.Skills);
     }
 
     public void SaveExperience()
@@ -1320,13 +1332,13 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
     public void SaveExperienceWithFirebase()
     {
-        firebaseDatabaseManager.CallSendExperiences(_addNewExperienceData.ExperienceLocale, _addNewExperienceData.RoleInExperience, _addNewExperienceData.StartDate, _addNewExperienceData.EndDate, _addNewExperienceData.Description, _addNewExperienceData.Comments, _addNewExperienceData.Skills, _addNewExperienceData.CourseOccured);
+        firebaseDatabaseManager.CallSendExperiences(_addNewExperienceData.ExperienceLocale, _addNewExperienceData.RoleInExperience, _addNewExperienceData.StartDate.ToShortDateString(), _addNewExperienceData.EndDate.ToShortDateString(), _addNewExperienceData.Description, _addNewExperienceData.Comments, _addNewExperienceData.Skills/*, _addNewExperienceData.CourseOccured*/);
     }
 
     public List<string> getDatabaseReference(List<ReferenceData> _references)
     {
         List<string> _data = new List<string>();
-        _data.Add("N/A");
+        _data.Add("Not Applicable");
 
         for (int i = 0; i < _references.Count; i++)
         {
@@ -1339,7 +1351,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public List<string> getDatabaseExperiences(List<ExperienceData> _experiences)
     {
         List<string> _data = new List<string>();
-        _data.Add("N/A");
+        _data.Add("Not Applicable");
 
         for (int i = 0; i < _experiences.Count; i++)
         {
@@ -1352,7 +1364,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public List<string> getDatabaseArtifacts(List<ArtifactData> _artifacts)
     {
         List<string> _data = new List<string>();
-        _data.Add("N/A");
+        _data.Add("Not Applicable");
 
         for (int i = 0; i < _artifacts.Count; i++)
         {
@@ -1366,7 +1378,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public List<string> getDatabaseSkills(List<SkillData> _skillData)
     {
         List<string> _data = new List<string>();
-        _data.Add("N/A");
+        _data.Add("Not Applicable");
 
         for (int i = 0; i < _skillData.Count; i++)
         {
