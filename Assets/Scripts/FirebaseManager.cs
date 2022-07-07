@@ -112,6 +112,8 @@ public class FirebaseManager : MonoBehaviour
     private AccountManager accountManager;
     [SerializeField]
     private DynamicInterfaceAreaUI dynamicUIManager;
+    [SerializeField]
+    private UserInterfaceManagerUI uiManager;
 
     private void Awake() {
 
@@ -146,6 +148,14 @@ public class FirebaseManager : MonoBehaviour
     {
         StartCoroutine(CheckAndFixDependencies());
     }
+
+    /*void Update()
+    {
+        uiManager.TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills";
+        uiManager.HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString();
+        uiManager.HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString();
+        uiManager.HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString();
+    }*/
 
     /*private void FixedUpdate()
     {
@@ -231,7 +241,11 @@ public class FirebaseManager : MonoBehaviour
                 //TODO: WE WILL RETURN TO THIS SCREEN AFTER THE LAUNCH BUILD
                 //AuthUIManager.instance.CoachSelectionScreen();
 
-                AuthUIManager.instance.HomeScreen();
+                AuthUIManager.instance.HomeScreen(); 
+                /*uiManager.TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills";
+                uiManager.HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString();
+                uiManager.HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString();
+                uiManager.HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString();*/
 
                 /*for (int i=0; i<coachButtons.Length; i++)
                 {
@@ -369,6 +383,9 @@ public class FirebaseManager : MonoBehaviour
             loginOutputText.text = "User successfully signed out.";
             //TODO: REMOVE ALL FROM THE LIST - ADD REST
             accountManager.localUserAccount._skills.Clear();
+            accountManager.localUserAccount._artifacts.Clear();
+            accountManager.localUserAccount._experiences.Clear();
+            accountManager.localUserAccount._references.Clear();
             StartCoroutine(SignOutLogic());
         }
         else
@@ -445,6 +462,7 @@ public class FirebaseManager : MonoBehaviour
                 //TODO: WE WILL RETURN TO THE COACH SELECTION AFTER THE LAUNCH BUILD OF THE APP
                 //AuthUIManager.instance.CoachSelectionScreen();
                 AuthUIManager.instance.HomeScreen();
+
                 ClearLoginFields();
                 ClearRegisterFields();
             }
