@@ -51,6 +51,14 @@ public class DreamJobInfo : MonoBehaviour
     private GameObject selectADreamJob;
     [SerializeField]
     private GameObject dreamJobCompletionWindow;
+    [SerializeField]
+    public string selectedDreamJob;
+    [SerializeField]
+    public int selectedDreamJobCategory;
+    [SerializeField]
+    public int selectedDreamJobIndex;
+    [SerializeField]
+    public bool screen;
     [Space(5f)]
 
     //THIS MAY NOT BE NEEDED, PRECAUTION FOR THE TIME BEING
@@ -71,11 +79,12 @@ public class DreamJobInfo : MonoBehaviour
     [Header("Dream Job Skill Information")]
     public SkillsRepository skillData; 
     public AccountManager accountManager;
+    public FirebaseManager firebaseManager;
 
     public List<string> dreamJobSkillsList = new List<string>();
 
-    private UserInterfaceManagerUI userInterfaceManager;
-    private DynamicInterfaceAreaUI dynamicInterfaceManager;
+    [SerializeField] private UserInterfaceManagerUI userInterfaceManager;
+    [SerializeField] private DynamicInterfaceAreaUI dynamicInterfaceManager;
 
     [SerializeField] GameObject Toggles;
     [SerializeField] Transform maskPanel;
@@ -180,12 +189,30 @@ public class DreamJobInfo : MonoBehaviour
         //Search function, if the input field contains the name or letter preferably of a word already then it will stay
         for (int i = 0; i < lawList.Length; i++)
         {
-            if (dreamJobInput.text.Contains(lawList[i].name)) { lawList[i].SetActive(true); noResultsFound.SetActive(false); }
-            if (dreamJobInput.text.Contains(educationList[i].name)) { educationList[i].SetActive(true); noResultsFound.SetActive(false); }
-            if (dreamJobInput.text.Contains(literatureList[i].name)) { literatureList[i].SetActive(true); noResultsFound.SetActive(false); }
-            if (dreamJobInput.text.Contains(scienceEngineeringList[i].name)) { scienceEngineeringList[i].SetActive(true); noResultsFound.SetActive(false); }
-            //TODO: ADD MORE DREAM JOBS HERE AS THEY ARE ADDED
+            if (dreamJobInput.text.Contains(lawList[i].name)) { lawList[i].SetActive(true); noResultsFound.SetActive(false); }if (dreamJobInput.text.Contains(educationList[i].name)) { educationList[i].SetActive(true); noResultsFound.SetActive(false); }
         }
+
+        for (int i = 0; i < educationList.Length; i++)
+        {
+            if (dreamJobInput.text.Contains(educationList[i].name)) { educationList[i].SetActive(true); noResultsFound.SetActive(false); }
+        }
+
+        for (int i = 0; i < literatureList.Length; i++)
+        {
+            if (dreamJobInput.text.Contains(literatureList[i].name)) { literatureList[i].SetActive(true); noResultsFound.SetActive(false); }
+        }
+
+        for (int i = 0; i < scienceEngineeringList.Length; i++)
+        {
+            if (dreamJobInput.text.Contains(scienceEngineeringList[i].name)) { scienceEngineeringList[i].SetActive(true); noResultsFound.SetActive(false); }
+        }
+
+        for (int i = 0; i < psychologyList.Length; i++)
+        {
+            if (dreamJobInput.text.Contains(psychologyList[i].name)) { psychologyList[i].SetActive(true); noResultsFound.SetActive(false); }
+        }
+
+        //TODO: ADD MORE DREAM JOBS HERE AS THEY ARE ADDED
 
         //Constantly checking if all the toggles are on, if so... it has met the required to complete the Dream Job
         /*if (DreamJobScreen.activeInHierarchy == true)
@@ -194,7 +221,7 @@ public class DreamJobInfo : MonoBehaviour
             
         }*/
 
-        
+
 
 
         /*for (int i = 0; i < dreamJobSkillsList.Count; i++)
@@ -266,7 +293,7 @@ public class DreamJobInfo : MonoBehaviour
         {
             dreamJobProgressSlider.value -= 2;
         }
-        
+
         /*for (int i = 0; i < displayDreamJobContent.Count; i++)
         {
             //displayDreamJobContent
@@ -385,8 +412,21 @@ public class DreamJobInfo : MonoBehaviour
                 }
             }
         }
+        Debug.Log("The bool is: " + screen);
+        if (screen) { userInterfaceManager.Open_MyDreamJob(); }
+        SaveDreamJobWithFirebase();
+    }
 
-        userInterfaceManager.Open_MyDreamJob();
+    public void SaveDreamJobWithFirebase()
+    {
+        //TODO: CHANGE THIS TO SUIT THE DREAM JOB SELECTION MORE EFFICIENTLY
+        firebaseManager.CallSendDreamJob(selectedDreamJob, selectedDreamJobCategory, selectedDreamJobIndex);
+    }
+
+    public IEnumerator DreamJobDelay()
+    {
+        userInterfaceManager.Open_Home();
+        yield return new WaitForSeconds(1f);
     }
 
     #region Pass Dream Job Names
@@ -397,8 +437,12 @@ public class DreamJobInfo : MonoBehaviour
         switch (index)
         {
             case 0:
-                dreamJobName = "Administration/ Corporate Support";
+                dreamJobName = "Administration & Corporate Support";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -462,6 +506,10 @@ public class DreamJobInfo : MonoBehaviour
             case 1:
                 dreamJobName = "Data & Analytics (Legal Analyst)";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -529,6 +577,10 @@ public class DreamJobInfo : MonoBehaviour
             case 2:
                 dreamJobName = "Legal Professional";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -592,6 +644,10 @@ public class DreamJobInfo : MonoBehaviour
             case 3:
                 dreamJobName = "Governance";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -658,6 +714,10 @@ public class DreamJobInfo : MonoBehaviour
             case 4:
                 dreamJobName = "Strategy";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -668,7 +728,7 @@ public class DreamJobInfo : MonoBehaviour
                 dreamJobSkillsList.Add(skillData.hardSkillList.skills[5].Skill.ToString());
 
                 //custom skills not in the repository
-                dreamJobSkillsList.Add("Budget Allocation/ Cost Management");
+                dreamJobSkillsList.Add("Budget Allocation & Cost Management");
                 dreamJobSkillsList.Add("Strategy Planning");
                 dreamJobSkillsList.Add("Logical and Inductive Reasoning");
 
@@ -726,6 +786,10 @@ public class DreamJobInfo : MonoBehaviour
             case 5:
                 dreamJobName = "Planning";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -790,6 +854,10 @@ public class DreamJobInfo : MonoBehaviour
             case 6:
                 dreamJobName = "Research & Development";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -856,6 +924,10 @@ public class DreamJobInfo : MonoBehaviour
             case 7:
                 dreamJobName = "Press Relations";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -924,6 +996,10 @@ public class DreamJobInfo : MonoBehaviour
             case 8:
                 dreamJobName = "Teaching & Education";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -997,6 +1073,10 @@ public class DreamJobInfo : MonoBehaviour
             case 9:
                 dreamJobName = "Environment & Sustainability";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 0;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1067,6 +1147,10 @@ public class DreamJobInfo : MonoBehaviour
             case 0:
                 dreamJobName = "Audio-Visual Technician";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1127,6 +1211,10 @@ public class DreamJobInfo : MonoBehaviour
             case 1:
                 dreamJobName = "Careers Advisor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1190,6 +1278,10 @@ public class DreamJobInfo : MonoBehaviour
             case 2:
                 dreamJobName = "Child Protection Officer";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1253,6 +1345,10 @@ public class DreamJobInfo : MonoBehaviour
             case 3:
                 dreamJobName = "Communication Support Worker";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1317,6 +1413,10 @@ public class DreamJobInfo : MonoBehaviour
             case 4:
                 dreamJobName = "Community Education Co-ordinator";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1382,6 +1482,10 @@ public class DreamJobInfo : MonoBehaviour
             case 5:
                 dreamJobName = "Nursery Worker";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1441,6 +1545,10 @@ public class DreamJobInfo : MonoBehaviour
             case 6:
                 dreamJobName = "Ofsted Inspector";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1450,7 +1558,7 @@ public class DreamJobInfo : MonoBehaviour
                 dreamJobSkillsList.Add(skillData.hardSkillList.skills[1].Skill.ToString());
 
                 //custom skills not in the repository
-                dreamJobSkillsList.Add("Observation/ Interviewing Skills");
+                dreamJobSkillsList.Add("Observation & Interviewing Skills");
 
                 //Organisational Skills B
                 //Discipline, Planning, Punctuality, Time Management, Meticulousness (B10)
@@ -1503,6 +1611,10 @@ public class DreamJobInfo : MonoBehaviour
             case 7:
                 dreamJobName = "Online Tutor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1563,6 +1675,10 @@ public class DreamJobInfo : MonoBehaviour
             case 8:
                 dreamJobName = "Outdoors Activities Instructor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1623,6 +1739,10 @@ public class DreamJobInfo : MonoBehaviour
             case 9:
                 dreamJobName = "Play Worker";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1683,6 +1803,10 @@ public class DreamJobInfo : MonoBehaviour
             case 10:
                 dreamJobName = "Portage Home Visitor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1744,6 +1868,10 @@ public class DreamJobInfo : MonoBehaviour
             case 11:
                 dreamJobName = "Primary School Worker";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1809,6 +1937,10 @@ public class DreamJobInfo : MonoBehaviour
             case 12:
                 dreamJobName = "Prison Instructor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1876,6 +2008,10 @@ public class DreamJobInfo : MonoBehaviour
             case 13:
                 dreamJobName = "QCF Assessor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -1946,6 +2082,10 @@ public class DreamJobInfo : MonoBehaviour
             case 14:
                 dreamJobName = "R&D Manager";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2026,6 +2166,10 @@ public class DreamJobInfo : MonoBehaviour
             case 15:
                 dreamJobName = "School Business Manager";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2099,6 +2243,10 @@ public class DreamJobInfo : MonoBehaviour
             case 16:
                 dreamJobName = "School for Life Teacher";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2167,6 +2315,10 @@ public class DreamJobInfo : MonoBehaviour
             case 17:
                 dreamJobName = "SEN Teacher";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2229,6 +2381,10 @@ public class DreamJobInfo : MonoBehaviour
             case 18:
                 dreamJobName = "SEN Teaching Assistant";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2292,6 +2448,10 @@ public class DreamJobInfo : MonoBehaviour
             case 19:
                 dreamJobName = "Training Manager";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2355,6 +2515,10 @@ public class DreamJobInfo : MonoBehaviour
             case 20:
                 dreamJobName = "Training Officer";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2416,6 +2580,10 @@ public class DreamJobInfo : MonoBehaviour
             case 21:
                 dreamJobName = "Youth Worker";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 1;
+                selectedDreamJobIndex = index;
+                screen = true;
                 //Debug.Log(dreamJobName);
 
                 //dreamJobSkillsList.Add(skillData.hardSkillList.skills[0].Skill.ToString());
@@ -2480,6 +2648,10 @@ public class DreamJobInfo : MonoBehaviour
             case 0:
                 dreamJobName = "Editorial Roles";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Analytical, Proficient IT, Research
@@ -2545,6 +2717,10 @@ public class DreamJobInfo : MonoBehaviour
             case 1:
                 dreamJobName = "Teaching & Education";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Analytical, Digital Literacy, Applied Knowledge, Research
@@ -2617,6 +2793,10 @@ public class DreamJobInfo : MonoBehaviour
             case 2:
                 dreamJobName = "Training";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Digital Literacy, Applied Knowledge
@@ -2682,6 +2862,10 @@ public class DreamJobInfo : MonoBehaviour
             case 3:
                 dreamJobName = "Media Correspondant";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Digital Literacy, Research
@@ -2752,8 +2936,12 @@ public class DreamJobInfo : MonoBehaviour
                 break;
 
             case 4:
-                dreamJobName = "Creative/ Content Writer";
+                dreamJobName = "Creative & Content Writer";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Analytical, Digital Literacy, Research
@@ -2821,6 +3009,10 @@ public class DreamJobInfo : MonoBehaviour
             case 5:
                 dreamJobName = "Performing Arts";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Analytical
@@ -2900,6 +3092,10 @@ public class DreamJobInfo : MonoBehaviour
             case 0:
                 dreamJobName = "Data & Analytics";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Domain Knowledge");
@@ -2950,6 +3146,10 @@ public class DreamJobInfo : MonoBehaviour
             case 1:
                 dreamJobName = "Engineering";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Science & Technology Knowledge");
@@ -3005,6 +3205,10 @@ public class DreamJobInfo : MonoBehaviour
             case 2:
                 dreamJobName = "Research & Development";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Domain Knowledge");
@@ -3062,6 +3266,10 @@ public class DreamJobInfo : MonoBehaviour
             case 3:
                 dreamJobName = "Security";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 2;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //Industry/ Hard Skills  A
                 //Analytical
@@ -3125,6 +3333,10 @@ public class DreamJobInfo : MonoBehaviour
             case 0:
                 dreamJobName = "Administration & Corporate Support";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Organizational Psychology");
@@ -3194,6 +3406,10 @@ public class DreamJobInfo : MonoBehaviour
             case 1:
                 dreamJobName = "Training";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Organizational Psychology");
@@ -3259,6 +3475,10 @@ public class DreamJobInfo : MonoBehaviour
             case 2:
                 dreamJobName = "Teaching & Education";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Developmental Psychology");
@@ -3317,6 +3537,10 @@ public class DreamJobInfo : MonoBehaviour
             case 3:
                 dreamJobName = "Research & Development";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Methodological Awareness");
@@ -3386,6 +3610,10 @@ public class DreamJobInfo : MonoBehaviour
             case 4:
                 dreamJobName = "Managerial";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Organizational Psychology");
@@ -3455,6 +3683,10 @@ public class DreamJobInfo : MonoBehaviour
             case 5:
                 dreamJobName = "Counselling & Therapy";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Clinical Psychology");
@@ -3519,6 +3751,10 @@ public class DreamJobInfo : MonoBehaviour
             case 6:
                 dreamJobName = "Health Professional";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Clinical Psychology");
@@ -3584,6 +3820,10 @@ public class DreamJobInfo : MonoBehaviour
             case 7:
                 dreamJobName = "Health & Safety";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Occupational Stress Factors");
@@ -3648,6 +3888,10 @@ public class DreamJobInfo : MonoBehaviour
             case 8:
                 dreamJobName = "Governance";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Social Psychology");
@@ -3718,6 +3962,10 @@ public class DreamJobInfo : MonoBehaviour
             case 9:
                 dreamJobName = "Human Resource ES";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Knowledge of Organisational Psychology");
@@ -3793,6 +4041,10 @@ public class DreamJobInfo : MonoBehaviour
             case 10:
                 dreamJobName = "Data & Analytics";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Quantitative Research");
@@ -3858,6 +4110,10 @@ public class DreamJobInfo : MonoBehaviour
             case 11:
                 dreamJobName = "Customer Insight";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Marketing Knowledge");
@@ -3944,8 +4200,12 @@ public class DreamJobInfo : MonoBehaviour
                 break;
 
             case 12:
-                dreamJobName = "Marketing/ Communication";
+                dreamJobName = "Marketing & Communication";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Marketing Knowledge");
@@ -4019,6 +4279,10 @@ public class DreamJobInfo : MonoBehaviour
             case 13:
                 dreamJobName = "Press Relations";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Marketing Knowledge");
@@ -4096,6 +4360,10 @@ public class DreamJobInfo : MonoBehaviour
             case 14:
                 dreamJobName = "Career Advisor";
                 dreamJobTitle.text = dreamJobName;
+                selectedDreamJob = dreamJobName;
+                selectedDreamJobCategory = 3;
+                selectedDreamJobIndex = index;
+                screen = true;
 
                 //custom skills not in the repository
                 dreamJobSkillsList.Add("Career Councelling");

@@ -114,6 +114,8 @@ public class FirebaseManager : MonoBehaviour
     private DynamicInterfaceAreaUI dynamicUIManager;
     [SerializeField]
     private UserInterfaceManagerUI uiManager;
+    [SerializeField]
+    private DreamJobInfo dreamJobInfoManager;
 
     private void Awake() {
 
@@ -909,9 +911,26 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(UpdateReferences(_name, _email, _position, _phonenumber, _skills));
     }
 
-    private IEnumerator UpdateDreamJob(string _dreamjob, List<string> _dreamjobSkills)
+
+
+    private IEnumerator UpdateDreamJob(string _name, int _category, int _index)
     {
-        var DBTask = DBreference.Child("users").Child(user.UserId).Child("dreamjob").Child(_dreamjob).SetValueAsync(_dreamjobSkills);
+        var DBTask = DBreference.Child("users").Child(user.UserId).Child("dreamjob").Child(_name).Child("name").SetValueAsync(_name);
+        DBreference.Child("users").Child(user.UserId).Child("dreamjob").Child(_name).Child("category").SetValueAsync(_category);
+        DBreference.Child("users").Child(user.UserId).Child("dreamjob").Child(_name).Child("index").SetValueAsync(_index);
+
+        /*foreach (var x in _skills)
+        {
+            if (x != null)
+            {
+                //Debug.Log(x.ToString());
+                DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("skills").Child(x.ToString()).Child("name").SetValueAsync(x.ToString());
+            }
+            else
+            {
+                DBreference.Child("users").Child(user.UserId).Child("references").Child(_name).Child("skills").SetValueAsync("null");
+            }
+        }*/
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -921,8 +940,13 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            //Dream job has been updated
+            //References are now updated
         }
+    }
+
+    public void CallSendDreamJob(string _name, int _category, int _index)
+    {
+        StartCoroutine(UpdateDreamJob(_name, _category, _index));
     }
 
     #endregion Write to Database
@@ -1139,7 +1163,7 @@ public class FirebaseManager : MonoBehaviour
     }*/
 
     //Loading in User Data with the Firebase Realtime Database
-    private IEnumerator LoadUserData(/*string skill*/)
+    private IEnumerator LoadUserData(/*int index*/)
     {
         var DBTask = DBreference.Child("users").Child(user.UserId).GetValueAsync();
 
@@ -1342,7 +1366,29 @@ public class FirebaseManager : MonoBehaviour
                 dynamicUIManager._addNewReferenceData = null;
             }
             #endregion Reference Load Data
+
+            #region Load Dream Job Data
+
+            //TODO: ADD IN DREAM JOB DATA
+            foreach (DataSnapshot childSnapshot in snapshot.Child("dreamjob").Children.Skip(0))
+            {
+                int _category = int.Parse(childSnapshot.Child("category").Value.ToString());
+                int _index = int.Parse(childSnapshot.Child("index").Value.ToString());
+
+                if (_category == 0) { dreamJobInfoManager.PassLawName(_index); StartCoroutine(dreamJobInfoManager.DreamJobDelay()); }
+                if (_category == 1) { dreamJobInfoManager.PassEducationName(_index); StartCoroutine(dreamJobInfoManager.DreamJobDelay()); }
+                if (_category == 2) { dreamJobInfoManager.PassLiteratureName(_index); StartCoroutine(dreamJobInfoManager.DreamJobDelay()); }
+                if (_category == 3) { dreamJobInfoManager.PassScienceEngineeringName(_index); StartCoroutine(dreamJobInfoManager.DreamJobDelay()); }
+                if (_category == 4) { dreamJobInfoManager.PassPsychologyName(_index); StartCoroutine(dreamJobInfoManager.DreamJobDelay()); }
+            }
+
+            #endregion Load Dream Job Data
         }
+    }
+
+    public void LoadDreamJobData(int index)
+    {
+        //switch (index)
     }
 
     /*private void LoadSkillData()

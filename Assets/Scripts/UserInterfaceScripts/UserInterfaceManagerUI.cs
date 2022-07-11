@@ -77,6 +77,14 @@ public class UserInterfaceManagerUI : MonoBehaviour
         BannerBottom.SetActive(false);
     }
 
+    void Update()
+    {
+        TotalSkillsAddedText.text = accountManager.localUserAccount._skills.Count + " Skills";
+        HomeScreenExpCountText.text = accountManager.localUserAccount._experiences.Count.ToString();
+        HomeScreenProjCountText.text = accountManager.localUserAccount._artifacts.Count.ToString();
+        HomeScreenRefCountText.text = accountManager.localUserAccount._references.Count.ToString();
+    }
+
     void LoadAllReferenceScreens()
     {
         for(int i=0; i< _holderScreen.transform.childCount; i++)
