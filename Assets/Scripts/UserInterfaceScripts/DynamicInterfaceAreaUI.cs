@@ -935,7 +935,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //Work Coach, Text "How do you want to practice your desired skills?", Two buttons(Learning Resources, Browse Physical Practice Options)
         if (pageNumber == 1)
         {
-            Configure_Top_Banner(false, true, "Learning Resources", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
+            Configure_Top_Banner(false, false, "Learning Resources", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
             EditButton.SetActive(false);
 
             CreateHeaderText(null, null, "How do you want to practice your desired skills?");
@@ -1122,7 +1122,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //1 - Employment Readiness
         if (pageNumber == 1)
         {
-            Configure_Top_Banner(false, true, "Employment Readiness", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
+            Configure_Top_Banner(false, false, "Employment Readiness", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); Debug.Log("back button pressed"); }, null, null);
             EditButton.SetActive(false);
 
             CreateWorkCoach(null, "Choose an option to prepare yourself for applying for a job.");
@@ -1135,11 +1135,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         }
         else
         {
-            Configure_Top_Banner(false, false, "Employment Readiness", delegate { AddEmploymentReadiness(pageNumber - 1); }, null, null);
+            Configure_Top_Banner(false, false, "Employment Readiness", delegate { AddEmploymentReadiness(pageNumber - 1); if (pageNumber == 1) { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); } }, null, null);
         }
         //2 - Create CV
         if (pageNumber == 2)
         {
+            Configure_Top_Banner(false, true, "Employment Readiness", delegate { AddEmploymentReadiness(pageNumber - 1); }, null, null);
             EditButton.SetActive(false);
 
             CreateWorkCoach(null, "Choose information you want to add to your CV.");
@@ -1227,6 +1228,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
+        //TODO:NOT NEEDED RIGHT NOW
         //4 - List of Video/ Audio learning resources
         else if (pageNumber == 4)
         {

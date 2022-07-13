@@ -91,16 +91,18 @@ public class FirebaseManager : MonoBehaviour
 
     [Header("Home References")]
     [SerializeField]
-    private TMP_Text welcomeOutputText;
+    public TMP_Text welcomeOutputText;
     [Space(5f)]
 
     [Header("Profile References")]
     [SerializeField]
-    private TMP_Text profileNameOutputText;
+    public TMP_Text profileNameOutputText;
     [SerializeField]
-    private TMP_Text profileUniversityText;
+    public TMP_Text profileUniversityText;
     [SerializeField]
-    private TMP_Text profileUsernameText;
+    public TMP_Text profileUsernameText;
+    [SerializeField]
+    public GameObject signoutButton;
     [Space(5f)]
 
     [Header("Bottom Banner")]
@@ -404,8 +406,9 @@ public class FirebaseManager : MonoBehaviour
         yield return new WaitForSeconds(4);
         loginOutput.SetActive(false);
         coachSelectionText.text = "";
-        emotionSelectionText.text = "";
-        //welcomeOutputText.text = "Welcome to the \nGES App!";
+        emotionSelectionText.text = "";/*
+        welcomeOutputText.text = "Welcome to the \nGES App!";*/
+
     }
 
     private IEnumerator LoginLogic(string _email, string _password)

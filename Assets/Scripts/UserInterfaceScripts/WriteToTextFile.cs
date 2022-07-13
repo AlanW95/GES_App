@@ -12,21 +12,25 @@ public class WriteToTextFile : MonoBehaviour
     void Start()
     {
         //create the folder
-        Directory.CreateDirectory(Application.streamingAssetsPath + "/Exported_CV/");
+        Directory.CreateDirectory(Application.persistentDataPath + "/Exported_CV_GES/");
     }
 
     public void CreateTextFile(string text)
     {
+
         string textDocumentName = "";
+
+        textDocumentName = Application.persistentDataPath + "/CVDetails.txt";
+
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
             //create the text file to download it
-            textDocumentName = Application.persistentDataPath + "CVDetails" + ".txt";
+            textDocumentName = Application.persistentDataPath + "/CVDetails.txt";
         }
         else
         {
             //create the text file at the already created directory in the start function
-            textDocumentName = Application.streamingAssetsPath + "/Exported_CV/" + "CVDetails" + ".txt";
+            textDocumentName = Application.persistentDataPath + "/Exported_CV/" + "CVDetails" + ".txt";
         }
         
 
