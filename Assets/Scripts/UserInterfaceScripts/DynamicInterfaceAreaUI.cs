@@ -1226,6 +1226,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
 
             CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Copy to Clipboard", delegate { textFileManager.CopyToClipboard("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
         //TODO:NOT NEEDED RIGHT NOW

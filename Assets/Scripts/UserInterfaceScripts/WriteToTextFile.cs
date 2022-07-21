@@ -47,4 +47,9 @@ public class WriteToTextFile : MonoBehaviour
             }
         }
     }
+
+    public void CopyToClipboard(string text)
+    {
+        GUIUtility.systemCopyBuffer = text;
+    }
 }
