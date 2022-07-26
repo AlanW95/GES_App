@@ -38,6 +38,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public Button ContinueButton;
     public Button[] BottomBannerButtons;
     public GameObject EditButton;
+    public Button AddButton;
 
     public ExperienceData _addNewExperienceData;
     public ArtifactData _addNewArtifactData;
@@ -149,6 +150,16 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //CaptureStringData(ref _addNewSkillData.Name, _skillName);
     }
 
+    public void AddButtonInteractable()
+    {
+        AddButton.interactable = true;
+    }
+
+    public void RemoveButtonInteractable()
+    {
+        AddButton.interactable = false;
+    }
+
     public void AddNewSkill(int pageNumber)
     {
         DestroyCurrentScreens();
@@ -169,10 +180,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             Configure_Top_Banner(false, true, "Add Skill", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
         }
         else
         {
             Configure_Top_Banner(false, false, "Add Skill", delegate { AddNewSkill(pageNumber - 1); }, null, null);
+            AddButton.interactable = false;
         }
 
         if (pageNumber == 1)
@@ -211,8 +224,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             Configure_Top_Banner(false, false, "Share Skill", delegate { userInterfaceManager.Open_AddSkills(); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
-            CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.<br><br><br>Please note: no data is stored in this current build of the app. Both buttons will progress, collecting no data.");
+            CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.");
 
             
 
@@ -235,6 +249,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             //TODO: CHANGE THISSSS
             //Configure_Top_Banner(false, false, "Skill Level", delegate { AddNewSkill(pageNumber - 1); }, true, delegate { /*show skill level information*/ });
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Select skill level:");
             CreateDisplayGroup("<b><u>" + _addNewSkillData.Name + "</b></u>");
             /*Transform _holder = CreateDisplayGroup(_addNewSkillData.Name).parent;*/
@@ -274,8 +289,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             Configure_Top_Banner(false, false, "Share Acquisition", delegate { AddNewSkill(pageNumber - 1); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
-            CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.<br><br><br>Please note: no data is stored in this current build of the app. Both buttons will progress, collecting no data.");
+            CreateDisplayGroup("Would you like to share this acquisition to the crowdsourced repository? This will allow the app to suggest new skills to you and others in similar situations based on your current skills and education.");
             CreateButton("Yes, I would love to contribute!",
             delegate
             {
@@ -302,6 +318,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateWorkCoach(null, "Please check all the information for your skill before proceeding!");
             //CreateSkillsDropDown(); //JUST FOR TESTING PURPOSES
             CreateDisplayGroup("");
@@ -321,6 +338,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveSkillWithFirebase();
                   _addNewSkillData = null;
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
+                  AddButton.interactable = true;
               }, 255, 255, 255, 255, 255, 255);
         }
     }
@@ -335,15 +353,18 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             Configure_Top_Banner(false, true, "Add Artifact", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
         }
         else
         {
             Configure_Top_Banner(false, false, "Add Artifact", delegate { AddNewArtifact(pageNumber - 1); }, null, null);
+            AddButton.interactable = false;
         }
 
 
         if (pageNumber == 1)
         {
+            AddButton.interactable = false;
             if (_addNewArtifactData == null)
                 _addNewArtifactData = new ArtifactData();
 
@@ -358,6 +379,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         else if (pageNumber == 2)
         {
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             //Document
             if (_addNewArtifactData.type == ArtifactData.ArtifactType.Document)
             {
@@ -470,6 +492,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Add relevant skills:");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewArtifactData.Skills, false);
 
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -490,6 +513,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Add relevant experiences:");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseExperiences(accountManager.localUserAccount._experiences), _addNewArtifactData.Experiences, true);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",
@@ -512,12 +536,13 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "<b>Artifact Summary</b><br><br>Please check all information before proceeding.");
             EditButton.SetActive(false);
-            CreateDisplayGroup("<b>Artifact</b>");
+            AddButton.interactable = false;
+            CreateDisplayGroup("\n<b><u>Artifact</u></b>");
             Transform _holder = CreateDisplayGroup(_addNewArtifactData.type.ToString()).parent;
             CreateDisplayGroup(_addNewArtifactData.Title, _holder);
             CreateDisplayGroup(_addNewArtifactData.Description, _holder);
 
-            CreateDisplayGroup("<b>Skill(s) Associated</b>");
+            CreateDisplayGroup("\n<b><u>Skill(s) Associated</u></b>");
             _holder = null;
             for (int i = 0; i < _addNewArtifactData.Skills.Count; i++)
             {
@@ -527,7 +552,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                     CreateDisplayGroup(_addNewArtifactData.Skills[i], _holder);
             }
 
-            CreateDisplayGroup("<b>Experience(s) Associated</b>");
+            CreateDisplayGroup("\n<b><u>Experience(s) Associated</u></b>");
             _holder = null;
             for (int i = 0; i < _addNewArtifactData.Experiences.Count; i++)
             {
@@ -546,6 +571,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
                   _addNewArtifactData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
+                  AddButton.interactable = true;
               }, 255, 255, 255, 255, 255, 255);
         }
     }
@@ -557,12 +583,14 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
         if (pageNumber == 1)
         {
-            Configure_Top_Banner(false, true, "Add Reference", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
+            Configure_Top_Banner(false, false, "Add Reference", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
         }
         else
         {
             Configure_Top_Banner(false, false, "Add Reference", delegate { AddNewReference(pageNumber - 1); }, null, null);
+            AddButton.interactable = false;
         }
 
         if (pageNumber == 1)
@@ -576,7 +604,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             ContentDataIdentiferUI _email = CreateEditInformationContent("Email", _addNewReferenceData.Email, TMP_InputField.ContentType.EmailAddress);
             //CreateEditInformationContent("Phone Number", TMP_InputField.ContentType.IntegerNumber, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateDisplayGroup("<b>By pressing continue you confirm that you have consent from the named reference to have their data processed and stored within this app and associated database(s).</b><br><br><b><i>Please note in this build of the app, no data is being stored.</i></b>");
+            CreateDisplayGroup("<b>By pressing continue you confirm that you have consent from the named reference to have their data processed and stored within this app and associated database(s).</b>");
             CreateButton("Continue", delegate
             {
                 CaptureStringData(ref _addNewReferenceData.Name, _name);
@@ -589,6 +617,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Skills that referee can vouch for:");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewReferenceData.Skills, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",
@@ -610,15 +639,16 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText("Reference Summary", pageNumber + "/" + totalPages, "Please check all information before proceeding.");
             EditButton.SetActive(false);
-            CreateDisplayGroup("<b>Reference</b>");
+            AddButton.interactable = false;
+            CreateDisplayGroup("\n<b><u>Reference</u></b>");
             Transform _holder = CreateDisplayGroup(_addNewReferenceData.Name).parent;
             CreateDisplayGroup(_addNewReferenceData.Position, _holder);
 
-            CreateDisplayGroup("<b>Contact Info</b>");
+            CreateDisplayGroup("\n<b><u>Contact Info</u></b>");
             _holder = CreateDisplayGroup(_addNewReferenceData.Email).parent;
             CreateDisplayGroup(_addNewReferenceData.PhoneNumber, _holder);
 
-            CreateDisplayGroup("<b>Skills Associated</b>");
+            CreateDisplayGroup("\n<b><u>Skills Associated</u></b>");
             _holder = null;
             for (int i = 0; i < _addNewReferenceData.Skills.Count; i++)
             {
@@ -637,6 +667,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
                   _addNewReferenceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
+                  AddButton.interactable = true;
               }, 255, 255, 255, 255, 255, 255);
         }
     }
@@ -653,10 +684,12 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             Configure_Top_Banner(false, true, "Add Experience", delegate { userInterfaceManager.ChangeWindow(userInterfaceManager.HomeScreen); }, null, null);
             EditButton.SetActive(false);
+            AddButton.interactable = false;
         }
         else
         {
             Configure_Top_Banner(false, false, "Add Experience", delegate { AddNewExperiencePage(pageNumber - 1); }, null, null);
+            AddButton.interactable = false;
         }
 
         if (pageNumber == 1)
@@ -679,6 +712,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "When did this experience take place?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _startDate = CreateDatePrefab("Start Date", _addNewExperienceData.StartDate).GetComponent<ContentDataIdentiferUI>();
             ContentDataIdentiferUI _endDate = CreateDatePrefab("End Date", _addNewExperienceData.EndDate).GetComponent<ContentDataIdentiferUI>();
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
@@ -690,6 +724,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
             CreateHeaderText(null, pageNumber + "/" + totalPages, "What skills did this experience help you improve at? You may choose more than one.");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _toggleHolder = CreateToggleItem(getDatabaseSkills(accountManager.localUserAccount._skills), _addNewExperienceData.Skills, false);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue",
@@ -710,6 +745,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Where did this experience take place?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Academic", delegate { AddNewExperiencePage(pageNumber + 1); _addNewExperienceData.ExperienceLocale = "Academic"; }, 255, 255, 255, 255, 255, 255);
             CreateButton("Practical", delegate { AddNewExperiencePage(pageNumber + 1); _addNewExperienceData.ExperienceLocale = "Practical"; }, 255, 255, 255, 255, 255, 255);
 
@@ -718,6 +754,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Give a brief description of the experience.");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Description, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue", delegate { _addNewExperienceData.Description = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
@@ -741,6 +778,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to your assigned role?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -751,6 +789,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team success?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -761,6 +800,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team leadership?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -771,6 +811,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How committed were you to the team process?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -781,6 +822,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How accountable were you towards your work?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -791,6 +833,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How well did you communicate with the rest of the team?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -801,6 +844,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "How well did you cooperate with the rest of the team?");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             CreateButton("Not at all", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 112, 112, 0, 0, 0);
             CreateButton("Little", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 167, 112, 0, 0, 0);
             CreateButton("Moderately", delegate { AddNewExperiencePage(pageNumber + 1); }, 255, 236, 112, 0, 0, 0);
@@ -811,6 +855,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText(null, pageNumber + "/" + totalPages, "Additional comments.");
             EditButton.SetActive(false);
+            AddButton.interactable = false;
             ContentDataIdentiferUI _prefab = CreateLongContextPrefab(_addNewExperienceData.Comments, TMP_InputField.ContentType.Standard);
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
             CreateButton("Continue", delegate { _addNewExperienceData.Comments = _prefab._inputField.text; AddNewExperiencePage(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
@@ -827,19 +872,21 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         {
             CreateHeaderText("Experience Summary", pageNumber + "/" + totalPages, "Please check all information.");
             EditButton.SetActive(false);
-            CreateDisplayGroup("<b>Experience</b>");
-            CreateDisplayGroup(_addNewExperienceData.ExperienceLocale);
+            AddButton.interactable = false;
 
-            CreateDisplayGroup("<b>Start & End Date</b>");
-            CreateDisplayGroup(_addNewExperienceData.StartDate.ToShortDateString() + " -\n" + _addNewExperienceData.EndDate.ToShortDateString());
-
-            CreateDisplayGroup("<b>Role</b>");
+            CreateDisplayGroup("\n<b><u>Role</u></b>");
             CreateDisplayGroup(_addNewExperienceData.RoleInExperience);
 
-            CreateDisplayGroup("<b>About</b>");
+            CreateDisplayGroup("\n<b><u>Start & End Date</u></b>");
+            CreateDisplayGroup(_addNewExperienceData.StartDate.ToShortDateString() + " -\n" + _addNewExperienceData.EndDate.ToShortDateString());
+
+            CreateDisplayGroup("\n<b><u>Experience</u></b>");
+            CreateDisplayGroup(_addNewExperienceData.ExperienceLocale);
+
+            CreateDisplayGroup("\n<b><u>About</u></b>");
             CreateDisplayGroup(_addNewExperienceData.Description);
 
-            CreateDisplayGroup("<b>Comments</b>");
+            CreateDisplayGroup("\n<b><u>Comments</u></b>");
             CreateDisplayGroup(_addNewExperienceData.Comments);
 
 
@@ -852,6 +899,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   SaveExperienceWithFirebase();
                   _addNewExperienceData = null;
                   userInterfaceManager.Open_Files(); //Go to next page.
+                  AddButton.interactable = true;
               }, 255, 255, 255, 255, 255, 255);
 
             //CreateButton("Continue", delegate { AddNewExperiencePage(pageNumber + 1); SaveExperience(); });
