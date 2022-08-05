@@ -2125,6 +2125,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         CreatePrefab(SkillItemExtension, _holder);
     }
 
+    #region LearningResources
     public void GetSkillsLearning(int index)
     {
         //TODO: Add in the skill definition etc; this will be dependant on the skill that is selected.
@@ -2346,21 +2347,29 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 }
                 break;
             case 9:
-                learningSkill = "Business and Commercial Awareness";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkill = "Business & Commercial Awareness";
+                learningSkillDefinition = "Knowledge of the resources, strengths which the company needs to demonstrate in order to meet current challenges, being profitable and serve its customers.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("How to Series: Developing your Commercial Awareness<br><b> Video </b><br> by Bright Network on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=N8AZAXxDsW8"); });
+                    CreateURLButton("5 tips to improve your COMMERCIAL AWARENESS<br><b> Video </b><br> by LawCareersNet on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ShilxObuyaY"); });
+                    CreateURLButton("Commercial Awareness<br><b> Video </b><br> by AllAboutLaw.co.uk on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ADqEy-_wRUc"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Developing Commercial Awareness<br><b>Article</b><br>Mind Tools", delegate { Application.OpenURL("https://www.mindtools.com/pages/article/developing-commercial-awareness.htm"); });
+                    CreateURLButton("What is Commercial Awareness?<br><b>Article</b><br>Bright Network", delegate { Application.OpenURL("https://www.brightnetwork.co.uk/graduate-career-advice/commercial-awareness/"); });
+                    CreateURLButton("Business and Commercial Awareness<br><b>Article</b><br>University of Bradford", delegate { Application.OpenURL("https://www.bradford.ac.uk/careers/develop-skills/commercial-awareness/"); });
+                    CreateURLButton("Developing Commercial Awareness<br><b>Article</b><br>SkillsYouNeed", delegate { Application.OpenURL("https://www.skillsyouneed.com/general/commercial-awareness.html"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Commercial Awareness<br>The Open University", delegate { Application.OpenURL("https://www.open.edu/openlearn/money-business/leadership-management/commercial-awareness/content-section-0?intro=1"); });
+                    CreateURLButton("Commercial Awareness<br>Bright Network", delegate { Application.OpenURL("https://www.brightnetwork.co.uk/academy/course/commercial-awareness/"); });
+                    CreateURLButton("Commercial Awareness Training Course<br>Revolution Learning and Development", delegate { Application.OpenURL("https://www.revolutionlearning.co.uk/courses/commercial-awareness-training-course/"); });
+                    CreateURLButton("Understanding Customer Needs<br>Harvard University", delegate { Application.OpenURL("https://pll.harvard.edu/course/understanding-customer-needs?delta=0"); });
                 }
 
                 if (miniGames)
@@ -2370,20 +2379,30 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 10:
                 learningSkill = "Career Management";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "The process of planning and managing your career development.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Career Management Process<br><b> Video </b><br> by Amanda Johnson on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=92eihrdf8Z0"); });
+                    CreateURLButton("5 Minutes on Careers Series: Career Planning<br><b> Video </b><br> by UCD Careers Network on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ABVpi3V8_Hw"); });
+                    CreateURLButton("CAREER STRATEGY - 4 principles of career management<br><b> Video </b><br> by Sven Sommerlatte on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=JvTBoGmceA4"); });
+                    CreateURLButton("How to Build an Effective Career Plan (Top 5 Tips)<br><b> Video </b><br> by CareerAddict on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=jVssNpBk37k"); });
+                    CreateURLButton("The Only 3 Career Steps that Matter | Rosabeth Moss Kanter | TedxBeaconStreet<br><b> Video </b><br> by Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ekX3CIz-Yec"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Career Management - Meaning and Important Concepts<br><b>Blog</b><br>Management Study Guide", delegate { Application.OpenURL("https://www.managementstudyguide.com/career-management.htm"); });
+                    CreateURLButton("Career Management Skills<br><b>Article</b><br>SkillsYouNeed", delegate { Application.OpenURL("https://www.skillsyouneed.com/ps/career-management-skills.html"); });
+                    CreateURLButton("12 Career Management Skills and How to measure them<br><b>Blog</b><br>iED", delegate { Application.OpenURL("https://ied.eu/project-updates/12-career-management-skills-and-how-to-measure-them/"); });
+                    CreateURLButton("7 skills for a succesful management career<br><b>Article</b><br>Prospects", delegate { Application.OpenURL("https://www.prospects.ac.uk/jobs-and-work-experience/job-sectors/business-consulting-and-management/7-skills-for-a-successful-management-career"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("How to Develop your Career Plan<br>LinkedIn Learning", delegate { Application.OpenURL("https://www.linkedin.com/learning/how-to-develop-your-career-plan"); });
+                    CreateURLButton("Developing Your Professional Image in a New Job<br>LinkedIn Learning", delegate { Application.OpenURL("https://www.linkedin.com/learning/developing-your-professional-image-in-a-new-job"); });
+                    CreateURLButton("Investing in Private Equity<br>Harvard University", delegate { Application.OpenURL("https://pll.harvard.edu/course/investing-private-equity?delta=0"); });
+                    CreateURLButton("Successful Career Development<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/career-advancement"); });
                 }
 
                 if (miniGames)
@@ -2494,20 +2513,28 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 15:
                 learningSkill = "Creative/ Innovative Thinking";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Ability to generate new ideas how to solve the problem.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Creative thinking - how to get out of the box and generate ideas: Giovanni Corazza at TedxRoma<br><b>Video</b><br> Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=bEusrD8g-dM"); });
+                    CreateURLButton("How to improve your creativity<br><b>Video</b><br> Prueba on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=6-Tb1FvLGjM"); });
+                    CreateURLButton("Creative Thinking Skills Techniques - The Five Whys<br><b>Video</b><br> James Taylor on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=dbN-66Iwtgk"); });
+                    CreateURLButton("Creativity In The Workplace - What You Should Know<br><b>Video</b><br> simpleshow foundation on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=U7nEgYOcb5c"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("5 Ways to Improve Your Creative Thinking<br><b>Blog</b><br>Rafis Abazov", delegate { Application.OpenURL("https://www.topuniversities.com/blog/5-ways-improve-your-creative-thinking"); });
+                    CreateURLButton("Innovative Thinking: Why It's The Skill of the Future<br><b>Artcle</b><br>Michael Dunlop, Viima", delegate { Application.OpenURL("https://www.viima.com/blog/innovative-thinking"); });
+                    CreateURLButton("What Are Innovative Thinking Skills?<br><b>Artcle</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/career-development/innovative-thinking"); });
+                    CreateURLButton("10 Ways to Inspire Creative and Innovative Thinking in Your Team<br><b>Blog</b><br>Lenny LaCour, Trust Well Network", delegate { Application.OpenURL("https://trustwellnetwork.com/blog/10-ways-how-to-inspire-a-creative-and-innovative-thinking-in-your-team"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Creative Thinking: Techniques and Tools for Success<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/creative-thinking-techniques-and-tools-for-success"); });
+                    CreateURLButton("Creative Thinking: Innovative Solutions to Complex Challenges<br>Harvard University", delegate { Application.OpenURL("https://pll.harvard.edu/course/creative-thinking-innovative-solutions-complex-challenges?delta=6"); });
+                    CreateURLButton("Creative Thinking & Brainstorming<br>SkillSoft", delegate { Application.OpenURL("https://www.skillsoft.com/channel/creative-thinking-brainstorming-0026f2f0-f919-11e6-aad2-6b3c03be7fe8"); });
                 }
 
                 if (miniGames)
@@ -2749,7 +2776,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 25:
                 learningSkill = "Independence at Work";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Being self-sufficient in accomplishing the tasks assigned by the supervisor.";
                 if (videoAudio)
                 {
                     CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
@@ -2757,12 +2784,16 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Working Independently<br><b>Article</b><br>Northeastern University", delegate { Application.OpenURL("https://webguru.sites.northeastern.edu/working-independently/"); });
+                    CreateURLButton("Independence at Work: Ways on How You Can Be Independent<br><b>Article</b><br>PeopleDynamics", delegate { Application.OpenURL("https://peopledynamics.co/ways-independence-at-work/"); });
+                    CreateURLButton("6 Ways to Be More Independent at Work (Even When You Work for Someone Else)<br><b>Article</b><br>Jen Hubley Luckwaldt, PayScale", delegate { Application.OpenURL("https://www.payscale.com/career-advice/6-ways-to-be-more-independent-at-work/"); });
+                    CreateURLButton("How to Become More Independent at Work<br><b>Article</b><br>Andrew Moran, Career Addict", delegate { Application.OpenURL("https://www.careeraddict.com/be-more-independent"); });
+                    CreateURLButton("Efficiency Improvement for Team Members<br><b>Article</b><br>Luanne Kelchner, Chron", delegate { Application.OpenURL("https://smallbusiness.chron.com/efficiency-improvement-team-members-33678.html"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Skills for Independence and Work<br>Independent", delegate { Application.OpenURL("https://courses.independent.co.uk/training/eastleigh-college/skills-for-independence-and-work-1152284#InformationRequestForm"); });
                 }
 
                 if (miniGames)
@@ -3041,20 +3072,31 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 36:
                 learningSkill = "Problem Solving";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Ability to plan action to get rid of obstacles to completing tasks.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("How to Solve a Problem in Four Steps: The IDEA Model<br><b>Video</b><br>DecisionSkills on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=QOjTJAFyNrU"); });
+                    CreateURLButton("How to Become a Problem Solver<br><b>Video</b><br>Brian Tracy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=C1XABm6OUQs"); });
+                    CreateURLButton("What is Creative Problem Solving?<br><b>Video</b><br>Sara Smith on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=QbxyiUG5RRI"); });
+                    CreateURLButton("Find Problem, Solve Problem | Ariana Glantz | TEDxMemphis<br><b>Video</b><br>Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=LaYVqj1El1A"); });
+                    CreateURLButton("Improve Your Problem Solving Skills<br><b>Video</b><br>Brian Tracy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=s1lt6pwIF1o"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("35 problem-solving techniques and methods for solving complex problems<br><b>Blog</b><br>James Smart, SessionLab", delegate { Application.OpenURL("https://www.sessionlab.com/blog/problem-solving-techniques/"); });
+                    CreateURLButton("Problem solving techniques: Steps and methods<br><b>Blog</b><br>Deakin University", delegate { Application.OpenURL("https://credentials.deakin.edu.au/problem-solving-techniques-steps-and-methods/"); });
+                    CreateURLButton("Problem-Solving Techniques and Tips (That Actually Work)<br><b>Article</b><br>Lionel Valdellon, Wrike", delegate { Application.OpenURL("https://www.wrike.com/blog/problem-solving-techniques/"); });
+                    CreateURLButton("How to Develop Problem Solving Skills: 4 Tips<br><b>Article</b><br>Masterclass", delegate { Application.OpenURL("https://www.masterclass.com/articles/how-to-develop-problem-solving-skills#4-tips-to-improve-your-problem-solving-skills"); });
+                    CreateURLButton("6 Ways to Enhance Your Problem Solving Skills Effectively<br><b>Blog</b><br>Zoe B, Lifehack", delegate { Application.OpenURL("https://www.lifehack.org/articles/productivity/6-ways-to-enhance-your-problem-solving-skills.html"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Critical Thinking & Problem Solving<br>edX", delegate { Application.OpenURL("https://www.edx.org/course/critical-thinking-problem-solving-3"); });
+                    CreateURLButton("Creative Problem Solving and Decision Making<br>CourseArena", delegate { Application.OpenURL("https://www.coursearena.io/course/creative-problem-solving-and-decision-making"); });
+                    CreateURLButton("Using Creative Problem Solving<br>CourseArena", delegate { Application.OpenURL("https://www.coursearena.io/course/using-creative-problem-solving"); });
+                    CreateURLButton("Effective Problem-Solving and Decision-Making<br>Class Central", delegate { Application.OpenURL("https://www.classcentral.com/course/probsolve-2721"); });
                 }
 
                 if (miniGames)
@@ -3739,4 +3781,5 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
         }
     }
+    #endregion LearningResources
 }
