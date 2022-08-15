@@ -2181,20 +2181,26 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 2:
                 learningSkill = "Adaptability";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Ability to accommodate changing environmental conditions.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("3 ways to measure your adaptability -- and how to improve it | Natalie Fratto<br><b> Video </b><br> by TED on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=xJM_CQN8-ns"); });
+                    CreateURLButton("Professional Development: Adaptability in the Workplace<br><b> Video </b><br> by KnowledgeWave on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=TODaNm216E8"); });
+                    CreateURLButton("How Adaptability Will Help You Deal With Change | Jennifer Jones | TedxNantwich<br><b> Video </b><br> by Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=Wur3RaGNRS8"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("How to improve your adaptability skills<br>Article<br>Robert Half Talent Solutions", delegate { Application.OpenURL("https://www.roberthalf.co.nz/career-advice/career-development/adaptability-skills"); });
+                    CreateURLButton("Important Adaptability Skills for Workplace Success<br>Article<br>The Balance Careers", delegate { Application.OpenURL("https://www.thebalancecareers.com/important-adaptability-skills-4768260"); });
+                    CreateURLButton("6 ways to develop adaptability in the workplace and embrace change<br>Article<br>Asana", delegate { Application.OpenURL("https://asana.com/pl/resources/workplace-adaptability-skills"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Adaptability and Resiliency<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/adaptability-and-resiliency"); });
+                    CreateURLButton("Being Adaptable<br>TalentLMS", delegate { Application.OpenURL("https://www.talentlms.com/library/being-adaptable/"); });
+                    CreateURLButton("Adapting to Change<br>SkillSoft", delegate { Application.OpenURL("https://www.skillsoft.com/channel/adapting-to-change-06720340-e71a-11e6-9835-f723b46a2688"); });
                 }
 
                 if (miniGames)
@@ -2204,20 +2210,23 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 3:
                 learningSkill = "Analytical Thinking";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Breaking a complex problem down into its individual parts and analyzing interrelationships; analytical thinking also includes critical thinking, logical thinking, and creativity.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Analytical Thinking Techniques<br><b> Video </b><br> by Sean John Thompson on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=toJKbhgR1G4"); });
+                    CreateURLButton("3 Ways To Master Analytical Thinking Without Breaking A Sweat<br><b> Video </b><br> by Sean John Thompson on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=D5Oeajtbg0Y"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("What Are Analytical Skills?<br>Article<br>The Balance Careers", delegate { Application.OpenURL("https://www.thebalancecareers.com/analytical-skills-list-2063729"); });
+                    CreateURLButton("Analytical Skills: How to Develop Your Analytical Skills<br>Article<br>MasterClass", delegate { Application.OpenURL("https://www.masterclass.com/articles/analytical-skills-guide#8-examples-of-analytical-skills"); });
+                    CreateURLButton("7 Steps To Improve Your Analytical Thinking Skills<br>Blog<br>TalentBridge", delegate { Application.OpenURL("https://talentbridge.com/blog/7-steps-to-improve-your-analytical-thinking-skills/"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Logical and Critical Thinking<br>Future Learn", delegate { Application.OpenURL("https://www.futurelearn.com/courses/logical-and-critical-thinking"); });
                 }
 
                 if (miniGames)
@@ -2227,7 +2236,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 4:
                 learningSkill = "Applied Knowledge";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Ability to translate knowledge constructed in one context (often a research context) to another contexts to solve a problem or improve practice. It implies practical use of knowledge.";
                 if (videoAudio)
                 {
                     CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
@@ -2544,22 +2553,31 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 16:
                 learningSkill = "Critical Thinking";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Realistic and reliable thinking to understand a problem clearly.";
                 if (videoAudio)
                 {
                     CreateURLButton("What is Critical Thinking?<br><b>Video</b><br>GCFLearnFree.org on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=-eEBuqwY-nE&ab_channel=GCFLearnFree.org"); });
                     CreateURLButton("Critical Thinking and Problem Solving<br><b>Webinar Video</b><br>UMN College of Continuing & Professional Studies on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=qSfq3BQjKN4&ab_channel=UMNCollegeofContinuing%26ProfessionalStudies"); });
                     CreateURLButton("This tool will help improve your critical thinking<br><b>Video</b><br>Erick Wilberding, TED-Ed on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=vNDYUlxNIAA&ab_channel=TED-Ed"); });
+                    CreateURLButton("5 tips to improve your critical thinking - Samantha Agoos<br><b>Video</b><br>TED-Ed on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=dItUGF8GdTw"); });
+                    CreateURLButton("Developing Critical Thinking Skills<br><b>Video</b><br>Erik Jentges on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=Iwnwq3buLjI"); });
+                    CreateURLButton("A short guide to critical thinking<br><b>Video</b><br>UniOfSunLib on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=PhV361MB0fg"); });
                 }
 
                 if (paperArticleBlog)
                 {
                     CreateURLButton("Center for Critical Thinking Community<br><b>Article</b><br>The Critical Thinking Community", delegate { Application.OpenURL("https://www.criticalthinking.org/pages/defining-critical-thinking/766"); });
+                    CreateURLButton("Top 8 Critical Thinking Skills and Ways to Improve Them<br><b>Blog</b><br>Zety", delegate { Application.OpenURL("https://zety.com/blog/critical-thinking-skills"); });
+                    CreateURLButton("10 Top Critical Thinking Skills (And How to Improve Them)<br><b>Article</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/career-development/critical-thinking-skills"); });
+                    CreateURLButton("Critical Thinking: an essential skills for every student<br><b>Blog</b><br>Australian Christian College", delegate { Application.OpenURL("https://www.acc.edu.au/blog/critical-thinking-essential-skill/"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Critical Thinking Skills for the Professional<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/critical-thinking-skills-for-professionals"); });
+                    CreateURLButton("Critical Analytical Thinking<br>Graduate School of Stanford Business", delegate { Application.OpenURL("https://www.gsb.stanford.edu/exec-ed/programs/stanford-lead/curriculum/courses/critical-analytical-thinking"); });
+                    CreateURLButton("Critical Thinking & Problem Solving<br>edX", delegate { Application.OpenURL("https://www.edx.org/course/critical-thinking-problem-solving-3"); });
+                    CreateURLButton("Logical and Critical Thinking<br>Future Learn", delegate { Application.OpenURL("https://www.futurelearn.com/courses/logical-and-critical-thinking"); });
                 }
 
                 if (miniGames)
@@ -2595,20 +2613,28 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 18:
                 learningSkill = "Decision Making";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Collecting and analysing information to decide on an appropriate course of action.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Before You Decide: 3 Steps To Better Decision Making | Matthew Confer | TedxOakLawn<br><b>Video</b><br>TEDx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=d7Jnmi2BkS8"); });
+                    CreateURLButton("How to make good decisions | Mikael Krogerus & Roman Tschappeler | TEDxDanubia<br><b>Video</b><br>TEDx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=KkyzYjPuxK8"); });
+                    CreateURLButton("How To Improve Decision Making Skills | Decision Making Process<br><b>Video</b><br>Productivity Guy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=2tCYy66CyuQ"); });
+                    CreateURLButton("Decision Making Techniques And Strategies<br><b>Video</b><br>Productivity Guy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=kK8rwqu9Vn0"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("5 Decision Making Skills for Successful Leaders<br><b>Blog</b><br>Insight Assessment", delegate { Application.OpenURL("https://www.insightassessment.com/blog/5-decision-making-skills-for-successful-leaders"); });
+                    CreateURLButton("Important Decision-Making Skills That Employers Value<br><b>Article</b><br>The Balance Careers", delegate { Application.OpenURL("https://www.thebalancecareers.com/decision-making-skills-with-examples-2063748"); });
+                    CreateURLButton("The Most Important Decision-Making Skills (With Examples)<br><b>Article</b><br>Zippia", delegate { Application.OpenURL("https://www.zippia.com/advice/decision-making-skills/"); });
+                    CreateURLButton("Decision Making<br><b>Blog</b><br>SkillsYouNeed", delegate { Application.OpenURL("https://www.skillsyouneed.com/ips/decision-making.html"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Effective Problem-Solving and Decision-Making<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/problem-solving"); });
+                    CreateURLButton("How to Create and Implement a Business Strategy<br>Future Learn", delegate { Application.OpenURL("https://www.futurelearn.com/experttracks/business-strategy-and-decision-making-skills"); });
+                    CreateURLButton("Critical thinking: reasoned decision making<br>edX", delegate { Application.OpenURL("https://www.edx.org/course/critical-thinking-reasoned-decision-making"); });
                 }
 
                 if (miniGames)
@@ -2618,20 +2644,28 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 19:
                 learningSkill = "Digital Literacy";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "The use of digital technologies to navigate specific tasks or comunitating from different digital environment.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("The essential elements of digital literacies: Doug Belshaw at TEDxWarwick<br><b>Video</b><br>TEDx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=A8yQPoTcZ78"); });
+                    CreateURLButton("Digital literacy and why it matters<br><b>Video</b><br>University of Derby on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=p2k3C-iB88w"); });
+                    CreateURLButton("My Digital Literacy Adventure<br><b>Video</b><br>Amanda Brace on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=OCo2z3TJ3Ws"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("What Is Digital Literacy? 5 Skills That Will Serve You Well<br><b>Blog</b><br>Rasmussen University", delegate { Application.OpenURL("https://www.rasmussen.edu/student-experience/college-life/what-is-digital-literacy/"); });
+                    CreateURLButton("How to Teach Digital Literacy Skills<br><b>Article</b><br>Applied Educational Systems", delegate { Application.OpenURL("https://www.aeseducation.com/blog/teach-digital-literacy-skills"); });
+                    CreateURLButton("What is Digital Literacy?<br><b>Blog</b><br>Developing Employability", delegate { Application.OpenURL("https://developingemployability.edu.au/what-is-digital-literacy/"); });
+                    CreateURLButton("Digital Literacy Fundamentals<br><b>Paper</b><br>Media Smarts", delegate { Application.OpenURL("https://mediasmarts.ca/digital-media-literacy/general-information/digital-media-literacy-fundamentals/digital-literacy-fundamentals"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Information & Digital Literacy for University Success<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/digital-literacy"); });
+                    CreateURLButton("Career Credentials: Evidence Your Expertise in Digital Literacy<br>Future Learn", delegate { Application.OpenURL("https://www.futurelearn.com/courses/career-credentials-digital-literacy"); });
+                    CreateURLButton("Career Credentials: Evidence Your Expertise in Digital Literacy<br>Class Central", delegate { Application.OpenURL("https://www.classcentral.com/course/career-credentials-digital-literacy-11860"); });
+                    CreateURLButton("Blackboard Web & Digital literacies<br>Class Central", delegate { Application.OpenURL("https://www.classcentral.com/course/open-education-by-blackboard-web-digital-literacies-4146"); });
                 }
 
                 if (miniGames)
@@ -3250,15 +3284,20 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 42:
                 learningSkill = "Research Skills";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Finding, evaluating and interpreting relevant information in reference to analyzed topic with aim to find solutions to a problem, increase effectiveness and develop.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Discover: Research Skills<br><b>Video</b><br>UniSydneyLibrary on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=vTkNw3mnryc"); });
+                    CreateURLButton("Developing Research Skills<br><b>Video</b><br>ELC Open Online Courses on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=sjGMBBQOONg"); });
+                    CreateURLButton("How to Research Any Topics | Essay & Writing Advice<br><b>Video</b><br>Lady of the Library on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ArynsHGwJ5A"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("What Are Research Skills? Definition, Examples and Tips<br><b>Article</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/career-development/research-skills"); });
+                    CreateURLButton("Research Skills: What They Are and Why They're Important<br><b>Blog</b><br>Glassdoor", delegate { Application.OpenURL("https://www.glassdoor.com/blog/guide/research-skills/"); });
+                    CreateURLButton("How to Improve Your Research Skills: 6 Research Tips<br><b>Article</b><br>MasterClass", delegate { Application.OpenURL("https://www.masterclass.com/articles/how-to-improve-your-research-skills#6-tips-for-improving-your-researching-skills"); });
+                    CreateURLButton("Introduction to Research Skills<br><b>Blog</b><br>University of Southampton", delegate { Application.OpenURL("https://library.soton.ac.uk/sash/introduction-to-research-skills"); });
                 }
 
                 if (freeCourses)
@@ -3268,7 +3307,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
                 if (miniGames)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Research Skills<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=com.andromo.dev601172.app1048038"); });
+                    CreateURLButton("Research Skills<br>Google Play Store", delegate { Application.OpenURL("https://play.google.com/store/apps/details?id=io.kodular.biswabarta0018.Research"); });
                 }
                 break;
             case 43:
@@ -3429,25 +3469,47 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 49:
                 learningSkill = "Social Media Management";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "Abilities you use to help you create effective social media strategies and campaigns. They help you complete your daily tasks as a social media manager and come up with effective social media marketing for your brand.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("What is Social Media Management?<br><b>Video</b><br>LYFE Marketing on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=uC1nOVk2DlE"); });
+                    CreateURLButton("Social Media Marketing vs Social Media Management - What's the Difference?<br><b>Video</b><br>Marketing 360 on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=7PBahHRwdcw"); });
+                    CreateURLButton("How to Become a Social Media Manager with No Experience (Entrepreneur Tips)<br><b>Video</b><br>Marley Jaxx on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=L8NCD0Smy88"); });
+                    CreateURLButton("BEST TOOLS for CREATING and MANAGING social media content 2022<br><b>Video</b><br>Joanna Yung on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=5o5k-g-toHg"); });
+                    CreateURLButton("How to Become a Social Media Manager in 2022 and Make Money Online<br><b>Video</b><br>Joanna Yung on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=7Ns5NCffot4&list=PL1DQUwCK0kU9wVUCIZ6bn9LZJ21iLFnvS"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Social Media Management<br><b>Article</b><br>International Journal of Management & Information Systems", delegate { Application.OpenURL("https://www.clutejournals.com/index.php/IJMIS/article/view/4645"); });
+                    CreateURLButton("Active Social Media Management: The Case of Health Care<br><b>Article</b><br>Informs PubsOnLine", delegate { Application.OpenURL("https://pubsonline.informs.org/doi/abs/10.1287/isre.1120.0466"); });
+                    CreateURLButton("The Social Media Management Handbook<br><b>Book</b><br>Google Books", delegate { Application.OpenURL("https://books.google.pl/books?hl=pl&lr=&id=3AbyDwAAQBAJ&oi=fnd&pg=PP11&dq=social+media+management&ots=CKsvFxGQ6m&sig=qGd2OmJb0oiICQRI7JUZqvE1rJM&redir_esc=y#v=onepage&q=social%20media%20management&f=false"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Social media management mode easy with facelift<br>Facelift", delegate { Application.OpenURL("https://facelift-bbt.com/en/"); });
+                    CreateURLButton("Marketing in a Digital World<br>Google Digital Workshop", delegate { Application.OpenURL("https://learndigital.withgoogle.com/digitalworkshop-eu/course/marketing-in-digital-world"); });
+                    CreateURLButton("Introduction to Social Media Strategy<br>Skill Share", delegate { Application.OpenURL("https://www.skillshare.com/site/join?coupon=buffer2mths&teacherRef=2069994&via=teacher-referral-partner&utm_source=buffer&utm_medium=teacher-referral-partner&utm_content=2017-04-23-buffer&t=Introduction-to-Social-Media-Strategy&sku=1934895986"); });
+                    CreateURLButton("What is Social?<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/what-is-social"); });
+                    CreateURLButton("Social Media Monitoring<br>Udemy", delegate { Application.OpenURL("https://www.udemy.com/course/social-media-monitoring-for-business/"); });
+                    CreateURLButton("The Business of Social<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/business-of-social?siteID=SAyYsTvLiGQ-9YbTVyVYfg4XkCOBWg01Rg&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=SAyYsTvLiGQ"); });
+                    CreateURLButton("Social Media Ethics<br>Udemy", delegate { Application.OpenURL("https://www.udemy.com/course/social-media-ethics/"); });
+                    CreateURLButton("Advanced Social Media Marketing for Picking Up Clients<br>Udemy", delegate { Application.OpenURL("https://www.udemy.com/course/social-media-marketing-plan/"); });
+                    CreateURLButton("Facebook Blueprint<br>Meta", delegate { Application.OpenURL("https://www.facebook.com/business/learn?ref=ens_rdr"); });
                 }
 
                 if (miniGames)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Your secret to standout marketing<br>Asana", delegate { Application.OpenURL("https://asana.com/teams/marketing"); });
+                    CreateURLButton("GetResponse", delegate { Application.OpenURL("https://www.getresponse.com/"); });
+                    CreateURLButton("Facelift", delegate { Application.OpenURL("https://facelift-bbt.com/en/"); });
+                    CreateURLButton("Campaign Management Made Easy<br>MediaTool", delegate { Application.OpenURL("https://mediatool.com/"); });
+                    CreateURLButton("Grow your audience on social and beyond<br>Buffer", delegate { Application.OpenURL("https://buffer.com/"); });
+                    CreateURLButton("Hootsuite", delegate { Application.OpenURL("https://www.hootsuite.com/en-GB"); });
+                    CreateURLButton("Meet Edgar", delegate { Application.OpenURL("https://meetedgar.com/"); });
+                    CreateURLButton("Social Pilot", delegate { Application.OpenURL("https://www.socialpilot.co/"); });
+                    CreateURLButton("Sendible", delegate { Application.OpenURL("https://www.sendible.com/"); });
                 }
                 break;
             case 50:
@@ -3544,25 +3606,41 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 54:
                 learningSkill = "Statistical Skills";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "The collection, organization, analysis, and interpretation of numerical data. They are a combination of other skills, such as math, computer literacy, data analysis, and critical thinking.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("How to learn statistics. Five tips to help your learning<br><b>Video</b><br>Dr Nic's Maths and Stats on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=gSrruN0thAQ"); });
+                    CreateURLButton("Statistics made easy!!! Learn about the t-test, the chi square test, the p value and more<br><b>Video</b><br>Global Health with Greg Martin on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=I10q6fjPxJ0"); });
+                    CreateURLButton("Statistics - A Full University Course on Data Science Basics<br><b>Video</b><br>freeCodeCamp.org on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=xxpc-HPKN28"); });
+                    CreateURLButton("R programming for beginners - statistic with R (t-test and linear regression) and dplyr and ggplot<br><b>Video</b><br>Global Health with Greg Martin on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=ANMuuq502rE"); });
+                    CreateURLButton("Statistics With Python Full Course 1 of 3 | Understanding and Visualizing Data with Python<br><b>Video</b><br>My Lesson on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=wGwJEbWTHRw"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Important Statistics Skills To Have in the Workplace<br><b>Article</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/resumes-cover-letters/statistics-skills"); });
+                    CreateURLButton("6 Effective Tips on How To Improve Basic Statistics Skills<br><b>Blog</b><br>CodeAvail", delegate { Application.OpenURL("https://www.codeavail.com/blog/6-effective-tips-on-how-to-improve-basic-statistics-skills/"); });
+                    CreateURLButton("Essentials of Craft: How to Become a Skilled and Confident Statistical Analyst<br><b>Article</b><br>The Analysis Factor", delegate { Application.OpenURL("https://www.theanalysisfactor.com/7-things-every-researcher-needs-to-become-a-proficient-and-confident-statitical-analyst/"); });
+                    CreateURLButton("Python Statistics Fundamentals: How to Describe Your Data<br><b>Article</b><br>Real Phyton", delegate { Application.OpenURL("https://realpython.com/python-statistics/"); });
+                    CreateURLButton("Using R for psychological research<br><b>Article</b><br>Personality Project", delegate { Application.OpenURL("https://personality-project.org/r/r.guide.html"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Statistical Thinking for Industrial Problem Solving (STIPS)<br>JMP Statistical Discovery", delegate { Application.OpenURL("https://www.jmp.com/en_gb/online-statistics-course.html?utm_term=&utm_campaign=(JMP)+EMEA+-+ENG+-+Search+-+NB+-+DSA&utm_source=adwords&utm_medium=ppc&hsa_acc=9962611730&hsa_cam=16063386375&hsa_grp=131614580286&hsa_ad=579241133511&hsa_src=g&hsa_tgt=dsa-1456167871416&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwk_WVBhBZEiwAUHQCmXaXXsoiQQ3VLzdtMcYIRuXV9N2OU9F07fPRsH-1CIk-oE0jxKG78BoCkjgQAvD_BwE"); });
+                    CreateURLButton("Statistics and probability<br>Khan Academy", delegate { Application.OpenURL("https://www.khanacademy.org/math/statistics-probability"); });
+                    CreateURLButton("Introduction to Statistics<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/stanford-statistics"); });
+                    CreateURLButton("Data Science Math Skills<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/datasciencemathskills"); });
+                    CreateURLButton("Probability and Statistics: To p or not to p?<br>Coursera", delegate { Application.OpenURL("https://www.coursera.org/learn/probability-statistics"); });
+                    CreateURLButton("Practice your Statistics skills for Data Science and Business Analysis<br>TechGig", delegate { Application.OpenURL("https://content.techgig.com/upskilling-at-techgig/practice-your-statistics-skills-for-data-science-and-business-analysis/articleshow/83740807.cms"); });
+                    CreateURLButton("Free Statistics Practice Tests<br>Varsity Tutors", delegate { Application.OpenURL("https://www.varsitytutors.com/statistics-practice-tests"); });
                 }
 
                 if (miniGames)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Cool Math Games<br>Statistics How To", delegate { Application.OpenURL("https://www.statisticshowto.com/cool-math-games/"); });
+                    CreateURLButton("Top 10 Mobile Apps To Develop Your Data Science Skills in 2021<br>Analytics Insight", delegate { Application.OpenURL("https://www.analyticsinsight.net/top-10-mobile-apps-to-develop-your-data-science-skills-in-2021/"); });
+                    CreateURLButton("Top 9 Mobile Apps for Learning and Practicing Data Science<br>KD Nuggets", delegate { Application.OpenURL("https://www.kdnuggets.com/2020/01/top-9-mobile-apps-learning-practicing-data-science.html"); });
                 }
                 break;
             case 55:
@@ -3659,20 +3737,27 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 58:
                 learningSkill = "Work Ethic";
-                learningSkillDefinition = "No skill definition available. Coming soon.";
+                learningSkillDefinition = "A term used to describe a person’s dedication in relation to their job. Especially a set of standards of behavior and beliefs regarding what is and isn't acceptable to do at work.";
                 if (videoAudio)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Career Competencies: Professionalism and Work Ethic<br><b>Video</b><br>University Career Services on YouTube", delegate { Application.OpenURL("https://youtu.be/eCkgqFXQJYI"); });
+                    CreateURLButton("Work Ethic - The Importance of Having A Strong Work Ethic at Work<br><b>Video</b><br>Career and Life Skills Lessons on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=4XUD8v9xJ8I"); });
+                    CreateURLButton("How to Improve Work Ethic<br><b>Video</b><br>Valuetainment on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=F-_qOh5tKrI"); });
                 }
 
                 if (paperArticleBlog)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Top Work Ethic Skills (And 4 Tips to Improve Yours)<br><b>Article</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/career-development/work-ethic-skills"); });
+                    CreateURLButton("Tips to Demonstrate Work Ethic<br><b>Article</b><br>Indeed", delegate { Application.OpenURL("https://www.indeed.com/career-advice/career-development/tips-to-demonstrate-work-ethic"); });
+                    CreateURLButton("Work Ethic in the Workplace<br><b>Article</b><br>Valamis", delegate { Application.OpenURL("https://www.valamis.com/hub/work-ethic#what-is-work-ethic"); });
+                    CreateURLButton("Relationships between work ethic and motivation to work from the point of view of the self-determination theory<br><b>Article</b><br>Plos One", delegate { Application.OpenURL("https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0253145"); });
                 }
 
                 if (freeCourses)
                 {
-                    CreateURLButton("No learning resources available", delegate { Application.OpenURL(null); });
+                    CreateURLButton("Work Ethic<br>TalentLMS", delegate { Application.OpenURL("https://www.talentlms.com/library/collection/work-ethic/?%2Faff%3Aadwlib=&utm_source=google&utm_medium=cpc&matchtype=&network=g&keyword=&cid=12998698547&grpid=130504534748&gclid=EAIaIQobChMIzNigk5XW-AIVQhN7Ch1piw7xEAAYASAAEgIWdPD_BwE"); });
+                    CreateURLButton("Work Ethic/ Professionalism<br>Undergraduate Career Services", delegate { Application.OpenURL("https://undergradcareers.nd.edu/getting-started/core-competencies/work-ethic-professionalism/"); });
+                    CreateURLButton("The Center for Work Ethic Development", delegate { Application.OpenURL("https://workethic.org/"); });
                 }
 
                 if (miniGames)
