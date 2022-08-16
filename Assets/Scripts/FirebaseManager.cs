@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
+using Firebase.Storage;
+using Firebase.Extensions;
 using TMPro;
 using System.Linq;
 
@@ -16,6 +19,8 @@ public class FirebaseManager : MonoBehaviour
     [Header("Firebase")]
     public FirebaseAuth auth;
     public FirebaseUser user;
+    public FirebaseStorage storage;
+    public StorageReference storageReference;
     public DatabaseReference DBreference;
     [Space(5f)]
 
@@ -200,6 +205,57 @@ public class FirebaseManager : MonoBehaviour
         /*FirebaseDatabase.DefaultInstance
             .GetReference("users").Child(user.UserId).Child("skills")
             .ValueChanged += HandleUpdateSkill;*/
+
+        //initialize storage reference
+        storage = FirebaseStorage.DefaultInstance;
+        storageReference = storage.GetReferenceFromUrl("gs://ges-app-30c54.appspot.com/additional-resources");
+
+        //get reference of files to download
+
+    }
+
+    public IEnumerator URLDownload(string url, string name)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.Send();
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                string savePath = string.Format("{0}/{1}.pdb", Application.persistentDataPath, name);
+                System.IO.File.WriteAllText(savePath, www.downloadHandler.text);
+                Debug.Log("File has been downloaded");
+            }
+        }
+    }
+
+    public void DownloadResources(int index)
+    {
+        switch (index)
+        {
+            default: 
+                //nothing happens
+                break;
+            case 1:
+                /*StorageReference document = storageReference.Child("20-job-interview-tips.doc");
+                document.GetDownloadUrlAsync().ContinueWithOnMainThread(task =>
+                {
+                    if (!task.IsFaulted && !task.IsCanceled)
+                    {
+                        StartCoroutine(URLDownload("https://firebasestorage.googleapis.com/v0/b/ges-app-30c54.appspot.com/o/additional-resources%2F20-job-interview-tips.doc?alt=media&token=f31eeb29-d07b-4bfc-bee7-8137b822e3ef"))
+                        //"https://firebasestorage.googleapis.com/v0/b/ges-app-30c54.appspot.com/o/additional-resources%2F20-job-interview-tips.doc?alt=media&token=f31eeb29-d07b-4bfc-bee7-8137b822e3ef"
+                    }
+                    else
+                    {
+                        Debug.LogError(task.Exception.ToString());
+                    }
+                });*/
+                StartCoroutine(URLDownload("https://firebasestorage.googleapis.com/v0/b/ges-app-30c54.appspot.com/o/additional-resources%2F20-job-interview-tips.doc?alt=media&token=f31eeb29-d07b-4bfc-bee7-8137b822e3ef", "learning-resource-01"));
+                break;
+        }
     }
 
     /*public void HandleUpdateSkill(object sender, ValueChangedEventArgs args)

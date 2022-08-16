@@ -974,7 +974,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
          * 6 - List of Free Courses/ Self-Assessment learning resources
          * 7 - List of Mini Games learning resources
          * 8 - Skill definition screen
-         * 9 - BROWSE PHYSICAL PRACTICE OPTIONS - THIS WON'T BE AVAILABLE RIGHT AWAY (LOCATION-BASED SERVICES)
+         * 9 - Downloadable Additional Resources using Firebase Storage
+         * NO LONGER DOING BELOW
          * 10 - Add Own Learning Resource - Type of Learning Resource
          * 11 - Add Own Learning Resource - Details of Learning Resource
          * 12 - Add Own Learning Resource - Confirmation of custom Learning Resource
@@ -990,6 +991,9 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Practice makes perfect! For the time being, you can view internal learning resources with more physical practice options coming soon!");
 
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
+            //Add way to download the additional PDF/ Word document resources
+            CreateHeaderText("Additional Resources\n<i>Download to your device</i>", null, null);
+            CreateButton("Additional Resources", delegate { AddPracticeSkills(pageNumber + 8); }, 255, 255, 255, 255, 255, 255);
             //TODO: MORE RESEARCH HAS TO BE DONE ON THIS - THIS MAY NOT BE POSSIBLE
             //CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
         }
@@ -1117,11 +1121,18 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateButton("Return", delegate { AddPracticeSkills(pageNumber - 5); }, 255, 255, 255, 255, 255, 255);
 
         }
-        //9 - BROWSE PHYSICAL PRACTICE OPTIONS - THIS WON'T BE AVAILABLE RIGHT AWAY (LOCATION-BASED SERVICES)
+        //9 - DOWNLOAD ADDITIONAL RESOURCES USING FIREBASE STORAGE
         else if (pageNumber == 9)
         {
-            //will add in due course
+            Configure_Top_Banner(false, false, "Additional Learning Resources", delegate { AddPracticeSkills(pageNumber - 8); }, null, null);
+            videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = false;
+            EditButton.SetActive(false);
+            CreateWorkCoach(null, "Find below many additional learning resources that are downloadable as .PDF, .PPT or .DOC files.");
+            CreateURLButton("Learning Resource 1", delegate { firebaseDatabaseManager.DownloadResources(1); });
+            StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
+            CreateButton("Return", delegate { AddPracticeSkills(pageNumber - 5); }, 255, 255, 255, 255, 255, 255);
         }
+        //NOT LONGER GOING AHEAD WITH THIS BELOW
         //10 - Add Own Learning Resource - Type of Learning Resource
         else if (pageNumber == 10)
         {
