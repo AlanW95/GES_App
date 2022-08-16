@@ -990,9 +990,6 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Practice makes perfect! For the time being, you can view internal learning resources with more physical practice options coming soon!");
 
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            //Add in a button that gives additional resources for downloading
-            CreateHeaderText(null, null, "Additional learning resources to download");
-            CreateButton("Additional Resources", delegate { AddPracticeSkills(pageNumber + 8); }, 255, 255, 255, 255, 255, 255);
             //TODO: MORE RESEARCH HAS TO BE DONE ON THIS - THIS MAY NOT BE POSSIBLE
             //CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
         }
