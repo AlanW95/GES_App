@@ -70,7 +70,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public FirebaseManager firebaseDatabaseManager;
 
     [SerializeField]
-    private GameObject selectedDropDownSkillObject;
+    //private GameObject selectedDropDownSkillObject;
     private TMP_Dropdown selectedSkill;
     private string selectedSkillName;
     private int dropdownValue;
@@ -1278,13 +1278,13 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //3 - Create CV - See list of CV chosen skills, experience, artifacts and references to export
         else if (pageNumber == 3)
         {
-            CreateWorkCoach(null, "Now that you have selected your chosen skills, experience, artifacts and references please preview below and export, saving to your device.");
+            CreateWorkCoach(null, "Now that you have selected your chosen skills, experience, artifacts and references please preview below and copy to clipboard for future storing.");
             //CreateHeaderText(null, null, "There are various resources available for <SKILL>, choose a type of resource you wish to continue with to learn more about your preferred skill.");
             EditButton.SetActive(false);
             CreateDisplayGroup("Skills:<br>" + ListToText(CVSkills) + "\nExperience:<br>" + ListToText(CVExperiences) + "\nArtifacts:<br>" + ListToText(CVArtifacts) + "\nReferences:<br>" + ListToText(CVReferences));
 
 
-            CreateButton("Export Data", delegate { /*AddEmploymentReadiness(pageNumber + 1);*/ Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
+            /*CreateButton("Export Data", delegate { *//*AddEmploymentReadiness(pageNumber + 1);*//* Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);*/
             CreateButton("Copy to Clipboard", delegate { textFileManager.CopyToClipboard("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
             CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
