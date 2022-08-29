@@ -163,7 +163,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
     public void AddNewSkill(int pageNumber)
     {
         DestroyCurrentScreens();
-        int totalPages = 5; //originally int totalPages = 3;
+        int totalPages = 4; //originally int totalPages = 3;
         /* 5 PAGES IN TOTAL
          * 
          * 1. Add Skill page
@@ -222,27 +222,25 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //TODO: CHANGE TO PAGE 3: Level of Skill because we need to add a new screen in for the confirmation of sharing with the crowd repository.
         else if (pageNumber == 2)
         {
-            Configure_Top_Banner(false, false, "Share Skill", delegate { userInterfaceManager.Open_AddSkills(); }, null, null);
+            Configure_Top_Banner(false, false, "Store Skill", delegate { userInterfaceManager.Open_AddSkills(); }, null, null);
             EditButton.SetActive(false);
             AddButton.interactable = false;
             CreateHeaderText(null, pageNumber + "/" + totalPages, _addNewSkillData.Name);
-            CreateDisplayGroup("Would you like to share this skill to the crowdsourced repository? This will allow other users to find and add it to their own skill portfolio.");
+            CreateDisplayGroup("Your skills will automatically be stored upon completion of your skill. This will allow you to build your skills portfolio. Please continue.");
 
-            
-
-            CreateButton("Yes, I would love to contribute!",
+            CreateButton("Continue",
             delegate
             {
                 
                 AddNewSkill(pageNumber + 1);
                 //TODO: Send skill to Firebase Realtime Database
             }, 255, 255, 255, 255, 255, 255); 
-            CreateButton("No thank you!",
+            /*CreateButton("No thank you!",
              delegate
              {
-                 /*CaptureStringData(ref _addNewSkillData.Name, _skillName);*/
+                 *//*CaptureStringData(ref _addNewSkillData.Name, _skillName);*//*
                  AddNewSkill(pageNumber + 1);
-             }, 255, 255, 255, 255, 255, 255);
+             }, 255, 255, 255, 255, 255, 255);*/
         }
         else if (pageNumber == 3)
         {
@@ -285,7 +283,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                   userInterfaceManager.Open_Files();// (userInterfaceManager.FilesScreen);                   //Go to next page.
               }); */
         }
-        else if (pageNumber == 4)
+        /*else if (pageNumber == 4)
         {
             Configure_Top_Banner(false, false, "Share Acquisition", delegate { AddNewSkill(pageNumber - 1); }, null, null);
             EditButton.SetActive(false);
@@ -300,7 +298,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 Debug.Log(_addNewSkillData.Name);
                 Debug.Log(_addNewSkillData.LevelName);
                 AddNewSkill(pageNumber + 1);
-                /*userInterfaceManager.Open_Files();*/
+                userInterfaceManager.Open_Files();
                 //TODO: Send skill to Firebase Realtime Database
             }, 255, 255, 255, 255, 255, 255);
             CreateButton("No thank you!",
@@ -310,11 +308,11 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                  //_addNewSkillData = null;
                  Debug.Log(_addNewSkillData.Name);
                  Debug.Log(_addNewSkillData.LevelName);
-                 /*userInterfaceManager.Open_Files();*/
+                 userInterfaceManager.Open_Files();
                  AddNewSkill(pageNumber + 1);
              }, 255, 255, 255, 255, 255, 255);
-        }
-        else if (pageNumber == 5)
+        }*/
+        else if (pageNumber == 4)
         {
             CreateHeaderText("Skill Summary", pageNumber + "/" + totalPages, null);
             EditButton.SetActive(false);
@@ -992,7 +990,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
             CreateButton("Learning Resources", delegate { AddPracticeSkills(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
             //Add way to download the additional PDF/ Word document resources
-            CreateHeaderText("Additional Resources\n<i>Download to your device</i>", null, null);
+            CreateHeaderText("Additional Resources\n<i>Viewed on external browser</i>", null, null);
             CreateButton("Additional Resources", delegate { AddPracticeSkills(pageNumber + 8); }, 255, 255, 255, 255, 255, 255);
             //TODO: MORE RESEARCH HAS TO BE DONE ON THIS - THIS MAY NOT BE POSSIBLE
             //CreateButton("Browse Physical Practice Options", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
@@ -1124,13 +1122,36 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
         //9 - DOWNLOAD ADDITIONAL RESOURCES USING FIREBASE STORAGE
         else if (pageNumber == 9)
         {
-            Configure_Top_Banner(false, false, "Additional Learning Resources", delegate { AddPracticeSkills(pageNumber - 8); }, null, null);
+            Configure_Top_Banner(false, false, "Additional Resources", delegate { AddPracticeSkills(pageNumber - 8); }, null, null);
             videoAudio = false; paperArticleBlog = false; freeCourses = false; miniGames = false;
             EditButton.SetActive(false);
-            CreateWorkCoach(null, "Find below many additional learning resources that are downloadable as .PDF, .PPT or .DOC files.");
-            CreateURLButton("Learning Resource 1", delegate { firebaseDatabaseManager.DownloadResources(1); });
+            CreateWorkCoach(null, "Find below many additional learning resources available to view.");
+            CreateDisplayGroup("These will open on your default browser.");
+            CreateURLButton("20 Job Interview Tips", delegate { /*firebaseDatabaseManager.DownloadResources(1);*/Application.OpenURL("https://docs.google.com/document/d/19wpcG2Pg0tbw2v4upwYr7zvIs1L4gcH-/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); }); //open to download area for external resources
+            CreateURLButton("Active Listening", delegate { Application.OpenURL("https://drive.google.com/file/d/1NU60qw6qRoFk6oAoiDTA6S6n2qtr1fwi/view?usp=sharing"); });
+            CreateURLButton("The Power of Active Listening", delegate { Application.OpenURL("https://drive.google.com/file/d/1vwbm79l5xHOgNJ9zrJOXcYTVT7QyeRrg/view?usp=sharing"); });
+            CreateURLButton("Agree to Disagree", delegate { Application.OpenURL("https://drive.google.com/file/d/1OxYRy1bzRp5XOZqMBFB-wJcMf9oP2UOu/view?usp=sharing"); });
+            CreateURLButton("Communication Exercises", delegate { Application.OpenURL("https://drive.google.com/file/d/1M-v2kfElsmZlEnwb_uTWukvih2UJFxqF/view?usp=sharing"); });
+            CreateURLButton("Complaint Handling - The Bubble Game", delegate { Application.OpenURL("https://docs.google.com/presentation/d/1S1AzH5sct_o-P0YnSYfdpY4hW5g1JImU/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Customer Care Crossword", delegate { Application.OpenURL("https://docs.google.com/document/d/1g4E81gPzR3TpGSc6u8bzY0e8mnZd9B85/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Dilemma", delegate { Application.OpenURL("https://docs.google.com/document/d/1_CDTi-1T-GcIIOeUoKEzCFScm63HYyzC/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Golden Rules of Presenting", delegate { Application.OpenURL("https://docs.google.com/document/d/1hoHaWZM6njRVkiEljxJOI5fEnlkmW4Rz/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Imagining Solution to Social Problems", delegate { Application.OpenURL("https://drive.google.com/file/d/11mi9BOXTiOhMB1XHepw3SonbcXLAHVQy/view?usp=sharing"); });
+            CreateURLButton("Meeting Challenges with Confidence", delegate { Application.OpenURL("https://drive.google.com/file/d/1yqPbjgvtTEBrj7NeRqRw1skLRdTQKwMC/view?usp=sharing"); });
+            CreateURLButton("Mental Agility Test", delegate { Application.OpenURL("https://docs.google.com/document/d/1G9pUuF5yO7p4TB7jak5tCwC9sZF1iGxI/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Negotiation Skills Ultimate Infographic", delegate { Application.OpenURL("https://drive.google.com/file/d/1Db3U8Jc_U9wNYoBzekd3LK8crbedrF_7/view?usp=sharing"); });
+            CreateURLButton("Negotiators Crossword", delegate { Application.OpenURL("https://docs.google.com/document/d/1GX3Mrfz67sG-aIaK3doCDaucQK6wfxdr/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Piece Negotiation", delegate { Application.OpenURL("https://docs.google.com/document/d/1uvkCXSClHsWcxiiWjYL4qf7f79qKp8UR/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Self Confidence", delegate { Application.OpenURL("https://drive.google.com/file/d/1wvH5mZoTgRBsx2piIU9aDExGGbbTBm_e/view?usp=sharing"); });
+            CreateURLButton("Delegation", delegate { Application.OpenURL("https://drive.google.com/file/d/1m-yGkRfkFWmWHD1Gd1fz4zxVgCSITaP4/view?usp=sharing"); });
+            CreateURLButton("Social Problem Solving: Step by Step", delegate { Application.OpenURL("https://drive.google.com/file/d/1ijPjHfsuDy1ItXpwvRm3yGX2U0PL8M6g/view?usp=sharing"); });
+            CreateURLButton("Stepping Stones - Team Building Game", delegate { Application.OpenURL("https://docs.google.com/document/d/1kxzQUCy035wux7Hn9FvmiEgy_g3LDsOk/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("Fluency - Effective Communication (answers in link below)", delegate { Application.OpenURL("https://drive.google.com/file/d/1KlqUmGoHrihq1T3U7DW4Mka6D2670E7l/view?usp=sharing"); });
+            CreateURLButton("Fluency - Effective Communication (Answers)", delegate { Application.OpenURL("https://drive.google.com/file/d/1X3XGp1wgKFTFW3t3vd2HLO4apIslOkPs/view?usp=sharing"); });
+            CreateURLButton("Telephone Procedures", delegate { Application.OpenURL("https://docs.google.com/document/d/11Q3fl9I6ajqdLcRfH8CBQIFfZ-zpFW_O/edit?usp=sharing&ouid=106526199113417151408&rtpof=true&sd=true"); });
+            CreateURLButton("The Big Book of Conflict Resolution Games", delegate { Application.OpenURL("https://drive.google.com/file/d/1uZuyUgMaScj7s7jQ8BGvQzGp3ax3-dT6/view?usp=sharing"); });
             StartCoroutine(CreateSpaceFiller(GetSpaceFillerIndex()));
-            CreateButton("Return", delegate { AddPracticeSkills(pageNumber - 5); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Return", delegate { AddPracticeSkills(pageNumber - 8); }, 255, 255, 255, 255, 255, 255);
         }
         //NOT LONGER GOING AHEAD WITH THIS BELOW
         //10 - Add Own Learning Resource - Type of Learning Resource
@@ -1187,7 +1208,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
             CreateWorkCoach(null, "Choose an option to prepare yourself for applying for a job.");
 
             CreateButton("Create CV", delegate { AddEmploymentReadiness(pageNumber + 1); }, 255, 255, 255, 255, 255, 255);
-            CreateDisplayGroup("Job interview practice \ncoming soon.");
+            /*CreateDisplayGroup("Job interview practice \ncoming soon.");*/
             //CreateButton("Practice Interview", delegate { AddEmploymentReadiness(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false); //add 7 because page 8
             //TODO: Check button below about what this does? Also remember to change the pageNumber + ? if needed.
             //CreateButton("Job Search", delegate { AddPracticeSkills(pageNumber + 7); }, 255, 255, 255, 255, 255, 255, interactableCheck: false);
@@ -1285,8 +1306,8 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
 
 
             /*CreateButton("Export Data", delegate { *//*AddEmploymentReadiness(pageNumber + 1);*//* Debug.Log("CV has successfully been exported."); OverlayWindow.SetActive(true); textFileManager.CreateTextFile("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);*/
-            CreateButton("Copy to Clipboard", delegate { textFileManager.CopyToClipboard("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); }, 255, 255, 255, 255, 255, 255);
-            CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 1); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Copy to Clipboard", delegate { textFileManager.CopyToClipboard("Skills:\n" + ListToText(CVSkills) + "\nExperience:\n" + ListToText(CVExperiences) + "\nArtifacts:\n" + ListToText(CVArtifacts) + "\nReferences:\n" + ListToText(CVReferences)); OverlayWindow.SetActive(true); }, 255, 255, 255, 255, 255, 255);
+            CreateButton("Return", delegate { AddEmploymentReadiness(pageNumber - 2); CVSkills.Clear(); CVExperiences.Clear(); CVArtifacts.Clear(); CVReferences.Clear(); }, 255, 255, 255, 255, 255, 255);
         }
         //TODO:NOT NEEDED RIGHT NOW
         //4 - List of Video/ Audio learning resources
@@ -2709,7 +2730,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 21:
                 learningSkill = "Discipline";
-                learningSkillDefinition = "The way of effective fulfilling tasks, where person is able to control themselves to act in accordance with expectations, sticks to the plan, is resistant to situational and environmental factors and is able to complete the task of action. ";
+                learningSkillDefinition = "The way of effective fulfilling tasks, where person is able to control themselves to act in accordance with expectations, sticks to the plan, is resistant to situational and environmental factors and is able to complete the task of action.";
                 if (videoAudio)
                 {
                     CreateURLButton("How to Be More Disciplined - 6 Ways to Master Self Control<br><b>Video</b><br>Thomas Frank on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=X3vRK2P9lSU"); });
@@ -2738,7 +2759,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 22:
                 learningSkill = "Flexibility";
-                learningSkillDefinition = "Easy and hassle free adjusting to changes in plans, tasks at work. ";
+                learningSkillDefinition = "Easy and hassle free adjusting to changes in plans, tasks at work.";
                 if (videoAudio)
                 {
                     CreateURLButton("Thinking Skills: Flexibility<br><b>Video</b><br>LearningWorks4Kids on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=5vgwp8nrY0U"); });
@@ -2791,7 +2812,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 24:
                 learningSkill = "Growth Orientation";
-                learningSkillDefinition = "Growth-orientation is a disposition of self-improvement by setting new and challenging goals for oneself. It is associated with a growth mindset, which means believing that one’s skills can improve over time thanks to hard work. ";
+                learningSkillDefinition = "A disposition of self-improvement by setting new and challenging goals for oneself. It is associated with a growth mindset, which means believing that one’s skills can improve over time thanks to hard work.";
                 if (videoAudio)
                 {
                     CreateURLButton("The 7 Essential Pillars of Personal Development<br><b>Video</b><br>Brian Tracy on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=AWGayyX9I6o"); });
@@ -2877,7 +2898,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 27:
                 learningSkill = "Leadership";
-                learningSkillDefinition = "Leadership is the ability to motivate a group of people to act toward achieving a common goal. It involves setting direction, building an inspiring vision, and creating something new. Leadership is about mapping out where you need to go to succeed as a team or an organization; and it is dynamic, exciting, and inspiring.";
+                learningSkillDefinition = "The ability to motivate a group of people to act toward achieving a common goal. It involves setting direction, building an inspiring vision, and creating something new. Leadership is about mapping out where you need to go to succeed as a team or an organization; and it is dynamic, exciting, and inspiring.";
                 if (videoAudio)
                 {
                     CreateURLButton("#2 Michael Lombardi: Leadership on the Field<br><b>Podcast</b><br>The Knowledge Project on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/4jpI5rTLeyuRMg4Yo7uV7C?si=QNMCB0JURkK_ma0pHngcyQ&dl_branch=1&nd=1"); });
@@ -3374,7 +3395,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 45:
                 learningSkill = "Self-Motivation";
-                learningSkillDefinition = "Self-motivation is the internal state that helps you initiate and continue a goal-oriented activity, despite obstacles, until it is completed.";
+                learningSkillDefinition = "The internal state that helps you initiate and continue a goal-oriented activity, despite obstacles, until it is completed.";
                 if (videoAudio)
                 {
                     CreateURLButton("Importance of Self-Efficacy<br><b>Video</b><br>Transforming Education on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=VW5v6PQ5PEc"); });
@@ -3406,7 +3427,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 46:
                 learningSkill = "Self-Presentation";
-                learningSkillDefinition = "Self-presentation is behavior with which people try to affect how they are perceived and judged by others; much social behavior is influenced by self-presentational motives and goals (Miller & Rowland, 2019).";
+                learningSkillDefinition = "Behavior with which people try to affect how they are perceived and judged by others; much social behavior is influenced by self-presentational motives and goals (Miller & Rowland, 2019).";
                 if (videoAudio)
                 {
                     CreateURLButton("How to introduce yourself | Kevin Bahler | TedxLehighRiver<br><b>Video</b><br>Tedx Talks on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=V1xt7zgnuK0"); });
@@ -3681,7 +3702,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 56:
                 learningSkill = "Teamwork";
-                learningSkillDefinition = "Teamwork is the collaborative effort of a group to achieve a common goal or to complete a task in the most effective and efficient way.";
+                learningSkillDefinition = "The collaborative effort of a group to achieve a common goal or to complete a task in the most effective and efficient way.";
                 if (videoAudio)
                 {
                     CreateURLButton("Perfecting Teamwork: Building High-Performing Teams By Encouraging Learning<br><b>Podcast</b><br>Think Fast, Talk Smart: Communication Techniques on Spotify", delegate { Application.OpenURL("https://open.spotify.com/episode/7pHpUwOMGOC2FXcikLvySt"); });
@@ -3706,7 +3727,7 @@ public class DynamicInterfaceAreaUI : MonoBehaviour
                 break;
             case 57:
                 learningSkill = "Time Management";
-                learningSkillDefinition = "Time management refers to the planning, prioritizing, and scheduling of tasks to create work efficiency in an environment of competing demands.";
+                learningSkillDefinition = "Refers to the planning, prioritizing, and scheduling of tasks to create work efficiency in an environment of competing demands.";
                 if (videoAudio)
                 {
                     CreateURLButton("How to manage your time more effectively (according to machines) - Brian Christian<br><b>Video</b><br>Ted-Ed on YouTube", delegate { Application.OpenURL("https://www.youtube.com/watch?v=iDbdXTMnOmE"); });
